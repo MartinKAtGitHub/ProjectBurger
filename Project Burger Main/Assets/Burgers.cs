@@ -26,9 +26,12 @@ public class Burgers : MonoBehaviour {
     //just make a circular motion then the burger flips itself?
 
 
-    //ask about pallet
-    //bonus stress sneaking guy
 
+
+
+
+
+    //temperature instead of clock.
 
 
 

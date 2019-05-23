@@ -42,52 +42,46 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
         if(freeMotionParent == null)
         {
-            freeMotionParent = transform.parent;
+            freeMotionParent = transform.parent.parent;
         }
+       
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //Debug.Log(" OnBeginDrag DRAG!");
-
         var currentMousePos = eventData.position;
         offset = (Vector2)transform.position - currentMousePos;
 
         if (!OnDropArea)
         {
-            CreatePlaceHolderObj();
+            CreatePlaceHolderObj(); // Move this down maybe ? CurrentDropArea != null
         }
 
-        ResetDropZone = transform.parent; // Only realy relavent if on dropzone
-
+        ResetDropZone = transform.parent; // Only really relevant when on DropZone
         FreeDragMode();
 
-        if (CurrentDropArea != null)
+        if (CurrentDropArea != null) // Or move this UP         if (!OnDropArea) else { lel}
         {
             CurrentDropArea.IsThisDropAreaOccupied = false;
-            // keyDropZone.orbMenuAbility = null;
+            CurrentDropArea.OnDropAreaBeginDrag();
 
             CurrentDropArea = null;
-
-            // Disconnect AB from KEY
         }
     }
 
    
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log(" OnDrag DRAG");
         transform.position = eventData.position + (Vector2)offset;
     }
 
-    public void OnEndDrag(PointerEventData eventData) // THIS FIRES AFTER ONDROP () in AbilityKeyDropZone
+    public void OnEndDrag(PointerEventData eventData) // THIS FIRES AFTER ONDROP () IN DropArea
     {
-        Debug.Log(" OnEndDrag DRAG");
-
         if(OnDropArea) // If i am on a dropZone
         {
             transform.SetParent(ResetDropZone);
             rectTransform.localPosition = Vector2.zero;
+            //canvasGroup.blocksRaycasts = false;
         }
         else
         {
@@ -115,7 +109,6 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
         PlaceHolder.transform.SetSiblingIndex(transform.GetSiblingIndex());
     }
-
     /// <summary>
     /// So what is happning here is simply childing to a parent OBJ. HOWEVER for the snap back action to happen the parant needs a Layoutgroup(vertical/horizontal)
     /// Even if the parent only has 1 Element inside of it. Check performance of this. because it might be more benificial to just reset pos insted leaning on Layoutgroup to snap

@@ -11,8 +11,13 @@ public class Ingredient : MonoBehaviour
         HamBurger_Cheese,
         HamBurger_Lettuce,
         HamBurger_Onions,
-        Hamburger_TopBun
+        Hamburger_TopBun,
 
+        Sandwich_BotBread,
+        Sandwich_Cheese,
+        Sandwich_Lettuce,
+        Sandwich_Onions,
+        Sandwich_TopBread
     }
 
     [SerializeField]

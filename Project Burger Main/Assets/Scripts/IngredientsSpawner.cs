@@ -6,7 +6,7 @@ public class IngredientsSpawner : MonoBehaviour, IPointerDownHandler/*, IBeginDr
     
     [SerializeField]
     private GameObject _ingredience;
-    private GameObject _spawnedIngredience;
+    private GameObject _spawnedIngredients;
 
     /// <summary>
     /// True = spawner will spawn inn all the ingreadiance at the start of the game.
@@ -14,6 +14,9 @@ public class IngredientsSpawner : MonoBehaviour, IPointerDownHandler/*, IBeginDr
     /// </summary>
     [SerializeField]
     private bool _presetSpawn;
+
+    private Draggable draggableIngredients; 
+       
 
     public int ingredienceSpawnAmout;
 
@@ -28,48 +31,48 @@ public class IngredientsSpawner : MonoBehaviour, IPointerDownHandler/*, IBeginDr
         }
     }
 
-
-
     //public void OnBeginDrag(PointerEventData eventData) // So this Enables the instant drag and sends a trigger message over to the dag scrip ?
     //{
-    //    if (!_presetSpawn)
+    //    //if (!_presetSpawn)
     //    {
-    //        eventData.pointerDrag = _spawnedIngredience;
+    //        //eventData.pointerDrag = _spawnedIngredients;
     //        Debug.Log("OnBeginDrag  IngredientsSpawner " + eventData.pointerDrag.name);
+    //        draggableIngredients.OnBeginDrag(eventData);
     //    }
     //}
 
-
-
-    //public void OnDrag(PointerEventData eventData) // dosent fire but is makes it work
+    //public void OnDrag(PointerEventData eventData)
     //{
-    //    if (!_presetSpawn)
+    //    //if (!_presetSpawn)
     //    {
-    //        Debug.Log(" OnDrag  IngredientsSpawner" + eventData.pointerDrag.name);
+    //        Debug.Log(" OnDrag  IngredientsSpawner " + eventData.pointerDrag.name);
+          
+    //        draggableIngredients.OnDrag(eventData);
     //    }
     //}
 
-    //public void OnEndDrag(PointerEventData eventData)// dosent fire but is makes it work
+    //public void OnEndDrag(PointerEventData eventData)
     //{
-    //    if (!_presetSpawn)
+    //   // if (!_presetSpawn)
     //    {
     //        Debug.Log("OnEndDrag  IngredientsSpawner" + eventData.pointerDrag.name);
+    //        draggableIngredients.OnEndDrag(eventData);
     //    }
     //}
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(!_presetSpawn)
+       // if(!_presetSpawn)
         {
-            Debug.Log("SPAWN ingredience " + _ingredience.name);
+           // Debug.Log("SPAWN ingredience " + _ingredience.name);
             SpawnIngredience();
-
         }
     }
 
     private void SpawnIngredience()
     {
-        _spawnedIngredience = Instantiate(_ingredience, transform.parent);
-        _spawnedIngredience.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        _spawnedIngredients = Instantiate(_ingredience, transform.parent);
+        _spawnedIngredients.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        draggableIngredients = _spawnedIngredients.GetComponent<Draggable>();
     }
 }

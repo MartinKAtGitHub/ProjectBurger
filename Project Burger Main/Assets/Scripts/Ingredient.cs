@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class Ingredient: MonoBehaviour
+public class Ingredient : MonoBehaviour
 {
-    public  enum IngredientTypes
+    public enum IngredientTypes
     {
         NotDefined, // Use this to check for errors
 
@@ -18,6 +18,13 @@ public class Ingredient: MonoBehaviour
     [SerializeField]
     IngredientTypes ingredientType = IngredientTypes.NotDefined;
 
-       
+    public IngredientTypes IngredientType
+    {
+        get
+        {
+            return ingredientType;
+        }
+    }
+
 }
 

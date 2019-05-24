@@ -56,5 +56,5 @@ public abstract class DropArea : MonoBehaviour, IDropHandler//, IPointerEnterHan
     /// <summary>
     /// When the player Drags FROM the drop zone, We can do different implementation depending on the type of drop area
     /// </summary>
-    public abstract void OnDropAreaBeginDrag();
+    public abstract void DropAreaOnBeginDrag();
 }

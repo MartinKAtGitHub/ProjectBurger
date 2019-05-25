@@ -12,9 +12,10 @@ public class FoodCombinationDropArea : DropArea
     private RecipeBook _recipeBook;
 
     /// <summary>
-    /// The position/index  the food stack which will be checked against the recipes
+    /// The position/index  the food stack which will be checked against the recipes.
+    /// Needs to start at -1 because of 0 index in start point
     /// </summary>
-    private int _foodStackCheckIndex;
+    private int _foodStackCheckIndex = -1;
 
     public override void OnDrop(PointerEventData eventData)
     {
@@ -26,6 +27,8 @@ public class FoodCombinationDropArea : DropArea
     public override void DropAreaOnBeginDrag()
     {
         RemoveIngredientFromFoodStack();
+        _foodStackCheckIndex--;
+        Debug.Log(_foodStackCheckIndex);
     }
 
     private void AddIngredientsToFoodStack(PointerEventData eventData)
@@ -35,21 +38,20 @@ public class FoodCombinationDropArea : DropArea
         {
             _foodStackIngredients.Add(ingredient);
             //stack.push(ingredient)
+            _foodStackCheckIndex++;
+            Debug.Log(_foodStackCheckIndex);
             CheckFoodStackWithRecepies();
         }
-
     }
 
     private void RemoveIngredientFromFoodStack()
     {
         _foodStackIngredients.RemoveAt(_foodStackIngredients.Count-1);
-      
         //stack.Pop
     }
 
     private void CheckFoodStackWithRecepies()
     {
-        
         for (int i = 0; i < _recipeBook.Recipes.Count; i++)
         {
             var currentRecipe = _recipeBook.Recipes[i];
@@ -59,8 +61,6 @@ public class FoodCombinationDropArea : DropArea
                 if (_foodStackIngredients[_foodStackCheckIndex].IngredientType == currentRecipe.Ingredients[_foodStackCheckIndex].IngredientType)
                 {
                     Debug.Log("MATCH " + _foodStackIngredients[_foodStackCheckIndex].IngredientType + " = " + currentRecipe.Ingredients[_foodStackCheckIndex].IngredientType);
-                    _foodStackCheckIndex++;
-                    Debug.Log(_foodStackCheckIndex);
                     return;
                 }
             }
@@ -69,35 +69,7 @@ public class FoodCombinationDropArea : DropArea
                 // go to the next recipe
                 continue;
             }
-            
         }
         Debug.LogWarning("NO RECIPE MATCHES THE FOOD YOU ARE MAKEING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
-
-    //[CustomEditor(typeof(FoodCombinationDropArea))]
-    //public class StackPreview : Editor
-    //{
-    //    public override void OnInspectorGUI()
-    //    {
-    //        var ts = (FoodCombinationDropArea)target;
-    //        var stack = ts._foodStackIngredients;
-
-    //        var bold = new GUIStyle();
-    //        bold.fontStyle = FontStyle.Bold;
-    //        GUILayout.Label("FoodStack", bold);
-
-    //        foreach (var item in stack)
-    //        {
-    //            GUILayout.Label(item.name);
-    //        }
-
-    //        EditorGUILayout.Space();
-    //        EditorGUILayout.Space();
-    //        EditorGUILayout.Space();
-    //        EditorGUILayout.Space();
-
-    //        DrawDefaultInspector();
-    //    }
-    //}
-
 }

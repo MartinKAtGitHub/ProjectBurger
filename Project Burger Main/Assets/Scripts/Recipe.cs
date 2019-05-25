@@ -6,5 +6,9 @@ using UnityEngine;
 /// </summary>
 public class Recipe : MonoBehaviour // make this into a SO maybe. 
 {
+    enum FoodType
+    {
+        Undefined, Hamburger, Sandwich
+    }
     public List<Ingredient> Ingredients;
 }

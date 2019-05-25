@@ -44,7 +44,6 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         {
             freeMotionParent = transform.parent.parent;
         }
-       
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -63,7 +62,7 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         if (CurrentDropArea != null) // Or move this UP         if (!OnDropArea) else { lel}
         {
             CurrentDropArea.IsThisDropAreaOccupied = false;
-            CurrentDropArea.OnDropAreaBeginDrag();
+            CurrentDropArea.DropAreaOnBeginDrag();
 
             CurrentDropArea = null;
         }

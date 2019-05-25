@@ -1013,6 +1013,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   burger: {fileID: 8177579232956609694, guid: 059abda7c8815d244a0001c615d93e71, type: 3}
+  other: {fileID: 0}
+--- !u!1 &780891689 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8177579232956609694, guid: 059abda7c8815d244a0001c615d93e71,
+    type: 3}
+  m_PrefabInstance: {fileID: 3511402769337811647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &780891690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780891689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868ad1209047edc4fa2fd6a1969fc8c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientType: 2
 --- !u!1 &830014401
 GameObject:
   m_ObjectHideFlags: 0

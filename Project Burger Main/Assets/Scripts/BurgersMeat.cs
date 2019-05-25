@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 //Time the burgers. Flip them and store them
-public class Burgers : Draggable {
+public class BurgersMeat : MonoBehaviour, IPointerUpHandler, IPointerDownHandler {
 
     //make points at which burgers can be place, drag and drop snapping points.
 
@@ -31,30 +31,44 @@ public class Burgers : Draggable {
 
     //just make a circular motion then the burger flips itself?
     //temperature instead of clock.
-   
-       
 
-   
+    PointerEventData _EventData;
+    bool Move = false;
+    public void SetEventData(PointerEventData eventData) {
+        _EventData = eventData;
+    
+        Move = true;
+    }
 
-  
+    public void OnPointerDown(PointerEventData eventData) {
+        Debug.Log("BurgetDown");
+        Move = true;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void OnPointerUp(PointerEventData eventData) {
+        Debug.Log("BurgetUp");
+        Move = false;
+    }
 
 
+    void Update() {
+        
+        if(Move == true) {
+            transform.position = _EventData.position;
+        }
+
+
+
+
+
+    }
 
 
 
 
 }
+
+
+
+
+

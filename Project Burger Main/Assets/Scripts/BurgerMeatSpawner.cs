@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BurgerSpawner : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IDragHandler {
+public class BurgerMeatSpawner : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler {
 
     public GameObject burger;
 
@@ -36,17 +36,15 @@ public class BurgerSpawner : MonoBehaviour, IPointerClickHandler, IPointerDownHa
     }
 
 
-
     public void OnPointerDown(PointerEventData eventData) {
 
         Debug.Log("HER");
         other = Instantiate(burger, transform.position + Vector3.up * 110, Quaternion.identity, transform.parent) as GameObject;
+        other.GetComponent<BurgersMeat>().SetEventData(eventData);
 
-        Debug.Log(other);
                 ExecuteEvents.Execute<IEndDragHandler>(gameObject, eventData, ExecuteEvents.endDragHandler);
                 eventData.pointerDrag = other;
-                ExecuteEvents.Execute<IDragHandler>(other, eventData, ExecuteEvents.dragHandler);
-        Debug.Log(other);
+                ExecuteEvents.Execute<IBeginDragHandler>(other, eventData, ExecuteEvents.beginDragHandler);
 
 
         //   data.pointerDrag = test;
@@ -69,5 +67,9 @@ public class BurgerSpawner : MonoBehaviour, IPointerClickHandler, IPointerDownHa
               test.GetComponent<Burgers>().OnBeginDrag(eventData);
               test.GetComponent<Burgers>().OnDrag(eventData);
           */
+    }
+
+    public void OnPointerUp(PointerEventData eventData) {
+        
     }
 }

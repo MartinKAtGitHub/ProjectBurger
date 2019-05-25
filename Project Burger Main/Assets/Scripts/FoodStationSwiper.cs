@@ -137,5 +137,5 @@ public class FoodStationSwiper : MonoBehaviour, IDragHandler, IEndDragHandler, I
             }
         }
     }
-    
+
 }

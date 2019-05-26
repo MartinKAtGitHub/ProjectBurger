@@ -30,6 +30,11 @@ public class Ingredient : MonoBehaviour
             return ingredientType;
         }
     }
-
+    /// <summary>
+    /// The chance of this ingredient not being included in the Order, 
+    /// set this in the recipe so we avoid situation where a cheeseburger doesn't have cheese
+    /// </summary>
+     public int RemoveChance; 
+   
 }
 

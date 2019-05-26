@@ -60,7 +60,7 @@ public class FoodCombinationDropArea : DropArea
             {
                 if (_foodStackIngredients[_foodStackCheckIndex].IngredientType == currentRecipe.Ingredients[_foodStackCheckIndex].IngredientType)
                 {
-                    Debug.Log("MATCH " + _foodStackIngredients[_foodStackCheckIndex].IngredientType + " = " + currentRecipe.Ingredients[_foodStackCheckIndex].IngredientType);
+                   // Debug.Log("MATCH " + _foodStackIngredients[_foodStackCheckIndex].IngredientType + " = " + currentRecipe.Ingredients[_foodStackCheckIndex].IngredientType);
                     return;
                 }
             }

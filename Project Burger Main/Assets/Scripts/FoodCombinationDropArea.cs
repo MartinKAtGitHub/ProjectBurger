@@ -28,19 +28,24 @@ public class FoodCombinationDropArea : DropArea
     {
         RemoveIngredientFromFoodStack();
         _foodStackCheckIndex--;
-        Debug.Log(_foodStackCheckIndex);
+        //Debug.Log(_foodStackCheckIndex);
     }
 
     private void AddIngredientsToFoodStack(PointerEventData eventData)
     {
-        var ingredient = eventData.pointerDrag.GetComponent<Ingredient>();
+        var ingredient = eventData.pointerDrag.GetComponent<IngredientGameObject>().ingredient;
+
         if (ingredient != null)
         {
             _foodStackIngredients.Add(ingredient);
             //stack.push(ingredient)
             _foodStackCheckIndex++;
-            Debug.Log(_foodStackCheckIndex);
+          //  Debug.Log(_foodStackCheckIndex);
             CheckFoodStackWithRecepies();
+        }
+        else
+        {
+            Debug.LogError("Cant find ingredient in FoodCombinationDropArea" );
         }
     }
 
@@ -58,6 +63,7 @@ public class FoodCombinationDropArea : DropArea
 
             if (_foodStackCheckIndex <= currentRecipe.Ingredients.Count)
             {
+                // If(_foodStackIngredients[_foodStackCheckIndex].classType == currentRecipe.Ingredients[_foodStackCheckIndex].classType)
                 if (_foodStackIngredients[_foodStackCheckIndex].IngredientType == currentRecipe.Ingredients[_foodStackCheckIndex].IngredientType)
                 {
                    // Debug.Log("MATCH " + _foodStackIngredients[_foodStackCheckIndex].IngredientType + " = " + currentRecipe.Ingredients[_foodStackCheckIndex].IngredientType);

@@ -7,10 +7,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4364827356571203016, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: ingredient
+      value: 
+      objectReference: {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358,
+        type: 2}
     - target: {fileID: 295963924765048965, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
       propertyPath: m_Name
       value: HamBurg_TopBun
+      objectReference: {fileID: 0}
+    - target: {fileID: 295963924765048988, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: ingredientType
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
@@ -123,10 +134,5 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 3c9009090580d3d4b912b871f0345c72,
         type: 3}
-    - target: {fileID: 295963924765048988, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: ingredientType
-      value: 6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6bdb26a075ad64489be7918469951df, type: 3}

@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 295963924765048990}
   - component: {fileID: 295963924765048985}
   - component: {fileID: 295963924765048984}
-  - component: {fileID: 295963924765048987}
-  - component: {fileID: 295963924765048988}
+  - component: {fileID: -7692582576981863897}
+  - component: {fileID: 4364827356571203016}
   m_Layer: 5
-  m_Name: Ingredient
+  m_Name: _Ingredient
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &295963924765048987
+--- !u!114 &-7692582576981863897
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,7 +127,7 @@ MonoBehaviour:
   ResetDropZone: {fileID: 0}
   OriginalParent: {fileID: 0}
   freeMotionParent: {fileID: 0}
---- !u!114 &295963924765048988
+--- !u!114 &4364827356571203016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,7 +136,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 295963924765048965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 868ad1209047edc4fa2fd6a1969fc8c0, type: 3}
+  m_Script: {fileID: 11500000, guid: d1c00574bad678643aff1685b4e26506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientType: 0

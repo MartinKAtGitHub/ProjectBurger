@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class Ingredient : MonoBehaviour
+[CreateAssetMenu(menuName = "Ingredient", fileName = "Ingredient")]
+public class Ingredient : ScriptableObject // make into SO
 {
     public enum IngredientTypes
     {
@@ -11,13 +12,8 @@ public class Ingredient : MonoBehaviour
         HamBurger_Cheese,
         HamBurger_Lettuce,
         HamBurger_Onions,
-        Hamburger_TopBun,
-
-        Sandwich_BotBread,
-        Sandwich_Cheese,
-        Sandwich_Lettuce,
-        Sandwich_Onions,
-        Sandwich_TopBread
+        Hamburger_Pickels,
+        Hamburger_TopBun
     }
 
     [SerializeField]
@@ -34,7 +30,8 @@ public class Ingredient : MonoBehaviour
     /// The chance of this ingredient not being included in the Order, 
     /// set this in the recipe so we avoid situation where a cheeseburger doesn't have cheese
     /// </summary>
-     public int RemoveChance; 
+     [Range(0,100)]
+    public int RemoveChance = 0; 
    
 }
 

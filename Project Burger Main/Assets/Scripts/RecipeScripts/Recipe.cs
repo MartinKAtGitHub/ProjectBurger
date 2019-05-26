@@ -3,11 +3,10 @@ using UnityEngine;
 
 //[CreateAssetMenu(menuName = "Hamburger recipe", fileName ="Recipes /HamburgerRecipe")]
 /// <summary>
-/// Holds the ingredients and stack order for a food.
+/// Holds the ingredients and order for all food types
 /// </summary>
 public abstract class Recipe : ScriptableObject 
 {
     public List<Ingredient> Ingredients;
-    public abstract void GetOrderFromRecpie();
-
+    public abstract List<Ingredient> GetOrderFromRecpie();
 }

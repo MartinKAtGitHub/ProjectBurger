@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Ingredient", fileName = "Ingredient")]
-public class Ingredient : ScriptableObject // make into SO
+public class Ingredient : ScriptableObject
 {
+    [SerializeField]
+    private Sprite _sprite;
+    [SerializeField]
+    private string _ingredientName;
     public enum IngredientTypes
     {
-        NotDefined, // Use this to check for errors
+        NotDefined, 
 
         HamBurger_BottomBun,
         HamBurger_Meat,

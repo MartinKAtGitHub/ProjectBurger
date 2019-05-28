@@ -31,7 +31,7 @@ public class FoodStationSwiper : MonoBehaviour, IDragHandler, IEndDragHandler, I
         //Find Panels To Go To. Just counting childs. this will most likely get checked agains an upgrading system or something of that sort.
         //unless we make every lvl with separate panels, and when getting the sandwitch panel its added as a child then this will work fine. if not then a small change need to be made
         _PanelsToTravelToInDistance = (transform.childCount - 1) * (Screen.width * -1) + (Screen.width / 2);
-
+        
     }
 
 

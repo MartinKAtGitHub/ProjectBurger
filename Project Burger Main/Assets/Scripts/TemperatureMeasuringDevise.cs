@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TemperatureMeasuringDevise : MonoBehaviour
-{
+public class TemperatureMeasuringDevise : MonoBehaviour {
+
+    public Animator MyAnimator;
+
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Start() {
+        transform.parent.GetChild(0);
     }
 
     // Update is called once per frame

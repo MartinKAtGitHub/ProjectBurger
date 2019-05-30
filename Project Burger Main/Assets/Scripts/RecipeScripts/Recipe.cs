@@ -11,16 +11,23 @@ public abstract class Recipe : ScriptableObject
     private Sprite _recipeImg;
     [SerializeField]
     private string _recipeName;
+    [SerializeField]
+    private foodType _foodType;
+    private enum foodType
+    {
+        NotDefined,
+        Hamburger,
+        IceCream,
+        Pizza
+    }
 
-    protected List<Ingredient> _discaredIngredients;
-
+    /// <summary>
+    /// Ingredients that go into this recipe
+    /// </summary>
     public List<Ingredient> Ingredients;
     /// <summary>
     /// The sprite that shows the finished recipe product
     /// </summary>
     public Sprite RecipeImg { get { return _recipeImg; } }
     public string RecipeName { get { return _recipeName; } }
-    public List<Ingredient> DiscaredIngredients { get { return _discaredIngredients; } }
-
-    public abstract List<Ingredient> GetOrderFromRecpie();
 }

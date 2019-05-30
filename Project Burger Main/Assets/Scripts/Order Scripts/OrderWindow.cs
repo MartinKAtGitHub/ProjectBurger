@@ -38,15 +38,13 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
 
     public void UpdateUI()
     {
-        _orderWindowData.RecipeNameText.text = _orderGenerator.Recipe.RecipeName;
-        _orderWindowData.RecipeImg.sprite = _orderGenerator.Recipe.RecipeImg;
+        _orderWindowData.RecipeNameText.text = _orderGenerator.OrderBaseRecipe.RecipeName;
+        _orderWindowData.RecipeImg.sprite = _orderGenerator.OrderBaseRecipe.RecipeImg;
 
-        for (int i = 0; i < _orderGenerator.Recipe.DiscaredIngredients.Count; i++)
+        for (int i = 0; i < _orderGenerator.DiscaredIngredients.Count; i++)
         {
-            _orderWindowData.DiscardedIngredients[i].sprite = _orderGenerator.Recipe.DiscaredIngredients[i].IngredientSprite;
+            _orderWindowData.DiscardedIngredients[i].sprite = _orderGenerator.DiscaredIngredients[i].IngredientSprite;
         }
-
-
     }
 
     private void CreateOrderWindow()

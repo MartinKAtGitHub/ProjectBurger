@@ -10,7 +10,18 @@ PrefabInstance:
     - target: {fileID: 295963924765048965, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
       propertyPath: m_Name
-      value: HamBurgCheese
+      value: HamBurg_Cheese
+      objectReference: {fileID: 0}
+    - target: {fileID: 295963924765048990, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16,
+        type: 3}
+    - target: {fileID: 295963924765048985, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: m_IgnoreParentGroups
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
@@ -117,12 +128,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 295963924765048990, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16,
-        type: 3}
     - target: {fileID: 295963924765048988, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
       propertyPath: ingredientType

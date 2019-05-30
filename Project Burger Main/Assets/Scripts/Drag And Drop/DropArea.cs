@@ -4,27 +4,26 @@ using UnityEngine.EventSystems;
 public abstract class DropArea : MonoBehaviour, IDropHandler//, IPointerEnterHandler, IPointerExitHandler
 {
     public bool IsThisDropAreaOccupied;
-    private Draggable _draggedElement;
+    //private Draggable _draggedElement;
 
 
     public virtual void OnDrop(PointerEventData eventData)
     {
-        
         UnlimitedElementsOnDropArea(eventData);
     }
 
-    public void OnlyAllowOneElementOnDropArea(PointerEventData eventData)
+    private void OnlyAllowOneElementOnDropArea(PointerEventData eventData)
     {
         if (!IsThisDropAreaOccupied)
         {
             var draggedObject = eventData.pointerDrag;
-            _draggedElement = draggedObject.GetComponent<Draggable>();
+             var draggableComponent = draggedObject.GetComponent<Draggable>();
 
-            if (_draggedElement != null)
+            if (draggableComponent != null)
             {
-                _draggedElement.ResetDropZone = this.transform;
-                _draggedElement.OnDropArea = true;
-                _draggedElement.CurrentDropArea = this;
+                draggableComponent.DropAreaTransform = this.transform;
+                draggableComponent.OnDropArea = true;
+                draggableComponent.CurrentDropArea = this;
                 IsThisDropAreaOccupied = true;
             }
             else
@@ -38,17 +37,17 @@ public abstract class DropArea : MonoBehaviour, IDropHandler//, IPointerEnterHan
         }
     }
 
-    public void UnlimitedElementsOnDropArea(PointerEventData eventData)
+    private void UnlimitedElementsOnDropArea(PointerEventData eventData) // move this to FoodCombi
     {
         var draggedObject = eventData.pointerDrag;
-      
-        _draggedElement = draggedObject.GetComponent<Draggable>();
 
-        if (_draggedElement != null) 
+        var draggableComponent = draggedObject.GetComponent<Draggable>();
+
+        if (draggableComponent != null)
         {
-            _draggedElement.ResetDropZone = this.transform;
-            _draggedElement.OnDropArea = true;
-            _draggedElement.CurrentDropArea = this;       
+            draggableComponent.DropAreaTransform = this.transform;
+            draggableComponent.OnDropArea = true;
+            draggableComponent.CurrentDropArea = this;
         }
     }
     /// <summary>

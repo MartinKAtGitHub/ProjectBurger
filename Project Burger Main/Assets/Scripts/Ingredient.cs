@@ -1,23 +1,23 @@
 ﻿using UnityEngine;
 
-public class Ingredient : MonoBehaviour
+[CreateAssetMenu(menuName = "Ingredient", fileName = "Ingredient")]
+public class Ingredient : ScriptableObject
 {
+    [SerializeField]
+    private Sprite _sprite;
+    [SerializeField]
+    private string _ingredientName;
     public enum IngredientTypes
     {
-        NotDefined, // Use this to check for errors
+        NotDefined, 
 
         HamBurger_BottomBun,
         HamBurger_Meat,
         HamBurger_Cheese,
         HamBurger_Lettuce,
         HamBurger_Onions,
-        Hamburger_TopBun,
-
-        Sandwich_BotBread,
-        Sandwich_Cheese,
-        Sandwich_Lettuce,
-        Sandwich_Onions,
-        Sandwich_TopBread
+        Hamburger_Pickels,
+        Hamburger_TopBun
     }
 
     [SerializeField]
@@ -30,6 +30,12 @@ public class Ingredient : MonoBehaviour
             return ingredientType;
         }
     }
-
+    /// <summary>
+    /// The chance of this ingredient not being included in the Order, 
+    /// set this in the recipe so we avoid situation where a cheeseburger doesn't have cheese
+    /// </summary>
+     [Range(0,100)]
+    public int RemoveChance = 0; 
+   
 }
 

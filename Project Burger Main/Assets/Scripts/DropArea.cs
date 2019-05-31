@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
-using UnityEditor;
 
 public abstract class DropArea : MonoBehaviour, IDropHandler//, IPointerEnterHandler, IPointerExitHandler
 {

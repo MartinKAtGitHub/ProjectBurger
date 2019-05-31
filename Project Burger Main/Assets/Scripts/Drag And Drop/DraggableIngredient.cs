@@ -5,32 +5,49 @@ using UnityEngine.EventSystems;
 
 public class DraggableIngredient : Draggable
 {
+    private bool _onFoodCombiDropArea;
+
     public FoodCombinationDropArea FoodCombinationDropArea { get; set; }
-    
+    public bool OnFoodCombiDropArea
+    {
+        get
+        {
+            return _onFoodCombiDropArea;
+        }
+        set
+        {
+            _onFoodCombiDropArea = value;
+        }
+    }
+
     public override void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("PULL FOOD DRAG");
+      //  Debug.Log("PULL FOOD DRAG");
         //base.OnBeginDrag(eventData);
         CalculateDragAreaOffset(eventData);
 
-        if (!OnDropArea)
+        //   if (!OnDropArea)
+        if (!_onFoodCombiDropArea)
         {
-            CreatePlaceHolderObj(); 
+            CreatePlaceHolderObj();
         }
 
         FreeDragMode();
 
-        if (FoodCombinationDropArea != null) 
+        if (FoodCombinationDropArea != null)
         {
             FoodCombinationDropArea.DropAreaOnBeginDrag();
             FoodCombinationDropArea = null;
         }
+
+        _onFoodCombiDropArea = false;
     }
 
     public override void OnEndDrag(PointerEventData eventData)
     {
 
-        if (OnDropArea)
+        //if (OnDropArea)
+        if (_onFoodCombiDropArea)
         {
             ResetPositionToDropArea();
         }
@@ -39,9 +56,9 @@ public class DraggableIngredient : Draggable
             RestToStartPosition();
         }
 
-        if(FoodCombinationDropArea != null)
+        if (FoodCombinationDropArea != null)
         {
-            if(FoodCombinationDropArea.IsFoodReady)
+            if (FoodCombinationDropArea.IsFoodReady)
             {
                 OnFoodIsReady();
             }

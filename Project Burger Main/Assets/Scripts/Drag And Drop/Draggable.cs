@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(LayoutElement))]
 public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    public bool OnDropArea;
+    public bool OnDropArea; // I can make a prop of this and have it override in each class and reuse this bool
     public DropArea CurrentDropArea; // This is assigned in the DropArea
     /// <summary>
     /// The Transform of the drop area, it should be set from the drop area to avoid confusion 
@@ -65,6 +65,8 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
        
             CurrentDropArea = null;
         }
+
+        OnDropArea = false;
     }
 
     public virtual void OnDrag(PointerEventData eventData)
@@ -120,7 +122,6 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     {
         transform.SetParent(freeMotionParent); // This takes us out of the Pnl(layout group) so we can freely move the UI element
         canvasGroup.blocksRaycasts = false; // after pick up we turn this off to allow PointerEventData to go through the draggable obj
-        OnDropArea = false;
     }
 
     /// <summary>

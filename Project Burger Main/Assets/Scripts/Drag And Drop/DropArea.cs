@@ -4,9 +4,8 @@ using UnityEngine.EventSystems;
 public abstract class DropArea : MonoBehaviour, IDropHandler//, IPointerEnterHandler, IPointerExitHandler
 {
     public bool IsThisDropAreaOccupied;
-    //private Draggable _draggedElement;
 
-
+   // public abstract void OnDrop(PointerEventData eventData); // we need this. because if we use the other system, then we can drop anything o anything 
     public virtual void OnDrop(PointerEventData eventData)
     {
         UnlimitedElementsOnDropArea(eventData);

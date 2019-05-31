@@ -40,7 +40,8 @@ public class FoodCombinationDropArea : DropArea
             if (draggableComponent != null)
             {
                 draggableComponent.DropAreaTransform = this.transform;
-                draggableComponent.OnDropArea = true;
+                draggableComponent.OnFoodCombiDropArea = true;
+                //draggableComponent.OnDropArea = true;
                 draggableComponent.FoodCombinationDropArea = this;
                 draggableComponent.DropAreaTransform = _foodStack.transform;
             }

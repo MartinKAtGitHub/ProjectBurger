@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 4788141113328053957}
   - component: {fileID: 2920829503567134515}
   - component: {fileID: 6560525569711647787}
-  - component: {fileID: 3679014307232394316}
-  - component: {fileID: 3679014306982896225}
+  - component: {fileID: 6601559010967701959}
+  - component: {fileID: 4788141113328054009}
+  - component: {fileID: -3691771109943997177}
   m_Layer: 0
   m_Name: BeefBurger
   m_TagString: Untagged
@@ -38,9 +39,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 820.6, y: -420.5}
-  m_SizeDelta: {x: 80, y: 80}
-  m_Pivot: {x: 0.5, y: 0.625}
+  m_AnchoredPosition: {x: 820.6, y: -442.10007}
+  m_SizeDelta: {x: 96, y: 96}
+  m_Pivot: {x: 0.5, y: 0.4}
 --- !u!222 &4788141113328053956
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -69,7 +70,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
+  m_Sprite: {fileID: -7637645349346055283, guid: 5e7007c8f45e9f44da90da48b18ffd83,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -110,7 +112,7 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &3679014307232394316
+--- !u!114 &6601559010967701959
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,11 +121,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4788141113328054008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 868ad1209047edc4fa2fd6a1969fc8c0, type: 3}
+  m_Script: {fileID: 11500000, guid: d1c00574bad678643aff1685b4e26506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientType: 2
---- !u!114 &3679014306982896225
+  ingredient: {fileID: 11400000, guid: cb23b04abbce881428b0d0240d5406da, type: 2}
+--- !u!114 &4788141113328054009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,7 +134,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4788141113328054008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3232ef5c697b4a046ac00514869ea579, type: 3}
+  m_Script: {fileID: 11500000, guid: 13781228f3674284ab7eb3eadeb111ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnDropArea: 0
@@ -140,7 +142,17 @@ MonoBehaviour:
   ResetDropZone: {fileID: 0}
   OriginalParent: {fileID: 0}
   freeMotionParent: {fileID: 0}
-  CookingTime: 1
-  RawMear: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
-  Complete: {fileID: 21300000, guid: d3159c88ff3d2fd4e89ebc3898cd364d, type: 3}
-  Burnt: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
+--- !u!114 &-3691771109943997177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4788141113328054008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a3194485b345b4698367d5e9aa5191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpOrDown: 1
+  TheQuality: 0

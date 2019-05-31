@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868ad1209047edc4fa2fd6a1969fc8c0, type: 3}
   m_Name: Hamburg_Bot
   m_EditorClassIdentifier: 
+  _ingredientSprite: {fileID: 21300000, guid: 53a32349bae35784bb56b852e7a97d22, type: 3}
+  _ingredientName: 
   ingredientType: 1
   RemoveChance: 0

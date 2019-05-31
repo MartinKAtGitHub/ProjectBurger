@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Hamburger recipe", fileName = "Recipes /HamburgerRecipe")]
 public class HamburgerRecipe : Recipe
 {
+
     public override List<Ingredient> GetOrderFromRecpie()
     {
         List<Ingredient> orderIngredient = new List<Ingredient>();
@@ -14,6 +15,7 @@ public class HamburgerRecipe : Recipe
 
             if (roll < Ingredients[i].RemoveChance)// Roll will never be 0% or 100% => %0 safe %100 removed
             {
+                _discaredIngredients.Add(Ingredients[i]);
                 continue; // skip this ingredient
             }
             else
@@ -23,6 +25,4 @@ public class HamburgerRecipe : Recipe
         }
         return orderIngredient;
     }
-
-    //private cloneRecpieToTempList
 }

@@ -6,12 +6,12 @@ using UnityEngine.UI;
 [RequireComponent(typeof(LayoutElement))]
 public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    public bool OnDropArea;
-    public DropArea CurrentDropArea;
+    public bool OnDropArea; // I can make a prop of this and have it override in each class and reuse this bool
+    public DropArea CurrentDropArea; // This is assigned in the DropArea
     /// <summary>
-    /// This is the area/pnl the Ability will be childed to. we store it so we can use it to go back in case the Drop point is invalid Or assign it as a New Pos for Draggable
+    /// The Transform of the drop area, it should be set from the drop area to avoid confusion 
     /// </summary>
-    public Transform ResetDropZone = null;
+    public Transform DropAreaTransform = null;
     public Transform OriginalParent = null; // If i cant drop in valid spot go back to this
       
     
@@ -22,11 +22,11 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     /// <summary>
     /// Used to calculate drag point. This allows you to drag from anywhere on the img. If we didnt use this it would snap to center of img
     /// </summary>
-    Vector3 offset;
+   protected Vector3 offset;
     /// <summary>
     /// Canvas group allows us use certain options to allow us to register PointerEventData through draggable objects.
     /// </summary>
-    CanvasGroup canvasGroup;
+   protected CanvasGroup canvasGroup;
     LayoutElement layoutElement;
     RectTransform rectTransform;
 
@@ -46,56 +46,52 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         }
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public virtual void OnBeginDrag(PointerEventData eventData)
     {
-        var currentMousePos = eventData.position;
-        offset = (Vector2)transform.position - currentMousePos;
+        Debug.Log("PULL DRAG" + name);
+        CalculateDragAreaOffset(eventData);
 
         if (!OnDropArea)
         {
             CreatePlaceHolderObj(); // Move this down maybe ? CurrentDropArea != null
         }
 
-        ResetDropZone = transform.parent; // Only really relevant when on DropZone
         FreeDragMode();
 
-        if (CurrentDropArea != null) // Or move this UP         if (!OnDropArea) else { lel}
+        if (CurrentDropArea != null)
         {
             CurrentDropArea.IsThisDropAreaOccupied = false;
             CurrentDropArea.DropAreaOnBeginDrag();
-
+       
             CurrentDropArea = null;
         }
+
+        OnDropArea = false;
     }
 
-   
-    public void OnDrag(PointerEventData eventData)
+    public virtual void OnDrag(PointerEventData eventData)
     {
         transform.position = eventData.position + (Vector2)offset;
     }
 
-    public void OnEndDrag(PointerEventData eventData) // THIS FIRES AFTER ONDROP () IN DropArea
+    public virtual void OnEndDrag(PointerEventData eventData) // THIS FIRES AFTER ONDROP () IN DropArea
     {
         if(OnDropArea) // If i am on a dropZone
         {
-            transform.SetParent(ResetDropZone);
-            rectTransform.localPosition = Vector2.zero;
-            //canvasGroup.blocksRaycasts = false;
+            ResetPositionToDropArea();
         }
         else
         {
-            RestBackToOriginalPosition();
+            RestToStartPosition();
         }
-        //transform.SetSiblingIndex(PlaceHolder.transform.GetSiblingIndex());
-        //Destroy(PlaceHolder);
-
+       
         canvasGroup.blocksRaycasts = true; // after pick up we turn this off to allow PointerEventData to go through the draggable obj
     }
 
     /// <summary>
     /// The PlaceHolder acts as a anchor to the draggable objects which holds the position in the hierarchy.
     /// </summary>
-    private void CreatePlaceHolderObj()
+    protected void CreatePlaceHolderObj()
     {
         PlaceHolder = new GameObject();
         PlaceHolder.name = "PlaceHolder (" + name + ") ";
@@ -108,11 +104,11 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
         PlaceHolder.transform.SetSiblingIndex(transform.GetSiblingIndex());
     }
+   
     /// <summary>
-    /// So what is happning here is simply childing to a parent OBJ. HOWEVER for the snap back action to happen the parant needs a Layoutgroup(vertical/horizontal)
-    /// Even if the parent only has 1 Element inside of it. Check performance of this. because it might be more benificial to just reset pos insted leaning on Layoutgroup to snap
-    /// </summary>
-    private void RestBackToOriginalPosition()
+    /// Snaps drag object back to starting position(Placeholder). and Destroys placeholder
+   /// </summary>
+    protected void RestToStartPosition()
     {
         transform.SetParent(OriginalParent);
         transform.SetSiblingIndex(PlaceHolder.transform.GetSiblingIndex());
@@ -122,12 +118,25 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         Destroy(PlaceHolder);
     }
 
-    private void FreeDragMode()
+    protected void FreeDragMode()
     {
         transform.SetParent(freeMotionParent); // This takes us out of the Pnl(layout group) so we can freely move the UI element
         canvasGroup.blocksRaycasts = false; // after pick up we turn this off to allow PointerEventData to go through the draggable obj
-
-        OnDropArea = false;
     }
 
+    /// <summary>
+    /// if you slide the draggable object while on a drop area and release, it will slide back to the drop area instead of the starting area
+    /// </summary>
+    protected void ResetPositionToDropArea()
+    {
+        transform.SetParent(DropAreaTransform);
+        rectTransform.localPosition = Vector2.zero;
+        //canvasGroup.blocksRaycasts = false;
+    }
+
+    protected void CalculateDragAreaOffset( PointerEventData eventData)
+    {
+        var currentMousePos = eventData.position;
+        offset = (Vector2)transform.position - currentMousePos;
+    }
 }

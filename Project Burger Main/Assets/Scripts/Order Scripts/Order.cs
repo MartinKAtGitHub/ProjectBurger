@@ -1,8 +1,13 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Order : MonoBehaviour
+[System.Serializable]
+/// <summary>
+/// What the customers want, which can be different from a recipe
+/// </summary>
+public class Order
 {
-    public List<Ingredient> OrderIngredients; // Fill this up with a custome Recepie
+    //public List<Sprite> FoodSpritesInThisOrder; // Holds the sprites of the recipes.
+    public List<OrderRecipes> OrderRecipes = new List<OrderRecipes>();
+
 }

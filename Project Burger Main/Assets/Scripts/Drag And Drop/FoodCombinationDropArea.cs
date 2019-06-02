@@ -96,17 +96,19 @@ public class FoodCombinationDropArea : DropArea
         {
             var currentRecipe = _recipeBook.Recipes[i];
 
-            if (_foodStackCheckIndex <= currentRecipe.Ingredients.Count)
+            if (_foodStackCheckIndex < currentRecipe.Ingredients.Count)
             {
                 // If(_foodStackIngredients[_foodStackCheckIndex].classType == currentRecipe.Ingredients[_foodStackCheckIndex].classType)
                 if (_foodStack.FoodStackIngredients[_foodStackCheckIndex].ingredient.IngredientType == currentRecipe.Ingredients[_foodStackCheckIndex].IngredientType)
                 {
+                    // Found match 
                     return;
                 }
             }
             else
             {
-                continue; // Go to next recipe
+                // out of bounce recipe go to next recipe
+                continue; 
             }
         }
         // Maybe we cant place the final ingredient(Top bun) if it doesn't match with any recipe

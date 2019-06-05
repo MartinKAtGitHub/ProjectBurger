@@ -66,13 +66,8 @@ public class OrderGenerator : MonoBehaviour
         return choosenRecipes;
     }
 
-
-
-    //private void AddOrderRecipesToOrder()
-    //{
-    //    for (int i = 0; i < length; i++)
-    //    {
-
-    //    }
-    //}
+    private void Request()
+    {
+        // IF(Multifoodorder)
+    }
 }

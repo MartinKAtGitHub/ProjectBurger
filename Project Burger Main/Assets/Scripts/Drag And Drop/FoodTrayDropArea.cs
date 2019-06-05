@@ -1,13 +1,16 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 /// <summary>
 /// Holds the food order that is ready to be sold
 /// </summary>
 public class FoodTrayDropArea : DropArea
 {
+    public Image ResultImage;
+
     public Order TESTORDER;
 
     private Order _order; // Get order from Customer
@@ -38,8 +41,14 @@ public class FoodTrayDropArea : DropArea
         if (_order != null)
         {
             AddFoodStack(eventData.pointerDrag.GetComponent<FoodStack>());
-            // if(_order.OrderRecipes.count ==  foodstacks.count )
-            //  CheckFoodStacksAgainstOrder();
+            if (_order.OrderRecipes.Count == _foodStacks.Count)
+            {
+                CheckFoodStacksAgainstOrder();
+            }
+            else
+            {
+                Debug.Log("Missing rest of the order -> Order recipes(" + _order.OrderRecipes.Count + ") FoodStacks(" + _foodStacks.Count + ")");
+            }
 
 
         }
@@ -67,10 +76,17 @@ public class FoodTrayDropArea : DropArea
         {
             _foodStacks.Add(foodStack);
         }
+        else
+        {
+            Debug.LogError("Something else was dropped on the FoodTray. Only a food stack can be on the food tray");
+        }
     }
 
     public void CheckFoodStacksAgainstOrder()
     {
+        var amountOfOrderRecipes = _order.OrderRecipes.Count;
+        var amountOffoodStackMatches = 0;
+
         for (int i = 0; i < _foodStacks.Count; i++) // for every foodstack
         {
             //Debug.Log("This should not decrease " + _order.OrderRecipes.Count);
@@ -91,7 +107,7 @@ public class FoodTrayDropArea : DropArea
                     {
                         if (currentIngredient.IngredientType == tempOrderRecipes[k].OrderIngredients[currentIngredientIndex].IngredientType)
                         {
-                           // Debug.Log("Match found ! | " + _foodStacks[i].name + "(" + currentIngredient.IngredientType + ") == (" + tempOrderRecipes[k].OrderIngredients[currentIngredientIndex].IngredientType + ")");
+                            // Debug.Log("Match found ! | " + _foodStacks[i].name + "(" + currentIngredient.IngredientType + ") == (" + tempOrderRecipes[k].OrderIngredients[currentIngredientIndex].IngredientType + ")");
                             ingredientMatchFoundInOrderRecipeIndex = k;
                             break; // Go to next FoodStack ingredient
                         }
@@ -136,10 +152,18 @@ public class FoodTrayDropArea : DropArea
             {
                 _foodStacks[i].DidStackMatchOrder = true;
                 tempOrderRecipes.RemoveAt(ingredientMatchFoundInOrderRecipeIndex);
-                Debug.Log("REMOVE AT " + ingredientMatchFoundInOrderRecipeIndex);
+                amountOffoodStackMatches++;
             }
-            //Check current FoodStack Status (FAIL or SUCCSES) and add it to a result list or somthing
-
         }
+
+        if (amountOffoodStackMatches == amountOfOrderRecipes)
+        {
+            ResultImage.color = Color.green;
+        }
+        else
+        {
+            ResultImage.color = Color.red;
+        }
+
     }
 }

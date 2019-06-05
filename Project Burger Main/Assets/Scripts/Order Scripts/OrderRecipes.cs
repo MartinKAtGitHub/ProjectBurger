@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 
-
+[System.Serializable]
 /// <summary>
 /// OrderRecipes will be the recipe after the customer/OrderGenerator has modified it
 /// (Removed or added ingredients to base recipe)

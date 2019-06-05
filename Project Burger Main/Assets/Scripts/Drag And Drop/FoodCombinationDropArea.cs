@@ -79,7 +79,7 @@ public class FoodCombinationDropArea : DropArea
 
     private void AddIngredientsToFoodStack(IngredientGameObject ingredient)
     {
-        _foodStack.FoodStackIngredients.Add(ingredient);
+        _foodStack.GameObjectIngredients.Add(ingredient);
         _foodStackCheckIndex++;
         Debug.Log("Add stack" + _foodStackCheckIndex);
 
@@ -87,7 +87,7 @@ public class FoodCombinationDropArea : DropArea
 
     private void RemoveIngredientFromFoodStack()
     {
-        _foodStack.FoodStackIngredients.RemoveAt(_foodStack.FoodStackIngredients.Count - 1); // Removes the top ingredient 
+        _foodStack.GameObjectIngredients.RemoveAt(_foodStack.GameObjectIngredients.Count - 1); // Removes the top ingredient 
     }
 
     private void CheckFoodStackWithRecepies()
@@ -99,7 +99,7 @@ public class FoodCombinationDropArea : DropArea
             if (_foodStackCheckIndex < currentRecipe.Ingredients.Count)
             {
                 // If(_foodStackIngredients[_foodStackCheckIndex].classType == currentRecipe.Ingredients[_foodStackCheckIndex].classType)
-                if (_foodStack.FoodStackIngredients[_foodStackCheckIndex].ingredient.IngredientType == currentRecipe.Ingredients[_foodStackCheckIndex].IngredientType)
+                if (_foodStack.GameObjectIngredients[_foodStackCheckIndex].ingredient.IngredientType == currentRecipe.Ingredients[_foodStackCheckIndex].IngredientType)
                 {
                     // Found match 
                     return;

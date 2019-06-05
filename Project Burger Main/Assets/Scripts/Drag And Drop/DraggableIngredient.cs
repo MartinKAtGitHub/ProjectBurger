@@ -76,9 +76,9 @@ public class DraggableIngredient : Draggable
 
     private void OnFoodIsReady()
     {
-        for (int i = 0; i < FoodCombinationDropArea.FoodStack.FoodStackIngredients.Count; i++)
+        for (int i = 0; i < FoodCombinationDropArea.FoodStack.GameObjectIngredients.Count; i++)
         {
-            FoodCombinationDropArea.FoodStack.FoodStackIngredients[i].GetComponent<CanvasGroup>().blocksRaycasts = false;
+            FoodCombinationDropArea.FoodStack.GameObjectIngredients[i].GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
         FoodCombinationDropArea.FoodStack.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }

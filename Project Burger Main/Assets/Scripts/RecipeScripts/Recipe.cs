@@ -13,6 +13,10 @@ public abstract class Recipe : ScriptableObject
     private string _recipeName;
     [SerializeField]
     private foodType _foodType;
+
+    private int _reputationGain;
+    private int _reputationLose;
+    private int _recipcPrice;
     private enum foodType
     {
         NotDefined,

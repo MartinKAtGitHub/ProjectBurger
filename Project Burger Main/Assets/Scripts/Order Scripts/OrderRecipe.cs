@@ -6,9 +6,8 @@ using System.Collections.Generic;
 /// OrderRecipes will be the recipe after the customer/OrderGenerator has modified it
 /// (Removed or added ingredients to base recipe)
 /// </summary>
-public class OrderRecipes
+public class OrderRecipe
 {
     public List<Ingredient> OrderIngredients = new List<Ingredient>();
-
-   
+    public List<Ingredient> DiscaredIngredients = new List<Ingredient>();
 }

@@ -8,6 +8,6 @@ using System.Collections.Generic;
 public class Order
 {
     //public List<Sprite> FoodSpritesInThisOrder; // Holds the sprites of the recipes.
-    public List<OrderRecipes> OrderRecipes = new List<OrderRecipes>();
+    public List<OrderRecipe> OrderRecipes = new List<OrderRecipe>();
 
 }

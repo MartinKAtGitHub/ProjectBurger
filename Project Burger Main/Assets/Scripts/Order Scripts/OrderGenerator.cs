@@ -9,12 +9,19 @@ public class OrderGenerator : MonoBehaviour
 {
     [SerializeField]
     private RecipeBook _recipeBook;
+    [SerializeField]
+    private int _multiOrderAmount;
     private Recipe _orderBaseRecipe;
     /// <summary>
     /// the Order recipe that is left after we have discarded all the ingredients the customer didn't want
     /// </summary>
+    [SerializeField]
     private Order _order;
+
+
     private List<Ingredient> _discaredIngredients = new List<Ingredient>();
+
+    public bool RemoveIngredients;
 
     /// <summary>
     /// The random recipe the order is being generated from
@@ -30,13 +37,13 @@ public class OrderGenerator : MonoBehaviour
     public void RequestOneFoodOrder()
     {
         _order = new Order();
-        List<OrderRecipes> orderRecipesIngredients = new List<OrderRecipes>();
+        List<OrderRecipe> orderRecipesIngredients = new List<OrderRecipe>();
 
         _orderBaseRecipe = _recipeBook.Recipes[Random.Range(0, _recipeBook.Recipes.Count)];    // Choose random recipe to use as template for order
 
-        for (int i = 0; i < _orderBaseRecipe.Ingredients.Count; i++)
+        for (int i = 0; i < _orderBaseRecipe.Ingredients.Count; i++) // Rolles to check if a ingredient will be rmeoved
         {
-            var roll = Random.Range(1, 100); // 1 included 100 excluded due to arrays -1 
+            var roll = Random.Range(1, 100);
 
             if (roll < _orderBaseRecipe.Ingredients[i].RemoveChance)// Roll will never be 0% or 100% => %0 safe %100 removed
             {
@@ -51,23 +58,74 @@ public class OrderGenerator : MonoBehaviour
         _order.OrderRecipes.Add(orderRecipesIngredients[0]);
     }
 
-    private List<Recipe> ChooseFoods() // Hard code 50 % chance
+    public void RequestOrder()
     {
-        List<Recipe> choosenRecipes = new List<Recipe>();
-        for (int i = 0; i < _recipeBook.Recipes.Count; i++)
+        _order = new Order();
+        var multiOrderChance = 50;
+        var multiOrderRoll = Random.Range(1, 100);
+
+        List<OrderRecipe> orderRecipes = new List<OrderRecipe>();
+
+        // Recipe orderBaseRecipe = null;
+
+        if (multiOrderRoll < multiOrderChance)
         {
-            var roll = Random.Range(1, 100);
-            if (roll < 50)
+            Debug.Log("MultiFood");
+
+            for (int i = 0; i < _multiOrderAmount; i++)
             {
-                choosenRecipes.Add(_recipeBook.Recipes[i]);
+                var recipeRoll = Random.Range(1, _recipeBook.totalAccumulatedWight);
+
+                for (int j = 0; j < _recipeBook.Recipes.Count; j++)
+                {
+                    if (_recipeBook.Recipes[j].AccumulatedWight >= recipeRoll)
+                    {
+                        Recipe orderBaseRecipe = _recipeBook.Recipes[j];
+
+                        _order.OrderRecipes.Add(CreateOrderRecipe(orderBaseRecipe));
+                    }
+                }
             }
         }
+        else
+        {
+            Debug.Log("Single food");
 
-        return choosenRecipes;
+            var recipeRoll = Random.Range(1, _recipeBook.totalAccumulatedWight);
+
+            for (int j = 0; j < _recipeBook.Recipes.Count; j++)
+            {
+                if (_recipeBook.Recipes[j].AccumulatedWight >= recipeRoll)
+                {
+                    Recipe orderBaseRecipe = _recipeBook.Recipes[j];
+
+                    _order.OrderRecipes.Add(CreateOrderRecipe(orderBaseRecipe));
+                }
+            }
+        }
     }
 
-    private void Request()
+    /// <summary>
+    /// Removes unwanted ingredients based on chance, and generates a Order Recipe the player will try to match
+    /// </summary>
+    /// <param name="orderBaseRecipe">The base recipe the OrderRecipe will be based on</param>
+    /// <returns></returns>
+    private OrderRecipe CreateOrderRecipe(Recipe orderBaseRecipe)
     {
-        // IF(Multifoodorder)
+        OrderRecipe orderRecipe = new OrderRecipe();
+
+        for (int i = 0; i < orderBaseRecipe.Ingredients.Count; i++) // Rolls to check if a ingredient will be removed
+        {
+            var roll = Random.Range(1, 100);
+            if (RemoveIngredients && roll < orderBaseRecipe.Ingredients[i].RemoveChance)// Roll will never be 0% or 100% => %0 safe %100 removed
+            {
+                orderRecipe.DiscaredIngredients.Add(orderBaseRecipe.Ingredients[i]);
+            }
+            else
+            {
+                orderRecipe.OrderIngredients.Add(orderBaseRecipe.Ingredients[i]);
+            }
+        }
+        return orderRecipe;
     }
 }

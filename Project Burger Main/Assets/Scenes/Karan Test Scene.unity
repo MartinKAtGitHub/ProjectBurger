@@ -366,16 +366,19 @@ MonoBehaviour:
       - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
       - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
       - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
+      DiscaredIngredients: []
     - OrderIngredients:
       - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
       - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
       - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
       - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
+      DiscaredIngredients: []
     - OrderIngredients:
       - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
       - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
       - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
       - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
+      DiscaredIngredients: []
   _foodStacks:
   - {fileID: 543501004}
   - {fileID: 432618220}
@@ -3777,7 +3780,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1896139856}
+      - m_Target: {fileID: 1348723755}
         m_MethodName: RequestOrder
         m_Mode: 1
         m_Arguments:
@@ -4426,7 +4429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1348723755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4440,6 +4443,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _recipeBook: {fileID: 11400000, guid: 4551bc7341af94b48a1e06c551ebb029, type: 2}
+  _multiOrderAmount: 2
+  _order:
+    OrderRecipes: []
 --- !u!4 &1348723756
 Transform:
   m_ObjectHideFlags: 0
@@ -6103,6 +6109,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _recipeBook: {fileID: 11400000, guid: 4551bc7341af94b48a1e06c551ebb029, type: 2}
+  _multiOrderAmount: 0
+  _order:
+    OrderRecipes: []
 --- !u!1 &1960579776
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-//[CreateAssetMenu(menuName = "Hamburger recipe", fileName ="Recipes /HamburgerRecipe")]
 /// <summary>
 /// Holds the ingredients and order for all food types
 /// </summary>
@@ -13,6 +12,17 @@ public abstract class Recipe : ScriptableObject
     private string _recipeName;
     [SerializeField]
     private foodType _foodType;
+    /// <summary>
+    /// The chance this recipe has to be ordered
+    /// </summary>
+    [SerializeField]
+    private int _orderChance;
+    /// <summary>
+    /// the sum of order chances. This is the number we will check against the random value to see if this recipe will be chosen 
+    /// </summary>
+    [SerializeField]
+    private int _accumulatedWight;
+
 
     private int _reputationGain;
     private int _reputationLose;
@@ -32,6 +42,9 @@ public abstract class Recipe : ScriptableObject
     /// <summary>
     /// The sprite that shows the finished recipe product
     /// </summary>
-    public Sprite RecipeImg { get { return _recipeImg; } }
-    public string RecipeName { get { return _recipeName; } }
+    public Sprite RecipeImg { get => _recipeImg; }
+    public string RecipeName { get => _recipeName; }
+    public int OrderChance { get => _orderChance; }
+    public int AccumulatedWight { get => _accumulatedWight; set => _accumulatedWight = value; }
+
 }

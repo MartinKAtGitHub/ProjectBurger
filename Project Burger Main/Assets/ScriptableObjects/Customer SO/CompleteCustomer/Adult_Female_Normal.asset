@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203ae46f35ba01e44afae1677ed734ed, type: 3}
+  m_Name: Adult_Female_Normal
+  m_EditorClassIdentifier: 
+  Hungryness: 1
+  PatienceTime: 1
+  HeadShape: {fileID: 11400000, guid: 764accb63244c7841a84559480fa5247, type: 2}
+  BodyShape: {fileID: 11400000, guid: fb888db6e8b6ef247b1051b43161903e, type: 2}

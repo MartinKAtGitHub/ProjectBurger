@@ -1,5 +1,6 @@
 ﻿using UnityEngine.EventSystems;
 
+//In The Future, Make The Burger Lose Its Freshness If On The Wait Area For To Long?
 public class BurgerWaitArea : DropArea {
 
     public Ingredient.IngredientTypes WhatCanDropOnHere;
@@ -16,7 +17,7 @@ public class BurgerWaitArea : DropArea {
         }
     }
 
-
+    
     public override void DropAreaOnBeginDrag() {//Calculate Burger Freshness :D
         if(ConstantHeat == true) {//TODO Do This / Burger Getting Old/Cold
 

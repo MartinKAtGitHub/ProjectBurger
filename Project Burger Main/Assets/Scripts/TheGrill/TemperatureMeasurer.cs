@@ -14,16 +14,14 @@ public class TemperatureMeasurer : MonoBehaviour {
     }
 
     void Update() {
-        if (_GrillHeat._StartCooking == true) {
 
-            if(_GrillHeat.GrillTemperature < 0.125f) {
+            if(_GrillHeat.BurgerTemperature < 0.125f) {
                 _TempImage.fillAmount = 0.125f;
-                _TempImage.color = _GrillHeat.TheBurgerIngredience.MeatTimers.Evaluate(0.125f);
+                _TempImage.color = _GrillHeat._BurgerIngredience.MeatTimers.Evaluate(0.125f);
             } else {
-                _TempImage.fillAmount = _GrillHeat.GrillTemperature;
-                _TempImage.color = _GrillHeat.TheBurgerIngredience.MeatTimers.Evaluate(_GrillHeat.GrillTemperature);
+                _TempImage.fillAmount = _GrillHeat.BurgerTemperature;
+                _TempImage.color = _GrillHeat._BurgerIngredience.MeatTimers.Evaluate(_GrillHeat.BurgerTemperature);
             }
-        }
 
     }
     

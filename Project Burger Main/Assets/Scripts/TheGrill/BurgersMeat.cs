@@ -15,6 +15,9 @@ public class BurgersMeat : Ingredient {
 
     public float MeatCookingTime = 1;//How long does the burger take to cook.
 
+    [HideInInspector] //Currently In Construction.
+    public float MeatHeatForPerfection = 60f;//This Is The Heat That The Spesific Meat Needs To Be Perfectly Made. (TODO In Future, To Hot Might Burn The Meat) 
+
     public SpriteAtlas AllBurgerStages;
       
 }

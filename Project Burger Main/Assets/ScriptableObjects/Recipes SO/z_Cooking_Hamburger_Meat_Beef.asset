@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3232ef5c697b4a046ac00514869ea579, type: 3}
   m_Name: z_Cooking_Hamburger_Meat_Beef
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
+  _ingredientSprite: {fileID: 21300000, guid: 2de7ee7147b995d4ebf5d50f9e9532c8, type: 3}
   _ingredientName: HamburgerMeat
   ingredientType: 2
   RemoveChance: 0
@@ -45,6 +45,8 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 6
     m_NumAlphaKeys: 2
-  MeatCookingTime: 25
+  PerfectlyCooked: 0.5
+  MeatCookingTime: 45
+  MeatHeatForPerfection: 60
   AllBurgerStages: {fileID: 4343727234628468602, guid: 255b06a76557d9b4bb4c71683dbee8cd,
     type: 2}

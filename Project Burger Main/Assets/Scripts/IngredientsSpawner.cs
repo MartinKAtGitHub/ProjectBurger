@@ -15,7 +15,7 @@ public class IngredientsSpawner : MonoBehaviour, IPointerDownHandler/*, IBeginDr
     [SerializeField]
     private bool _presetSpawn;
 
-    private Draggable draggableIngredients; 
+    //private Draggable draggableIngredients; 
        
 
     public int ingredienceSpawnAmout;
@@ -73,6 +73,6 @@ public class IngredientsSpawner : MonoBehaviour, IPointerDownHandler/*, IBeginDr
     {
         _spawnedIngredients = Instantiate(_ingredience, transform.parent);
         _spawnedIngredients.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-        draggableIngredients = _spawnedIngredients.GetComponent<Draggable>();
+        //draggableIngredients = _spawnedIngredients.GetComponent<Draggable>();
     }
 }

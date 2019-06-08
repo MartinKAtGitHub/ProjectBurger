@@ -7,21 +7,27 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 295963924765048965, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: m_Name
+      value: HamBurg_Meat
+      objectReference: {fileID: 0}
     - target: {fileID: 4364827356571203016, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
       propertyPath: ingredient
       value: 
       objectReference: {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4,
         type: 2}
-    - target: {fileID: 295963924765048965, guid: d6bdb26a075ad64489be7918469951df,
+    - target: {fileID: 295963924765048990, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
-      propertyPath: m_Name
-      value: HamBurg_Meat
-      objectReference: {fileID: 0}
-    - target: {fileID: 295963924765048988, guid: d6bdb26a075ad64489be7918469951df,
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4d70409f33cf87e4ea9f6883be2b042d,
         type: 3}
-      propertyPath: ingredientType
-      value: 2
+    - target: {fileID: 295963924765048985, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: m_IgnoreParentGroups
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
@@ -128,11 +134,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 295963924765048990, guid: d6bdb26a075ad64489be7918469951df,
+    - target: {fileID: 295963924765048988, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 4d70409f33cf87e4ea9f6883be2b042d,
-        type: 3}
+      propertyPath: ingredientType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6bdb26a075ad64489be7918469951df, type: 3}

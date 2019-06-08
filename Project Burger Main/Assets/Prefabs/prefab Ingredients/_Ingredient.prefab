@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 295963924765048990}
   - component: {fileID: 295963924765048985}
   - component: {fileID: 295963924765048984}
-  - component: {fileID: -7692582576981863897}
   - component: {fileID: 4364827356571203016}
+  - component: {fileID: 5601900088430116840}
   m_Layer: 5
   m_Name: _Ingredient
   m_TagString: Untagged
@@ -89,7 +89,7 @@ CanvasGroup:
   m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
+  m_IgnoreParentGroups: 1
 --- !u!114 &295963924765048984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,23 +110,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &-7692582576981863897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295963924765048965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13781228f3674284ab7eb3eadeb111ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnDropArea: 0
-  CurrentDropArea: {fileID: 0}
-  ResetDropZone: {fileID: 0}
-  OriginalParent: {fileID: 0}
-  freeMotionParent: {fileID: 0}
 --- !u!114 &4364827356571203016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,3 +122,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c00574bad678643aff1685b4e26506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ingredient: {fileID: 0}
+--- !u!114 &5601900088430116840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295963924765048965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 805fe3adbea6658428601bdf55f8a6b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDropArea: 0
+  CurrentDropArea: {fileID: 0}
+  DropAreaTransform: {fileID: 0}
+  OriginalParent: {fileID: 0}
+  freeMotionParent: {fileID: 0}

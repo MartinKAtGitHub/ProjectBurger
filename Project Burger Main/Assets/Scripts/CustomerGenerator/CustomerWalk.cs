@@ -10,9 +10,15 @@ public class CustomerWalk : MonoBehaviour {
 
     bool ReachedEnd = false;
     bool GoIn = true;
-
+    bool onceorder = true;
     public float TimeToWait = 5f;
     float WaitTime = 0;
+    OrderGenerator test;
+
+    private void Start() {
+        test = GetComponent<OrderGenerator>();
+    }
+
 
     public void SetWalkTargets(Transform start, Transform end) {
         Door = start;
@@ -31,6 +37,11 @@ public class CustomerWalk : MonoBehaviour {
 
             if(GoIn == true) {//StartDialog And/Or Order Generator
                               //TODO connect To Order Generator And Wait For Response;
+
+                if(onceorder == true) {
+                    test.RequestOrder();
+                    onceorder = false;
+                }
 
                 if (Time.time >= WaitTime) {
                     Cashier = Door;

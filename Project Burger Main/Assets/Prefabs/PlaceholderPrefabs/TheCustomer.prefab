@@ -440,6 +440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4092426325199644495}
   - component: {fileID: 8189772387029709092}
+  - component: {fileID: -6684023892697497603}
   m_Layer: 0
   m_Name: TheCustomer
   m_TagString: Untagged
@@ -477,6 +478,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 250
   TimeToWait: 0
+--- !u!114 &-6684023892697497603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4537498345374149908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b68c12f31253e48449266402555e602f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _recipeBook: {fileID: 11400000, guid: 4551bc7341af94b48a1e06c551ebb029, type: 2}
+  _multiOrderAmount: 2
+  _order:
+    OrderRecipes: []
+  RemoveIngredients: 0
 --- !u!1 &7828447596688982112
 GameObject:
   m_ObjectHideFlags: 0

@@ -51,6 +51,7 @@ public class GeneratingCursomers : MonoBehaviour {
         one.transform.GetChild(1).GetComponent<SetHeadShape>().SetImages(cus.HeadShape);
 
         one.GetComponent<CustomerWalk>().SetWalkTargets(transform, WalkToPosition);
+        one.GetComponent<CustomerWalk>().setTestManager(GetComponent<TestManager>());
 
     }
 

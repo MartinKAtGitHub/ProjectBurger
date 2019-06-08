@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class CustomerWalk : MonoBehaviour {
 
+
+
+
+    TestManager testin;
+
+    public void setTestManager(TestManager te) {
+        testin = te;
+    }
+
      Transform Door;
      Transform Cashier;
     public float MoveSpeed = 1;
@@ -17,6 +26,7 @@ public class CustomerWalk : MonoBehaviour {
 
     private void Start() {
         test = GetComponent<OrderGenerator>();
+        
     }
 
 
@@ -39,7 +49,10 @@ public class CustomerWalk : MonoBehaviour {
                               //TODO connect To Order Generator And Wait For Response;
 
                 if(onceorder == true) {
+                    Debug.Log("AT THE GOAL");
                     test.RequestOrder();
+                    testin.SetOrder(this);
+
                     onceorder = false;
                 }
 
@@ -50,7 +63,7 @@ public class CustomerWalk : MonoBehaviour {
                 }
 
             } else {
-                GameObject.Find("CustomGenerator").GetComponent<GeneratingCursomers>().Remake = true;
+                GameObject.Find("Manager").GetComponent<GeneratingCursomers>().Remake = true;
                 Destroy(gameObject);
             }
         }

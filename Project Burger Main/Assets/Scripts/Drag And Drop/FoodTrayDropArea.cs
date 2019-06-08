@@ -11,8 +11,9 @@ public class FoodTrayDropArea : DropArea
 {
     public Image ResultImage;
 
+    [HideInInspector]
     public Order TESTORDER;
-
+    [SerializeField]
     private Order _order; // Get order from Customer
     private OrderGenerator orderGenerator;
     [Space(20)]
@@ -20,12 +21,12 @@ public class FoodTrayDropArea : DropArea
     /// <summary>
     /// The current order being processed
     /// </summary>
-    public Order Order { get; set; }
+    public Order Order { get => _order; set => _order = value; }
 
 
     private void Start()
     {
-        _order = TESTORDER;
+       // _order = TESTORDER;
         Debug.Log("!!!! TESTORDER IS ENABLED !!!!");
     }
 

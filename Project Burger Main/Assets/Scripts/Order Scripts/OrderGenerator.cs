@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class OrderGenerator : MonoBehaviour
 {
+    public bool RemoveIngredients;
     [SerializeField]
     private RecipeBook _recipeBook;
     [SerializeField]
@@ -21,7 +22,6 @@ public class OrderGenerator : MonoBehaviour
 
     private List<Ingredient> _discaredIngredients = new List<Ingredient>();
 
-    public bool RemoveIngredients;
 
     /// <summary>
     /// The random recipe the order is being generated from

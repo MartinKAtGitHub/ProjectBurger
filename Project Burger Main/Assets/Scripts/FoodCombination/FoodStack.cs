@@ -14,6 +14,5 @@ public class FoodStack : MonoBehaviour
     private bool _didStackMatchOrder;
 
     public List<IngredientGameObject> GameObjectIngredients = new List<IngredientGameObject>();
-    public bool DidStackMatchOrder
-    { get => _didStackMatchOrder;  set => _didStackMatchOrder = value; }
+    public bool DidStackMatchOrder { get => _didStackMatchOrder;  set => _didStackMatchOrder = value; }
 }

@@ -3359,10 +3359,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CustomerPrefab: {fileID: 3584862983583774472, guid: 54c4c1bcfae847e4a97b794387f08a98,
     type: 3}
-  TheCustomerMale: {fileID: 0}
-  TheCustomerFemale: {fileID: 0}
+  TheCustomerMale: {fileID: 407353009508986264, guid: ec7c8e68c5b201041bc3e931cd633c50,
+    type: 3}
+  TheCustomerFemale: {fileID: 407353009508986264, guid: 99bb1cb071b69574cb2915239fbdbb8a,
+    type: 3}
   Remake: 0
-  WalkToPosition: {fileID: 0}
+  WalkToPosition: {fileID: 1686069711}
 --- !u!1 &1476685342
 GameObject:
   m_ObjectHideFlags: 0

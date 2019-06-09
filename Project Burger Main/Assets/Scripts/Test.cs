@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class Test : MonoBehaviour
 {
+    public int HP;
+    public int MANA;
     // LEL
     // I removed this 
     

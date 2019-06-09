@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: DoubleDecker
   m_EditorClassIdentifier: 
   _recipeImg: {fileID: 0}
-  _recipeName: 
-  _foodType: 0
-  _orderChance: 0
-  _accumulatedWight: 0
-  Ingredients: []
+  _recipeName: DoubleDecker
+  _foodType: 1
+  _orderChance: 50
+  _accumulatedWight: 250
+  Ingredients:
+  - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
+  - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
+  - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
+  - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}

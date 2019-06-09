@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomerWalk : MonoBehaviour {
+public class FlexibleCustomerWalk : MonoBehaviour
+{
+  
 
-     Transform Door;
-     Transform Cashier;
+    Transform Door;
+    Transform Cashier;
     public float MoveSpeed = 1;
 
     bool ReachedEnd = false;
     bool GoIn = true;
-    bool onceorder = true;
     public float TimeToWait = 5f;
     float WaitTime = 0;
-    OrderGenerator test;
 
     private void Start() {
-        test = GetComponent<OrderGenerator>();
+
     }
 
 
@@ -27,7 +27,7 @@ public class CustomerWalk : MonoBehaviour {
 
     private void Update() {
 
-        if(ReachedEnd == false) {
+        if (ReachedEnd == false) {
             transform.position = Vector3.MoveTowards(transform.position, Cashier.position, MoveSpeed * Time.deltaTime);
             if (transform.position == Cashier.position) {
                 ReachedEnd = true;
@@ -35,13 +35,10 @@ public class CustomerWalk : MonoBehaviour {
             }
         } else {
 
-            if(GoIn == true) {//StartDialog And/Or Order Generator
-                              //TODO connect To Order Generator And Wait For Response;
+            if (GoIn == true) {//StartDialog And/Or Order Generator
+                               //TODO connect To Order Generator And Wait For Response;
 
-                if(onceorder == true) {
-                    test.RequestOrder();
-                    onceorder = false;
-                }
+                
 
                 if (Time.time >= WaitTime) {
                     Cashier = Door;
@@ -50,7 +47,7 @@ public class CustomerWalk : MonoBehaviour {
                 }
 
             } else {
-                GameObject.Find("CustomGenerator").GetComponent<GeneratingCursomers>().Remake = true;
+                GameObject.Find("CustomGenerator").GetComponent<FlexibleCreateBody>().Remake = true;
                 Destroy(gameObject);
             }
         }

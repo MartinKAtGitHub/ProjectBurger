@@ -5,5 +5,10 @@ using UnityEngine.EventSystems;
 
 public class Test : MonoBehaviour
 {
-   // I removed this 
+    // I removed this 
+    private void Start()
+    {
+        Debug.Log("HELP");
+    }
+
 }

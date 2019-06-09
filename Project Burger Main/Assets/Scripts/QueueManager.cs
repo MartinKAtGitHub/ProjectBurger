@@ -2,10 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QueueManager : MonoBehaviour 
+
+public class QueueManager : MonoBehaviour
 {
-   
-    // Queue<customer>
+
+    [SerializeField]
+    private int _maxActiveCustomerAmount;
+    [SerializeField]
+    private List<GameObject> _activeCustomerQueue = new List<GameObject>(); // TODO QueueManager can be an array if we have a fixed amount of active customers
+
+
+    private void Awake()
+    {
+
+    }
+
+    private void Start()
+    {
+        // wait for init prep time
+        // Then activate queue
+    }
 
     public void OnProcessCustomer()
     {
@@ -14,4 +30,11 @@ public class QueueManager : MonoBehaviour
         //queue.pop
         // queue.peek.GoToCounterToOrderFood();
     }
+
+
+    private void AddCustomerToQueue()
+    {
+
+    }
+
 }

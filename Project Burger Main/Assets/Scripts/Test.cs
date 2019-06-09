@@ -7,8 +7,12 @@ public class Test : MonoBehaviour
 {
     // LEL
     // I removed this 
-    private void Start()
-    {
+    
+
+    //HIHOHA
+    //In master
+
+    private void Start() {
         Debug.Log("HELP");
     }
 

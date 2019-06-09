@@ -9,8 +9,12 @@ public class Test : MonoBehaviour
     public int MANA;
     // LEL
     // I removed this 
-    private void Start()
-    {
+    
+
+    //HIHOHA
+    //In master
+
+    private void Start() {
         Debug.Log("HELP");
     }
 

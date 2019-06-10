@@ -11,8 +11,7 @@ public class FoodTrayDropArea : DropArea
 {
     public Image ResultImage;
 
-    [HideInInspector]
-    public Order TESTORDER;
+    //public Order TESTORDER;
     [SerializeField]
     private Order _order; // Get order from Customer
     private OrderGenerator orderGenerator;
@@ -21,13 +20,26 @@ public class FoodTrayDropArea : DropArea
     /// <summary>
     /// The current order being processed
     /// </summary>
-    public Order Order { get => _order; set => _order = value; }
+    public Order Order
+    {
+        get => _order;
+
+        set
+        {
+            if(value.OrderRecipes.Count == 0)
+            {
+                //   Debug.Break();
+                Debug.LogError("FoodTray order should never be 0");
+            }
+            _order = value;
+        }
+    }
 
 
     private void Start()
     {
        // _order = TESTORDER;
-        Debug.Log("!!!! TESTORDER IS ENABLED !!!!");
+      //  Debug.Log("!!!! TESTORDER IS ENABLED !!!!");
     }
 
     public override void DropAreaOnBeginDrag()
@@ -42,16 +54,7 @@ public class FoodTrayDropArea : DropArea
         if (_order != null)
         {
             AddFoodStack(eventData.pointerDrag.GetComponent<FoodStack>());
-            if (_order.OrderRecipes.Count == _foodStacks.Count)
-            {
-                CheckFoodStacksAgainstOrder();
-            }
-            else
-            {
-                Debug.Log("Missing rest of the order -> Order recipes(" + _order.OrderRecipes.Count + ") FoodStacks(" + _foodStacks.Count + ")");
-            }
-
-
+            AutoSell();
         }
         else
         {
@@ -60,11 +63,19 @@ public class FoodTrayDropArea : DropArea
         // you cant pick the food back up
     }
 
-
+    /// <summary>
+    /// The food will sold the moment the amount of foodstacks = to the amount of foodstack the order requers
+    /// </summary>
     private void AutoSell()
     {
-        // if(_order.OrderRecipes.count ==  foodstacks.count )
-        // then sell the food
+        if (_order.OrderRecipes.Count == _foodStacks.Count)
+        {
+            CheckFoodStacksAgainstOrder();
+        }
+        else
+        {
+            Debug.Log("Missing rest of the order -> Order recipes(" + _order.OrderRecipes.Count + ") FoodStacks(" + _foodStacks.Count + ")");
+        }
     }
 
     /// <summary>

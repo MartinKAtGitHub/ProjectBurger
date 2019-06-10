@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cc43817b2ce86d458be24be40781e9f, type: 3}
-  m_Name: _HamBurg_Recpie
+  m_Name: DoubleDecker_recipe
   m_EditorClassIdentifier: 
-  _recipeImg: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
-  _recipeName: Hamburger
+  _recipeImg: {fileID: 0}
+  _recipeName: DoubleDecker
   _foodType: 1
   _orderChance: 50
-  _accumulatedWight: 250
+  _accumulatedWight: 100
   Ingredients:
   - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
   - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
-  - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+  - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
   - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}

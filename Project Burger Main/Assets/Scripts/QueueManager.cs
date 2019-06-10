@@ -11,6 +11,7 @@ public class QueueManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> _activeCustomerQueue = new List<GameObject>(); // TODO QueueManager can be an array if we have a fixed amount of active customers
 
+    public List<GameObject> ActiveCustomerQueue { get => _activeCustomerQueue; }
 
     private void Awake()
     {
@@ -32,9 +33,9 @@ public class QueueManager : MonoBehaviour
     }
 
 
-    private void AddCustomerToQueue()
+    public void AddCustomerToQueue(GameObject customer)
     {
-
+        _activeCustomerQueue.Add(customer);
     }
 
 }

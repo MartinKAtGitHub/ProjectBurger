@@ -22,17 +22,17 @@ public class DraggableIngredient : Draggable
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
-      //  Debug.Log("PULL FOOD DRAG");
-        //base.OnBeginDrag(eventData);
-        CalculateDragAreaOffset(eventData);
 
-        //   if (!OnDropArea)
-        if (!_onFoodCombiDropArea)
-        {
-            CreatePlaceHolderObj();
-        }
+        base.OnBeginDrag(eventData);
 
-        FreeDragMode();
+        //CalculateDragAreaOffset(eventData);
+
+        //if (!_onFoodCombiDropArea)
+        //{
+        //    CreatePlaceHolderObj();
+        //}
+
+        //FreeDragMode();
 
         if (FoodCombinationDropArea != null)
         {
@@ -40,21 +40,22 @@ public class DraggableIngredient : Draggable
             FoodCombinationDropArea = null;
         }
 
-        _onFoodCombiDropArea = false;
+        //_onFoodCombiDropArea = false;
     }
 
     public override void OnEndDrag(PointerEventData eventData)
     {
+        base.OnEndDrag(eventData);
 
         //if (OnDropArea)
-        if (_onFoodCombiDropArea)
-        {
-            ResetPositionToDropArea();
-        }
-        else
-        {
-            RestToStartPosition();
-        }
+        //if (_onFoodCombiDropArea)
+        //{
+        //    ResetPositionToDropArea();
+        //}
+        //else
+        //{
+        //    RestToPlaceHolderPosition();
+        //}
 
         if (FoodCombinationDropArea != null)
         {
@@ -80,6 +81,7 @@ public class DraggableIngredient : Draggable
         {
             FoodCombinationDropArea.FoodStack.GameObjectIngredients[i].GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
+
         FoodCombinationDropArea.FoodStack.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 }

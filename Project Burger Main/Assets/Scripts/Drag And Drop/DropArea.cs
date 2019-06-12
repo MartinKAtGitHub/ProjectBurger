@@ -5,10 +5,12 @@ public abstract class DropArea : MonoBehaviour, IDropHandler//, IPointerEnterHan
 {
     public bool IsThisDropAreaOccupied;
 
-   // public abstract void OnDrop(PointerEventData eventData); // we need this. because if we use the other system, then we can drop anything o anything 
+    // public abstract void OnDrop(PointerEventData eventData); // we need this. because if we use the other system, then we can drop anything o anything 
     public virtual void OnDrop(PointerEventData eventData)
     {
         UnlimitedElementsOnDropArea(eventData);
+
+
     }
 
     private void OnlyAllowOneElementOnDropArea(PointerEventData eventData)
@@ -16,7 +18,7 @@ public abstract class DropArea : MonoBehaviour, IDropHandler//, IPointerEnterHan
         if (!IsThisDropAreaOccupied)
         {
             var draggedObject = eventData.pointerDrag;
-             var draggableComponent = draggedObject.GetComponent<Draggable>();
+            var draggableComponent = draggedObject.GetComponent<Draggable>();
 
             if (draggableComponent != null)
             {
@@ -49,6 +51,8 @@ public abstract class DropArea : MonoBehaviour, IDropHandler//, IPointerEnterHan
             draggableComponent.CurrentDropArea = this;
         }
     }
+   
+
     /// <summary>
     /// When the player Drags FROM the drop zone, We can do different implementation depending on the type of drop area
     /// </summary>

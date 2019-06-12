@@ -9,18 +9,23 @@ public class LevelManager : MonoBehaviour
     public FoodTrayDropArea FoodTrayDropArea;
     public CustomerSpawner CustomerSpawner;
 
+    [SerializeField]
+    private float _preparationTime;
+
     void Start()
     {
         // StartCorutine(StartLevel)
+        //CustomerSpawner.SpawnCustomer();
+       // CustomerSpawner.SpawnCustomer();
         CustomerSpawner.SpawnCustomer();
         CustomerSelect.SelectInitialCustomer();
 
     }
 
-
-    void Update()
+    private IEnumerator StartLevel()
     {
-
+        // Wait for prep time
+        // Enable/Start Customer spawner
+        yield return null;
     }
-
 }

@@ -14,6 +14,7 @@ public class CustomerSpawner : MonoBehaviour
         
         var clone = Instantiate(Customer);
         clone.name += cloneNum++;
+        clone.GetComponent<OrderGenerator>().RequestOrder();
         Debug.Log("SPAWNING " + clone.name);
 
         QueueManager.AddCustomerToQueue(clone);

@@ -32,49 +32,14 @@ public class OrderGenerator : MonoBehaviour
     public List<Ingredient> DiscaredIngredients { get { return _discaredIngredients; } }
     public Order Order { get { return _order; } }
 
-    private void Awake()
-    {
-        RequestOrder();
-        Debug.Log("REQUEST ORDER ORDERGENERATOR START()");
-    }
-
-    private void Start()
-    {
-        // RequestOrder();
-        // Debug.Log("REQUEST ORDER ORDERGENERATOR START()");
-    }
-
-
     /// <summary>
-    /// Generates a new order, it will roll to see which ingredients will be removed 
+    /// Generates a new order(s) based on chance, the ingredients can be set to be removed at which point
+    /// there will be chance to remove the ingredients
     /// </summary>
-    public void RequestOneFoodOrder()
-    {
-        _order = new Order();
-        List<OrderRecipe> orderRecipesIngredients = new List<OrderRecipe>();
-
-        _orderBaseRecipe = _recipeBook.Recipes[Random.Range(0, _recipeBook.Recipes.Count)];    // Choose random recipe to use as template for order
-
-        for (int i = 0; i < _orderBaseRecipe.Ingredients.Count; i++) // Rolles to check if a ingredient will be rmeoved
-        {
-            var roll = Random.Range(1, 100);
-
-            if (roll < _orderBaseRecipe.Ingredients[i].RemoveChance)// Roll will never be 0% or 100% => %0 safe %100 removed
-            {
-                _discaredIngredients.Add(_orderBaseRecipe.Ingredients[i]);
-            }
-            else
-            {
-                //TODO OrderGenerator We need to create a system for multiple type food order
-                orderRecipesIngredients[0].OrderIngredients.Add(_orderBaseRecipe.Ingredients[i]);
-            }
-        }
-        _order.OrderRecipes.Add(orderRecipesIngredients[0]);
-    }
-
     public void RequestOrder()
     {
         _order = new Order();
+        _order.CustomerName = name;
         var multiOrderRoll = Random.Range(1, 100);
 
         List<OrderRecipe> orderRecipes = new List<OrderRecipe>();
@@ -83,8 +48,7 @@ public class OrderGenerator : MonoBehaviour
 
         if (multiOrderRoll < _multiOrderChance)
         {
-            Debug.Log("MultiFood");
-
+            Debug.Log("Requesting Multi food recipe order");
             for (int i = 0; i < _multiOrderAmount; i++)
             {
                 SelectRandomRecipe();
@@ -92,8 +56,7 @@ public class OrderGenerator : MonoBehaviour
         }
         else
         {
-            Debug.Log("Single food");
-
+            Debug.Log("Requesting Single food order");
             SelectRandomRecipe();
         }
 
@@ -112,6 +75,7 @@ public class OrderGenerator : MonoBehaviour
     private OrderRecipe CreateOrderRecipe(Recipe orderBaseRecipe)
     {
         OrderRecipe orderRecipe = new OrderRecipe();
+        //orderRecipe.CustomerName = gameObject.name;
 
         for (int i = 0; i < orderBaseRecipe.Ingredients.Count; i++) // Rolls to check if a ingredient will be removed
         {

@@ -13,26 +13,6 @@ public class QueueManager : MonoBehaviour
 
     public List<GameObject> ActiveCustomerQueue { get => _activeCustomerQueue; }
 
-    private void Awake()
-    {
-
-    }
-
-    private void Start()
-    {
-        // wait for init prep time
-        // Then activate queue
-    }
-
-    public void OnProcessCustomer()
-    {
-        // Send data to OrderWindow // But is it really this class job ?????????
-        // StartCorutin(queue.peek.waitForFood())
-        //queue.pop
-        // queue.peek.GoToCounterToOrderFood();
-    }
-
-
     public void AddCustomerToQueue(GameObject customer)
     {
         _activeCustomerQueue.Add(customer);

@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handel's the selection of customers in queue.
+/// the selected customer will be the one the food is checked against
+/// and any other operation needed to be done to a singular customer 
+/// </summary>
 public class CustomerSelect : MonoBehaviour
 {
     public int CustomerSelectIndex = 0;

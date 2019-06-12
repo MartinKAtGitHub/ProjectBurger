@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class FoodCombinationDropArea : DropArea
+public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
 {
     [SerializeField]
     private GameObject _foodStackPrefab;
@@ -22,28 +22,35 @@ public class FoodCombinationDropArea : DropArea
     /// Needs to start at -1 because of 0 index in start point
     /// </summary>
     private int _foodStackCheckIndex = -1;
-    private FoodStack _foodStack;
-    private bool _isFoodReady;
+    private Food _foodStack;
+    [SerializeField]private bool _isFoodReady;
 
-    public FoodStack FoodStack { get { return _foodStack; } }
+    public Food FoodStack { get { return _foodStack; } }
     public bool IsFoodReady { get { return _isFoodReady; } }
-    public override void OnDrop(PointerEventData eventData)
+    public void OnDrop(PointerEventData eventData)
     {
         if (!_isFoodReady) // Maybe also check if it is a food ingredient draggable
         {
-            //base.OnDrop(eventData);
+
             CreateFoodStackGameObject();
 
-            var draggedObject = eventData.pointerDrag;
+           // var draggedObject = eventData.pointerDrag;
+            var draggableComponent = eventData.pointerDrag.GetComponent<DraggableIngredient>();
 
-            var draggableComponent = draggedObject.GetComponent<DraggableIngredient>();
             if (draggableComponent != null)
             {
-                draggableComponent.DropAreaTransform = this.transform;
-                draggableComponent.OnFoodCombiDropArea = true;
-                //draggableComponent.OnDropArea = true;
-                draggableComponent.FoodCombinationDropArea = this;
-                draggableComponent.DropAreaTransform = _foodStack.transform;
+                //draggableComponent.DropAreaTransform = this.transform;
+                //draggableComponent.OnFoodCombiDropArea = true;
+                //draggableComponent.FoodCombinationDropArea = this;
+                //draggableComponent.DropAreaTransform = _foodStack.transform;
+
+                // UPDATE-----------------------------------------
+                Debug.Log("FoodCombi DROP" );
+
+                draggableComponent.CurrentParent = this.transform;
+                //draggableComponent.transform.SetParent(this.transform);
+               
+
             }
 
 
@@ -70,7 +77,7 @@ public class FoodCombinationDropArea : DropArea
         }
     }
 
-    public override void DropAreaOnBeginDrag()
+    public void DropAreaOnBeginDrag()
     {
         RemoveIngredientFromFoodStack();
         _foodStackCheckIndex--;
@@ -81,7 +88,7 @@ public class FoodCombinationDropArea : DropArea
     {
         _foodStack.GameObjectIngredients.Add(ingredient);
         _foodStackCheckIndex++;
-        Debug.Log("Add stack" + _foodStackCheckIndex);
+      //  Debug.Log("Add stack" + _foodStackCheckIndex);
 
     }
 
@@ -120,7 +127,7 @@ public class FoodCombinationDropArea : DropArea
         if (_foodStack == null)
         {
             var clone = Instantiate(_foodStackPrefab, transform);
-            _foodStack = clone.GetComponent<FoodStack>();
+            _foodStack = clone.GetComponent<Food>();
         }
     }
 

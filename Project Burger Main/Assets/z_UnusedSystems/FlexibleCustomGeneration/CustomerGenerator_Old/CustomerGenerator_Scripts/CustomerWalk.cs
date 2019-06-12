@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class CustomerWalk : MonoBehaviour {
 
+    //customer Script
+    //holds order.
 
 
+
+        //all referance som har med customer å gjøre
+        //walking With Animations
 
     TestManager testin;
 

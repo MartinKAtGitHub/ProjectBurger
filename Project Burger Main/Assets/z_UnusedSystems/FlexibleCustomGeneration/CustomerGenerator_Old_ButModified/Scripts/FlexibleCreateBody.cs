@@ -13,7 +13,6 @@ public class FlexibleCreateBody : MonoBehaviour {
 
     GameObject one;
 
-
     public Transform WalkToPosition;
 
     private void Update() {
@@ -53,7 +52,7 @@ public class FlexibleCreateBody : MonoBehaviour {
         savedHead = cus.TheHeads[Random.Range(0, cus.TheHeads.Length)];
 
 
-        one = Instantiate(CustomerPrefab, transform.position + pos, Quaternion.identity, WalkToPosition.transform) as GameObject;
+        one = (Instantiate(CustomerPrefab, transform.position + pos, Quaternion.identity, WalkToPosition.transform) as GameObject);
 
         one.transform.GetChild(0).GetComponent<SetFlexibleTorso>().SetImages(savedTorso);
         one.transform.GetChild(1).transform.localPosition = savedTorso.GetComponent<FlexibleCustomTorso>().HeadConnectPosition - savedHead.GetComponent<FlexibleCustomHead>().HeadConnectPosition;

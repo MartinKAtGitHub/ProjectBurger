@@ -47,7 +47,11 @@ public class FlexibleCustomerWalk : MonoBehaviour
                 }
 
             } else {
-                GameObject.Find("CustomGenerator").GetComponent<FlexibleCreateBody>().Remake = true;
+                if (GameObject.Find("CustomGenerator").GetComponent<FlexibleCreateBody>().enabled == true) {//Still IN Testing.
+                    GameObject.Find("CustomGenerator").GetComponent<FlexibleCreateBody>().Remake = true;
+                } else {
+                    GameObject.Find("CustomGenerator").GetComponent<Generator>().Remake = true;
+                }
                 Destroy(gameObject);
             }
         }

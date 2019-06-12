@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-using UnityEditor;
 
 [RequireComponent(typeof(CanvasGroup))]
 [RequireComponent(typeof(LayoutElement))]
@@ -10,10 +9,6 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
     public bool OnDropArea; // I can make a prop of this and have it override in each class and reuse this bool
     public DropArea CurrentDropArea; // This is assigned in the DropArea
-    /// <summary>
-    /// The Transform of the drop area, it should be set from the drop area to avoid confusion 
-    /// </summary>
-    public Transform DropAreaTransform = null;
     public Transform OriginalParent = null; // If i cant drop in valid spot go back to this
 
     /// <summary>
@@ -111,8 +106,6 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
       
          transform.SetParent(_currentParent);
         _rectTransform.localPosition = Vector2.zero;
-        EditorApplication.RepaintHierarchyWindow();
-       // Debug.Log(transform.parent);
         canvasGroup.blocksRaycasts = true;
     }
 
@@ -164,12 +157,12 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     /// <summary>
     /// if you slide the draggable object while on a drop area and release, it will slide back to the drop area instead of the starting area
     /// </summary>
-    protected void ResetPositionToDropArea()
-    {
-        transform.SetParent(DropAreaTransform);
-        _rectTransform.localPosition = Vector2.zero;
-        //canvasGroup.blocksRaycasts = false;
-    }
+    //protected void ResetPositionToDropArea()
+    //{
+    //    transform.SetParent(DropAreaTransform);
+    //    _rectTransform.localPosition = Vector2.zero;
+    //    //canvasGroup.blocksRaycasts = false;
+    //}
 
     /// <summary>
     /// The offset allows the player to drag from corners

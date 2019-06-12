@@ -8,49 +8,49 @@ public abstract class DropArea : MonoBehaviour, IDropHandler//, IPointerEnterHan
     // public abstract void OnDrop(PointerEventData eventData); // we need this. because if we use the other system, then we can drop anything o anything 
     public virtual void OnDrop(PointerEventData eventData)
     {
-        UnlimitedElementsOnDropArea(eventData);
+        //UnlimitedElementsOnDropArea(eventData);
 
 
     }
 
-    private void OnlyAllowOneElementOnDropArea(PointerEventData eventData)
-    {
-        if (!IsThisDropAreaOccupied)
-        {
-            var draggedObject = eventData.pointerDrag;
-            var draggableComponent = draggedObject.GetComponent<Draggable>();
+    //private void OnlyAllowOneElementOnDropArea(PointerEventData eventData)
+    //{
+    //    if (!IsThisDropAreaOccupied)
+    //    {
+    //        var draggedObject = eventData.pointerDrag;
+    //        var draggableComponent = draggedObject.GetComponent<Draggable>();
 
-            if (draggableComponent != null)
-            {
-                draggableComponent.DropAreaTransform = this.transform;
-                draggableComponent.OnDropArea = true;
-                draggableComponent.CurrentDropArea = this;
-                IsThisDropAreaOccupied = true;
-            }
-            else
-            {
-                Debug.LogWarning(draggedObject.name + " ");
-            }
-        }
-        else
-        {
-            Debug.Log("DropArea occupied  = " + name);
-        }
-    }
+    //        if (draggableComponent != null)
+    //        {
+    //            draggableComponent.DropAreaTransform = this.transform;
+    //            draggableComponent.OnDropArea = true;
+    //            draggableComponent.CurrentDropArea = this;
+    //            IsThisDropAreaOccupied = true;
+    //        }
+    //        else
+    //        {
+    //            Debug.LogWarning(draggedObject.name + " ");
+    //        }
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("DropArea occupied  = " + name);
+    //    }
+    //}
 
-    private void UnlimitedElementsOnDropArea(PointerEventData eventData) // move this to FoodCombi
-    {
-        var draggedObject = eventData.pointerDrag;
+    //private void UnlimitedElementsOnDropArea(PointerEventData eventData) // move this to FoodCombi
+    //{
+    //    var draggedObject = eventData.pointerDrag;
 
-        var draggableComponent = draggedObject.GetComponent<Draggable>();
+    //    var draggableComponent = draggedObject.GetComponent<Draggable>();
 
-        if (draggableComponent != null)
-        {
-            draggableComponent.DropAreaTransform = this.transform;
-            draggableComponent.OnDropArea = true;
-            draggableComponent.CurrentDropArea = this;
-        }
-    }
+    //    if (draggableComponent != null)
+    //    {
+    //        draggableComponent.DropAreaTransform = this.transform;
+    //        draggableComponent.OnDropArea = true;
+    //        draggableComponent.CurrentDropArea = this;
+    //    }
+    //}
    
 
     /// <summary>

@@ -9,35 +9,28 @@ public class FoodDrag : Draggable
     // Snap Back to Foodcombi 
     public override void OnBeginDrag(PointerEventData eventData)
     {
-      //  base.OnBeginDrag(eventData);
 
-        if (!OnDropArea)
-        {
-            CreatePlaceHolderObj();
-        }
+        base.OnBeginDrag(eventData);
 
-        if (CurrentDropArea != null)
-        {
-            CurrentDropArea.IsThisDropAreaOccupied = false;
-            CurrentDropArea.DropAreaOnBeginDrag();
-            CurrentDropArea = null;
-        }
+        //base.OnBeginDrag(eventData);
 
-        OnDropArea = false;
+        //if (!OnDropArea)
+        //{
+        //    CreatePlaceHolderObj();
+        //}
+
+        //if (CurrentDropArea != null)
+        //{
+        //    CurrentDropArea.IsThisDropAreaOccupied = false;
+        //    CurrentDropArea.DropAreaOnBeginDrag();
+        //    CurrentDropArea = null;
+        //}
+
+        //OnDropArea = false;
     }
 
     public override void OnEndDrag(PointerEventData eventData)
     {
-       // base.OnEndDrag(eventData);
-
-        if (OnDropArea) // If i am on a dropZone
-        {
-            ResetPositionToDropArea();
-        }
-        else
-        {
-            RestToPlaceHolderPosition();
-        }
-
+        base.OnEndDrag(eventData);
     }
 }

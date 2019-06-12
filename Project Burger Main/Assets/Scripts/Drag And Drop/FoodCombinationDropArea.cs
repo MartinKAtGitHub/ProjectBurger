@@ -3,10 +3,14 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class FoodCombinationDropArea : DropArea
+public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
 {
+    public Food Food { get { return _food; } }
+    public bool IsFoodReady { get { return _isFoodReady; } }
+
+
     [SerializeField]
-    private GameObject _foodStackPrefab;
+    private GameObject _foodGameObjectPrefab;
     /// <summary>
     /// When this ingredient is added to the stack, it marks that the food is ready to be sold 
     /// </summary>
@@ -22,32 +26,28 @@ public class FoodCombinationDropArea : DropArea
     /// Needs to start at -1 because of 0 index in start point
     /// </summary>
     private int _foodStackCheckIndex = -1;
-    private FoodStack _foodStack;
-    private bool _isFoodReady;
+    private Food _food;
+    [SerializeField] private bool _isFoodReady;
 
-    public FoodStack FoodStack { get { return _foodStack; } }
-    public bool IsFoodReady { get { return _isFoodReady; } }
-    public override void OnDrop(PointerEventData eventData)
+    public void OnDrop(PointerEventData eventData)
     {
         if (!_isFoodReady) // Maybe also check if it is a food ingredient draggable
         {
-            //base.OnDrop(eventData);
+
             CreateFoodStackGameObject();
 
-            var draggedObject = eventData.pointerDrag;
+            // var draggedObject = eventData.pointerDrag;
+            var draggableComponent = eventData.pointerDrag.GetComponent<DraggableIngredient>();
 
-            var draggableComponent = draggedObject.GetComponent<DraggableIngredient>();
             if (draggableComponent != null)
             {
-                draggableComponent.DropAreaTransform = this.transform;
-                draggableComponent.OnFoodCombiDropArea = true;
-                //draggableComponent.OnDropArea = true;
+               // draggableComponent.OnFoodCombiDropArea = true;
                 draggableComponent.FoodCombinationDropArea = this;
-                draggableComponent.DropAreaTransform = _foodStack.transform;
+                draggableComponent.CurrentParent = this.transform;
             }
 
-
             var ingredientGameObject = eventData.pointerDrag.GetComponent<IngredientGameObject>();
+
             if (ingredientGameObject != null)
             {
                 AddIngredientsToFoodStack(ingredientGameObject);
@@ -70,24 +70,24 @@ public class FoodCombinationDropArea : DropArea
         }
     }
 
-    public override void DropAreaOnBeginDrag()
+    public void DropAreaOnBeginDrag()
     {
         RemoveIngredientFromFoodStack();
         _foodStackCheckIndex--;
-        Debug.Log( "Pull stack"+ _foodStackCheckIndex);
+        Debug.Log("Pull stack" + _foodStackCheckIndex);
     }
 
     private void AddIngredientsToFoodStack(IngredientGameObject ingredient)
     {
-        _foodStack.GameObjectIngredients.Add(ingredient);
+        _food.GameObjectIngredients.Add(ingredient);
         _foodStackCheckIndex++;
-        Debug.Log("Add stack" + _foodStackCheckIndex);
+        //  Debug.Log("Add stack" + _foodStackCheckIndex);
 
     }
 
     private void RemoveIngredientFromFoodStack()
     {
-        _foodStack.GameObjectIngredients.RemoveAt(_foodStack.GameObjectIngredients.Count - 1); // Removes the top ingredient 
+        _food.GameObjectIngredients.RemoveAt(_food.GameObjectIngredients.Count - 1); // Removes the top ingredient 
     }
 
     private void CheckFoodStackWithRecepies()
@@ -99,7 +99,7 @@ public class FoodCombinationDropArea : DropArea
             if (_foodStackCheckIndex < currentRecipe.Ingredients.Count)
             {
                 // If(_foodStackIngredients[_foodStackCheckIndex].classType == currentRecipe.Ingredients[_foodStackCheckIndex].classType)
-                if (_foodStack.GameObjectIngredients[_foodStackCheckIndex].ingredient.IngredientType == currentRecipe.Ingredients[_foodStackCheckIndex].IngredientType)
+                if (_food.GameObjectIngredients[_foodStackCheckIndex].ingredient.IngredientType == currentRecipe.Ingredients[_foodStackCheckIndex].IngredientType)
                 {
                     // Found match 
                     return;
@@ -108,7 +108,7 @@ public class FoodCombinationDropArea : DropArea
             else
             {
                 // out of bounce recipe go to next recipe
-                continue; 
+                continue;
             }
         }
         // Maybe we cant place the final ingredient(Top bun) if it doesn't match with any recipe
@@ -117,10 +117,10 @@ public class FoodCombinationDropArea : DropArea
 
     private void CreateFoodStackGameObject() //TODO FoodCombi Create 1 FoodStack and reuse it after each sale/delete instead of spawning a new one
     {
-        if (_foodStack == null)
+        if (_food == null)
         {
-            var clone = Instantiate(_foodStackPrefab, transform);
-            _foodStack = clone.GetComponent<FoodStack>();
+            var clone = Instantiate(_foodGameObjectPrefab, transform);
+            _food = clone.GetComponent<Food>();
         }
     }
 

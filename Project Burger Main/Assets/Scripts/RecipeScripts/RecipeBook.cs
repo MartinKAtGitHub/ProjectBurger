@@ -13,13 +13,17 @@ public class RecipeBook : ScriptableObject  // Static ? we would really never ne
     public List<Recipe> Recipes; //TODO Maybe A list for each section (Hamburg, sandwich, whatever)
 
     public int totalAccumulatedWight { get => _totalAccumulatedWight;}
+
     public void OnEnable()
     {
-        CalulateWeightsForRecipes();
+        CalulateWeightsForRecipes(); // Find out a way to calculate on Add/Remove recipe (Costume editor)
+        Debug.Log("Weight is being calculated in ScriptableObject Awake(), We only need to do this once!");
     }
 
     private void CalulateWeightsForRecipes()
     {
+        _totalAccumulatedWight = 0;
+
         if(Recipes != null)
         {
             for (int i = 0; i < Recipes.Count; i++)
@@ -32,7 +36,12 @@ public class RecipeBook : ScriptableObject  // Static ? we would really never ne
         }
         else
         {
-            Debug.LogError("Cant calulate weight becuse the recipebook list is empty");
+            Debug.LogError("Cant calculate weight because the recipe book list is empty");
         }
+    }
+
+    public void InitializeRecipeBook()
+    {
+        CalulateWeightsForRecipes();
     }
 }

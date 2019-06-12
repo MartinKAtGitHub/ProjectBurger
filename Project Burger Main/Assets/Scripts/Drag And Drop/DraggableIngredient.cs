@@ -8,31 +8,21 @@ public class DraggableIngredient : Draggable
     private bool _onFoodCombiDropArea;
 
     public FoodCombinationDropArea FoodCombinationDropArea { get; set; }
-    public bool OnFoodCombiDropArea
-    {
-        get
-        {
-            return _onFoodCombiDropArea;
-        }
-        set
-        {
-            _onFoodCombiDropArea = value;
-        }
-    }
+    //public bool OnFoodCombiDropArea
+    //{
+    //    get
+    //    {
+    //        return _onFoodCombiDropArea;
+    //    }
+    //    set
+    //    {
+    //        _onFoodCombiDropArea = value;
+    //    }
+    //}
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
-      //  Debug.Log("PULL FOOD DRAG");
-        //base.OnBeginDrag(eventData);
-        CalculateDragAreaOffset(eventData);
-
-        //   if (!OnDropArea)
-        if (!_onFoodCombiDropArea)
-        {
-            CreatePlaceHolderObj();
-        }
-
-        FreeDragMode();
+        base.OnBeginDrag(eventData);
 
         if (FoodCombinationDropArea != null)
         {
@@ -40,21 +30,12 @@ public class DraggableIngredient : Draggable
             FoodCombinationDropArea = null;
         }
 
-        _onFoodCombiDropArea = false;
+        //_onFoodCombiDropArea = false;
     }
 
     public override void OnEndDrag(PointerEventData eventData)
     {
-
-        //if (OnDropArea)
-        if (_onFoodCombiDropArea)
-        {
-            ResetPositionToDropArea();
-        }
-        else
-        {
-            RestToStartPosition();
-        }
+        base.OnEndDrag(eventData);
 
         if (FoodCombinationDropArea != null)
         {
@@ -76,11 +57,12 @@ public class DraggableIngredient : Draggable
 
     private void OnFoodIsReady()
     {
-        for (int i = 0; i < FoodCombinationDropArea.FoodStack.GameObjectIngredients.Count; i++)
+        for (int i = 0; i < FoodCombinationDropArea.Food.GameObjectIngredients.Count; i++)
         {
-            FoodCombinationDropArea.FoodStack.GameObjectIngredients[i].GetComponent<CanvasGroup>().blocksRaycasts = false;
+            FoodCombinationDropArea.Food.GameObjectIngredients[i].GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
-        FoodCombinationDropArea.FoodStack.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        FoodCombinationDropArea.Food.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 }
 

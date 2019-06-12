@@ -8,6 +8,7 @@ using System.Collections.Generic;
 /// </summary>
 public class OrderRecipe
 {
+    
     public List<Ingredient> OrderIngredients = new List<Ingredient>();
     public List<Ingredient> DiscaredIngredients = new List<Ingredient>();
 }

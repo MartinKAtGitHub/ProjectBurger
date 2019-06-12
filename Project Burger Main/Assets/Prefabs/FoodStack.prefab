@@ -85,7 +85,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb586936893737e45bb34d5266fda6ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FoodStackIngredients: []
+  _didStackMatchOrder: 0
+  GameObjectIngredients: []
 --- !u!114 &479884470156320851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,7 +96,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1975844395357534545}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13781228f3674284ab7eb3eadeb111ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 9727d7f52c394e44b94894c1aacd2df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnDropArea: 0

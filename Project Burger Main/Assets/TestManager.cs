@@ -21,7 +21,7 @@ public class TestManager : MonoBehaviour
         Debug.Log("HERE");
         theCustomer = t;
         orderGenerator = theCustomer.GetComponent<OrderGenerator>();
-        foodTrayDropArea.Order = orderGenerator.ActiveOrder;
+        foodTrayDropArea.Order = orderGenerator.Order;
 
     }
 

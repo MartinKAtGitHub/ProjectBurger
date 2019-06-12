@@ -8,7 +8,7 @@ using UnityEngine;
 /// <summary>
 /// The physical / GameObject version of a recipe
 /// </summary>
-public class FoodStack : MonoBehaviour
+public class Food : MonoBehaviour
 {
     [SerializeField]
     private bool _didStackMatchOrder;

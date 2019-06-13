@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -5082770904467563421}
   - component: {fileID: -8502240065824417304}
   m_Layer: 5
-  m_Name: FoodStack
+  m_Name: FoodGameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,11 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9727d7f52c394e44b94894c1aacd2df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDropArea: 0
-  CurrentDropArea: {fileID: 0}
-  DropAreaTransform: {fileID: 0}
-  OriginalParent: {fileID: 0}
   freeMotionParent: {fileID: 0}
+  _currentParent: {fileID: 0}
 --- !u!222 &-5082770904467563421
 CanvasRenderer:
   m_ObjectHideFlags: 0

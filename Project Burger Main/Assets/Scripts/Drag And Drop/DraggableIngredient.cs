@@ -8,17 +8,6 @@ public class DraggableIngredient : Draggable
     private bool _onFoodCombiDropArea;
 
     public FoodCombinationDropArea FoodCombinationDropArea { get; set; }
-    //public bool OnFoodCombiDropArea
-    //{
-    //    get
-    //    {
-    //        return _onFoodCombiDropArea;
-    //    }
-    //    set
-    //    {
-    //        _onFoodCombiDropArea = value;
-    //    }
-    //}
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
@@ -41,7 +30,9 @@ public class DraggableIngredient : Draggable
         {
             if (FoodCombinationDropArea.IsFoodReady)
             {
-                OnFoodIsReady();
+                MakeFoodDraggable();
+                ParentIngredientsToFood();
+                //TODO DraggableIngredient.cs | make an event fire here, so this class doesn't have to do illogical stuff.
             }
             else
             {
@@ -57,14 +48,18 @@ public class DraggableIngredient : Draggable
     /// <summary>
     /// This disables the drag on ingredients AND enables it on the final Food Gameobject.
     /// </summary>
-    private void OnFoodIsReady() // PERFORMANCE DraggableIngredient.cs -> the OnFoodIsReady() is check every time a ingredient is dropped on the foodcombination pad.
+    private void MakeFoodDraggable() // PERFORMANCE DraggableIngredient.cs -> the OnFoodIsReady() is check every time a ingredient is dropped on the foodcombination pad.
     {
         for (int i = 0; i < FoodCombinationDropArea.Food.GameObjectIngredients.Count; i++)
         {
             FoodCombinationDropArea.Food.GameObjectIngredients[i].GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
-
         FoodCombinationDropArea.Food.GetComponent<CanvasGroup>().blocksRaycasts = true;
+    }
+
+    private void ParentIngredientsToFood()
+    {
+        FoodCombinationDropArea.Food.CreateFoodGameObjectWithIngredients();
     }
 }
 

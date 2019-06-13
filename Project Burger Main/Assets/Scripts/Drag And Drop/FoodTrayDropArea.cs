@@ -30,7 +30,7 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
 
     private OrderGenerator orderGenerator;
     [Space(20)]
-    public List<Food> _foodStacks = new List<Food>();
+    public List<Food> _foods = new List<Food>();
     /// <summary>
     /// The current order being processed
     /// </summary>
@@ -42,7 +42,6 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
         if (_order != null)
         {
             AddFoodStack(eventData.pointerDrag.GetComponent<Food>());
-            //AutoSell();
         }
         else
         {
@@ -55,22 +54,21 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
     public void DropAreaOnBeginDrag()
     {
         Debug.Log("Dragging from food tray ");
-        _foodStacks.RemoveAt(_foodStacks.Count - 1);
+        _foods.RemoveAt(_foods.Count - 1);
     }
-
 
     /// <summary>
     /// The food will sold the moment the amount of foodstacks = to the amount of foodstack the order requers
     /// </summary>
     private void AutoSell()
     {
-        if (_order.OrderRecipes.Count == _foodStacks.Count)
+        if (_order.OrderRecipes.Count == _foods.Count)
         {
             CheckFoodStacksAgainstOrder();
         }
         else
         {
-            Debug.Log("Missing rest of the order -> Order recipes(" + _order.OrderRecipes.Count + ") FoodStacks(" + _foodStacks.Count + ")");
+            Debug.Log("Missing rest of the order -> Order recipes(" + _order.OrderRecipes.Count + ") FoodStacks(" + _foods.Count + ")");
         }
     }
 
@@ -82,7 +80,7 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
     {
         if (foodStack != null)
         {
-            _foodStacks.Add(foodStack);
+            _foods.Add(foodStack);
         }
         else
         {
@@ -95,9 +93,9 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
         var amountOfOrderRecipes = _order.OrderRecipes.Count;
         var amountOffoodStackMatches = 0;
 
-        if (amountOfOrderRecipes == _foodStacks.Count)
+        if (amountOfOrderRecipes == _foods.Count)
         {
-            for (int i = 0; i < _foodStacks.Count; i++) // for every foodstack
+            for (int i = 0; i < _foods.Count; i++) // for every foodstack
             {
                 //Debug.Log("This should not decrease " + _order.OrderRecipes.Count);
                 //then maybe remove it here _order.OrderRecipes.Count marked as completed or failed
@@ -105,14 +103,14 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
                 var ingredientMatchFoundInOrderRecipeIndex = 0;
                 var failCounter = 0;
 
-                for (int j = 0; j < _foodStacks[i].GameObjectIngredients.Count; j++) // ingredients in foodstack loop
+                for (int j = 0; j < _foods[i].GameObjectIngredients.Count; j++) // ingredients in foodstack loop
                 {
-                    var currentIngredient = _foodStacks[i].GameObjectIngredients[j].ingredient;
+                    var currentIngredient = _foods[i].GameObjectIngredients[j].ingredient;
                     var currentIngredientIndex = j;
 
                     for (int k = ingredientMatchFoundInOrderRecipeIndex; k < tempOrderRecipes.Count; k++) // Order recipes Loop
                     {
-                        if (_foodStacks[i].GameObjectIngredients.Count <= tempOrderRecipes[k].OrderIngredients.Count)
+                        if (_foods[i].GameObjectIngredients.Count <= tempOrderRecipes[k].OrderIngredients.Count)
                         {
                             if (currentIngredient.IngredientType == tempOrderRecipes[k].OrderIngredients[currentIngredientIndex].IngredientType)
                             {
@@ -137,25 +135,25 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
                     if (failCounter == tempOrderRecipes.Count)
                     {
                         // The ingredient didn't match any order recipe ingredient so go to next foodstack
-                        _foodStacks[i].DidStackMatchOrder = false;
+                        _foods[i].DidStackMatchOrder = false;
                         break;
                     }
                     else // TODO foodtray optimization,  _foodStacks[i].DidStackMatchOrder = true;
                     {
-                        _foodStacks[i].DidStackMatchOrder = true;
+                        _foods[i].DidStackMatchOrder = true;
                     }
 
                 }
                 
                 // Next foodStack
-                if (!_foodStacks[i].DidStackMatchOrder)
+                if (!_foods[i].DidStackMatchOrder)
                 {
-                    Debug.Log("FAIL " + _foodStacks[i].name);
+                    Debug.Log("FAIL " + _foods[i].name);
                     continue;
                 }
                 else
                 {
-                    _foodStacks[i].DidStackMatchOrder = true;
+                    _foods[i].DidStackMatchOrder = true;
                     tempOrderRecipes.RemoveAt(ingredientMatchFoundInOrderRecipeIndex);
                     amountOffoodStackMatches++;
                 }

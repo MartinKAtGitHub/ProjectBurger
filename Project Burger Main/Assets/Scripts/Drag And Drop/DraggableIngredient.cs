@@ -54,8 +54,10 @@ public class DraggableIngredient : Draggable
         }
     }
 
-
-    private void OnFoodIsReady()
+    /// <summary>
+    /// This disables the drag on ingredients AND enables it on the final Food Gameobject.
+    /// </summary>
+    private void OnFoodIsReady() // PERFORMANCE DraggableIngredient.cs -> the OnFoodIsReady() is check every time a ingredient is dropped on the foodcombination pad.
     {
         for (int i = 0; i < FoodCombinationDropArea.Food.GameObjectIngredients.Count; i++)
         {

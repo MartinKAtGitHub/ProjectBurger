@@ -33,7 +33,6 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
     {
         if (!_isFoodReady) // Maybe also check if it is a food ingredient draggable
         {
-
             CreateFoodStackGameObject();
 
             // var draggedObject = eventData.pointerDrag;
@@ -74,7 +73,7 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
     {
         RemoveIngredientFromFoodStack();
         _foodStackCheckIndex--;
-        Debug.Log("Pull stack" + _foodStackCheckIndex);
+      //  Debug.Log("Pull stack" + _foodStackCheckIndex);
     }
 
     private void AddIngredientsToFoodStack(IngredientGameObject ingredient)

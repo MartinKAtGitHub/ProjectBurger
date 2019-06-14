@@ -38,10 +38,23 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        // base.OnDrop(eventData);
         if (_order != null)
         {
-            AddFoodStack(eventData.pointerDrag.GetComponent<Food>());
+            var foodDrag = eventData.pointerDrag.GetComponent<FoodDrag>();
+            if (foodDrag != null)
+            {
+                foodDrag.ResetPositionParent = this.transform;
+
+                var food = eventData.pointerDrag.GetComponent<Food>();
+                if (food != null)
+                {
+                    _foods.Add(food);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Only food can be dropped on the foodtray");
+            }
         }
         else
         {
@@ -49,7 +62,6 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
         }
         // you cant pick the food back up
     }
-
 
     public void DropAreaOnBeginDrag()
     {
@@ -71,23 +83,6 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
             Debug.Log("Missing rest of the order -> Order recipes(" + _order.OrderRecipes.Count + ") FoodStacks(" + _foods.Count + ")");
         }
     }
-
-    /// <summary>
-    /// We add a food stack to a List(food stacks) so we can check to see when we have the whole order.
-    /// </summary>
-    /// <param name="foodStack"> the currently dragged and dropped food stack gameobject </param>
-    private void AddFoodStack(Food foodStack)
-    {
-        if (foodStack != null)
-        {
-            _foods.Add(foodStack);
-        }
-        else
-        {
-            Debug.LogError("Something else was dropped on the FoodTray. Only a food stack can be on the food tray");
-        }
-    }
-
     public void CheckFoodStacksAgainstOrder() //TODO CheckFoodStacksAgainstOrder() in foodtray can possibly be optimized 
     {
         var amountOfOrderRecipes = _order.OrderRecipes.Count;
@@ -142,7 +137,6 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
                     {
                         _foods[i].DidStackMatchOrder = true;
                     }
-
                 }
                 
                 // Next foodStack

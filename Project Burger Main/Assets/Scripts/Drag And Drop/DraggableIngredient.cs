@@ -15,7 +15,7 @@ public class DraggableIngredient : Draggable
 
         if (FoodCombinationDropArea != null)
         {
-            FoodCombinationDropArea.DropAreaOnBeginDrag();
+            FoodCombinationDropArea.RemoveIngredientFromFood();
             FoodCombinationDropArea = null;
         }
 
@@ -26,12 +26,14 @@ public class DraggableIngredient : Draggable
     {
         base.OnEndDrag(eventData);
 
-        if (FoodCombinationDropArea != null)
+      
+        if (FoodCombinationDropArea != null) // This will only run if we drop on foodcombi, not on reset
         {
             if (FoodCombinationDropArea.IsFoodReady)
             {
                 MakeFoodDraggable();
                 ParentIngredientsToFood();
+                FoodCombinationDropArea.IsFoodReady = false;
                 //TODO DraggableIngredient.cs | make an event fire here, so this class doesn't have to do illogical stuff.
             }
             else

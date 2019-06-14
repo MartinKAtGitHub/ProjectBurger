@@ -19,23 +19,20 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     /// Canvas group allows us use certain options to allow us to register PointerEventData through draggable objects.
     /// </summary>
     protected CanvasGroup canvasGroup;
+    /// <summary>
+    /// This parent object will be the reset point / snap back position when the player stops dragging in a invalid position. 
+    /// </summary>
+    public Transform ResetPositionParent { get => _resetPositionParent; set => _resetPositionParent = value; }
 
-
-    public Transform CurrentParent { get => _currentParent; set => _currentParent = value; }
-
-    [SerializeField] private Transform _currentParent;
+    [SerializeField] private Transform _resetPositionParent;
     private RectTransform _rectTransform;
 
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-
-        //layoutElement = GetComponent<LayoutElement>();
-        //OriginalParent = transform.parent;
-
         _rectTransform = GetComponent<RectTransform>();
 
-        _currentParent = transform.parent;
+        _resetPositionParent = transform.parent;
         if (freeMotionParent == null)
         {
             freeMotionParent = transform.parent.parent;
@@ -57,7 +54,7 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     public virtual void OnEndDrag(PointerEventData eventData) // THIS FIRES AFTER ONDROP () IN DropArea
     {
         // OnDrop happens before this, so if you set the parent in OnDrop then this will snap to the new Position and not the Original
-        transform.SetParent(_currentParent);
+        transform.SetParent(_resetPositionParent);
         _rectTransform.localPosition = Vector2.zero;
         canvasGroup.blocksRaycasts = true;
     }

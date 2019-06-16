@@ -5,25 +5,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
-/// Holds the food order that is ready to be sold
+/// Holds the food order that is ready to be sold AND checks the Food against the order to see if it was correct or not
 /// </summary>
-public class FoodTrayDropArea : MonoBehaviour , IDropHandler
+public class FoodTrayDropArea : MonoBehaviour, IDropHandler
 {
     public Image ResultImage;
-    public Order Order
-    {
-        get => _order;
-
-        set
-        {
-            if (value.OrderRecipes.Count == 0)
-            {
-                //   Debug.Break();
-                Debug.LogError("FoodTray order should never be 0");
-            }
-            _order = value;
-        }
-    }
+    public Order Order { get => _order; set => _order = value; }
 
     [SerializeField]
     private Order _order; // Get order from Customer
@@ -35,21 +22,22 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
     /// The current order being processed
     /// </summary>
 
+    private void Start()
+    {
+        LevelManager.Instance.FoodTrayDropArea = this;
+        LevelManager.Instance.SalesManager.OnSale += CheckFoodStacksAgainstOrder;
+    }
 
     public void OnDrop(PointerEventData eventData)
     {
         if (_order != null)
         {
-            var foodDrag = eventData.pointerDrag.GetComponent<FoodDrag>();
-            if (foodDrag != null)
+            var food = eventData.pointerDrag.GetComponent<Food>();
+            if (food != null)
             {
-                foodDrag.ResetPositionParent = this.transform;
+                food.FoodDrag.ResetPositionParent = this.transform;
+                _foods.Add(food);
 
-                var food = eventData.pointerDrag.GetComponent<Food>();
-                if (food != null)
-                {
-                    _foods.Add(food);
-                }
             }
             else
             {
@@ -60,7 +48,6 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
         {
             Debug.LogError("We don't have the order for the current customer food tray cant check food");
         }
-        // you cant pick the food back up
     }
 
     public void DropAreaOnBeginDrag()
@@ -83,7 +70,9 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
             Debug.Log("Missing rest of the order -> Order recipes(" + _order.OrderRecipes.Count + ") FoodStacks(" + _foods.Count + ")");
         }
     }
-    public void CheckFoodStacksAgainstOrder() //TODO CheckFoodStacksAgainstOrder() in foodtray can possibly be optimized 
+
+    //PERFORMANCE Foodtray CheckFoodStacksAgainstOrder() we can check food per Drop instead of all the food at 1 time. check all the results on sell
+    public void CheckFoodStacksAgainstOrder() // TODO FoodTray.cs | CheckFoodStacksAgainstOrder() can be moved to another script to make it cleaner 
     {
         var amountOfOrderRecipes = _order.OrderRecipes.Count;
         var amountOffoodStackMatches = 0;
@@ -138,7 +127,7 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
                         _foods[i].DidStackMatchOrder = true;
                     }
                 }
-                
+
                 // Next foodStack
                 if (!_foods[i].DidStackMatchOrder)
                 {
@@ -165,8 +154,7 @@ public class FoodTrayDropArea : MonoBehaviour , IDropHandler
         }
         else
         {
-            Debug.Log("Can not sell food, order is not complete, Give player FAIL for selling to early ?");
+            Debug.Log("Can not sell food, Amount of food is not the same in order, Give player FAIL for selling to early ?");
         }
-
     }
 }

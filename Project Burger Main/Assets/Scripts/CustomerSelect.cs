@@ -16,14 +16,13 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
     [SerializeField]private TextMeshProUGUI _customerFocusName;
 
-
     private void Awake()
     {
         QueueManager = GetComponent<QueueManager>();
+        LevelManager.Instance.CustomerSelect = this;
     }
     private void Start()
     {
-        LevelManager.Instance.CustomerSelect = this;
         LevelManager.Instance.SalesManager.OnSale += ResetCustomerSelect;
     }
 

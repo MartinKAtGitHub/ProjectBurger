@@ -10,21 +10,26 @@ using UnityEngine.UI;
 public class FoodTrayDropArea : MonoBehaviour, IDropHandler
 {
     public Image ResultImage;
+    
+    [SerializeField]  private Order _order; // Get order from Customer
+    [SerializeField] private bool _orderSuccessful;
+    //private OrderGenerator orderGenerator;
+
     public Order Order { get => _order; set => _order = value; }
+    public bool OrderSuccessful { get => _orderSuccessful; }
 
-    [SerializeField]
-    private Order _order; // Get order from Customer
-
-    private OrderGenerator orderGenerator;
     [Space(20)]
     public List<Food> _foods = new List<Food>();
-    /// <summary>
-    /// The current order being processed
-    /// </summary>
 
-    private void Start()
+    
+
+    private void Awake()
     {
         LevelManager.Instance.FoodTrayDropArea = this;
+    }
+    private void Start()
+    {
+      
         LevelManager.Instance.SalesManager.OnSale += CheckFoodStacksAgainstOrder;
     }
 
@@ -76,6 +81,12 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
     {
         var amountOfOrderRecipes = _order.OrderRecipes.Count;
         var amountOffoodStackMatches = 0;
+
+        if(_foods.Count == 0)
+        {
+            Debug.Log("NO FOOD PLACED ON FOODTRAY !!!!!");
+            _orderSuccessful = false;
+        }
 
         if (amountOfOrderRecipes == _foods.Count)
         {
@@ -145,16 +156,19 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
             if (amountOffoodStackMatches == amountOfOrderRecipes)
             {
                 ResultImage.color = Color.green;
+                _orderSuccessful = true;
             }
             else
             {
                 ResultImage.color = Color.red;
+                _orderSuccessful = false;
             }
 
         }
         else
         {
             Debug.Log("Can not sell food, Amount of food is not the same in order, Give player FAIL for selling to early ?");
+            _orderSuccessful =  false;
         }
     }
 }

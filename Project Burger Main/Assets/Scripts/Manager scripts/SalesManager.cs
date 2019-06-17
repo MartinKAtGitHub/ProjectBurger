@@ -8,7 +8,7 @@ public class SalesManager : MonoBehaviour
 
     public Action OnSale;
 
-    private void Start()
+    private void Awake()
     {
         LevelManager.Instance.SalesManager = this;
     }

@@ -13,9 +13,13 @@ public class QueueManager : MonoBehaviour
 
     public List<GameObject> ActiveCustomerQueue { get => _activeCustomerQueue; }
 
-    private void Start()
+    private void Awake()
     {
         LevelManager.Instance.QueueManager = this;
+    }
+    private void Start()
+    {
+      
         LevelManager.Instance.SalesManager.OnSale += RemoveCustomerFromQueue;
     }
 

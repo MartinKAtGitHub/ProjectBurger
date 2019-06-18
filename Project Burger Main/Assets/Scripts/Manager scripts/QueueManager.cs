@@ -9,35 +9,33 @@ public class QueueManager : MonoBehaviour
     [SerializeField]
     private int _maxActiveCustomerAmount;
     [SerializeField]
-    private List<GameObject> _activeCustomerQueue = new List<GameObject>(); // TODO QueueManager can be an array if we have a fixed amount of active customers
+    private List<Customer> _activeCustomerQueue = new List<Customer>(); // TODO QueueManager can be an array if we have a fixed amount of active customers
 
-    public List<GameObject> ActiveCustomerQueue { get => _activeCustomerQueue; }
+    public List<Customer> ActiveCustomerQueue { get => _activeCustomerQueue; }
 
-    private void Awake()
+   
+    public void Initialize()
     {
         LevelManager.Instance.QueueManager = this;
-    }
-    private void Start()
-    {
-      
         LevelManager.Instance.SalesManager.OnSale += RemoveCustomerFromQueue;
     }
 
-    public void AddCustomerToQueue(GameObject customer)
+    public void AddCustomerToQueue(Customer customer)
     {
         _activeCustomerQueue.Add(customer);
     }
 
-    public void RemoveCustomerFromQueue()
+    public void RemoveCustomerFromQueue() // TODO QueueManager.cs | RemoveCustomerFromQueue() might remove the wrong customer. Test this method to make sure it removes the correct customer
     {
        if(ActiveCustomerQueue.Count != 0)
         {
-            var customerIndex = LevelManager.Instance.CustomerSelect.CustomerSelectIndex;
-            var customer = _activeCustomerQueue[customerIndex];
+            //var customerIndex = LevelManager.Instance.CustomerSelect.CustomerSelectIndex;
+            //var customer = _activeCustomerQueue[customerIndex];
+            var customer = LevelManager.Instance.CustomerSelect.CustomerInFocus;
 
-            _activeCustomerQueue.RemoveAt(customerIndex);
+            _activeCustomerQueue.Remove(customer);
 
-            Debug.Log($"Destroying {customer.name} from QueueManger OnRemove");
+            Debug.Log($"Destroying {customer.CustomerName} from QueueManger OnRemove");
             Destroy(customer);
         }
     }

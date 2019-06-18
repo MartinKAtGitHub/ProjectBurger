@@ -13,23 +13,23 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
     
     [SerializeField]  private Order _order; // Get order from Customer
     [SerializeField] private bool _orderSuccessful;
-    //private OrderGenerator orderGenerator;
 
-    public Order Order { get => _order; set => _order = value; }
+     public Order Order { set => _order = value; }
+
     public bool OrderSuccessful { get => _orderSuccessful; }
 
     [Space(20)]
     public List<Food> _foods = new List<Food>();
 
     
-
     private void Awake()
     {
-        LevelManager.Instance.FoodTrayDropArea = this;
     }
-    private void Start()
+
+
+    public void Initialize()
     {
-      
+        LevelManager.Instance.FoodTrayDropArea = this;
         LevelManager.Instance.SalesManager.OnSale += CheckFoodStacksAgainstOrder;
     }
 

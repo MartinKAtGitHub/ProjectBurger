@@ -29,11 +29,15 @@ public  class LevelManager : MonoBehaviour
 
     void Start()
     {
+        CustomerSelect.Initialize();
+        FoodTrayDropArea.Initialize();
+        QueueManager.Initialize();
+
         // StartCorutine(StartLevel)
         //CustomerSpawner.SpawnCustomer();
        // CustomerSpawner.SpawnCustomer();
         CustomerSpawner.SpawnCustomer();
-        CustomerSelect.SelectInitialCustomer();
+        CustomerSelect.SetInitialCustomer();
 
     }
 

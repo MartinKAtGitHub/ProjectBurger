@@ -10,33 +10,40 @@ using TMPro;
 /// </summary>
 public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update the script to take Customer object instead of directly ref OrderGenerator
 {
-    public int CustomerSelectIndex = 0;
+    [SerializeField] private int _customerSelectIndex = 0;
     public QueueManager QueueManager;
-    public FoodTrayDropArea FoodTrayDropArea;
 
-    [SerializeField]private TextMeshProUGUI _customerFocusName;
+    private FoodTrayDropArea _foodTrayDropArea;
+
+    [SerializeField] private TextMeshProUGUI _customerFocusName;
+
+    public Customer CustomerInFocus { get; private set; }
+    public int CustomerSelectIndex { get => _customerSelectIndex;}
 
     private void Awake()
     {
         QueueManager = GetComponent<QueueManager>();
-        LevelManager.Instance.CustomerSelect = this;
+       
     }
-    private void Start()
+   
+    public void Initialize()
     {
+        LevelManager.Instance.CustomerSelect = this;
+        _foodTrayDropArea = LevelManager.Instance.FoodTrayDropArea;
         LevelManager.Instance.SalesManager.OnSale += ResetCustomerSelect;
     }
 
     public void NextCustomer()
     {
-        if(CustomerSelectIndex < QueueManager.ActiveCustomerQueue.Count - 1)
+        if (_customerSelectIndex < QueueManager.ActiveCustomerQueue.Count - 1)
         {
-            CustomerSelectIndex++;
+            _customerSelectIndex++;
 
-            FoodTrayDropArea.Order = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
-                .GetComponent<OrderGenerator>().Order;
+            //FoodTrayDropArea.Order = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
+            //    .GetComponent<OrderGenerator>().Order;
 
-            _customerFocusName.text = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
-                .GetComponent<OrderGenerator>().Order.CustomerName;
+            //_customerFocusName.text = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
+            //    .GetComponent<OrderGenerator>().Order.CustomerName;
         }
         else
         {
@@ -46,16 +53,16 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
     public void PrevCustomer()
     {
-        if(CustomerSelectIndex > 0)
+        if (_customerSelectIndex > 0)
         {
-            CustomerSelectIndex--;
-            Debug.Log("CUSTOMER = " + CustomerSelectIndex);
+            _customerSelectIndex--;
+            Debug.Log("CUSTOMER = " + _customerSelectIndex);
 
-            FoodTrayDropArea.Order = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
-                .GetComponent<OrderGenerator>().Order;
+           // FoodTrayDropArea.Order = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
+           //     .GetComponent<OrderGenerator>().Order;
 
-            _customerFocusName.text = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
-           .GetComponent<OrderGenerator>().Order.CustomerName;
+           // _customerFocusName.text = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
+           //.GetComponent<OrderGenerator>().Order.CustomerName;
         }
         else
         {
@@ -67,13 +74,10 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     /// When the game starts, the first person to come to the queue will be auto selected for the player.
     /// This method attaches the first customer to the selector
     /// </summary>
-    public void SelectInitialCustomer()
+    public void SetInitialCustomer()
     {
-        CustomerSelectIndex = 0;
-        FoodTrayDropArea.Order = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
-                .GetComponent<OrderGenerator>().Order;
-        _customerFocusName.text = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
-           .GetComponent<OrderGenerator>().Order.CustomerName;
+        _customerSelectIndex = 0;
+        SetCustomerFocus(_customerSelectIndex);
     }
 
     private void ResetCustomerSelect()
@@ -84,13 +88,54 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         }
         else
         {
-            CustomerSelectIndex = QueueManager.ActiveCustomerQueue.Count - 1;
-            _customerFocusName.text = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
-               .GetComponent<OrderGenerator>().Order.CustomerName;
+            _customerSelectIndex = QueueManager.ActiveCustomerQueue.Count - 1;
+            //_customerFocusName.text = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
+            //   .GetComponent<OrderGenerator>().Order.CustomerName;
         }
 
-    
+
 
         Debug.Log("ResetCustomerSelect() need to set a new Selected customer on Sale");
+    }
+
+
+    public void CircularNextItem()
+    {
+        _customerSelectIndex++;
+        _customerSelectIndex %= QueueManager.ActiveCustomerQueue.Count; // clip index (turns to 0 if index == items.Count)
+
+        SetCustomerFocus(_customerSelectIndex);
+    }
+
+    public void CircularPreviousItem()
+    {
+        _customerSelectIndex--; // decrement index
+
+        if (_customerSelectIndex < 0)
+        {
+            _customerSelectIndex = QueueManager.ActiveCustomerQueue.Count - 1;
+        }
+
+        SetCustomerFocus(_customerSelectIndex);
+    }
+
+
+    private void SetCustomerFocus(int index)
+    {
+        if(QueueManager.ActiveCustomerQueue.Count > 0)
+        {
+            CustomerInFocus = QueueManager.ActiveCustomerQueue[index];
+            ChangeFoodTrayOrder();
+        }
+        else
+        {
+            Debug.LogError("CustomerSelect.cs |  SetCustomerFocus () =  ActiveCustomerQueue is Empty");
+        }
+    }
+
+
+    private void ChangeFoodTrayOrder() // This runs before Start because of Levelmanager ScriptOrder priority
+    {
+        _foodTrayDropArea.Order = CustomerInFocus.Order;
     }
 }

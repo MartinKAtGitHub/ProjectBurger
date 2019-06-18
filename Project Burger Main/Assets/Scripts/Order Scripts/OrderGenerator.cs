@@ -8,43 +8,41 @@ using UnityEngine;
 public class OrderGenerator : MonoBehaviour
 {
     public bool RemoveIngredients;
-    [SerializeField]
-    private RecipeBook _recipeBook;
 
+    [SerializeField] private RecipeBook _recipeBook;
     [Range(2,6)]
-    [SerializeField]
-    private int _multiOrderAmount;
-    [SerializeField]
-    private int _multiOrderChance = 50;
-    private Recipe _orderBaseRecipe;
+    [SerializeField] private int _multiOrderAmount;
+    [SerializeField] private int _multiOrderChance = 50;
     /// <summary>
     /// the Order recipe that is left after we have discarded all the ingredients the customer didn't want
     /// </summary>
-    [SerializeField]
-    private Order _order;
+    [SerializeField]  private Order _order;
 
+    private Recipe _orderBaseRecipe;
+    private Customer _customer;
     private List<Ingredient> _discaredIngredients = new List<Ingredient>();
 
     /// <summary>
-    /// The random recipe the order is being generated from
+    /// The recipe the order is being generated from
     /// </summary>
     public Recipe OrderBaseRecipe { get { return _orderBaseRecipe; } }
     public List<Ingredient> DiscaredIngredients { get { return _discaredIngredients; } }
-    public Order Order { get { return _order; } }
+    // public Order Order { get { return _order; } }
 
+    private void Awake()
+    {
+        _customer = GetComponent<Customer>();
+    }
     /// <summary>
     /// Generates a new order(s) based on chance, the ingredients can be set to be removed at which point
     /// there will be chance to remove the ingredients
     /// </summary>
-    public void RequestOrder()
+    public Order RequestOrder()
     {
         _order = new Order();
-        _order.CustomerName = name;
+        _order.CustomerName = _customer.name;
+
         var multiOrderRoll = Random.Range(1, 100);
-
-        List<OrderRecipe> orderRecipes = new List<OrderRecipe>();
-
-        // Recipe orderBaseRecipe = null;
 
         if (multiOrderRoll < _multiOrderChance)
         {
@@ -53,18 +51,15 @@ public class OrderGenerator : MonoBehaviour
             {
                 SelectRandomRecipe();
             }
+
+            return _order;
         }
         else
         {
             Debug.Log("Requesting Single food order");
             SelectRandomRecipe();
+            return _order;
         }
-
-        if (_order.OrderRecipes.Count == 0)
-        {
-            Debug.LogError("Generator failed to create a valid order, This should never happen| Order count 0" );
-        }
-
     }
 
     /// <summary>
@@ -103,7 +98,6 @@ public class OrderGenerator : MonoBehaviour
             if (_recipeBook.Recipes[j].AccumulatedWight >= recipeRoll)
             {
                 // var orderBaseRecipe = _recipeBook.Recipes[j]; // This turns into null for some reason, but only for the first spawn lel
-                //Debug.Log("SELECTED RECIPE NAME = " + _recipeBook.Recipes[j].name);
                 _order.OrderRecipes.Add(CreateOrderRecipe(_recipeBook.Recipes[j]));
 
                 return; // If i find a recipe then no need to loop through the rest

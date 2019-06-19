@@ -22,6 +22,8 @@ public class Customer : MonoBehaviour
     private void Awake()
     {
         OrderGenerator = GetComponent<OrderGenerator>();
+
+   
     }
 
     private void Start()

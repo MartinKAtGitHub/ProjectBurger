@@ -28,14 +28,14 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
    
     public void Initialize()
     {
-        LevelManager.Instance.CustomerSelect = this;
+        //LevelManager.Instance.CustomerSelect = this;
         _foodTrayDropArea = LevelManager.Instance.FoodTrayDropArea;
         LevelManager.Instance.SalesManager.OnSale += ResetCustomerSelect;
     }
 
     public void NextCustomer()
     {
-        if (_customerSelectIndex < QueueManager.ActiveCustomerQueue.Count - 1)
+        if (_customerSelectIndex < QueueManager.ActiveQueueLimit.Count - 1)
         {
             _customerSelectIndex++;
 
@@ -82,13 +82,13 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
     private void ResetCustomerSelect()
     {
-        if (QueueManager.ActiveCustomerQueue.Count == 0)
+        if (QueueManager.ActiveQueueLimit.Count == 0)
         {
             _customerFocusName.text = "No customer";
         }
         else
         {
-            _customerSelectIndex = QueueManager.ActiveCustomerQueue.Count - 1;
+            _customerSelectIndex = QueueManager.ActiveQueueLimit.Count - 1;
             //_customerFocusName.text = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
             //   .GetComponent<OrderGenerator>().Order.CustomerName;
         }
@@ -102,7 +102,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     public void CircularNextItem()
     {
         _customerSelectIndex++;
-        _customerSelectIndex %= QueueManager.ActiveCustomerQueue.Count; // clip index (turns to 0 if index == items.Count)
+        _customerSelectIndex %= QueueManager.ActiveQueueLimit.Count; // clip index (turns to 0 if index == items.Count)
 
         SetCustomerFocus(_customerSelectIndex);
     }
@@ -113,7 +113,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
         if (_customerSelectIndex < 0)
         {
-            _customerSelectIndex = QueueManager.ActiveCustomerQueue.Count - 1;
+            _customerSelectIndex = QueueManager.ActiveQueueLimit.Count - 1;
         }
 
         SetCustomerFocus(_customerSelectIndex);
@@ -122,9 +122,9 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
     private void SetCustomerFocus(int index)
     {
-        if(QueueManager.ActiveCustomerQueue.Count > 0)
+        if(QueueManager.ActiveQueueLimit.Count > 0)
         {
-            CustomerInFocus = QueueManager.ActiveCustomerQueue[index];
+            CustomerInFocus = QueueManager.ActiveQueueLimit[index];
             ChangeFoodTrayOrder();
         }
         else

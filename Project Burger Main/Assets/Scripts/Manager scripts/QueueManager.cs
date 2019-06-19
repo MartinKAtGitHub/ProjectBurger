@@ -6,17 +6,18 @@ using UnityEngine;
 public class QueueManager : MonoBehaviour
 {
 
-    [SerializeField]
-    private int _maxActiveCustomerAmount;
-    [SerializeField]
-    private List<Customer> _activeCustomerQueue = new List<Customer>(); // TODO QueueManager can be an array if we have a fixed amount of active customers
 
-    public List<Customer> ActiveCustomerQueue { get => _activeCustomerQueue; }
+    [SerializeField] private int _activeQueueLimit;
 
-   
+    [SerializeField] private List<Customer> _activeCustomerQueue = new List<Customer>(); // TODO QueueManager can be an array if we have a fixed amount of active customers
+
+    public List<Customer> ActiveQueueLimit { get => _activeCustomerQueue; }
+
+    public int MaxActiveCustomerAmount { get => _activeQueueLimit;}
+
     public void Initialize()
     {
-        LevelManager.Instance.QueueManager = this;
+        //LevelManager.Instance.QueueManager = this;
         LevelManager.Instance.SalesManager.OnSale += RemoveCustomerFromQueue;
     }
 
@@ -27,7 +28,7 @@ public class QueueManager : MonoBehaviour
 
     public void RemoveCustomerFromQueue() // TODO QueueManager.cs | RemoveCustomerFromQueue() might remove the wrong customer. Test this method to make sure it removes the correct customer
     {
-       if(ActiveCustomerQueue.Count != 0)
+       if(ActiveQueueLimit.Count != 0)
         {
             //var customerIndex = LevelManager.Instance.CustomerSelect.CustomerSelectIndex;
             //var customer = _activeCustomerQueue[customerIndex];

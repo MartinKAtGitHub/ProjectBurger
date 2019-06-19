@@ -29,7 +29,7 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
 
     public void Initialize()
     {
-        LevelManager.Instance.FoodTrayDropArea = this;
+        //LevelManager.Instance.FoodTrayDropArea = this;
         LevelManager.Instance.SalesManager.OnSale += CheckFoodStacksAgainstOrder;
     }
 

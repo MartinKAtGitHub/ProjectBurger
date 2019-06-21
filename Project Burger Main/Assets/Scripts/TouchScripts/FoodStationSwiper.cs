@@ -121,7 +121,7 @@ public class FoodStationSwiper : MonoBehaviour, IDragHandler, IEndDragHandler, I
         }
     }
 
-    void Update() {
+    void Update() { // PERFORMANCE FoodStationSwiper.cs | use IEnumerator and call when it when it is needed instead of checking a bool every frame?
 
         if (_UpdatePosition == true) {
             if(_TheTime < 0.75f) {//0.75f Is The Point At Which I Starts The Slowdown "Effect"

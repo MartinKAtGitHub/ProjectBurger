@@ -10,22 +10,24 @@ using TMPro;
 /// </summary>
 public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update the script to take Customer object instead of directly ref OrderGenerator
 {
-    [SerializeField] private int _customerSelectIndex = 0;
     public QueueManager QueueManager;
+    public Transform CustomerSwipeContainer;
+
+    [SerializeField] private int _customerSelectIndex = 0;
+    [SerializeField] private TextMeshProUGUI _customerFocusName;
+
 
     private FoodTrayDropArea _foodTrayDropArea;
 
-    [SerializeField] private TextMeshProUGUI _customerFocusName;
-
     public Customer CustomerInFocus { get; private set; }
-    public int CustomerSelectIndex { get => _customerSelectIndex;}
+    public int CustomerSelectIndex { get => _customerSelectIndex; }
 
     private void Awake()
     {
         QueueManager = GetComponent<QueueManager>();
-       
+
     }
-   
+
     public void Initialize()
     {
         //LevelManager.Instance.CustomerSelect = this;
@@ -38,12 +40,9 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         if (_customerSelectIndex < QueueManager.ActiveQueueLimit.Count - 1)
         {
             _customerSelectIndex++;
+            SetCustomerFocus(_customerSelectIndex);
 
-            //FoodTrayDropArea.Order = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
-            //    .GetComponent<OrderGenerator>().Order;
-
-            //_customerFocusName.text = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
-            //    .GetComponent<OrderGenerator>().Order.CustomerName;
+            CustomerSwipeContainer.GetComponent<RectTransform>().anchoredPosition += new Vector2(1000 + 500, 0); // HlayoutGroup space (1000) + Customer width (500)
         }
         else
         {
@@ -56,13 +55,9 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         if (_customerSelectIndex > 0)
         {
             _customerSelectIndex--;
-            Debug.Log("CUSTOMER = " + _customerSelectIndex);
+            SetCustomerFocus(_customerSelectIndex);
+            CustomerSwipeContainer.GetComponent<RectTransform>().anchoredPosition += new Vector2(-1 * (1000 + 500), 0); // HlayoutGroup space (1000) + Customer width (500)
 
-           // FoodTrayDropArea.Order = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
-           //     .GetComponent<OrderGenerator>().Order;
-
-           // _customerFocusName.text = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
-           //.GetComponent<OrderGenerator>().Order.CustomerName;
         }
         else
         {
@@ -122,7 +117,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
     private void SetCustomerFocus(int index)
     {
-        if(QueueManager.ActiveQueueLimit.Count > 0)
+        if (QueueManager.ActiveQueueLimit.Count > 0)
         {
             CustomerInFocus = QueueManager.ActiveQueueLimit[index];
             ChangeFoodTrayOrder();
@@ -138,4 +133,9 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     {
         _foodTrayDropArea.Order = CustomerInFocus.Order;
     }
+
+    //private void Update()
+    //{
+    //    Debug.Log(QueueManager.ActiveQueueLimit.Count);
+    //}
 }

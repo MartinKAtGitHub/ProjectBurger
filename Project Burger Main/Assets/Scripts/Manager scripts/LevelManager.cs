@@ -55,15 +55,15 @@ public class LevelManager : MonoBehaviour
 
             }); // PERFORMANCE Levelmanager.cs | StartLevel() The bool is checked every frame, until it turns true
 
-            yield return new WaitForSeconds(Random.Range(3, 6));
-            Debug.Log("SPAWINIG NEW DUDE");
+            yield return new WaitForSeconds(Random.Range(1, 2));
+           // Debug.Log("SPAWINIG NEW DUDE");
 
             var customer = ShuffleBag.Next();
-            customer.gameObject.SetActive(true);
-            QueueManager.AddCustomerToQueue(customer); 
+            QueueManager.AddCustomerToQueue(customer);
+
+            yield return new WaitForEndOfFrame();
 
         }
 
-        yield return null;
     }
 }

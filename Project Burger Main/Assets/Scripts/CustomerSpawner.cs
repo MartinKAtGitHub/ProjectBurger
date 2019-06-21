@@ -18,7 +18,7 @@ public class CustomerSpawner : MonoBehaviour
         var customer = clone.GetComponent<Customer>();
       //  customer.Order = customer.OrderGenerator.RequestOrder;
 
-        LevelManager.Instance.QueueManager.AddCustomerToQueue(clone.GetComponent<Customer>());
+       // LevelManager.Instance.QueueManager.AddCustomerToQueue(clone.GetComponent<Customer>());
         
         // maybe some audio, like a bell
         Debug.Log("SPAWNING " + clone.name);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 /// <summary>
 /// Handel's the selection of customers in queue.
@@ -10,14 +11,20 @@ using TMPro;
 /// </summary>
 public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update the script to take Customer object instead of directly ref OrderGenerator
 {
+    // NEEDS A BETTER WAY OF CONNECTING PUBLICS
     public QueueManager QueueManager;
-    public Transform CustomerSwipeContainer;
+    public RectTransform CustomerSwipeContainer;
+    public GameObject CustomerPrefab;
 
+
+    [SerializeField] private float _easing = 0.5f;
     [SerializeField] private int _customerSelectIndex = 0;
     [SerializeField] private TextMeshProUGUI _customerFocusName;
 
-
+    private float _horizontalLayoutGroupSpacing;
+    private float _customerWidth;
     private FoodTrayDropArea _foodTrayDropArea;
+    private bool _inSmoothMotion;
 
     public Customer CustomerInFocus { get; private set; }
     public int CustomerSelectIndex { get => _customerSelectIndex; }
@@ -26,6 +33,8 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     {
         QueueManager = GetComponent<QueueManager>();
 
+        _horizontalLayoutGroupSpacing = CustomerSwipeContainer.GetComponent<HorizontalLayoutGroup>().spacing;
+        _customerWidth = CustomerPrefab.GetComponent<RectTransform>().sizeDelta.x;
     }
 
     public void Initialize()
@@ -37,31 +46,42 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
     public void NextCustomer()
     {
-        if (_customerSelectIndex < QueueManager.ActiveQueueLimit.Count - 1)
+        if (!_inSmoothMotion)
         {
-            _customerSelectIndex++;
-            SetCustomerFocus(_customerSelectIndex);
+            if (_customerSelectIndex < QueueManager.ActiveQueueLimit.Count - 1)
+            {
+                _customerSelectIndex++;
+                SetCustomerFocus(_customerSelectIndex);
 
-            CustomerSwipeContainer.GetComponent<RectTransform>().anchoredPosition += new Vector2(1000 + 500, 0); // HlayoutGroup space (1000) + Customer width (500)
-        }
-        else
-        {
-            Debug.Log("NO NEXT CUSTOMER");
+                var newPos = CustomerSwipeContainer.anchoredPosition;
+                newPos += new Vector2((_horizontalLayoutGroupSpacing + _customerWidth), 0);
+
+                StartCoroutine(SmoothMotion(CustomerSwipeContainer.anchoredPosition, newPos, _easing));
+            }
+            else
+            {
+                Debug.Log("NO NEXT CUSTOMER");
+            }
         }
     }
 
     public void PrevCustomer()
     {
-        if (_customerSelectIndex > 0)
+        if (!_inSmoothMotion)
         {
-            _customerSelectIndex--;
-            SetCustomerFocus(_customerSelectIndex);
-            CustomerSwipeContainer.GetComponent<RectTransform>().anchoredPosition += new Vector2(-1 * (1000 + 500), 0); // HlayoutGroup space (1000) + Customer width (500)
+            if (_customerSelectIndex > 0)
+            {
+                _customerSelectIndex--;
+                SetCustomerFocus(_customerSelectIndex);
+                var newPos = CustomerSwipeContainer.anchoredPosition;
+                newPos += new Vector2(-1 * (_horizontalLayoutGroupSpacing + _customerWidth), 0);
 
-        }
-        else
-        {
-            Debug.Log("NO BACK CUSTOMER");
+                StartCoroutine(SmoothMotion(CustomerSwipeContainer.anchoredPosition, newPos, _easing));
+            }
+            else
+            {
+                Debug.Log("NO BACK CUSTOMER");
+            }
         }
     }
 
@@ -134,8 +154,18 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         _foodTrayDropArea.Order = CustomerInFocus.Order;
     }
 
-    //private void Update()
-    //{
-    //    Debug.Log(QueueManager.ActiveQueueLimit.Count);
-    //}
+
+    IEnumerator SmoothMotion(Vector2 startPos, Vector2 endPos, float sec)
+    {
+        _inSmoothMotion = true;
+        float t = 0f;
+        while (t <= 1.0)
+        {
+            t += Time.deltaTime / sec;
+            CustomerSwipeContainer.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
+            yield return null;
+        }
+        _inSmoothMotion = false;
+        yield return null;
+    }
 }

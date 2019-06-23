@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
 
 
     [SerializeField] private float _preparationTime;
+    [SerializeField] private Vector2 _customerSpawnTimerMinMax;
 
     public static LevelManager Instance { get; private set; }
 
@@ -35,17 +36,32 @@ public class LevelManager : MonoBehaviour
         FoodTrayDropArea.Initialize();
         QueueManager.Initialize();
 
-        StartCoroutine(CustomerSpawnSystem());
+        StartCoroutine(CustomerSpawnSystemInit());
+        Debug.Log("WAIT FOR FIRST TO SAPWN");
+       
     }
 
-    private IEnumerator CustomerSpawnSystem()
+    /// <summary>
+    /// Starts the customer spawn system, we need a special case for the first customer that spawns which only happens once.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator CustomerSpawnSystemInit()
     {
-        /*
-         * Go though list and return customers at Random time. 
-         * At the end of the list restart the list.
-         *  
-         */
+        yield return new WaitForSeconds(_preparationTime);
 
+        var customer = ShuffleBag.Next();
+        QueueManager.AddCustomerToQueue(customer);
+        CustomerSelect.SetInitialCustomer();
+
+
+        yield return new WaitForSeconds(3);
+        StartCoroutine(CustomerSpawnSystemLoop());
+    }
+    /// <summary>
+    /// This is th main customer spawn loop. At the end of the list this method will be called again.
+    /// </summary>
+    private IEnumerator CustomerSpawnSystemLoop()
+    {
         for (int i = 0; i < ShuffleBag.CustomerPool.Count; i++)
         {
             yield return new WaitUntil(() =>
@@ -55,15 +71,14 @@ public class LevelManager : MonoBehaviour
 
             }); // PERFORMANCE Levelmanager.cs | StartLevel() The bool is checked every frame, until it turns true
 
-            yield return new WaitForSeconds(Random.Range(1, 2));
-           // Debug.Log("SPAWINIG NEW DUDE");
-
+            yield return new WaitForSeconds(Random.Range(_customerSpawnTimerMinMax.x, _customerSpawnTimerMinMax.y));
+      
             var customer = ShuffleBag.Next();
             QueueManager.AddCustomerToQueue(customer);
 
-            yield return new WaitForEndOfFrame();
-
+            yield return null;
         }
-
+        // Signal end of loop, maybe have an event and fire this metod again
+        // OR StartCoroutine(CustomerSpawnSystemLoop()); call it again, might crash 
     }
 }

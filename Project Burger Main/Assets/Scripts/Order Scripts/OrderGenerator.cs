@@ -31,7 +31,7 @@ public class OrderGenerator : MonoBehaviour
 
     private void Awake()
     {
-        _customer = GetComponent<Customer>();
+        //_customer = GetComponent<Customer>();
     }
     /// <summary>
     /// Generates a new order(s) based on chance, the ingredients can be set to be removed at which point
@@ -40,7 +40,7 @@ public class OrderGenerator : MonoBehaviour
     public Order RequestOrder()
     {
         _order = new Order();
-        _order.CustomerName = _customer.name;
+     //   _order.CustomerName = _customer.CustomerName;
 
         var multiOrderRoll = Random.Range(1, 100);
 

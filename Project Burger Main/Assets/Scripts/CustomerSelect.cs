@@ -20,13 +20,14 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     [SerializeField] private float _easing = 0.5f;
     [SerializeField] private int _customerSelectIndex = 0;
     [SerializeField] private TextMeshProUGUI _customerFocusName;
+    [SerializeField] private Customer _customerInFocus;
 
     private float _horizontalLayoutGroupSpacing;
     private float _customerWidth;
     private FoodTrayDropArea _foodTrayDropArea;
     private bool _inSmoothMotion;
 
-    public Customer CustomerInFocus { get; private set; }
+    public Customer CustomerInFocus { get => _customerInFocus; }
     public int CustomerSelectIndex { get => _customerSelectIndex; }
 
     private void Awake()
@@ -41,7 +42,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     {
         //LevelManager.Instance.CustomerSelect = this;
         _foodTrayDropArea = LevelManager.Instance.FoodTrayDropArea;
-        LevelManager.Instance.SalesManager.OnSale += ResetCustomerSelect;
+      //  LevelManager.Instance.SalesManager.OnSale += ResetCustomerSelect;
     }
 
     public void NextCustomer()
@@ -95,7 +96,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         SetCustomerFocus(_customerSelectIndex);
     }
 
-    private void ResetCustomerSelect()
+    private void ReFocusCustomer()
     {
         if (QueueManager.ActiveQueueLimit.Count == 0)
         {
@@ -103,9 +104,10 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         }
         else
         {
-            _customerSelectIndex = QueueManager.ActiveQueueLimit.Count - 1;
-            //_customerFocusName.text = QueueManager.ActiveCustomerQueue[CustomerSelectIndex]
-            //   .GetComponent<OrderGenerator>().Order.CustomerName;
+            if (_customerSelectIndex > QueueManager.ActiveQueueLimit.Count - 1)
+            {
+
+            }
         }
 
 
@@ -135,11 +137,13 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     }
 
 
+
+
     private void SetCustomerFocus(int index)
     {
         if (QueueManager.ActiveQueueLimit.Count > 0)
         {
-            CustomerInFocus = QueueManager.ActiveQueueLimit[index];
+            _customerInFocus = QueueManager.ActiveQueueLimit[index];
             ChangeFoodTrayOrder();
         }
         else
@@ -149,11 +153,10 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     }
 
 
-    private void ChangeFoodTrayOrder() // This runs before Start because of Levelmanager ScriptOrder priority
+    private void ChangeFoodTrayOrder()
     {
         _foodTrayDropArea.Order = CustomerInFocus.Order;
     }
-
 
     IEnumerator SmoothMotion(Vector2 startPos, Vector2 endPos, float sec)
     {

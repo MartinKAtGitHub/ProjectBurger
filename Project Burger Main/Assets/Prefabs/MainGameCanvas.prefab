@@ -871,9 +871,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QueueManager: {fileID: 1083111154}
-  CustomerSwipeContainer: {fileID: 0}
+  CustomerSwipeContainer: {fileID: 8578046467175054171}
+  CustomerPrefab: {fileID: 5503328911389282102, guid: 5658b58e70319114c8e47e91db8ea4b5,
+    type: 3}
+  _easing: 0.5
   _customerSelectIndex: 0
   _customerFocusName: {fileID: 8704241237237671899}
+  _customerInFocus: {fileID: 0}
 --- !u!114 &1083111154
 MonoBehaviour:
   m_ObjectHideFlags: 0

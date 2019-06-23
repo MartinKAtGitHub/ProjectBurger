@@ -25,10 +25,15 @@ public class Customer : MonoBehaviour
 
    
     }
-
-    private void Start()
+    private void OnEnable()
     {
         _customerName = gameObject.name;
         _order = OrderGenerator.RequestOrder();
+        _order.CustomerName = _customerName;
+    }
+
+    private void Start()
+    {
+      
     }
 }

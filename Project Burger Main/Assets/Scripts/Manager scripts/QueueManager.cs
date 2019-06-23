@@ -28,18 +28,16 @@ public class QueueManager : MonoBehaviour
         customer.gameObject.SetActive(true);
     }
 
-    public void RemoveCustomerFromQueue() // TODO QueueManager.cs | RemoveCustomerFromQueue() might remove the wrong customer. Test this method to make sure it removes the correct customer
+    public void RemoveCustomerFromQueue() // TODO QueueManager.cs | RemoveCustomerFromQueue() Dose not take into account Timeout customer. Maybe make diffrent versions
     {
        if(ActiveQueueLimit.Count != 0)
         {
-            //var customerIndex = LevelManager.Instance.CustomerSelect.CustomerSelectIndex;
-            //var customer = _activeCustomerQueue[customerIndex];
             var customer = LevelManager.Instance.CustomerSelect.CustomerInFocus;
 
+          //  Debug.Log($"Destroying {customer.CustomerName} from QueueManger OnRemove");
             _activeCustomerQueue.Remove(customer);
 
-            Debug.Log($"Destroying {customer.CustomerName} from QueueManger OnRemove");
-            Destroy(customer);
+            Destroy(customer.gameObject);
         }
     }
 }

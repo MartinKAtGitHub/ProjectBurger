@@ -6,9 +6,9 @@ using UnityEngine;
 public class SalesManager : MonoBehaviour
 {
 
-    public Action OnSale;
+    private Action _onSale;
 
-  
+    public Action OnSale { get => _onSale; set => _onSale = value; }
 
     public void Initialize()
     {
@@ -23,6 +23,10 @@ public class SalesManager : MonoBehaviour
         // Call this on a button
         // event.Fire();
 
-        OnSale?.Invoke();
+        //  OnSale?.Invoke();
+
+        LevelManager.Instance.FoodTrayDropArea.CheckFoodStacksAgainstOrder();
+        LevelManager.Instance.QueueManager.RemoveCustomerFromQueue();
+        LevelManager.Instance.CustomerSelect.ReFocusCustomerOnSell();
     }
 }

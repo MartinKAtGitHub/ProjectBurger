@@ -26,6 +26,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     private float _customerWidth;
     private FoodTrayDropArea _foodTrayDropArea;
     private bool _inSmoothMotion;
+    private GameObject _placeHolderGameObject;
 
     public Customer CustomerInFocus { get => _customerInFocus; }
     public int CustomerSelectIndex { get => _customerSelectIndex; }
@@ -38,18 +39,22 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         _customerWidth = CustomerPrefab.GetComponent<RectTransform>().sizeDelta.x;
     }
 
-    public void Initialize()
+    private void Start()
     {
-        //LevelManager.Instance.CustomerSelect = this;
         _foodTrayDropArea = LevelManager.Instance.FoodTrayDropArea;
-      //  LevelManager.Instance.SalesManager.OnSale += ResetCustomerSelect;
     }
+    //public void Initialize()
+    //{
+    //    //LevelManager.Instance.CustomerSelect = this;
+    //    _foodTrayDropArea = LevelManager.Instance.FoodTrayDropArea;
+    //      LevelManager.Instance.SalesManager.OnSale += ReFocusCustomerOnSell;
+    //}
 
     public void NextCustomer()
     {
         if (!_inSmoothMotion)
         {
-            if (_customerSelectIndex < QueueManager.ActiveQueueLimit.Count - 1)
+            if (_customerSelectIndex < QueueManager.ActiveCustomerQueue.Count - 1)
             {
                 _customerSelectIndex++;
                 SetCustomerFocus(_customerSelectIndex);
@@ -96,30 +101,49 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         SetCustomerFocus(_customerSelectIndex);
     }
 
-    private void ReFocusCustomer()
+    public void ReFocusCustomerOnSell()
     {
-        if (QueueManager.ActiveQueueLimit.Count == 0)
+        if (QueueManager.ActiveCustomerQueue.Count != 0)
         {
-            _customerFocusName.text = "No customer";
-        }
-        else
-        {
-            if (_customerSelectIndex > QueueManager.ActiveQueueLimit.Count - 1)
+            // _customerSelectIndex--;
+            // Debug.Log("INDEX IS = " + _customerSelectIndex + "MaxIndex IS =" + (QueueManager.ActiveCustomerQueue.Count - 1));
+
+            if (_customerSelectIndex - 1 == QueueManager.ActiveCustomerQueue.Count - 1)// Because the customer is removed from the list Before this check, we need to take that into account and calculate index from -1
             {
+                // _customerSelectIndex--;
+                Debug.Log("Edge case | Index = " + _customerSelectIndex + " MaxIndex = " + (QueueManager.ActiveCustomerQueue.Count - 1));
+                //SetCustomerFocus(_customerSelectIndex);
+                PrevCustomer();
+            }
+            else
+            {
+
+                CreatePlaceHolder();
+                SetCustomerFocus(_customerSelectIndex);
+
+                var newPos = CustomerSwipeContainer.anchoredPosition;
+                newPos += new Vector2((_horizontalLayoutGroupSpacing + _customerWidth), 0);
+
+                StartCoroutine(SmoothMotion(CustomerSwipeContainer.anchoredPosition, newPos, _easing));
+              
+                // After Anim we want to Placeholder.stLast/firstSibling
 
             }
         }
-
-
-
-        Debug.Log("ResetCustomerSelect() need to set a new Selected customer on Sale");
+        else
+        {
+            _customerFocusName.text = "No customer";
+        }
     }
+
+
+
 
 
     public void CircularNextItem()
     {
         _customerSelectIndex++;
-        _customerSelectIndex %= QueueManager.ActiveQueueLimit.Count; // clip index (turns to 0 if index == items.Count)
+        _customerSelectIndex %= QueueManager.ActiveCustomerQueue.Count; // clip index (turns to 0 if index == items.Count)
 
         SetCustomerFocus(_customerSelectIndex);
     }
@@ -130,20 +154,23 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
         if (_customerSelectIndex < 0)
         {
-            _customerSelectIndex = QueueManager.ActiveQueueLimit.Count - 1;
+            _customerSelectIndex = QueueManager.ActiveCustomerQueue.Count - 1;
         }
 
         SetCustomerFocus(_customerSelectIndex);
     }
 
-
-
+    public void RemovePlaceHolder()
+    {
+        Destroy(_placeHolderGameObject);
+    }
 
     private void SetCustomerFocus(int index)
     {
-        if (QueueManager.ActiveQueueLimit.Count > 0)
+        if (QueueManager.ActiveCustomerQueue.Count > 0)
         {
-            _customerInFocus = QueueManager.ActiveQueueLimit[index];
+            _customerInFocus = QueueManager.ActiveCustomerQueue[index];
+
             ChangeFoodTrayOrder();
         }
         else
@@ -151,7 +178,6 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
             Debug.LogError("CustomerSelect.cs |  SetCustomerFocus () =  ActiveCustomerQueue is Empty");
         }
     }
-
 
     private void ChangeFoodTrayOrder()
     {
@@ -168,7 +194,27 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
             CustomerSwipeContainer.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
             yield return null;
         }
-        _inSmoothMotion = false;
+        _inSmoothMotion = false
+            ;
+        if(_placeHolderGameObject != null)
+        {
+            _placeHolderGameObject.transform.SetAsLastSibling();
+        }
         yield return null;
     }
+
+    private void CreatePlaceHolder()
+    {
+        _placeHolderGameObject = new GameObject("PlaceHolder For Customer");
+        _placeHolderGameObject.AddComponent<RectTransform>();
+
+        _placeHolderGameObject.transform.SetParent(CustomerSwipeContainer.transform);
+        Debug.Log("Customer in Focus SIB = " + _customerInFocus.transform.GetSiblingIndex());
+        _placeHolderGameObject.transform.SetSiblingIndex(_customerInFocus.transform.GetSiblingIndex());
+
+        var placeHolderRectTrans = _placeHolderGameObject.GetComponent<RectTransform>();
+        placeHolderRectTrans.localScale = Vector2.one;
+        placeHolderRectTrans.sizeDelta = _customerInFocus.GetComponent<RectTransform>().sizeDelta;
+    }
+
 }

@@ -23,7 +23,7 @@ public class ShuffleBag : MonoBehaviour
         GetComponentsInChildren<Customer>(true, CustomerPool);
         _maxCount = CustomerPool.Count - 1;
 
-        Debug.Log("AWAKE -< maxCount = " + _maxCount);
+     //   Debug.Log("AWAKE -< maxCount = " + _maxCount);
 
     }
 
@@ -37,7 +37,7 @@ public class ShuffleBag : MonoBehaviour
 
             _customer = CustomerPool[0];
 
-            Debug.Log("WHY DOSE THIS FIRE FIRST LUL");
+        //    Debug.Log("WHY DOSE THIS FIRE FIRST LUL");
             return _customer;
         }
 
@@ -48,7 +48,7 @@ public class ShuffleBag : MonoBehaviour
         CustomerPool[_maxCount] = _customer;
         _maxCount--;
 
-        Debug.Log("SUFFLE BAG => RandIndex :" + randomIndex + " MaxCount : " + _maxCount + " CustomerName : " + _customer.name);
+       // Debug.Log("SUFFLE BAG => RandIndex :" + randomIndex + " MaxCount : " + _maxCount + " CustomerName : " + _customer.name);
 
         return _customer;
     }

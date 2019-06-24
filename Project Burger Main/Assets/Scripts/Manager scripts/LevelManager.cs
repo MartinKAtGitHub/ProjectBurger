@@ -32,9 +32,9 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        CustomerSelect.Initialize();
-        FoodTrayDropArea.Initialize();
-        QueueManager.Initialize();
+        //CustomerSelect.Initialize();
+        //FoodTrayDropArea.Initialize();
+        //QueueManager.Initialize();
 
         StartCoroutine(CustomerSpawnSystemInit());
         Debug.Log("WAIT FOR FIRST TO SAPWN");
@@ -66,8 +66,8 @@ public class LevelManager : MonoBehaviour
         {
             yield return new WaitUntil(() =>
             {
-                Debug.Log("Waiting for Active Queue to be smaller then limit before spawning more customers");
-                return QueueManager.ActiveQueueLimit.Count < QueueManager.MaxActiveCustomerAmount;
+                //Debug.Log("Waiting for Active Queue to be smaller then limit before spawning more customers");
+                return QueueManager.ActiveCustomerQueue.Count < QueueManager.ActiveQueueLimit;
 
             }); // PERFORMANCE Levelmanager.cs | StartLevel() The bool is checked every frame, until it turns true
 

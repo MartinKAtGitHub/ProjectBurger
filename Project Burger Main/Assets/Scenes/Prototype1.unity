@@ -1475,15 +1475,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1083111156, guid: c9eceda9495c8da40a29ee11ce2a36a2, type: 3}
-      propertyPath: CustomerSwipeContainer
-      value: 
-      objectReference: {fileID: 17834733}
-    - target: {fileID: 1083111156, guid: c9eceda9495c8da40a29ee11ce2a36a2, type: 3}
-      propertyPath: CustomerPrefab
-      value: 
-      objectReference: {fileID: 5503328911389282102, guid: 5658b58e70319114c8e47e91db8ea4b5,
-        type: 3}
     - target: {fileID: 8727089984607184489, guid: c9eceda9495c8da40a29ee11ce2a36a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1828,6 +1819,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Padding.m_Right
       value: 710
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738678088208732042, guid: c9eceda9495c8da40a29ee11ce2a36a2,
+        type: 3}
+      propertyPath: _customerSpawnTimerMinMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738678088208732042, guid: c9eceda9495c8da40a29ee11ce2a36a2,
+        type: 3}
+      propertyPath: _customerSpawnTimerMinMax.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738678088208732042, guid: c9eceda9495c8da40a29ee11ce2a36a2,
+        type: 3}
+      propertyPath: _preparationTime
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9eceda9495c8da40a29ee11ce2a36a2, type: 3}

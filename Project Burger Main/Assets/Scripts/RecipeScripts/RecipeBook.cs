@@ -17,7 +17,7 @@ public class RecipeBook : ScriptableObject  // Static ? we would really never ne
     public void OnEnable()
     {
         CalulateWeightsForRecipes(); // Find out a way to calculate on Add/Remove recipe (Costume editor)
-        Debug.Log("Weight is being calculated in ScriptableObject Awake(), We only need to do this once!");
+      //  Debug.Log("Weight is being calculated in ScriptableObject Awake(), We only need to do this once!");
     }
 
     private void CalulateWeightsForRecipes()

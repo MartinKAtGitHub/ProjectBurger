@@ -36,6 +36,8 @@ public class TheCustomSpawner : MonoBehaviour {
             _CustomerCreation.SettingUpCustomer(_ThemeDayCustomers.CusomterSpawnRandom());
         }
 
+     Debug.Log(   LevelManager.Instance.gameObject.name);
+
     }
     // Update is called once per frame
     void Update()
@@ -49,8 +51,8 @@ public class TheCustomSpawner : MonoBehaviour {
 
 
 
-   /*     if (ArtificialQueueLength > 0 && _ArtificialTimeWaited < Time.time) {
-            if (_TheQueue.ActiveCustomerQueue.Count < _TheQueue.MaxActiveCustomerAmount) {
+        if (ArtificialQueueLength > 0 && _ArtificialTimeWaited < Time.time) {
+            if (_TheQueue.ActiveQueueLimit.Count < _TheQueue.MaxActiveCustomerAmount) {
                 //Spawn
                 ArtificialQueueLength--;
             } else {
@@ -62,7 +64,7 @@ public class TheCustomSpawner : MonoBehaviour {
             if (TimeWaited + spawntime < Time.time) {//When Its Time To Spawn A Customer This Is True 
                 TimeWaited = Time.time;
 
-                if (_TheQueue.ActiveCustomerQueue.Count < _TheQueue.MaxActiveCustomerAmount) {
+                if (_TheQueue.ActiveQueueLimit.Count < _TheQueue.MaxActiveCustomerAmount) {
                     //Spawn
                 } else {
 
@@ -81,7 +83,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
         if (SpawnCustomer == false) {
 
-            if (_TheQueue.ActiveCustomerQueue.Count == 0) {
+            if (_TheQueue.ActiveQueueLimit.Count == 0) {
                 TimeWaited = Time.time;
                 SpawnCustomer = true;
             }
@@ -107,7 +109,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
 
 
-        }*/
+        }
 
 
     }

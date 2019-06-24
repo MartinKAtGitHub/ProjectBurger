@@ -49,7 +49,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
 
 
-        if (ArtificialQueueLength > 0 && _ArtificialTimeWaited < Time.time) {
+   /*     if (ArtificialQueueLength > 0 && _ArtificialTimeWaited < Time.time) {
             if (_TheQueue.ActiveCustomerQueue.Count < _TheQueue.MaxActiveCustomerAmount) {
                 //Spawn
                 ArtificialQueueLength--;
@@ -107,7 +107,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
 
 
-        }
+        }*/
 
 
     }

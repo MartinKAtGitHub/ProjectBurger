@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class TestingCustomerListGO : MonoBehaviour
 {
-    public Customer[] CustomersArray;
-    public List<Customer> CustomersList = new List<Customer>();
+    public Customerss[] CustomersArray;
+    public List<Customerss> CustomersList = new List<Customerss>();
 
     private void Awake()
     {
        // CustomersList = GetComponentsInChildren<Customer>(true);
-        GetComponentsInChildren<Customer>(true,CustomersList);
+        GetComponentsInChildren<Customerss>(true,CustomersList);
     }
 }

@@ -19,7 +19,7 @@ public class OrderGenerator : MonoBehaviour
     [SerializeField]  private Order _order;
 
     private Recipe _orderBaseRecipe;
-    private Customer _customer;
+    private Customerss _customer;
     private List<Ingredient> _discaredIngredients = new List<Ingredient>();
 
     /// <summary>
@@ -31,7 +31,7 @@ public class OrderGenerator : MonoBehaviour
 
     private void Awake()
     {
-        _customer = GetComponent<Customer>();
+        _customer = GetComponent<Customerss>();
     }
     /// <summary>
     /// Generates a new order(s) based on chance, the ingredients can be set to be removed at which point

@@ -15,10 +15,10 @@ public class CustomerSpawner : MonoBehaviour
 
         var clone = Instantiate(CustomerPrefab, _customerParent);
         clone.name += cloneNum++;
-        var customer = clone.GetComponent<Customer>();
+        var customer = clone.GetComponent<Customerss>();
       //  customer.Order = customer.OrderGenerator.RequestOrder;
 
-        LevelManager.Instance.QueueManager.AddCustomerToQueue(clone.GetComponent<Customer>());
+        LevelManager.Instance.QueueManager.AddCustomerToQueue(clone.GetComponent<Customerss>());
         
         // maybe some audio, like a bell
         Debug.Log("SPAWNING " + clone.name);

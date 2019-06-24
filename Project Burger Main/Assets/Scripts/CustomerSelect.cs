@@ -17,7 +17,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
     [SerializeField] private TextMeshProUGUI _customerFocusName;
 
-    public Customer CustomerInFocus { get; private set; }
+    public Customerss CustomerInFocus { get; private set; }
     public int CustomerSelectIndex { get => _customerSelectIndex;}
 
     private void Awake()

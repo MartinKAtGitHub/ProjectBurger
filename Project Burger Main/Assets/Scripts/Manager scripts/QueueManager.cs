@@ -9,9 +9,9 @@ public class QueueManager : MonoBehaviour
 
     [SerializeField] private int _activeQueueLimit;
 
-    [SerializeField] private List<Customer> _activeCustomerQueue = new List<Customer>(); // TODO QueueManager can be an array if we have a fixed amount of active customers
+    [SerializeField] private List<Customerss> _activeCustomerQueue = new List<Customerss>(); // TODO QueueManager can be an array if we have a fixed amount of active customers
 
-    public List<Customer> ActiveQueueLimit { get => _activeCustomerQueue; }
+    public List<Customerss> ActiveQueueLimit { get => _activeCustomerQueue; }
 
     public int MaxActiveCustomerAmount { get => _activeQueueLimit;}
 
@@ -21,7 +21,7 @@ public class QueueManager : MonoBehaviour
         LevelManager.Instance.SalesManager.OnSale += RemoveCustomerFromQueue;
     }
 
-    public void AddCustomerToQueue(Customer customer)
+    public void AddCustomerToQueue(Customerss customer)
     {
         _activeCustomerQueue.Add(customer);
     }

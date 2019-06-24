@@ -18,4 +18,6 @@ public class QueueManager : MonoBehaviour
         _activeCustomerQueue.Add(customer);
     }
 
+    public int MaxActiveCustomerAmount { get => _maxActiveCustomerAmount; }
+
 }

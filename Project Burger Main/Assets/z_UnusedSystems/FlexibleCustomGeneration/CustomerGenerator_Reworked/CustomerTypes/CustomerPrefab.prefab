@@ -131,8 +131,12 @@ MonoBehaviour:
   TorsoRef: {fileID: 1128429750916784257}
   HeadRef: {fileID: 25677088193205681}
   EyeRef: {fileID: 7102224951955450076}
+  NoseRef: {fileID: 6664858643669036869}
   MouthRef: {fileID: 23704273718689642}
   HairRef: {fileID: 1443704512059227624}
+  RecipeB: {fileID: 11400000, guid: 4551bc7341af94b48a1e06c551ebb029, type: 2}
+  MultiorderAmount: 2
+  MultiorderChance: 50
 --- !u!1 &5681663685263564038
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +167,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4652459034527097403}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -298,7 +302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4409607771110080632
 RectTransform:
   m_ObjectHideFlags: 0
@@ -311,7 +315,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4652459034527097403}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -459,7 +463,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4652459034527097403}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -584,9 +588,9 @@ RectTransform:
   m_Children:
   - {fileID: 3673342181210362099}
   - {fileID: 6338389621279878456}
+  - {fileID: 4409607771110080632}
   - {fileID: 8911012723900862982}
   - {fileID: 3275729370409263431}
-  - {fileID: 4409607771110080632}
   m_Father: {fileID: 7953252691955027431}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -610,6 +614,8 @@ MonoBehaviour:
   Heads:
   - {fileID: 21300000, guid: 22d676abbd402384b954a5445926037e, type: 3}
   Eyes:
+  - {fileID: 21300000, guid: 33cd9eaf260c5f548b3fdeb7a477fc2d, type: 3}
+  Noses:
   - {fileID: 21300000, guid: 33cd9eaf260c5f548b3fdeb7a477fc2d, type: 3}
   Mouths:
   - {fileID: 21300000, guid: 093a3975d761a9b438ebfdbf420516fd, type: 3}

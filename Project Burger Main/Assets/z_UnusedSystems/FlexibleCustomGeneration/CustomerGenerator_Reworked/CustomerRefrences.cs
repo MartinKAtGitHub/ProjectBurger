@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CustomerGenderState : MonoBehaviour {
+public class CustomerRefrences : MonoBehaviour {
 
     public CustomerTorsoSprites TorsoSprites;
     public CustomerHeadSprites HeadSprites;
@@ -16,7 +16,11 @@ public class CustomerGenderState : MonoBehaviour {
     public Image TorsoRef;
     public Image HeadRef;
     public Image EyeRef;
+    public Image NoseRef;
     public Image MouthRef;
     public Image HairRef;
 
+    public RecipeBook RecipeB;
+    public int MultiorderAmount;
+    public int MultiorderChance;
 }

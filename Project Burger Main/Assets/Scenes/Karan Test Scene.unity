@@ -863,8 +863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad672a32d41672a4791833c1d673eb39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _foodStackPrefab: {fileID: 1975844395357534545, guid: c7cc03f7586bf684696c8de62ee20279,
-    type: 3}
+  _foodGameObjectPrefab: {fileID: 0}
   _foodStackFinishConditionIngredient: {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358,
     type: 2}
   _recipeBook: {fileID: 11400000, guid: 4551bc7341af94b48a1e06c551ebb029, type: 2}

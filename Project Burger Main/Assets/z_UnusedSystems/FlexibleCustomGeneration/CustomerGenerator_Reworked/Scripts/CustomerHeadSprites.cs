@@ -6,7 +6,7 @@ public class CustomerHeadSprites : MonoBehaviour {
 
     public Sprite[] Heads;
     public Sprite[] Eyes;
-//    public Sprite[] Noses;
+    public Sprite[] Noses;
     public Sprite[] Mouths;
     public Sprite[] Hair;
 

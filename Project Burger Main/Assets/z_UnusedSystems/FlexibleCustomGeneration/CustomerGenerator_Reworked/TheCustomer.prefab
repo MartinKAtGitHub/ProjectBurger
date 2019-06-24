@@ -30,7 +30,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 723940892099210378}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -213,7 +213,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 0bdd3d0a53ceff94c86f0f1e40ff25ca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33cd9eaf260c5f548b3fdeb7a477fc2d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -239,7 +239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8622489309446475465
 RectTransform:
   m_ObjectHideFlags: 0
@@ -252,7 +252,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 723940892099210378}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -287,7 +287,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 87ff5b6a443147b43b5a0240d796f63e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33cd9eaf260c5f548b3fdeb7a477fc2d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -325,16 +325,16 @@ RectTransform:
   m_Children:
   - {fileID: 8674350628609728066}
   - {fileID: 2120444969328075657}
+  - {fileID: 8622489309446475465}
   - {fileID: 3544729196257369271}
   - {fileID: 7489086172656201718}
-  - {fileID: 8622489309446475465}
   m_Father: {fileID: 2977820079505253254}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.5, y: 8}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3600168031842651323
 GameObject:
@@ -370,7 +370,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.5, y: -8}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4304389600862180979
 GameObject:
@@ -402,7 +402,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 723940892099210378}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -529,8 +529,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2977820079505253254}
-  - component: {fileID: 8587567015731296}
+  - component: {fileID: -6221067129693045094}
   - component: {fileID: 4000002164745539283}
+  - component: {fileID: 223520889014273738}
   m_Layer: 0
   m_Name: TheCustomer
   m_TagString: Untagged
@@ -559,7 +560,7 @@ RectTransform:
   m_AnchoredPosition: {x: -195, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8587567015731296
+--- !u!114 &-6221067129693045094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -568,14 +569,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8498571083417570081}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b68c12f31253e48449266402555e602f, type: 3}
+  m_Script: {fileID: 11500000, guid: c0c520891547f89419fe3181105d0ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RemoveIngredients: 0
-  _recipeBook: {fileID: 11400000, guid: 4551bc7341af94b48a1e06c551ebb029, type: 2}
-  _multiOrderAmount: 2
-  _order:
-    OrderRecipes: []
+  OG: {fileID: 223520889014273738}
+  CW: {fileID: 4000002164745539283}
 --- !u!114 &4000002164745539283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,3 +588,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 500
   TimeToWait: 2.5
+--- !u!114 &223520889014273738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8498571083417570081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b68c12f31253e48449266402555e602f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RemoveIngredients: 0
+  _recipeBook: {fileID: 11400000, guid: 9766ba8e4d331924da23f8fd98434781, type: 2}
+  _multiOrderAmount: 2
+  _multiOrderChance: 51
+  _order:
+    CustomerName: TheCustomer
+    OrderRecipes:
+    - OrderIngredients:
+      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
+      DiscaredIngredients: []
+    - OrderIngredients:
+      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
+      DiscaredIngredients: []

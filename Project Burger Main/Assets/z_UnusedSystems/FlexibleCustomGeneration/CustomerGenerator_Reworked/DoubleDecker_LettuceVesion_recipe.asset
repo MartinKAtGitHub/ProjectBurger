@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc43817b2ce86d458be24be40781e9f, type: 3}
+  m_Name: DoubleDecker_LettuceVesion_recipe
+  m_EditorClassIdentifier: 
+  _recipeImg: {fileID: 0}
+  _recipeName: DoubleDecker
+  _foodType: 1
+  _orderChance: 50
+  _accumulatedWight: 50
+  Ingredients:
+  - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
+  - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+  - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+  - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}

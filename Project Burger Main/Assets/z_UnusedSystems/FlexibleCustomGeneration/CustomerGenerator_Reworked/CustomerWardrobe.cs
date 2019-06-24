@@ -69,7 +69,7 @@ public class CustomerWardrobe : MonoBehaviour {
         SPMouth.sprite = a.HeadSprites.Mouths[Random.Range(0, a.HeadSprites.Mouths.Length)];
         SPHair.sprite = a.HeadSprites.Hair[Random.Range(0, a.HeadSprites.Hair.Length)];
 
-        CustomerOrderG.RequestOrderTrial(a.RecipeB, a.MultiorderAmount, a.MultiorderChance);
+       // CustomerOrderG.RequestOrderTrial(a.RecipeB, a.MultiorderAmount, a.MultiorderChance);
         Instantiate(CustomerPrefab, transform.position, Quaternion.identity, transform.parent.GetChild(0));
 
     }

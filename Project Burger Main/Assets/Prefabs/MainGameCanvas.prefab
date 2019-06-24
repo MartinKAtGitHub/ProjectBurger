@@ -857,7 +857,8 @@ MonoBehaviour:
   CustomerSpawner: {fileID: 273676619}
   SalesManager: {fileID: 127417319464679396}
   ShuffleBag: {fileID: 5530641185789147020}
-  _preparationTime: 0
+  _preparationTime: 3
+  _customerSpawnTimerMinMax: {x: 1, y: 2}
 --- !u!114 &1083111156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,11 +888,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1083111153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74a46d721d776524c9bd41c566cf0308, type: 3}
+  m_Script: {fileID: 11500000, guid: 298bf1da0623344478ae5c1b9e76a3dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _customerSwipeContainer: {fileID: 8578046467175054171}
-  _activeQueueLimit: 5
+  _activeQueueLimit: 3
   _activeCustomerQueue: []
 --- !u!114 &127417319464679396
 MonoBehaviour:

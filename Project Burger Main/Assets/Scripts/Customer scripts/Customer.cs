@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(OrderGenerator))]
-public class Customerss : MonoBehaviour
+public class Customer : MonoBehaviour
 {
     [SerializeField] private string _customerName;
 

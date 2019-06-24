@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TheGrill : DropArea, IPointerClickHandler {
+public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler {
 
     public GrillTemperature GrillSettings;
     [HideInInspector]
@@ -21,6 +21,7 @@ public class TheGrill : DropArea, IPointerClickHandler {
 
 
     bool _IsBurgerOnGrill = false;
+    private bool _dropAreaOccupied; // occupied
 
     int _KeyCounter = 0;
     [HideInInspector]
@@ -129,9 +130,9 @@ public class TheGrill : DropArea, IPointerClickHandler {
     }
 
 
-    public override void OnDrop(PointerEventData eventData) {
+    public void OnDrop(PointerEventData eventData) {
 
-        if (IsThisDropAreaOccupied == false) {
+        if (_dropAreaOccupied == false) {
 
             if (eventData.pointerDrag != null && eventData.pointerDrag.GetComponent<IngredientGameObject>() != null) {//The Problem Here Is If I Drag Something And Drop It On Here, I Will Get An Error, So I Need A Check Of Some Sort. eventData.pointerDrag != null, will never happen but just for safety.
 
@@ -140,8 +141,8 @@ public class TheGrill : DropArea, IPointerClickHandler {
                     _BurgerInfo = eventData.pointerDrag.GetComponent<BurgerInfo>();
                     _TheBurgerSprite = eventData.pointerDrag.GetComponent<Image>();
 
-                    base.OnDrop(eventData);
-                    IsThisDropAreaOccupied = true;
+                    //base.OnDrop(eventData);
+                    _dropAreaOccupied = true;
                     Setup();
                     transform.GetChild(0).gameObject.SetActive(true);
                 }
@@ -150,18 +151,18 @@ public class TheGrill : DropArea, IPointerClickHandler {
 
     }
 
-    public override void DropAreaOnBeginDrag() {
+    public void DropAreaOnBeginDrag() {
 
         SaveInfoToBurgerSide();
         EvaluateQuality();
         _IsBurgerOnGrill = false;
-        IsThisDropAreaOccupied = false;
+        _dropAreaOccupied = false;
         transform.GetChild(0).gameObject.SetActive(false);
 
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        if (_FlipBurger == false && IsThisDropAreaOccupied == true) {
+        if (_FlipBurger == false && _dropAreaOccupied == true) {
             SaveInfoToBurgerSide();
             SetupFlip();
         }

@@ -31,7 +31,7 @@ public class RecipeBook : ScriptableObject  // Static ? we would really never ne
                 _totalAccumulatedWight += Recipes[i].OrderChance;
                 Recipes[i].AccumulatedWight = _totalAccumulatedWight;
 
-                Debug.Log(Recipes[i].RecipeName +" Weight is : " + _totalAccumulatedWight);
+               // Debug.Log(Recipes[i].RecipeName +" Weight is : " + _totalAccumulatedWight);
             }
         }
         else

@@ -49,7 +49,7 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
 
     private void CreateOrderWindow()
     {
-        _orderWindow = Instantiate(_orderWindowPrefab,transform.parent);
+        _orderWindow = Instantiate(_orderWindowPrefab,transform);
 
         _orderWindowData = _orderWindow.GetComponent<OrderWindowData>();
         _orderWindow.SetActive(false);

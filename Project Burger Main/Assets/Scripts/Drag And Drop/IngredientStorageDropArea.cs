@@ -11,7 +11,7 @@ public class IngredientStorageDropArea : MonoBehaviour , IDropHandler
         if (draggableComponent != null)
         {
             Debug.Log("IngredientStorageDropArea DROP" );
-            draggableComponent.CurrentParent = this.transform;
+            draggableComponent.ResetPositionParent = this.transform;
             draggableComponent.transform.SetParent(this.transform);
         }
     }

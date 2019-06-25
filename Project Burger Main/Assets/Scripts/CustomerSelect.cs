@@ -28,6 +28,8 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     private bool _inSmoothMotion;
     private GameObject _placeHolderGameObject;
 
+    private float _distanceBetweenCustomers; 
+
     public Customer CustomerInFocus { get => _customerInFocus; }
     public int CustomerSelectIndex { get => _customerSelectIndex; }
 
@@ -37,6 +39,8 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
         _horizontalLayoutGroupSpacing = CustomerSwipeContainer.GetComponent<HorizontalLayoutGroup>().spacing;
         _customerWidth = CustomerPrefab.GetComponent<RectTransform>().sizeDelta.x;
+
+        _distanceBetweenCustomers = _horizontalLayoutGroupSpacing + _customerWidth;
     }
 
     private void Start()
@@ -60,7 +64,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
                 SetCustomerFocus(_customerSelectIndex);
 
                 var newPos = CustomerSwipeContainer.anchoredPosition;
-                newPos += new Vector2((_horizontalLayoutGroupSpacing + _customerWidth), 0);
+                newPos += new Vector2((_distanceBetweenCustomers), 0);
 
                 StartCoroutine(SmoothMotion(CustomerSwipeContainer.anchoredPosition, newPos, _easing));
             }
@@ -80,7 +84,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
                 _customerSelectIndex--;
                 SetCustomerFocus(_customerSelectIndex);
                 var newPos = CustomerSwipeContainer.anchoredPosition;
-                newPos += new Vector2(-1 * (_horizontalLayoutGroupSpacing + _customerWidth), 0);
+                newPos += new Vector2(-1 * (_distanceBetweenCustomers), 0);
 
                 StartCoroutine(SmoothMotion(CustomerSwipeContainer.anchoredPosition, newPos, _easing));
             }
@@ -122,7 +126,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
                 SetCustomerFocus(_customerSelectIndex);
 
                 var newPos = CustomerSwipeContainer.anchoredPosition;
-                newPos += new Vector2((_horizontalLayoutGroupSpacing + _customerWidth), 0);
+                newPos += new Vector2((_distanceBetweenCustomers), 0);
 
                 StartCoroutine(SmoothMotion(CustomerSwipeContainer.anchoredPosition, newPos, _easing));
               
@@ -163,7 +167,9 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     public void RemovePlaceHolder()
     {
         Destroy(_placeHolderGameObject);
+        CustomerSwipeContainer.anchoredPosition -= new Vector2(_distanceBetweenCustomers, 0);
     }
+
 
     private void SetCustomerFocus(int index)
     {
@@ -199,6 +205,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         if(_placeHolderGameObject != null)
         {
             _placeHolderGameObject.transform.SetAsLastSibling();
+            RemovePlaceHolder();
         }
         yield return null;
     }

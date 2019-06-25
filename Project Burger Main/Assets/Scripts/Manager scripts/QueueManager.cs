@@ -24,12 +24,11 @@ public class QueueManager : MonoBehaviour
     {
         _activeCustomerQueue.Add(customer);
 
-        // TODO Quemanager.cs | AddCustomer() Remove  1 Placeholder for this new customer
-
+       
         customer.transform.SetParent(_customerSwipeContainer);
         customer.transform.SetAsFirstSibling();
         customer.gameObject.SetActive(true);
-       // _customerSelect.RemovePlaceHolder();
+        //_customerSelect.RemovePlaceHolder();
     }
 
     public void RemoveCustomerFromQueue() // TODO QueueManager.cs | RemoveCustomerFromQueue() Dose not take into account Timeout customer. Maybe make diffrent versions

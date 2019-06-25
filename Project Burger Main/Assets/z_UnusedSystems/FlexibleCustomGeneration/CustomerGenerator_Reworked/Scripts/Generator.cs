@@ -67,7 +67,7 @@ public class Generator : MonoBehaviour {
         saver.transform.GetChild(1).GetChild(3).GetComponent<Image>().sprite = DifferentCustomers[customindex].transform.GetChild(1).GetChild(3).GetComponent<Image>().sprite;
         saver.transform.GetChild(1).GetChild(3).GetComponent<RectTransform>().sizeDelta = DifferentCustomers[customindex].transform.GetChild(1).GetChild(3).GetComponent<RectTransform>().sizeDelta;
 
-        saver.GetComponent<FlexibleCustomerWalk>().SetWalkTargets(transform, WalkToPosition);
+    //    saver.GetComponent<CustomerState>().SetWalkTargets(transform, WalkToPosition);//WALKINGOOF
     //    saver.GetComponent<FlexibleCustomerWalk>().setTestManager(GetComponent<TestManager>());
 
     }

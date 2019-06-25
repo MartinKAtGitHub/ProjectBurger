@@ -529,6 +529,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2977820079505253254}
+  - component: {fileID: 3056172779180994003}
   - component: {fileID: 4000002164745539283}
   - component: {fileID: 223520889014273738}
   m_Layer: 0
@@ -559,6 +560,21 @@ RectTransform:
   m_AnchoredPosition: {x: -195, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3056172779180994003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8498571083417570081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94f66bc8299858f4fb40d75ff36021ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _customerName: Sup M. Kay?
+  _OrderGenerator: {fileID: 223520889014273738}
+  _CustomerStates: {fileID: 4000002164745539283}
 --- !u!114 &4000002164745539283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,8 +587,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c57cb48f265924ca91a374ffeadf4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 500
-  TimeToWait: 2.5
+  CustomerStates:
+  - walkingPositions:
+    - {fileID: 0}
+    - {fileID: 0}
+    Talk: 0
+    WaitingTime: 0
+  - walkingPositions:
+    - {fileID: 0}
+    - {fileID: 0}
+    Talk: 0
+    WaitingTime: 0
+  lenght: 2
+  _MoveSpeed: 250
 --- !u!114 &223520889014273738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,21 +613,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RemoveIngredients: 0
-  _recipeBook: {fileID: 11400000, guid: 9766ba8e4d331924da23f8fd98434781, type: 2}
-  _multiOrderAmount: 2
-  _multiOrderChance: 51
+  _recipeBook: {fileID: 11400000, guid: 4551bc7341af94b48a1e06c551ebb029, type: 2}
+  _multiOrderAmount: 3
+  _multiOrderChance: 65
   _order:
-    CustomerName: TheCustomer
+    CustomerName: 
     OrderRecipes:
     - OrderIngredients:
       - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
-      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
+      - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
+      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
+      DiscaredIngredients: []
+    - OrderIngredients:
+      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
+      - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
       - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
       - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
       DiscaredIngredients: []
     - OrderIngredients:
       - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
-      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
       - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
       - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
       DiscaredIngredients: []

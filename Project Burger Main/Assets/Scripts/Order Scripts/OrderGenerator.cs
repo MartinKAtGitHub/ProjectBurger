@@ -105,4 +105,37 @@ public class OrderGenerator : MonoBehaviour
         }
         Debug.LogError("SelectRandomRecipe() Failed to role a recipe | Rollnum: " + recipeRoll);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //----------------Trial Code, Need To Get This Somehow To Get My Code To Work-------------------------------------------------
+    public void RequestOrderTrial(RecipeBook a, int b, int c) {//If We Have 2 ThemeDays At Some Point, Like Green Day And A BurthDay Where A Woman Can Buy A Cake Or Just Plain Salad
+        _recipeBook = a;
+        _multiOrderAmount = b;
+        _multiOrderChance = c;
+
+        RequestOrder();
+
+    }
+    //------------------------------------------------------------------------------------------------------------------------------
+
+
+
 }

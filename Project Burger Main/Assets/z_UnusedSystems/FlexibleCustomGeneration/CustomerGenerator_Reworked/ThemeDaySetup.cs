@@ -43,29 +43,38 @@ public class ThemeDaySetup : MonoBehaviour {
     }
 
 
-    ThemeDay ThemeDayChecker = null;
-    float Checker = 0;
 
 
     public CustomerRefrences CusomterSpawnRandom() {//TODO This Can Be Improved By Adding A % Search Based Algorythm, If rng Is 20% Of Max Amount, Then I Start At 20% Spot Of List.Count And Go From There.
 
-        ThemeDayChecker = GetRngTheme();
-        Checker = Random.Range(0, ThemeDayChecker.ThemeRngChance);
-      
-        for (int i = 0; i < ThemeDayChecker.CustomerSpawnValues.Length; i++) {
-            if (Checker >= ThemeDayChecker.CustomerSpawnValues[i].MinRng && Checker <= ThemeDayChecker.CustomerSpawnValues[i].MaxRng) {//If rng Is Between MinMax Then This Shall Be Spawned
-             //   Debug.Log("Getting Customer " + ThemeDayChecker.CustomerSpawnValues[i].CustomerToIncreaseSpawnValue.name);
-                return ThemeDayChecker.CustomerSpawnValues[i].CustomerToIncreaseSpawnValue;
-            }
-        }
+         return GetRngTheme().CustomerSpawnValues[Random.Range(0, GetRngTheme().CustomerSpawnValues.Length)].CustomerToIncreaseSpawnValue;//Currently The Theme Logic I Had In Mind Didnt Work As I Wanted, Gave Alot Of Controle, But Needs A Iteration Or Two To Realy Get Going
 
-        Debug.LogError("Returned 0 Cuz Theme Didnt Excist");
-        return ThemeDayChecker.CustomerSpawnValues[0].CustomerToIncreaseSpawnValue;
+
+        /* 
+     ThemeDay ThemeDayChecker = null;
+    float Checker = 0;
+         
+       ThemeDayChecker = GetRngTheme();
+          Checker = Random.Range(0, ThemeDayChecker.ThemeRngChance);
+
+          for (int i = 0; i < ThemeDayChecker.CustomerSpawnValues.Length; i++) {
+              if (Checker >= ThemeDayChecker.CustomerSpawnValues[i].MinRng && Checker <= ThemeDayChecker.CustomerSpawnValues[i].MaxRng) {//If rng Is Between MinMax Then This Shall Be Spawned
+               //   Debug.Log("Getting Customer " + ThemeDayChecker.CustomerSpawnValues[i].CustomerToIncreaseSpawnValue.name);
+                  return ThemeDayChecker.CustomerSpawnValues[i].CustomerToIncreaseSpawnValue;
+              }
+          }
+
+          Debug.LogError("Returned 0 Cuz Theme Didnt Excist");
+          return ThemeDayChecker.CustomerSpawnValues[0].CustomerToIncreaseSpawnValue;*/
 
     }
 
     public ThemeDay GetRngTheme() {
-        Checker = Random.Range(0, RngMaxRange);
+        return ThemeDays[0];//Currently The Theme Logic I Had In Mind Didnt Work As I Wanted, Gave Alot Of Controle, But Needs A Iteration Or Two To Realy Get Going
+
+
+
+      /*  Checker = Random.Range(0, RngMaxRange);
 
         for (int i = 0; i < ThemeDays.Length; i++) {
             if (Checker >= ThemeDays[i].MinRng && Checker <= ThemeDays[i].MaxRng) {//If rng Is Between MinMax Then This Shall Be Spawned
@@ -75,8 +84,9 @@ public class ThemeDaySetup : MonoBehaviour {
         }
 
         Debug.LogError("Returned 0 Cuz Theme Didnt Excist");
-        return ThemeDays[0];
+        return ThemeDays[0];*/
     }
+
 
 }
 

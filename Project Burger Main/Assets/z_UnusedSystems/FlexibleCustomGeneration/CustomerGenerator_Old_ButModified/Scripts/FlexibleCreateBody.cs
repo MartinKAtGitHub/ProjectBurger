@@ -58,7 +58,7 @@ public class FlexibleCreateBody : MonoBehaviour {
         one.transform.GetChild(1).transform.localPosition = savedTorso.GetComponent<FlexibleCustomTorso>().HeadConnectPosition - savedHead.GetComponent<FlexibleCustomHead>().HeadConnectPosition;
         one.transform.GetChild(1).GetComponent<SetFlexibleHead>().SetImages(savedHead);
 
-        one.GetComponent<FlexibleCustomerWalk>().SetWalkTargets(transform, WalkToPosition);
+     //   one.GetComponent<CustomerState>().SetWalkTargets(transform, WalkToPosition);WALKINGOOF
 
     }
 

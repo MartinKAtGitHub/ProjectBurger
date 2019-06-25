@@ -4,32 +4,31 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler {
+public class TheGrill : OnDropAreaInfo, IPointerClickHandler {
 
     public GrillTemperature GrillSettings;
     [HideInInspector]
-    public BurgersMeat _BurgerIngredience;
-
-    BurgerInfo _BurgerInfo;
-    Image _TheBurgerSprite;
-
-    BurgerQualityVariables _CurrentBurgerSide;
+    public BurgersMeat BurgerIngredience;
+    BurgerDrag _TheBurgerInfo;
 
 
-    readonly float StartTemp = 0.125f;
-    readonly float _EndTime = 0.905f;//This Is Going To Become 1, Its Just That I Need To Make a Sprite With Correct Dimentions.
+    //    readonly float StartTemp = 0.125f;
+    public readonly float EndHeat = 0.905f;//This Is Going To Become 1, Its Just That I Need To Make a Sprite With Correct Dimentions.
+
+    public bool DropAreaOccupied; // occupied
+    float _GrillTopHeat = 0;
+
+    [SerializeField]
+    private float _HeatOfBurger = 0;
+
+    public float HeatOfBurger {
+        get {
+            return _HeatOfBurger;
+        }
+    }
 
 
-    bool _IsBurgerOnGrill = false;
-    private bool _dropAreaOccupied; // occupied
-
-    int _KeyCounter = 0;
-    [HideInInspector]
-    public float BurgerTemperature = 0;
-
-    float GrillTopHeat = 0;
-
-#region Flip Variables
+    #region Flip Variables
 
     bool _RotateBackAndForth = true;
     bool _FlipBurger = false;
@@ -41,108 +40,89 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler {
     float _DownForce = 0;
     readonly float _UpForce = 200;//TODO Think About Screen.Height??
 
-#endregion
+    #endregion
+
+
+
+
+
 
 
     private void Update() {
 
         if (GrillSettings.HeatOnOff == true) {//Setting The Heat Of The Grill
-            if (GrillTopHeat < GrillSettings.GrillTopTemperatureValue) {
-                GrillTopHeat += GrillSettings.GrillHeatingRate * Time.deltaTime;
-                if (GrillTopHeat > GrillSettings.GrillTopTemperatureValue)
-                    GrillTopHeat = GrillSettings.GrillTopTemperatureValue;
+            if (_GrillTopHeat < GrillSettings.GrillTopTemperatureValue) {
+                _GrillTopHeat += GrillSettings.GrillHeatingRate * Time.deltaTime;
+                if (_GrillTopHeat > GrillSettings.GrillTopTemperatureValue)
+                    _GrillTopHeat = GrillSettings.GrillTopTemperatureValue;
             }
         } else {
-            if (GrillTopHeat > 0) {
-                GrillTopHeat -= GrillSettings.GrillCoolingRate * Time.deltaTime;
-                if (GrillTopHeat < 0)
-                    GrillTopHeat = 0;
+            if (_GrillTopHeat > 0) {
+                _GrillTopHeat -= GrillSettings.GrillCoolingRate * Time.deltaTime;
+                if (_GrillTopHeat < 0)
+                    _GrillTopHeat = 0;
             }
         }
 
+        if (DropAreaOccupied == true) {
 
+            if (_FlipBurger == false) {//Add HeadToBurger
 
-        if (_FlipBurger == true) {//Flipping Logic
+                _HeatOfBurger += (_GrillTopHeat / GrillSettings.GrillTopTemperatureValue) * (1 / BurgerIngredience.MeatCookingTime) * Time.deltaTime;//This Is How Long The Burger Is On, where -1 is negative 100 degrees, and +1 is 100. Normalized Numbers
 
-            _DownForce -= 9.8066f;
-            _BurgerInfo.transform.position += ((Vector3.up * _UpForce) + (Vector3.up * _DownForce)) * Time.deltaTime * _JumpSpeed;//This Will Make The Burger Have Abit Rng Jump Hight.
-
-            if (_UpForce + _DownForce < _UpForce / 2) {//WhenToStartFlip Currently At Highest Point
-
-                if (_RotateBackAndForth == true) {
-                    _BurgerInfo.transform.rotation = Quaternion.Slerp(_BurgerInfo.transform.rotation, Quaternion.Euler(90, 0, 0), (_RotateTime += _RotateSpeed) * Time.deltaTime);
-
-                    if ((_RotateTime * Time.deltaTime) >= 1) {
-                        _RotateBackAndForth = false;
-                        _RotateTime = 0;
-                        _BurgerInfo.UpOrDown = !_BurgerInfo.UpOrDown;
-                        SelectingBurgerSide();
-                    }
-
+                if (_TheBurgerInfo.TheBurgerInfos.UpOrDown == true) {
+                    AddBurgerHeat(ref _TheBurgerInfo.TheBurgerInfos.MyVariablesUp);
                 } else {
-                    _BurgerInfo.transform.rotation = Quaternion.Slerp(_BurgerInfo.transform.rotation, Quaternion.Euler(0, 0, 0), (_RotateTime += _RotateSpeed) * Time.deltaTime);
+                    AddBurgerHeat(ref _TheBurgerInfo.TheBurgerInfos.MyVariablesDown);
+
                 }
-            }
+            } else {
 
-            if (_BurgerInfo.transform.position.y < transform.position.y) {//Burger Back On The Grill.
-                _BurgerInfo.transform.position = transform.position;
-                _FlipBurger = false;
-                StartCooking();
-            }
+                _DownForce -= 9.8066f;
+                _TheBurgerInfo.TheBurgerInfos.transform.position += ((Vector3.up * _UpForce) + (Vector3.up * _DownForce)) * Time.deltaTime * _JumpSpeed;//This Will Make The Burger Have Abit Rng Jump Hight.
 
-        } else {//Grilling Logic
+                if (_UpForce + _DownForce < _UpForce / 2) {//WhenToStartFlip Currently At Highest Point
 
-            if (GrillSettings.HeatOnOff == true) {
+                    if (_RotateBackAndForth == true) {
+                        _TheBurgerInfo.transform.rotation = Quaternion.Slerp(_TheBurgerInfo.transform.rotation, Quaternion.Euler(90, 0, 0), (_RotateTime += _RotateSpeed) * Time.deltaTime);
 
-                if (GrillTopHeat < GrillSettings.GrillTopTemperatureValue) {
-                    GrillTopHeat += GrillSettings.GrillHeatingRate * Time.deltaTime;
-                    if (GrillTopHeat > GrillSettings.GrillTopTemperatureValue)
-                        GrillTopHeat = GrillSettings.GrillTopTemperatureValue;
-                }
-
-                if (_IsBurgerOnGrill == true) {
-                    if (BurgerTemperature < StartTemp) {//In Theory Its Frozen Here Cuz Less Then Start Point.
-                        BurgerTemperature += (GrillTopHeat / GrillSettings.GrillTopTemperatureValue) * (1 / _BurgerIngredience.MeatCookingTime) * Time.deltaTime;
-                    } else {
-
-                        if (BurgerTemperature < _EndTime) {
-                            BurgerTemperature += (GrillTopHeat / GrillSettings.GrillTopTemperatureValue) * (1 / _BurgerIngredience.MeatCookingTime) * Time.deltaTime;
-
-                            if (BurgerTemperature >= _EndTime) {
-                                _IsBurgerOnGrill = false;
-                                _KeyCounter = _BurgerIngredience.MeatTimers.colorKeys.Length - 1;
-                            } else {
-                                if (BurgerTemperature >= _BurgerIngredience.MeatTimers.colorKeys[_KeyCounter].time) {
-                                    _KeyCounter++;
-                                }
-                            }
+                        if ((_RotateTime * Time.deltaTime) >= 1) {
+                            _RotateBackAndForth = false;
+                            _RotateTime = 0;
+                            _TheBurgerInfo.TheBurgerInfos.UpOrDown = !_TheBurgerInfo.TheBurgerInfos.UpOrDown;
+                            SelectingBurgerSide();
                         }
 
+                    } else {
+                        _TheBurgerInfo.transform.rotation = Quaternion.Slerp(_TheBurgerInfo.transform.rotation, Quaternion.Euler(0, 0, 0), (_RotateTime += _RotateSpeed) * Time.deltaTime);
                     }
+                }
 
-                    if (_KeyCounter > _CurrentBurgerSide._BurgerState) {
-                        _TheBurgerSprite.sprite = _BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + _KeyCounter);
-                    }
+                if (_TheBurgerInfo.transform.position.y < transform.position.y) {//Burger Back On The Grill.
+                    _TheBurgerInfo.transform.position = transform.position;
+                    _FlipBurger = false;
+                    StartCooking();
                 }
             }
         }
 
     }
 
+    public override void OnDrop(PointerEventData eventData) {
 
-    public void OnDrop(PointerEventData eventData) {
+        if (DropAreaOccupied == false) {
+            _TheBurgerInfo = eventData.pointerDrag.GetComponent<Draggable>() as BurgerDrag;
 
-        if (_dropAreaOccupied == false) {
+            if (_TheBurgerInfo != null) {
 
-            if (eventData.pointerDrag != null && eventData.pointerDrag.GetComponent<IngredientGameObject>() != null) {//The Problem Here Is If I Drag Something And Drop It On Here, I Will Get An Error, So I Need A Check Of Some Sort. eventData.pointerDrag != null, will never happen but just for safety.
+                if (_TheBurgerInfo.TheIngredientGameObject.ingredient.IngredientType == Ingredient.IngredientTypes.HamBurger_Meat) {
 
-                if (eventData.pointerDrag.GetComponent<IngredientGameObject>().ingredient.IngredientType == Ingredient.IngredientTypes.HamBurger_Meat) {
-                    _BurgerIngredience = eventData.pointerDrag.GetComponent<IngredientGameObject>().ingredient as BurgersMeat;
-                    _BurgerInfo = eventData.pointerDrag.GetComponent<BurgerInfo>();
-                    _TheBurgerSprite = eventData.pointerDrag.GetComponent<Image>();
+                    _TheBurgerInfo.ResetPositionParent = transform;
+                    _TheBurgerInfo.transform.SetParent(transform);
+                    _TheBurgerInfo.transform.position = transform.position;
 
-                    //base.OnDrop(eventData);
-                    _dropAreaOccupied = true;
+                    BurgerIngredience = _TheBurgerInfo.TheIngredientGameObject.ingredient as BurgersMeat;
+
                     Setup();
                     transform.GetChild(0).gameObject.SetActive(true);
                 }
@@ -151,94 +131,91 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler {
 
     }
 
-    public void DropAreaOnBeginDrag() {
 
-        SaveInfoToBurgerSide();
+    public override void DropAreaOnBeginDrag() {
+
         EvaluateQuality();
-        _IsBurgerOnGrill = false;
-        _dropAreaOccupied = false;
+        DropAreaOccupied = false;
         transform.GetChild(0).gameObject.SetActive(false);
 
     }
 
+
     public void OnPointerClick(PointerEventData eventData) {
-        if (_FlipBurger == false && _dropAreaOccupied == true) {
-            SaveInfoToBurgerSide();
+        if (_FlipBurger == false && DropAreaOccupied == true) {
             SetupFlip();
         }
     }
 
 
+
     void Setup() {
+        DropAreaOccupied = true;
         SelectingBurgerSide();
         StartCooking();
     }
 
+    void StartCooking() {
+
+        if (_TheBurgerInfo.TheBurgerInfos.UpOrDown == true) {//Setting What BurgerSide To Grill
+            _HeatOfBurger = _TheBurgerInfo.TheBurgerInfos.MyVariablesUp._BurgerHeat;
+        } else {
+            _HeatOfBurger = _TheBurgerInfo.TheBurgerInfos.MyVariablesDown._BurgerHeat;
+        }
+    }
 
     void SelectingBurgerSide() {//Setting Burger Info So That The Temperature Can Be Measured Correctly
 
-        if (_BurgerInfo.UpOrDown == true) {//Setting What BurgerSide To Grill
-            _CurrentBurgerSide = _BurgerInfo.MyVariablesDown;
+        if (_TheBurgerInfo.TheBurgerInfos.UpOrDown == true) {//Setting What BurgerSide To Grill
+            _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + _TheBurgerInfo.TheBurgerInfos.MyVariablesUp._BurgerState);
         } else {
-            _CurrentBurgerSide = _BurgerInfo.MyVariablesUp;
+            _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + _TheBurgerInfo.TheBurgerInfos.MyVariablesDown._BurgerState);
         }
 
-        SetPlaceInGradient();
-
-        _TheBurgerSprite.sprite = _BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + _CurrentBurgerSide._BurgerState);
-
     }
-
-    void SetPlaceInGradient() {
-
-        for (int i = 0; i < _BurgerIngredience.MeatTimers.colorKeys.Length; i++) {
-            if (_CurrentBurgerSide._BurgerHeat < _BurgerIngredience.MeatTimers.colorKeys[i].time) {
-                _KeyCounter = i;
-                return;
-            }
-        }
-
-        _KeyCounter = _BurgerIngredience.MeatTimers.colorKeys.Length - 1;
-
-    }
-
     void SetupFlip() {
-        _IsBurgerOnGrill = false;
         _FlipBurger = true;
         _RotateBackAndForth = true;
 
         _DownForce = 0;
         _RotateTime = 0;
-        GrillTopHeat -= 2.5f;
-        if (GrillTopHeat < 0)
-            GrillTopHeat = 0;
+        _GrillTopHeat -= 0.5f;//Reducing Grill Heat Cuz Airflow When Flipping :D
+        if (_GrillTopHeat < 0)
+            _GrillTopHeat = 0;
 
     }
 
-    void StartCooking() {
-        _IsBurgerOnGrill = true;
-        BurgerTemperature = _CurrentBurgerSide._BurgerHeat;
+    void AddBurgerHeat(ref BurgerQualityVariables burgerside) {//Adding Heat To The Side Of The Burger
 
-    }
+        if (burgerside._BurgerHeat < _HeatOfBurger) {//Setting Current Heat
+            burgerside._BurgerHeat = _HeatOfBurger;
 
-    void SaveInfoToBurgerSide() {
-        if (_BurgerInfo.UpOrDown == true) {
-            _BurgerInfo.MyVariablesDown._BurgerTime = Time.time;
-            _BurgerInfo.MyVariablesDown._BurgerHeat = BurgerTemperature;
-            _BurgerInfo.MyVariablesDown._BurgerState = _KeyCounter;
-        } else {
-            _BurgerInfo.MyVariablesUp._BurgerTime = Time.time;
-            _BurgerInfo.MyVariablesUp._BurgerHeat = BurgerTemperature;
-            _BurgerInfo.MyVariablesUp._BurgerState = _KeyCounter;
+            if (burgerside._BurgerHeat >= EndHeat) {//Heat
+
+                burgerside._BurgerState = BurgerIngredience.MeatTimers.colorKeys.Length - 1;
+                burgerside._BurgerCurrentHeat = burgerside._BurgerHeat;
+                    SetupFlip();//MOAHAHAHAH AUTOFLIP
+            } else {
+
+                if (burgerside._BurgerCurrentHeat < burgerside._BurgerHeat) {//When The Heat Of The Burger Is Higher Then It Has Ever Been.
+                    burgerside._BurgerCurrentHeat = burgerside._BurgerHeat;
+
+                    if (burgerside._BurgerCurrentHeat >= BurgerIngredience.MeatTimers.colorKeys[burgerside._BurgerState].time) {
+                        burgerside._BurgerState++;
+                        _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + burgerside._BurgerState);
+                        SetupFlip();//MOAHAHAHAH AUTOFLIP
+                    }
+                }
+            }
         }
-
     }
+   
 
     void EvaluateQuality() {//TODO make this abit more advanced later on. 
 
-        _BurgerInfo.TheQuality = 1 - Mathf.Abs(_BurgerInfo.MyVariablesDown._BurgerHeat - _BurgerIngredience.PerfectlyCooked) - Mathf.Abs(_BurgerInfo.MyVariablesUp._BurgerHeat - _BurgerIngredience.PerfectlyCooked);
-        if (_BurgerInfo.TheQuality < 0)
-            _BurgerInfo.TheQuality = 0;
+        _TheBurgerInfo.TheBurgerInfos.TheQuality = 1 - Mathf.Abs(_TheBurgerInfo.TheBurgerInfos.MyVariablesDown._BurgerHeat - BurgerIngredience.PerfectlyCooked) - Mathf.Abs(_TheBurgerInfo.TheBurgerInfos.MyVariablesUp._BurgerHeat - BurgerIngredience.PerfectlyCooked);
+        if (_TheBurgerInfo.TheBurgerInfos.TheQuality < 0)
+            _TheBurgerInfo.TheBurgerInfos.TheQuality = 0;
 
     }
 

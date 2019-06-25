@@ -590,11 +590,9 @@ MonoBehaviour:
   CustomerStates:
   - walkingPositions:
     - {fileID: 0}
-    - {fileID: 0}
     Talk: 0
     WaitingTime: 0
   - walkingPositions:
-    - {fileID: 0}
     - {fileID: 0}
     Talk: 0
     WaitingTime: 0
@@ -613,27 +611,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RemoveIngredients: 0
-  _recipeBook: {fileID: 11400000, guid: 4551bc7341af94b48a1e06c551ebb029, type: 2}
-  _multiOrderAmount: 3
-  _multiOrderChance: 65
+  _recipeBook: {fileID: 11400000, guid: 9766ba8e4d331924da23f8fd98434781, type: 2}
+  _multiOrderAmount: 2
+  _multiOrderChance: 51
   _order:
     CustomerName: 
     OrderRecipes:
     - OrderIngredients:
       - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
-      - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
-      - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
-      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
-      DiscaredIngredients: []
-    - OrderIngredients:
-      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
-      - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
       - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
-      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
-      DiscaredIngredients: []
-    - OrderIngredients:
-      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
-      - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
       - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
       - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
       DiscaredIngredients: []

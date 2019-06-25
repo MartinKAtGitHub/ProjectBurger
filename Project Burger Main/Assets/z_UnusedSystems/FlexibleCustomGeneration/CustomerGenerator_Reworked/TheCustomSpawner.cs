@@ -26,17 +26,17 @@ public class TheCustomSpawner : MonoBehaviour {
     bool SpeedSpawn = true;
 
     [SerializeField]
-    private CustomerWardrobe _CustomerCreation;
+    private CustomerWardrobe _CustomerCreation = null;
     [SerializeField]
-    private ThemeDaySetup _ThemeDayCustomers;
+    private ThemeDaySetup _ThemeDayCustomers = null; 
 
 
 
     [SerializeField]
-    private SetWalkingPositions _WalkingPositions;
-
-    public SetWalkingPositions WalkingPositions {
-        get { return _WalkingPositions; }
+    private SetWalkingPositions _WalkingPositions = null;
+     
+    public SetWalkingPositions WalkingPositions { 
+        get { return _WalkingPositions; } 
     }
 
 

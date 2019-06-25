@@ -24,11 +24,10 @@ public class CustomerWardrobe : MonoBehaviour {
     Image SPHair;
 
     OrderGenerator CustomerOrderG;
-   public Customer _Customer;
+   Customer _Customer;
 
-    GameObject spawned;
 
-    private void Awake() {
+    private void Awake() { 
         SetupConnections();
     }
 

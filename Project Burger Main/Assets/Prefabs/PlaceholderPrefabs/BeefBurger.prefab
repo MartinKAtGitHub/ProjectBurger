@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 2920829503567134515}
   - component: {fileID: 6560525569711647787}
   - component: {fileID: 6601559010967701959}
-  - component: {fileID: 4788141113328054009}
   - component: {fileID: -3691771109943997177}
+  - component: {fileID: 5506372015663910276}
   m_Layer: 0
   m_Name: BeefBurger
   m_TagString: Untagged
@@ -125,23 +125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredient: {fileID: 11400000, guid: cb23b04abbce881428b0d0240d5406da, type: 2}
---- !u!114 &4788141113328054009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4788141113328054008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13781228f3674284ab7eb3eadeb111ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnDropArea: 0
-  CurrentDropArea: {fileID: 0}
-  ResetDropZone: {fileID: 0}
-  OriginalParent: {fileID: 0}
-  freeMotionParent: {fileID: 0}
 --- !u!114 &-3691771109943997177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,3 +139,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpOrDown: 1
   TheQuality: 0
+--- !u!114 &5506372015663910276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4788141113328054008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea8ef1ab30f777741a6f48b708ebf48f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freeMotionParent: {fileID: 0}
+  _resetPositionParent: {fileID: 0}
+  TheImage: {fileID: 4788141113328053957}
+  TheBurgerInfos: {fileID: -3691771109943997177}
+  TheIngredientGameObject: {fileID: 6601559010967701959}

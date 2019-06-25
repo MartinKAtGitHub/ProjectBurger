@@ -17,7 +17,7 @@ public class Customer : MonoBehaviour
 
 
     [SerializeField]
-    private OrderGenerator _OrderGenerator;
+    private OrderGenerator _OrderGenerator = null;
     public OrderGenerator OrderGenerator {
         get {
             return _OrderGenerator;
@@ -25,18 +25,18 @@ public class Customer : MonoBehaviour
     }
 
     [SerializeField]
-    private CustomerState _CustomerStates;
+    private CustomerState _CustomerStates = null;
     public CustomerState CustomerStates {
         get {
             return _CustomerStates;
         }
-    }
+    } 
 
     private void OnDestroy() {
         //Destoyed
     }
 
-    private void OnEnable()
+    private void OnEnable() 
     {
         _customerName = gameObject.name;
         _order = OrderGenerator.RequestOrder();

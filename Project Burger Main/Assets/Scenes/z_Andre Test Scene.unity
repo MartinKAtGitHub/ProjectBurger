@@ -1587,125 +1587,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448357879}
   m_CullTransparentMesh: 0
---- !u!1001 &454365159
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8498571083417570081, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_Name
-      value: TheCustomer
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -195
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977820079505253254, guid: b681f58d5d8595b4f925776c226d4d66,
-        type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b681f58d5d8595b4f925776c226d4d66, type: 3}
 --- !u!1 &472978628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1863,7 +1744,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1000, y: -250}
+  m_AnchoredPosition: {x: 482, y: -27}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &517538359
@@ -2088,7 +1969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _customerSwipeContainer: {fileID: 1452697431}
-  _activeQueueLimit: 1
+  _activeQueueLimit: 10
   _activeCustomerQueue: []
 --- !u!20 &519420031
 Camera:
@@ -2521,7 +2402,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrillSettings: {fileID: 576884812}
   _BurgerIngredience: {fileID: 0}
-  BurgerTemperature: 0
+  _dropAreaOccupied: 0
+  GrillTopHeat: 0
+  _HeatOfBurger: 0
 --- !u!114 &576884810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3484,6 +3367,7 @@ GameObject:
   - component: {fileID: 670215698}
   - component: {fileID: 670215697}
   - component: {fileID: 670215700}
+  - component: {fileID: 670215699}
   m_Layer: 0
   m_Name: StackOfBurgers
   m_TagString: Untagged
@@ -3547,7 +3431,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 670215695}
   m_CullTransparentMesh: 0
---- !u!114 &670215700
+--- !u!114 &670215699
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3555,6 +3439,22 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 670215695}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64350fac081ce9d499a62dcbff4ef092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ingredience: {fileID: 4788141113328054008, guid: e44a10f26af52f740824871835a55b23,
+    type: 3}
+  _presetSpawn: 1
+  ingredienceSpawnAmout: 5
+--- !u!114 &670215700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670215695}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c32d67af2d149284c88b9734f7c3f8ba, type: 3}
   m_Name: 
@@ -4128,6 +4028,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5609257}
+  - {fileID: 1891168815}
   m_Father: {fileID: 1478391212}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4761,7 +4662,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrillSettings: {fileID: 881917578}
   _BurgerIngredience: {fileID: 0}
-  BurgerTemperature: 0
+  _dropAreaOccupied: 0
+  GrillTopHeat: 0
+  _HeatOfBurger: 0
 --- !u!114 &881917576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6976,7 +6879,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrillSettings: {fileID: 1006516980}
   _BurgerIngredience: {fileID: 0}
-  BurgerTemperature: 0
+  _dropAreaOccupied: 0
+  GrillTopHeat: 0
+  _HeatOfBurger: 0
 --- !u!114 &1006516978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7723,7 +7628,6 @@ RectTransform:
   - {fileID: 1686069711}
   - {fileID: 505117396}
   - {fileID: 1452697431}
-  - {fileID: 1891168815}
   m_Father: {fileID: 1478391212}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7919,7 +7823,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrillSettings: {fileID: 1225379117}
   _BurgerIngredience: {fileID: 0}
-  BurgerTemperature: 0
+  _dropAreaOccupied: 0
+  GrillTopHeat: 0
+  _HeatOfBurger: 0
 --- !u!114 &1225379115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9742,7 +9648,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452697430}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5365511144d7ec54c9626ca7d555a559, type: 3}
   m_Name: 
@@ -9750,7 +9656,9 @@ MonoBehaviour:
   SpawnStartPos: {fileID: 1452697431}
   SpawnEndPos: {fileID: 1686069711}
   MinimumTimeOfEmptyQueue: 5
-  spawntime: 1
+  TimeWaited: 0
+  spawntime: 5
+  timetime: 0
   MakeArtificialQueue: 0
   ArtificialQueueFallOff: 1
   _CustomerCreation: {fileID: 1452697437}
@@ -9769,9 +9677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThemeDays:
-  - {fileID: 11400000, guid: bc2a00d534ff91942a3da49fb7820647, type: 2}
-  - {fileID: 11400000, guid: 0c8459bebb9c0fe4fa3acb4e5e2c63b9, type: 2}
-  - {fileID: 11400000, guid: 8b01f21d475c1ec4f84bbef0d5700494, type: 2}
+  - {fileID: 11400000, guid: b99cb47f932fd70429f059c8765a165c, type: 2}
 --- !u!114 &1452697437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9808,6 +9714,15 @@ MonoBehaviour:
         Patience: 1
       - PositionsInPath:
         - {fileID: 505117396}
+        - {fileID: 1452697431}
+        Talking: 0
+        Patience: 1
+    - PathInGroup:
+      - PositionsInPath:
+        - {fileID: 1686069711}
+        Talking: 0
+        Patience: 1
+      - PositionsInPath:
         - {fileID: 1452697431}
         Talking: 0
         Patience: 1
@@ -10444,7 +10359,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrillSettings: {fileID: 1607642228}
   _BurgerIngredience: {fileID: 0}
-  BurgerTemperature: 0
+  _dropAreaOccupied: 0
+  GrillTopHeat: 0
+  _HeatOfBurger: 0
 --- !u!114 &1607642226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10496,8 +10413,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeatOnOff: 1
   GrillTopTemperatureValue: 60
-  GrillHeatingRate: 1
-  GrillCoolingRate: 1
+  GrillHeatingRate: 0.5
+  GrillCoolingRate: 1.5
 --- !u!1 &1614767427
 GameObject:
   m_ObjectHideFlags: 0
@@ -10630,7 +10547,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrillSettings: {fileID: 1632786707}
   _BurgerIngredience: {fileID: 0}
-  BurgerTemperature: 0
+  _dropAreaOccupied: 0
+  GrillTopHeat: 0
+  _HeatOfBurger: 0
 --- !u!114 &1632786705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10852,7 +10771,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrillSettings: {fileID: 1699069094}
   _BurgerIngredience: {fileID: 0}
-  BurgerTemperature: 0
+  _dropAreaOccupied: 0
+  GrillTopHeat: 0
+  _HeatOfBurger: 0
 --- !u!114 &1699069092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11788,7 +11709,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrillSettings: {fileID: 1890988874}
   _BurgerIngredience: {fileID: 0}
-  BurgerTemperature: 0
+  _dropAreaOccupied: 0
+  GrillTopHeat: 0
+  _HeatOfBurger: 0
 --- !u!114 &1890988872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11871,8 +11794,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1476685343}
-  m_Father: {fileID: 1187804866}
-  m_RootOrder: 4
+  m_Father: {fileID: 766156694}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

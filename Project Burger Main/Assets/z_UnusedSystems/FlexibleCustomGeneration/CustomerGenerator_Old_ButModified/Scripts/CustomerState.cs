@@ -17,11 +17,12 @@ public class CustomerStateBehaviour {
     }
 
 }
+
+
 public class CustomerState : MonoBehaviour {
 
     [SerializeField]
     public CustomerStateBehaviour[] CustomerStates;
-    public int lenght = 0;
 
     [SerializeField]
     private float _MoveSpeed = 1f;
@@ -36,29 +37,26 @@ public class CustomerState : MonoBehaviour {
         }
     }
 
-    int currentPath = 0;
-    int currentBehaviour = 0;
-    float TimeToWait = 0;
-    int added = 0;
+    int _CurrentPath = 0;
+    int _CurrentBehaviour = 0;
+    float _TimeToWait = 0;
+    int _Adding = 0;
 
-    bool StartCustomer = false;
+    bool _StartCustomer = false;
     TheCustomerStates _TheState;
-
-    private void Start() {
-        lenght = CustomerStates.Length;
-    }
+ 
 
     private void Update() {
 
-        if (StartCustomer == true) {
+        if (_StartCustomer == true) {
 
             if (_TheState == TheCustomerStates.Walking) {
-                if (CustomerStates[currentBehaviour].walkingPositions.Length > 0) {//If Customer Needs To Walk A Specific Route To Get To The Buying Place, This Does That
+                if (CustomerStates[_CurrentBehaviour].walkingPositions.Length > 0) {//If Customer Needs To Walk A Specific Route To Get To The Buying Place, This Does That
 
-                    transform.position = Vector3.MoveTowards(transform.position, CustomerStates[currentBehaviour].walkingPositions[currentPath].position, MoveSpeed * Time.deltaTime);
-                    if (transform.position == CustomerStates[currentBehaviour].walkingPositions[currentPath].position) {
-                        if (currentPath < CustomerStates[currentBehaviour].walkingPositions.Length - 1) {
-                            currentPath++;
+                    transform.position = Vector3.MoveTowards(transform.position, CustomerStates[_CurrentBehaviour].walkingPositions[_CurrentPath].position, MoveSpeed * Time.deltaTime);
+                    if (transform.position == CustomerStates[_CurrentBehaviour].walkingPositions[_CurrentPath].position) {
+                        if (_CurrentPath < CustomerStates[_CurrentBehaviour].walkingPositions.Length - 1) {
+                            _CurrentPath++;
                         } else {
                             _TheState = TheCustomerStates.Talking;
                         }
@@ -69,21 +67,21 @@ public class CustomerState : MonoBehaviour {
 
             } else if (_TheState == TheCustomerStates.Talking) {
 
-                if (CustomerStates[currentBehaviour].Talk == true) {//TODO Additional Logic Needed If Going To Work
-                    TimeToWait = Time.time + CustomerStates[currentBehaviour].WaitingTime;
+                if (CustomerStates[_CurrentBehaviour].Talk == true) {//TODO Additional Logic Needed If Going To Work
+                    _TimeToWait = Time.time + CustomerStates[_CurrentBehaviour].WaitingTime;
                     _TheState = TheCustomerStates.WaitingForOrder;
                 } else {
-                    TimeToWait = Time.time + CustomerStates[currentBehaviour].WaitingTime;
+                    _TimeToWait = Time.time + CustomerStates[_CurrentBehaviour].WaitingTime;
                     _TheState = TheCustomerStates.WaitingForOrder;
                 }
 
             } else if (_TheState == TheCustomerStates.WaitingForOrder) {
 
-                if (TimeToWait <= Time.time) {//Continue With Next State If Not Delete
-                    if (currentBehaviour < CustomerStates.Length - 1) {
-                        currentBehaviour++;
+                if (_TimeToWait <= Time.time) {//Continue With Next State If Not Delete
+                    if (_CurrentBehaviour < CustomerStates.Length - 1) {
+                        _CurrentBehaviour++;
                         _TheState = TheCustomerStates.Walking;
-                        currentPath = 0;
+                        _CurrentPath = 0;
                     } else {
                         Destroy(gameObject);
                     }
@@ -105,23 +103,22 @@ public class CustomerState : MonoBehaviour {
         }
     }
 
-
     public void ForceLastState() {
         _TheState = TheCustomerStates.Walking;
-        currentPath = 0;
-        currentBehaviour = CustomerStates.Length - 1;
+        _CurrentPath = 0;
+        _CurrentBehaviour = CustomerStates.Length - 1;
     }
 
     public void StartCustomerStates() {
-        StartCustomer = true;
+        _StartCustomer = true;
     }
 
     public void MakeNewInstance(int lengths) {
         CustomerStates = new CustomerStateBehaviour[lengths];
-        added = 0;
+        _Adding = 0;
     }
     public void SetBehaviours(Transform[] paths, bool talk, float waiting) {
-        CustomerStates[added++] = new CustomerStateBehaviour(paths, talk, waiting);
+        CustomerStates[_Adding++] = new CustomerStateBehaviour(paths, talk, waiting);
     }
 
 

@@ -13,7 +13,7 @@ public class QueueManager : MonoBehaviour
     private CustomerSelect _customerSelect;
 
     public List<Customer> ActiveCustomerQueue { get => _activeCustomerQueue; }
-    public int ActiveQueueLimit { get => _activeQueueLimit;}
+    public int ActiveQueueLimit { get => _activeQueueLimit; }
 
     private void Start()
     {
@@ -24,23 +24,23 @@ public class QueueManager : MonoBehaviour
     {
         _activeCustomerQueue.Add(customer);
 
-       
         customer.transform.SetParent(_customerSwipeContainer);
         customer.transform.SetAsFirstSibling();
         customer.gameObject.SetActive(true);
-        //_customerSelect.RemovePlaceHolder();
     }
 
-    public void RemoveCustomerFromQueue() // TODO QueueManager.cs | RemoveCustomerFromQueue() Dose not take into account Timeout customer. Maybe make diffrent versions
+    public void RemoveCustomerFromQueue(Customer customer)
     {
-       if(ActiveCustomerQueue.Count != 0)
+        if (ActiveCustomerQueue.Count != 0)
         {
-            var customer = LevelManager.Instance.CustomerSelect.CustomerInFocus;
-
-          //  Debug.Log($"Destroying {customer.CustomerName} from QueueManger OnRemove");
+            //  Debug.Log($"Destroying {customer.CustomerName} from QueueManger OnRemove");
             _activeCustomerQueue.Remove(customer);
 
             Destroy(customer.gameObject);
+        }
+        else
+        {
+            Debug.LogError("Quemanager.cs  RemoveCustomerFromQueue() | You are trying to remove a customer from a empty list");
         }
     }
 }

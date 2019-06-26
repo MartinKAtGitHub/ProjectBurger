@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(OrderGenerator))]
 public class Customer : MonoBehaviour
 {
+    public bool TestingRandomTimeout;
+
     [SerializeField] private string _customerName;
 
     private Order _order;
@@ -23,7 +25,7 @@ public class Customer : MonoBehaviour
     {
         OrderGenerator = GetComponent<OrderGenerator>();
 
-   
+
     }
     private void OnEnable()
     {
@@ -34,6 +36,15 @@ public class Customer : MonoBehaviour
 
     private void Start()
     {
-      
+        if (TestingRandomTimeout)
+        {
+           Invoke("CustomerTimeout", Random.Range(3, 6));
+        }
+    }
+
+    private void CustomerTimeout()
+    {
+        //LevelManager.Instance.CustomerSelect.ReFocusCustomerOnTimeOut(this);
+        LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
     }
 }

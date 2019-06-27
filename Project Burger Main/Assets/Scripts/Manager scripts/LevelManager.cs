@@ -48,8 +48,7 @@ public class LevelManager : MonoBehaviour
 
         var customer = ShuffleBag.Next();
         QueueManager.AddCustomerToQueue(customer);
-        CustomerSelect.SetInitialCustomer();
-
+       // CustomerSelect.ZeroIndexCustomer();
 
         yield return new WaitForSeconds(3);
         StartCoroutine(CustomerSpawnSystemLoop());

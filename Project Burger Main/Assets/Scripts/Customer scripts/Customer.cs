@@ -12,21 +12,14 @@ public class Customer : MonoBehaviour
     private Order _order;
 
     public OrderGenerator OrderGenerator { get; private set; }
-    public Order Order
-    {
-        get
-        {
-            return _order;
-        }
-    }
+    public Order Order { get => _order; }
     public string CustomerName { get => _customerName; }
 
     private void Awake()
     {
         OrderGenerator = GetComponent<OrderGenerator>();
-
-
     }
+
     private void OnEnable()
     {
         _customerName = gameObject.name;
@@ -38,13 +31,13 @@ public class Customer : MonoBehaviour
     {
         if (TestingRandomTimeout)
         {
-          // Invoke("CustomerTimeout", Random.Range(3, 6));
+            Invoke("CustomerTimeout", Random.Range(5, 10));
         }
     }
 
     private void CustomerTimeout()
     {
-        //LevelManager.Instance.CustomerSelect.ReFocusCustomerOnTimeOut(this);
+        LevelManager.Instance.CustomerSelect.OnTimeOut(this);
         LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
     }
 }

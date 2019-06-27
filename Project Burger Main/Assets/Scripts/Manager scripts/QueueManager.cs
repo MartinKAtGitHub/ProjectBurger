@@ -7,6 +7,7 @@ public class QueueManager : MonoBehaviour
 {
 
     [SerializeField] private RectTransform _customerNotInFocusContainer;
+    [SerializeField] private RectTransform _customerInteractionContainer;
     [SerializeField] private int _activeQueueLimit;
     [SerializeField] private List<Customer> _activeCustomerQueue = new List<Customer>(); // TODO QueueManager can be an array if we have a fixed amount of active customers
 
@@ -22,12 +23,21 @@ public class QueueManager : MonoBehaviour
 
     public void AddCustomerToQueue(Customer customer)
     {
-        _activeCustomerQueue.Add(customer);
-
-        customer.transform.SetParent(_customerNotInFocusContainer);
-        //customer.transform.SetAsFirstSibling();
-        customer.transform.localPosition = Vector2.zero;
         customer.gameObject.SetActive(true);
+      
+
+        _activeCustomerQueue.Add(customer);
+        if (_activeCustomerQueue.Count == 1)
+        {
+            _customerSelect.ZeroIndexCustomer();
+        }
+        else
+        {
+            customer.transform.SetParent(_customerNotInFocusContainer);
+            customer.transform.localPosition = Vector2.zero;
+        }
+
+    
     }
 
     public void RemoveCustomerFromQueue(Customer customer)

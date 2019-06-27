@@ -38,7 +38,7 @@ public class Customer : MonoBehaviour
     {
         if (TestingRandomTimeout)
         {
-           Invoke("CustomerTimeout", Random.Range(3, 6));
+          // Invoke("CustomerTimeout", Random.Range(3, 6));
         }
     }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class QueueManager : MonoBehaviour
 {
 
-    [SerializeField] private Transform _customerSwipeContainer;
+    [SerializeField] private RectTransform _customerNotInFocusContainer;
     [SerializeField] private int _activeQueueLimit;
     [SerializeField] private List<Customer> _activeCustomerQueue = new List<Customer>(); // TODO QueueManager can be an array if we have a fixed amount of active customers
 
@@ -24,8 +24,9 @@ public class QueueManager : MonoBehaviour
     {
         _activeCustomerQueue.Add(customer);
 
-        customer.transform.SetParent(_customerSwipeContainer);
-        customer.transform.SetAsFirstSibling();
+        customer.transform.SetParent(_customerNotInFocusContainer);
+        //customer.transform.SetAsFirstSibling();
+        customer.transform.localPosition = Vector2.zero;
         customer.gameObject.SetActive(true);
     }
 

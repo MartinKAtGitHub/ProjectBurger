@@ -12,15 +12,16 @@ using UnityEngine.UI;
 public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update the script to take Customer object instead of directly ref OrderGenerator
 {
     public QueueManager QueueManager;
-    public RectTransform CustomerSwipeContainer;
+    public RectTransform CustomerInteractionContainer;
     public GameObject CustomerPrefab;
 
+    [SerializeField] private RectTransform _customerNotInFocusContainer;
     [SerializeField] private GameObject _customerQueueSpotPrefab;
-    [SerializeField] private int _queueSpotIndex = 0;
-    [SerializeField] private int _positionIndex = 0;
+    [SerializeField] private int _customerIndex = 0;
+    [SerializeField] private Customer _customerInFocus;
+    //[SerializeField] private int _positionIndex = 0;
     [SerializeField] private float _easing = 0.5f;
     [SerializeField] private TextMeshProUGUI _customerFocusName;
-    [SerializeField] private Customer _customerInFocus;
     [SerializeField] private List<GameObject> _customerQueueSpots = new List<GameObject>();
 
     private int _loopCounter = 0;
@@ -31,16 +32,18 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     private GameObject _animPlaceHolderGameObject;
     private List<GameObject> _placeHolderList = new List<GameObject>();
     private float _distanceBetweenCustomers;
+    private List<Customer> _customers;
+
 
     public Customer CustomerInFocus { get => _customerInFocus; }
-    public int CustomerSelectIndex { get => _queueSpotIndex; }
+    public int CustomerSelectIndex { get => _customerIndex; }
     public bool InSmoothTransition { get => _inSmoothTransition; }
 
     private void Awake()
     {
         QueueManager = GetComponent<QueueManager>();
 
-        _horizontalLayoutGroupSpacing = CustomerSwipeContainer.GetComponent<HorizontalLayoutGroup>().spacing;
+        _horizontalLayoutGroupSpacing = CustomerInteractionContainer.GetComponent<HorizontalLayoutGroup>().spacing;
         _customerWidth = CustomerPrefab.GetComponent<RectTransform>().sizeDelta.x;
 
         _distanceBetweenCustomers = _horizontalLayoutGroupSpacing + _customerWidth;
@@ -50,7 +53,8 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     {
         _foodTrayDropArea = LevelManager.Instance.FoodTrayDropArea;
 
-        GenerateCustomerQueueSpots();
+        _customers = LevelManager.Instance.QueueManager.ActiveCustomerQueue;
+        // GenerateCustomerQueueSpots();
     }
 
 
@@ -58,15 +62,15 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     {
         if (!_inSmoothTransition)
         {
-            if (_queueSpotIndex < QueueManager.ActiveCustomerQueue.Count - 1)
+            if (_customerIndex < QueueManager.ActiveCustomerQueue.Count - 1)
             {
-                _queueSpotIndex++;
-                SetCustomerFocus(_queueSpotIndex);
+                _customerIndex++;
+                SetNewActiveCustomer(_customerIndex);
 
-                var newPos = CustomerSwipeContainer.anchoredPosition;
+                var newPos = CustomerInteractionContainer.anchoredPosition;
                 newPos += new Vector2((_distanceBetweenCustomers), 0);
 
-                StartCoroutine(SmoothTransitionAnim(CustomerSwipeContainer.anchoredPosition, newPos, _easing));
+                StartCoroutine(SmoothTransitionAndSetNewCustomerFocus(CustomerInteractionContainer.anchoredPosition, newPos, _easing));
             }
             else
             {
@@ -79,14 +83,14 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     {
         if (!_inSmoothTransition)
         {
-            if (_queueSpotIndex > 0)
+            if (_customerIndex > 0)
             {
-                _queueSpotIndex--;
-                SetCustomerFocus(_queueSpotIndex);
-                var newPos = CustomerSwipeContainer.anchoredPosition;
+                _customerIndex--;
+                SetNewActiveCustomer(_customerIndex);
+                var newPos = CustomerInteractionContainer.anchoredPosition;
                 newPos += new Vector2(-1 * (_distanceBetweenCustomers), 0);
 
-                StartCoroutine(SmoothTransitionAnim(CustomerSwipeContainer.anchoredPosition, newPos, _easing));
+                StartCoroutine(SmoothTransitionAndSetNewCustomerFocus(CustomerInteractionContainer.anchoredPosition, newPos, _easing));
             }
             else
             {
@@ -101,8 +105,9 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     /// </summary>
     public void SetInitialCustomer()
     {
-        _queueSpotIndex = 0;
-        SetCustomerFocus(_queueSpotIndex);
+        _customerIndex = 0;
+        SetNewActiveCustomer(_customerIndex);
+        _customerInFocus.transform.SetParent(CustomerInteractionContainer);
     }
 
 
@@ -166,14 +171,14 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
         for (int i = 0; i < QueueManager.ActiveQueueLimit; i++)
         {
-            var clone = Instantiate(_customerQueueSpotPrefab, CustomerSwipeContainer);
+            var clone = Instantiate(_customerQueueSpotPrefab, CustomerInteractionContainer);
             clone.name = $"Spot {i + 1}";
             _customerQueueSpots.Add(clone);
         }
     }
 
 
-    private void SetCustomerFocus(int index)
+    private void SetNewActiveCustomer(int index)
     {
         if (QueueManager.ActiveCustomerQueue.Count > 0)
         {
@@ -192,7 +197,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         _foodTrayDropArea.Order = CustomerInFocus.Order;
     }
 
-    IEnumerator SmoothTransitionAnim(Vector2 startPos, Vector2 endPos, float sec)
+    IEnumerator SmoothTransitionAndSetNewCustomerFocus(Vector2 startPos, Vector2 endPos, float sec)
     {
 
         _inSmoothTransition = true;
@@ -200,140 +205,64 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         while (t <= 1.0)
         {
             t += Time.deltaTime / sec;
-            CustomerSwipeContainer.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
+            CustomerInteractionContainer.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
             yield return null;
         }
 
+        _customerInFocus.transform.SetParent(_customerNotInFocusContainer);
+        _customerInFocus.transform.localPosition = Vector2.zero;
+        SetNewActiveCustomer(_customerIndex);
+
+        CustomerInteractionContainer.anchoredPosition = Vector2.zero;
         _inSmoothTransition = false;
-
-
-        //  RemoveAnimPlaceHolder();
-
 
         yield return null;
     }
 
 
-    //private void RemoveAnimPlaceHolder()
-    //{
-    //    if(_animPlaceHolderGameObject != null)
-    //    {
-    //        Debug.Log("ANIM REMOVE");
-    //       // _animPlaceHolderGameObject.transform.SetAsLastSibling();
-    //        Destroy(_animPlaceHolderGameObject);
-    //        CustomerSwipeContainer.anchoredPosition -= new Vector2(_distanceBetweenCustomers, 0);
-    //    }
-    //}
-
-    //private void CreateAnimPlaceHolder(Customer customer)
-    //{
-    //    _animPlaceHolderGameObject = new GameObject();
-    //    _animPlaceHolderGameObject.AddComponent<RectTransform>();
-
-    //    _animPlaceHolderGameObject.transform.SetParent(CustomerSwipeContainer.transform);
-    //    // Debug.Log("Customer in Focus = " + _customerInFocus.transform.GetSiblingIndex());
-    //    _animPlaceHolderGameObject.transform.SetSiblingIndex(customer.transform.GetSiblingIndex());
-    //    _animPlaceHolderGameObject.name = $" Placeholder ({customer.name})";
-
-    //    var placeHolderRectTrans = _animPlaceHolderGameObject.GetComponent<RectTransform>();
-    //    placeHolderRectTrans.localScale = Vector2.one;
-    //    placeHolderRectTrans.sizeDelta = customer.GetComponent<RectTransform>().sizeDelta;
-
-    //}
-
-
-    //private void CreatePlaceHolder(Customer customer)
-    //{
-    //    var placeHolderGameObject = new GameObject();
-    //    placeHolderGameObject.AddComponent<RectTransform>();
-
-    //    placeHolderGameObject.transform.SetParent(CustomerSwipeContainer.transform);
-    //    // Debug.Log("Customer in Focus = " + _customerInFocus.transform.GetSiblingIndex());
-    //    placeHolderGameObject.transform.SetSiblingIndex(customer.transform.GetSiblingIndex());
-    //    placeHolderGameObject.name = $" Placeholder ({customer.name})";
-
-    //    var placeHolderRectTrans = placeHolderGameObject.GetComponent<RectTransform>();
-    //    placeHolderRectTrans.localScale = Vector2.one;
-    //    placeHolderRectTrans.sizeDelta = customer.GetComponent<RectTransform>().sizeDelta;
-
-    //    _placeHolderList.Add(placeHolderGameObject);
-    //}
-
     public void CircularLeft()
     {
-        if (!_inSmoothTransition)
+        if (!_inSmoothTransition && _customers.Count > 1)
         {
 
 
-            _queueSpotIndex--;
-            _positionIndex--;
+            _customerIndex--;
 
-            //  if (_positionIndex < 0)
-            if (_queueSpotIndex < 0)
+            if (_customerIndex < 0)
             {
-                _positionIndex = 0;
-                _loopCounter++;
-
-                _queueSpotIndex = _customerQueueSpots.Count - _loopCounter;
-                _customerQueueSpots[_queueSpotIndex].transform.SetAsFirstSibling();
-
-                if (_queueSpotIndex == 0)
-                {
-                    _loopCounter = 0;
-                }
-
-                //_customerSelectIndex = _customerQueueSpots.Count - 1; // reduce 1 ith 1 unitl it beacuse 0 then reset to count
-                //_customerQueueSpots[_customerQueueSpots.Count - 1].transform.SetAsFirstSibling();
-
-                CustomerSwipeContainer.anchoredPosition += new Vector2(-1 * (_distanceBetweenCustomers), 0);
+                _customerIndex = _customers.Count - 1;
+                Debug.Log("LOOPING AROUND");
             }
 
-            // SetCustomerFocus(_customerSelectIndex);
+            _customers[_customerIndex].transform.SetParent(CustomerInteractionContainer);
+            _customers[_customerIndex].transform.SetAsFirstSibling();
 
-            var newPos = CustomerSwipeContainer.anchoredPosition;
-            newPos += new Vector2((_distanceBetweenCustomers), 0);
+            var newPos = CustomerInteractionContainer.anchoredPosition;
+            CustomerInteractionContainer.anchoredPosition += new Vector2(-1 * (_distanceBetweenCustomers), 0);
 
-            StartCoroutine(SmoothTransitionAnim(CustomerSwipeContainer.anchoredPosition, newPos, _easing));
+            StartCoroutine(SmoothTransitionAndSetNewCustomerFocus(CustomerInteractionContainer.anchoredPosition, newPos, _easing));
 
         }
     }
 
     public void CircularRight()
     {
-        if (!_inSmoothTransition)
+        if (!_inSmoothTransition && _customers.Count > 1)
         {
-            _queueSpotIndex++;
-            _positionIndex++;
+            _customerIndex++;
+            _customerIndex %= _customers.Count - 1;
+            _customers[_customerIndex].transform.SetParent(CustomerInteractionContainer);
+            _customers[_customerIndex].transform.SetAsLastSibling();
 
-            _queueSpotIndex %= _customerQueueSpots.Count;
-
-            if (_positionIndex >= _customerQueueSpots.Count)
-            {
-                _positionIndex = _customerQueueSpots.Count - 1;
-                _customerQueueSpots[_queueSpotIndex].transform.SetAsLastSibling();
-
-                if (_queueSpotIndex == 0)
-                {
-
-
-                    //CustomerSwipeContainer.anchoredPosition = new Vector2(0, 0);
-                    //_customerQueueSpots[_queueSpotIndex].transform.SetAsFirstSibling();
-                    //_positionIndex = 0;
-                }
-
-                CustomerSwipeContainer.anchoredPosition += new Vector2((_distanceBetweenCustomers), 0);
-            }
-
-            // SetCustomerFocus(_customerSelectIndex);
-
-            var newPos = CustomerSwipeContainer.anchoredPosition;
+            var newPos = CustomerInteractionContainer.anchoredPosition;
             newPos += new Vector2(-1 * (_distanceBetweenCustomers), 0);
 
-            StartCoroutine(SmoothTransitionAnim(CustomerSwipeContainer.anchoredPosition, newPos, _easing));
+            StartCoroutine(SmoothTransitionAndSetNewCustomerFocus(CustomerInteractionContainer.anchoredPosition, newPos, _easing));
 
         }
-
     }
 
-
 }
+
+
+

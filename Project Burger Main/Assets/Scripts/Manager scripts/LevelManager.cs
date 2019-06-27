@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
      
-       // StartCoroutine(CustomerSpawnSystemInit());
+       StartCoroutine(CustomerSpawnSystemInit());
         Debug.Log("WAIT FOR FIRST TO SAPWN");
        
     }

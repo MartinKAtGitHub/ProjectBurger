@@ -13,10 +13,11 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 {
 
     [SerializeField] private RectTransform _customerInteractionContainer;
-    [SerializeField] private GameObject _customerPrefab;
     [SerializeField] private RectTransform _customerNotInFocusContainer;
+    [SerializeField] private GameObject _customerPrefab;
     [SerializeField] private int _customerIndex = 0;
     [SerializeField] private Customer _customerInFocus;
+    [SerializeField] private Customer _customerLostFocus;
     [SerializeField] private float _easing = 0.5f;
 
 
@@ -28,7 +29,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     private bool _inSmoothTransition;
     private float _distanceBetweenCustomers;
     private List<Customer> _customers;
-    private GameObject _placeHolderGameObject;
+    private List<GameObject> _placeHolderGameObjects = new List<GameObject>();
 
     public Customer CustomerInFocus { get => _customerInFocus; }
     public int CustomerSelectIndex { get => _customerIndex; }
@@ -50,40 +51,42 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         _customers = _queueManager.ActiveCustomerQueue;
     }
 
+    //private void Update()
+    //{
+    //    if (_customerInFocus != null)
+    //    {
+    //        if (!_customerInFocus.IsWaiting)
+    //        {
+    //            _customerInFocus.CheckCustomerTimout();
+    //        }
+    //    }
+    //}
     /// <summary>
     /// When the active list has only 1 customer we want to force the view of the player to that customer
     /// </summary>
     public void ZeroIndexCustomer()
     {
-        Debug.Log("Zero Index -> force customer to view");
+        //   Debug.Log("Zero Index -> force customer to view");
+        DeletePlaceholder();
+
         _customerIndex = 0;
-        SetNewActiveCustomer(_customerIndex);
-        _customerInFocus.transform.SetParent(_customerInteractionContainer);
-    }
+        CreatePlaceHolder();
 
+        _customers[_customerIndex].transform.SetParent(_customerInteractionContainer);
+        _customers[_customerIndex].transform.SetAsFirstSibling();
 
-    private void SetNewActiveCustomer(int index)
-    {
-        if (_queueManager.ActiveCustomerQueue.Count > 0)
-        {
-            _customerInFocus = _queueManager.ActiveCustomerQueue[index];
+        var newPos = _customerInteractionContainer.anchoredPosition;
+        _customerInteractionContainer.anchoredPosition += new Vector2(-1 * (_distanceBetweenCustomers), 0);
 
-            ChangeFoodTrayOrder();
-        }
-        else
-        {
-            Debug.LogError("CustomerSelect.cs |  SetCustomerFocus () =  ActiveCustomerQueue is Empty");
-        }
-    }
+        StartCoroutine(SmoothTransitionAndSetNewCustomerFocus(_customerInteractionContainer.anchoredPosition, newPos, _easing));
 
-    private void ChangeFoodTrayOrder()
-    {
-        _foodTrayDropArea.Order = _customerInFocus.Order;
     }
 
     IEnumerator SmoothTransitionAndSetNewCustomerFocus(Vector2 startPos, Vector2 endPos, float sec)
     {
         _inSmoothTransition = true;
+
+        var tempIndex = _customerIndex;
 
         float t = 0f;
         while (t <= 1.0)
@@ -93,21 +96,19 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
             yield return null;
         }
 
-        if (_customerInFocus != null) // TODO CustomerSelect | SmootTransition -> BUG , when there is only 1 person left the player cant select beacuse he gets  sendt back to NotInFocusArea
+        var oldCustomer = _customerInFocus;
+
+        if (oldCustomer != null) // TODO CustomerSelect | SmootTransition -> BUG , when there is only 1 person left the player cant select becaose he gets sendt back to NotInFocusArea
         {
-            _customerInFocus.transform.SetParent(_customerNotInFocusContainer);
-            _customerInFocus.transform.localPosition = Vector2.zero;
+            oldCustomer.transform.SetParent(_customerNotInFocusContainer);
+            oldCustomer.transform.localPosition = Vector2.zero;
+
+            //Debug.Log($"Old customer Waiting({oldCustomer.IsWaiting})");
+            //oldCustomer.CheckCustomerTimout();
         }
         else
         {
-            if(_placeHolderGameObject != null)
-            {
-                Destroy(_placeHolderGameObject);
-            }
-            else
-            {
-                Debug.LogError("CustomerSelector | Placeholder is Null but you are trying to destroy it ");
-            }
+            DeletePlaceholder();
         }
 
         SetNewActiveCustomer(_customerIndex);
@@ -118,20 +119,40 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         yield return null;
     }
 
+    private void SetNewActiveCustomer(int index)
+    {
+        if (_queueManager.ActiveCustomerQueue.Count > 0)
+        {
+            Debug.Log($"Length = {_queueManager.ActiveCustomerQueue.Count}  index = {index}  MaxIndex ={_queueManager.ActiveCustomerQueue.Count - 1}");
+
+            // TODO BUG CustomerSelect.cs when customer is deleted the list is rescales and index is out of range
+            var customer = _queueManager.ActiveCustomerQueue[index];
+
+            _customerInFocus = customer;
+            ChangeFoodTrayOrder();
+        }
+        else
+        {
+            Debug.LogError("CustomerSelect.cs |  SetCustomerFocus () =  ActiveCustomerQueue is Empty OR enemy died before set");
+        }
+    }
+
+    private void ChangeFoodTrayOrder()
+    {
+        _foodTrayDropArea.Order = _customerInFocus.Order;
+    }
 
     public void CircularLeft()
     {
-        if (!_inSmoothTransition && _customers.Count != 0)
+        if (!_inSmoothTransition && _customerNotInFocusContainer.childCount > 0)
         {
-
-
             _customerIndex--;
 
             if (_customerIndex < 0)
             {
                 _customerIndex = _customers.Count - 1;
-             
             }
+
 
             _customers[_customerIndex].transform.SetParent(_customerInteractionContainer);
             _customers[_customerIndex].transform.SetAsFirstSibling();
@@ -140,17 +161,17 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
             _customerInteractionContainer.anchoredPosition += new Vector2(-1 * (_distanceBetweenCustomers), 0);
 
             StartCoroutine(SmoothTransitionAndSetNewCustomerFocus(_customerInteractionContainer.anchoredPosition, newPos, _easing));
-
         }
     }
 
+
     public void CircularRight()
     {
-        if (!_inSmoothTransition && _customers.Count != 0)
+        if (!_inSmoothTransition && _customerNotInFocusContainer.childCount > 0)
         {
             _customerIndex++;
             //_customerIndex %= _customers.Count - 1;
-            if(_customerIndex > _customers.Count -1)
+            if (_customerIndex > _customers.Count - 1)
             {
                 _customerIndex = 0;
             }
@@ -168,33 +189,56 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
     public void OnSell()
     {
-        if (_customers.Count > 0)
-        {
-
-        }
+        CreatePlaceHolder();
     }
 
     public void OnTimeOut(Customer customer)
     {
         if (_customerInFocus == customer)
         {
-            // Debug.Log("Equal InFocus = " + _customerInFocus.name + "  ==  " + customer.name);
             CreatePlaceHolder();
         }
     }
     private void CreatePlaceHolder()
     {
-        _placeHolderGameObject = new GameObject("PlaceHolder For Customer");
-        _placeHolderGameObject.AddComponent<RectTransform>();
+        Debug.Log("PlaceHOLDER created");
+        var placeHolderGameObject = new GameObject("PlaceHolder For Customer");
+        placeHolderGameObject.AddComponent<RectTransform>();
 
-        _placeHolderGameObject.transform.SetParent(_customerInteractionContainer.transform);
-        _placeHolderGameObject.transform.SetSiblingIndex(_customerInFocus.transform.GetSiblingIndex());
+        placeHolderGameObject.transform.SetParent(_customerInteractionContainer.transform);
 
-        var placeHolderRectTrans = _placeHolderGameObject.GetComponent<RectTransform>();
+        if (_customerInFocus != null)
+        {
+            placeHolderGameObject.transform.SetSiblingIndex(_customerInFocus.transform.GetSiblingIndex());
+        }
+        else
+        {
+            placeHolderGameObject.transform.SetAsFirstSibling();
+            // Debug.Log("NO customer in focus, creating placeholder on SetAsFirstSibling()");
+        }
+
+
+        var placeHolderRectTrans = placeHolderGameObject.GetComponent<RectTransform>();
         placeHolderRectTrans.localScale = Vector2.one;
         placeHolderRectTrans.sizeDelta = new Vector2(_customerWidth, 0);
+
+        _placeHolderGameObjects.Add(placeHolderGameObject);
     }
 
+    private void DeletePlaceholder()
+    {
+        if (_placeHolderGameObjects != null)
+        {
+            for (int i = 0; i < _placeHolderGameObjects.Count; i++)
+            {
+                Destroy(_placeHolderGameObjects[i]);
+            }
+        }
+        //else
+        //{
+        //    Debug.Log("CustomerSelector | Placeholder is Null but you are trying to destroy it ");
+        //}
+    }
 }
 
 

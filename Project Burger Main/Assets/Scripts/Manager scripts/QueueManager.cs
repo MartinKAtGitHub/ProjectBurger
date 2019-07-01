@@ -24,9 +24,8 @@ public class QueueManager : MonoBehaviour
     public void AddCustomerToQueue(Customer customer)
     {
         customer.gameObject.SetActive(true);
-      
-
         _activeCustomerQueue.Add(customer);
+      
         if (_activeCustomerQueue.Count == 1)
         {
             _customerSelect.ZeroIndexCustomer();
@@ -42,11 +41,9 @@ public class QueueManager : MonoBehaviour
 
     public void RemoveCustomerFromQueue(Customer customer)
     {
-        if (ActiveCustomerQueue.Count != 0)
+        if (ActiveCustomerQueue.Count != 0 )
         {
-            //  Debug.Log($"Destroying {customer.CustomerName} from QueueManger OnRemove");
             _activeCustomerQueue.Remove(customer);
-
             Destroy(customer.gameObject);
         }
         else

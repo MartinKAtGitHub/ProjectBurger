@@ -7,25 +7,28 @@ public class SalesManager : MonoBehaviour
 {
 
     private CustomerSelect _customerSelect;
+    private QueueManager _queueManager;
     private Action _onSale;
     public Action OnSale { get => _onSale; set => _onSale = value; }
 
     private void Awake()
     {
         _customerSelect = GetComponent<CustomerSelect>();
+        _queueManager = GetComponent<QueueManager>();
     }
     /// <summary>
     /// Triggers the onSale event;
     /// </summary>
     public void OnSell()
     {
-        //  OnSale?.Invoke();
-        if (!_customerSelect.InSmoothTransition)
+
+        var customer = _customerSelect.CustomerInFocus;
+        if (!_customerSelect.InSmoothTransition && customer != null)
         {
             LevelManager.Instance.FoodTrayDropArea.CheckFoodStacksAgainstOrder();
-            LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(LevelManager.Instance.CustomerSelect.CustomerInFocus);
-           // LevelManager.Instance.CustomerSelect.ReFocusCustomerOnSell();
-        }
 
+            _customerSelect.OnSell();
+            _queueManager.RemoveCustomerFromQueue(customer);
+        }
     }
 }

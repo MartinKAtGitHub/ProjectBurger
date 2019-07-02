@@ -23,13 +23,14 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
 
     private QueueManager _queueManager;
+    private QueueDotIndicators _queueDotIndicators;
+    private FoodTrayDropArea _foodTrayDropArea;
     private float _horizontalLayoutGroupSpacing;
     private float _customerWidth;
-    private FoodTrayDropArea _foodTrayDropArea;
-    private bool _inSmoothTransition;
     private float _distanceBetweenCustomers;
     private List<Customer> _customers;
     private List<GameObject> _placeHolderGameObjects = new List<GameObject>();
+    private bool _inSmoothTransition;
 
     public Customer CustomerInFocus { get => _customerInFocus; }
     public int CustomerSelectIndex { get => _customerIndex; }
@@ -38,10 +39,10 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
     private void Awake()
     {
         _queueManager = GetComponent<QueueManager>();
+        _queueDotIndicators = GetComponent<QueueDotIndicators>();
 
         _horizontalLayoutGroupSpacing = _customerInteractionContainer.GetComponent<HorizontalLayoutGroup>().spacing;
         _customerWidth = _customerPrefab.GetComponent<RectTransform>().sizeDelta.x;
-
         _distanceBetweenCustomers = _horizontalLayoutGroupSpacing + _customerWidth;
     }
 
@@ -51,16 +52,6 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         _customers = _queueManager.ActiveCustomerQueue;
     }
 
-    //private void Update()
-    //{
-    //    if (_customerInFocus != null)
-    //    {
-    //        if (!_customerInFocus.IsWaiting)
-    //        {
-    //            _customerInFocus.CheckCustomerTimout();
-    //        }
-    //    }
-    //}
     /// <summary>
     /// When the active list has only 1 customer we want to force the view of the player to that customer
     /// </summary>
@@ -71,6 +62,8 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
         _customerIndex = 0;
         CreatePlaceHolder();
+
+        _queueDotIndicators.SetDotFocus(_customerIndex);
 
         _customers[_customerIndex].transform.SetParent(_customerInteractionContainer);
         _customers[_customerIndex].transform.SetAsFirstSibling();
@@ -98,7 +91,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
         var oldCustomer = _customerInFocus;
 
-        if (oldCustomer != null) // TODO CustomerSelect | SmootTransition -> BUG , when there is only 1 person left the player cant select becaose he gets sendt back to NotInFocusArea
+        if (oldCustomer != null) // TODO CustomerSelect | SmootTransition -> BUG , when there is only 1 person left the player cant select because he gets sendt back to NotInFocusArea
         {
             oldCustomer.transform.SetParent(_customerNotInFocusContainer);
             oldCustomer.transform.localPosition = Vector2.zero;
@@ -129,7 +122,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
             var customer = _queueManager.ActiveCustomerQueue[index];
 
             _customerInFocus = customer;
-            ChangeFoodTrayOrder();
+            ChangeFoodTrayOrder(_customerInFocus.Order);
         }
         else
         {
@@ -137,9 +130,9 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         }
     }
 
-    private void ChangeFoodTrayOrder()
+    private void ChangeFoodTrayOrder(Order order)
     {
-        _foodTrayDropArea.Order = _customerInFocus.Order;
+        _foodTrayDropArea.Order = order;
     }
 
     public void CircularLeft()
@@ -153,6 +146,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
                 _customerIndex = _customers.Count - 1;
             }
 
+            _queueDotIndicators.SetDotFocus(_customerIndex);
 
             _customers[_customerIndex].transform.SetParent(_customerInteractionContainer);
             _customers[_customerIndex].transform.SetAsFirstSibling();
@@ -176,6 +170,8 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
                 _customerIndex = 0;
             }
 
+            _queueDotIndicators.SetDotFocus(_customerIndex);
+
             _customers[_customerIndex].transform.SetParent(_customerInteractionContainer);
             _customers[_customerIndex].transform.SetAsLastSibling();
 
@@ -197,6 +193,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         if (_customerInFocus == customer)
         {
             CreatePlaceHolder();
+            ChangeFoodTrayOrder(null);
         }
     }
     private void CreatePlaceHolder()

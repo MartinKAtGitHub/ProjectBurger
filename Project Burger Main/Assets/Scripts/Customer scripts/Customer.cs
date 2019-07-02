@@ -6,6 +6,7 @@ using UnityEngine;
 public class Customer : MonoBehaviour
 {
     public bool TestingRandomTimeout;
+    public GameObject QueuePositionDot;
 
     [SerializeField] private RectTransform _customerInteractionContainer;
     [SerializeField] private RectTransform _customerNotInFocusContainer;
@@ -15,6 +16,7 @@ public class Customer : MonoBehaviour
 
     private Order _order;
     private CustomerSelect _customerSelect;
+
     public OrderGenerator OrderGenerator { get; private set; }
     public Order Order { get => _order; }
     public string CustomerName { get => _customerName; }
@@ -38,7 +40,7 @@ public class Customer : MonoBehaviour
         _customerSelect = LevelManager.Instance.CustomerSelect;
         if (TestingRandomTimeout)
         {
-            Invoke("CustomerTimeout", Random.Range(5, 5));
+            Invoke("CustomerTimeout", Random.Range(10, 20));
         }
     }
 

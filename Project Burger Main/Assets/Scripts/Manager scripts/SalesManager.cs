@@ -23,12 +23,19 @@ public class SalesManager : MonoBehaviour
     {
 
         var customer = _customerSelect.CustomerInFocus;
-        if (!_customerSelect.InSmoothTransition && customer != null)
+        if (customer != null)
         {
-            LevelManager.Instance.FoodTrayDropArea.CheckFoodStacksAgainstOrder();
+            if (!_customerSelect.InSmoothTransition)
+            {
+                LevelManager.Instance.FoodTrayDropArea.CheckFoodStacksAgainstOrder();
 
-            _customerSelect.OnSell();
-            _queueManager.RemoveCustomerFromQueue(customer);
+                _customerSelect.OnSell();
+                _queueManager.RemoveCustomerFromQueue(customer);
+            }
+        }
+        else
+        {
+            Debug.Log("No customer too sell to");
         }
     }
 }

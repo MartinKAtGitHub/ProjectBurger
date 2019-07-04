@@ -24,8 +24,10 @@ public class CustomerWardrobe : MonoBehaviour {
     Image SPHair;
 
     OrderGenerator CustomerOrderG;
+   Customer _Customer;
 
-    private void Awake() {
+
+    private void Awake() { 
         SetupConnections();
     }
 
@@ -41,21 +43,13 @@ public class CustomerWardrobe : MonoBehaviour {
         SPHair = CustomerPrefab.transform.GetChild(1).GetChild(4).GetComponent<Image>(); //Hair
 
         CustomerOrderG = CustomerPrefab.GetComponent<OrderGenerator>();
-    }
-
-
-
-
-
-
-
-    public void CreatCustomer() {
-
-
+        _Customer = CustomerPrefab.GetComponent<Customer>();
 
     }
 
-    public void SettingUpCustomer(CustomerRefrences a) {
+
+
+    public GameObject SettingUpCustomer(CustomerRefrences a, TheCustomSpawner spawener) {
        
         RTTorso.transform.localPosition = a.TorsoRectTransform.transform.localPosition;
         RTTorso.sizeDelta = a.TorsoRectTransform.sizeDelta;
@@ -69,21 +63,36 @@ public class CustomerWardrobe : MonoBehaviour {
         SPMouth.sprite = a.HeadSprites.Mouths[Random.Range(0, a.HeadSprites.Mouths.Length)];
         SPHair.sprite = a.HeadSprites.Hair[Random.Range(0, a.HeadSprites.Hair.Length)];
 
-       // CustomerOrderG.RequestOrderTrial(a.RecipeB, a.MultiorderAmount, a.MultiorderChance);
-        Instantiate(CustomerPrefab, transform.position, Quaternion.identity, transform.parent.GetChild(0));
+
+        CustomerOrderG.RequestOrderTrial(a.RecipeB, a.MultiorderAmount, a.MultiorderChance);
+        _Customer.SetCustomerStates(spawener);
+
+     //   spawned = Instantiate(CustomerPrefab, transform.localPosition, Quaternion.identity, transform);
+        return CustomerPrefab;
 
     }
 
 
-    void RandomCustomerSetup() {
+    public GameObject RandomCustomerSetup(CustomerRefrences a) { 
+
+        RTTorso.transform.localPosition = a.TorsoRectTransform.transform.localPosition;
+        RTTorso.sizeDelta = a.TorsoRectTransform.sizeDelta;
+        SPTorso.sprite = a.TorsoSprites.Torsos[Random.Range(0, a.TorsoSprites.Torsos.Length)];
+
+        RTHead.transform.localPosition = a.HeadRectTransform.transform.localPosition;
+        RTHead.sizeDelta = a.HeadRectTransform.sizeDelta;
+        SPHead.sprite = a.HeadSprites.Heads[Random.Range(0, a.HeadSprites.Heads.Length)];
+        SPEye.sprite = a.HeadSprites.Eyes[Random.Range(0, a.HeadSprites.Eyes.Length)];
+        SPNose.sprite = a.HeadSprites.Noses[Random.Range(0, a.HeadSprites.Noses.Length)];
+        SPMouth.sprite = a.HeadSprites.Mouths[Random.Range(0, a.HeadSprites.Mouths.Length)];
+        SPHair.sprite = a.HeadSprites.Hair[Random.Range(0, a.HeadSprites.Hair.Length)];
+
+        CustomerOrderG.RequestOrderTrial(a.RecipeB, a.MultiorderAmount, a.MultiorderChance);
+      
+        //  return Instantiate(CustomerPrefab, transform.position, Quaternion.identity, transform.parent.GetChild(0)).GetComponent<Customer>();
+        return CustomerPrefab;
 
     }
-
-    
-
-
-
-
 
 
 

@@ -26,15 +26,14 @@ public class GrillPlateStack : OnDropAreaInfo {
         _SpawnedIngredients = Instantiate(_Ingredience, transform).GetComponent<Draggable>() as BurgerDrag;
 
         _SpawnedIngredients.ResetPositionParent = transform;
-        _SpawnedIngredients.LastParent = transform;
-        _SpawnedIngredients.LastPosition = transform.position + (Vector3.up * transform.childCount * 8) + (Vector3.up * 28.5f);
+        _SpawnedIngredients.SetStartParent(transform.position + (Vector3.up * transform.childCount * 8) + (Vector3.up * 28.5f), transform);
 
-        _SpawnedIngredients.GetComponent<RectTransform>().position = _SpawnedIngredients.LastPosition;
+        _SpawnedIngredients.GetComponent<RectTransform>().position = transform.position + (Vector3.up * transform.childCount * 8) + (Vector3.up * 28.5f);
     }
 
     public override void DropAreaOnBeginDrag() {
 
-        if(transform.childCount < 2) {
+        if(transform.childCount < 1) {
 
             SpawnIngredience();
 

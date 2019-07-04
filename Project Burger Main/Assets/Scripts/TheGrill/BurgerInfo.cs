@@ -13,6 +13,7 @@ public class BurgerInfo : MonoBehaviour {
     public BurgerQualityVariables MyVariablesUp = new BurgerQualityVariables(0,0,0,0);
     public BurgerQualityVariables MyVariablesDown = new BurgerQualityVariables(0,0,0,0);
 
+
 }
 
 

@@ -167,9 +167,13 @@ public class TheGrill : OnDropAreaInfo, IPointerClickHandler {
     void SelectingBurgerSide() {//Setting Burger Info So That The Temperature Can Be Measured Correctly
 
         if (_TheBurgerInfo.TheBurgerInfos.UpOrDown == true) {//Setting What BurgerSide To Grill
-            _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + _TheBurgerInfo.TheBurgerInfos.MyVariablesUp._BurgerState);
+            _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerState[_TheBurgerInfo.TheBurgerInfos.MyVariablesUp._BurgerState].IngredientSprite;
+            _TheBurgerInfo.TheIngredientGameObject.ingredient = BurgerIngredience.AllBurgerState[_TheBurgerInfo.TheBurgerInfos.MyVariablesUp._BurgerState];
+            //  _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + _TheBurgerInfo.TheBurgerInfos.MyVariablesUp._BurgerState);
         } else {
-            _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + _TheBurgerInfo.TheBurgerInfos.MyVariablesDown._BurgerState);
+            _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerState[_TheBurgerInfo.TheBurgerInfos.MyVariablesDown._BurgerState].IngredientSprite;
+            _TheBurgerInfo.TheIngredientGameObject.ingredient = BurgerIngredience.AllBurgerState[_TheBurgerInfo.TheBurgerInfos.MyVariablesDown._BurgerState];
+            //  _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + _TheBurgerInfo.TheBurgerInfos.MyVariablesDown._BurgerState);
         }
 
     }
@@ -202,7 +206,10 @@ public class TheGrill : OnDropAreaInfo, IPointerClickHandler {
 
                     if (burgerside._BurgerCurrentHeat >= BurgerIngredience.MeatTimers.colorKeys[burgerside._BurgerState].time) {
                         burgerside._BurgerState++;
-                        _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + burgerside._BurgerState);
+
+                        _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerState[burgerside._BurgerState].IngredientSprite;
+                        _TheBurgerInfo.TheIngredientGameObject.ingredient = BurgerIngredience.AllBurgerState[burgerside._BurgerState];
+                   //     _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + burgerside._BurgerState);
                         SetupFlip();//MOAHAHAHAH AUTOFLIP
                     }
                 }

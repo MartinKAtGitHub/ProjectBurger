@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     public CustomerSpawner CustomerSpawner;
     public SalesManager SalesManager;
     public ShuffleBag ShuffleBag;
-
+    public ScoreManager ScoreManager;
 
     [SerializeField] private float _preparationTime;
     [SerializeField] private Vector2 _customerSpawnTimerMinMax;

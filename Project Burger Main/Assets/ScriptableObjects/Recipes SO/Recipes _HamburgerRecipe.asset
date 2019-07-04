@@ -17,4 +17,5 @@ MonoBehaviour:
   _foodType: 0
   _orderChance: 0
   _accumulatedWight: 0
+  _recipeCost: 0
   Ingredients: []

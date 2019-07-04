@@ -10,15 +10,15 @@ public class BurgerDrag : Draggable {
     public BurgerInfo TheBurgerInfos;
     public IngredientGameObject TheIngredientGameObject;
 
-    public Transform LastParent;
-    public Vector3 LastPosition;
+    private Transform LastParent;
+    private Vector3 LastPosition;
   
 
     public override void OnBeginDrag(PointerEventData eventData) {
 
-        ResetPositionParent.GetComponent<OnDropAreaInfo>().DropAreaOnBeginDrag();
         transform.SetParent(transform.parent.parent.parent);//Hmmmm
         canvasGroup.blocksRaycasts = false;
+        ResetPositionParent.GetComponent<OnDropAreaInfo>().DropAreaOnBeginDrag();
 
     }
 
@@ -31,7 +31,14 @@ public class BurgerDrag : Draggable {
             LastParent = ResetPositionParent;
         } else {
             transform.position = LastPosition;
+            transform.SetParent(ResetPositionParent);
         }
 
     }
+
+    public void SetStartParent(Vector3 pos, Transform transfor) {
+        LastPosition = pos;
+        LastParent = transfor;
+    }
+
 }

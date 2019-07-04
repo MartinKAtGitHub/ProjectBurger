@@ -49,16 +49,6 @@ public class CustomerWardrobe : MonoBehaviour {
 
 
 
-
-
-
-
-    public void CreatCustomer() {
-
-
-
-    }
-
     public GameObject SettingUpCustomer(CustomerRefrences a, TheCustomSpawner spawener) {
        
         RTTorso.transform.localPosition = a.TorsoRectTransform.transform.localPosition;
@@ -103,12 +93,6 @@ public class CustomerWardrobe : MonoBehaviour {
         return CustomerPrefab;
 
     }
-
-
-
-
-
-
 
 
 

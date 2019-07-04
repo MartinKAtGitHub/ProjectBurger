@@ -44,7 +44,8 @@ public class LevelGoalSelecter : MonoBehaviour {
 
     int LastAddedIndex = 0;
     int CurrentAddingIndex = 0;
-    int rngReach = 3;
+    int rngReach = 2;
+    int randomRange = 1;
 
     void SelectClosestItem() {
 
@@ -57,9 +58,23 @@ public class LevelGoalSelecter : MonoBehaviour {
             }
         }
 
-        if (Mathf.Abs(LastAddedIndex - CurrentAddingIndex) < rngReach) {
+        int a = Random.Range(0, 3);
+        if (a == 0) {
+            CurrentAddingIndex += Random.Range(0, randomRange + 1);
+        } else if (a == 1) {
+            CurrentAddingIndex -= Random.Range(0, randomRange + 1);
+        } else {
+            
+        }
+        if (CurrentAddingIndex < 0) {
+            CurrentAddingIndex = 0;
+        } else if (CurrentAddingIndex >= meny.Items.Length) {
+            CurrentAddingIndex = meny.Items.Length - 1;
+        }
 
-            if(LastAddedIndex == CurrentAddingIndex) {
+        if (Mathf.Abs(LastAddedIndex - CurrentAddingIndex) < rngReach) {//If Range Of Next Item Is Within Range. Currently If The Next Item Is More Then 2 Places Appart, Make It 2 Instead
+
+            if(LastAddedIndex == CurrentAddingIndex) {//If Im Going To Make The Same Items Twice, Change It So That It Cannot Make It Again
                 if(Random.Range(0,2) == 0) {
                     CurrentAddingIndex += 1;
                     if (CurrentAddingIndex >= meny.Items.Length) {
@@ -73,7 +88,6 @@ public class LevelGoalSelecter : MonoBehaviour {
                 }
             }
 
-
             ListOfSoldItems2.Add(meny.Items[CurrentAddingIndex]);
             CurrentTime += meny.Items[CurrentAddingIndex].TheTime;
             CurrentGold += meny.Items[CurrentAddingIndex].Cost;
@@ -82,6 +96,7 @@ public class LevelGoalSelecter : MonoBehaviour {
         } else {
 
             CurrentAddingIndex = LastAddedIndex + Mathf.Clamp((CurrentAddingIndex - LastAddedIndex), -rngReach, rngReach);
+     //       CurrentAddingIndex = LastAddedIndex + Mathf.Clamp((LastAddedIndex - CurrentAddingIndex), -rngReach, rngReach);
 
             if (CurrentAddingIndex < 0) {
                 CurrentAddingIndex = 0;

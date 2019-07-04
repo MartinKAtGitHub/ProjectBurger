@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3232ef5c697b4a046ac00514869ea579, type: 3}
+  m_Name: z_Hamburger_Meat_Beef_5_Overcooked
+  m_EditorClassIdentifier: 
+  _ingredientSprite: {fileID: 21300000, guid: 2c80ae958fa6502498bb994ebc9e4365, type: 3}
+  _ingredientName: HamburgerMeat
+  ingredientType: 2
+  RemoveChance: 0
+  IngredientCost: 5
+  MeatTimers:
+    serializedVersion: 2
+    key0: {r: 0.41251338, g: 0.46900716, b: 0.8490566, a: 1}
+    key1: {r: 0.4146131, g: 0.8117647, b: 0.78039217, a: 1}
+    key2: {r: 0.41568628, g: 0.8117647, b: 0.42745098, a: 0}
+    key3: {r: 0.77205074, g: 0.26155132, b: 0.1784782, a: 0}
+    key4: {r: 0.41509432, g: 0.057920128, b: 0, a: 0}
+    key5: {r: 0.41509432, g: 0.057920128, b: 0, a: 0}
+    key6: {r: 0.41509432, g: 0.057920128, b: 0, a: 0}
+    key7: {r: 0.41509432, g: 0.057920128, b: 0, a: 0}
+    ctime0: 14745
+    ctime1: 29491
+    ctime2: 42598
+    ctime3: 49151
+    ctime4: 54066
+    ctime5: 65535
+    ctime6: 58211
+    ctime7: 58211
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 6
+    m_NumAlphaKeys: 2
+  PerfectlyCooked: 0.5
+  MeatCookingTime: 45
+  MeatHeatForPerfection: 60
+  AllBurgerState:
+  - {fileID: 11400000, guid: 43b2e068eab111a488ecf5ec389d0b42, type: 2}
+  - {fileID: 11400000, guid: 91eab3dc226f5df4f9c635d77ee6340b, type: 2}
+  - {fileID: 11400000, guid: ecbeb6080522dea45912f133086e8b11, type: 2}
+  - {fileID: 11400000, guid: 4aedcd607324a8049a4c4d0157912f02, type: 2}
+  - {fileID: 11400000, guid: 26f4117fff29e7c4db6988789827d1a7, type: 2}
+  - {fileID: 11400000}
+  AllBurgerStages: {fileID: 4343727234628468602, guid: 255b06a76557d9b4bb4c71683dbee8cd,
+    type: 2}

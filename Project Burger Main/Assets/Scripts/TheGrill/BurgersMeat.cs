@@ -18,6 +18,8 @@ public class BurgersMeat : Ingredient {
     [HideInInspector] //Currently In Construction.
     public float MeatHeatForPerfection = 60f;//This Is The Heat That The Spesific Meat Needs To Be Perfectly Made. (TODO In Future, To Hot Might Burn The Meat) 
 
+    public BurgersMeat[] AllBurgerState;
+
     public SpriteAtlas AllBurgerStages;
       
 }

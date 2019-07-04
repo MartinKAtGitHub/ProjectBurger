@@ -7,16 +7,17 @@ public class TheCustomSpawner : MonoBehaviour {
     public Transform SpawnStartPos;
     public Transform SpawnEndPos;
 
-    public float MinimumTimeOfEmptyQueue = 5f;
-    public float TimeWaited = 0f;
+ //   public float MinimumTimeOfEmptyQueue = 5f;
+
+    float TimeWaited = 0f;
     public float spawntime = 30;
-    public float timetime = 0;
+ //   public float timetime = 0;
 
     QueueManager _TheQueue;
     GameObject spawned;
 
     public bool MakeArtificialQueue = false;//This Allows Good Player Performance To Spawn More Customer More Often.
-    public float ArtificialQueueFallOff = 1f;
+ //   public float ArtificialQueueFallOff = 1f;
 
     int ArtificialQueueLength = 0;
     float _ArtificialTimeWaited = 0;
@@ -42,8 +43,10 @@ public class TheCustomSpawner : MonoBehaviour {
 
     void Start() {
 
-        _TheQueue = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<QueueManager>();
+        if (SpawnStartPos == null)
+            SpawnStartPos = transform;
 
+        _TheQueue = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<QueueManager>();
         StartSpawning();
 
     }
@@ -51,7 +54,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
 
     void Update() {
-        timetime = Time.time;
+
         if (StartSpawner == true) {
 
 
@@ -94,7 +97,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
     void SetAditionalSpawningInfo() {
         spawned = _CustomerCreation.SettingUpCustomer(_ThemeDayCustomers.CusomterSpawnRandom(), this);//Getting Customer To Spawn
-        spawned = Instantiate(spawned, transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+        spawned = Instantiate(spawned, SpawnStartPos.position, Quaternion.identity, gameObject.transform) as GameObject;
 
          _TheQueue.AddCustomerToQueue(spawned.GetComponent<Customer>());
         SpeedSpawn = false;

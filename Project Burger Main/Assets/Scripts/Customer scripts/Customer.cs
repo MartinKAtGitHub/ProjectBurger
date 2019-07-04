@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(OrderGenerator))]
-public class Customer : MonoBehaviour
-{
+public class Customer : MonoBehaviour {
+
+    [SerializeField] private int _CustomerWaitingTime;
+
+
+
+
     [SerializeField] private string _customerName;
     public string CustomerName { get => _customerName; }
 
@@ -38,25 +43,41 @@ public class Customer : MonoBehaviour
 
     private void OnEnable() 
     {
-        _customerName = gameObject.name;
-        _order = OrderGenerator.RequestOrder();
-        _order.CustomerName = _customerName;
+
+        if (_order != null) {
+            _customerName = gameObject.name;
+            _order = OrderGenerator.RequestOrder();
+            _order.CustomerName = _customerName;
+        }
     }
 
     private void Start() {
         //Start Walk
         //Stop At Disc
         //Start Dialog;
+
         _CustomerStates.StartCustomerStates();
 
     }
+
+
+    void SetWaitingTime() {
+
+    }
+
+
 
     public void SetCustomerStates(TheCustomSpawner spawner) {
         TransformArray2 Paths = spawner.WalkingPositions.WalkingPossibilities[0].GroupInGroups[Random.Range(0, spawner.WalkingPositions.WalkingPossibilities[0].GroupInGroups.Length)];
         _CustomerStates.MakeNewInstance(Paths.PathInGroup.Length);
 
+        _customerName = gameObject.name;
+        _order = OrderGenerator.RequestOrder();
+        _order.CustomerName = _customerName;
+
+
         for (int i = 0; i < Paths.PathInGroup.Length; i++) {
-        _CustomerStates.SetBehaviours(
+            _CustomerStates.SetBehaviours(
            Paths.PathInGroup[i].PositionsInPath , Paths.PathInGroup[i].Talking, _order.OrderRecipes.Count * 25f * Paths.PathInGroup[i].Patience);
         }
 

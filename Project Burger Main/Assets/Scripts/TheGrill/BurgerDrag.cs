@@ -11,7 +11,7 @@ public class BurgerDrag : Draggable {
     public IngredientGameObject TheIngredientGameObject;
 
     private Transform LastParent;
-    private Vector3 LastPosition;
+  //  private Vector3 LastPosition;
   
 
     public override void OnBeginDrag(PointerEventData eventData) {

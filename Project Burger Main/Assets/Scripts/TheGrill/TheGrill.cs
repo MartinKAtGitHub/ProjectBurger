@@ -116,9 +116,7 @@ public class TheGrill : DropArea, IPointerClickHandler {
 
                 if (_TheBurgerInfo.TheIngredientGameObject.ingredient.IngredientType == Ingredient.IngredientTypes.HamBurger_Meat) {
 
-                    Debug.Log("SETTING PARENT");
                     _TheBurgerInfo.ResetPositionParent = transform;
-            //        _TheBurgerInfo.transform.SetParent(transform);
                     _TheBurgerInfo.transform.position = transform.position;
 
                     BurgerIngredience = _TheBurgerInfo.TheIngredientGameObject.ingredient as BurgersMeat;

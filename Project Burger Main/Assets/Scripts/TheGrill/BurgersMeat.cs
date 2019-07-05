@@ -20,7 +20,7 @@ public class BurgersMeat : Ingredient {
 
     public BurgersMeat[] AllBurgerState;
 
-    public SpriteAtlas AllBurgerStages;
+  //  public SpriteAtlas AllBurgerStages;
       
 }
 

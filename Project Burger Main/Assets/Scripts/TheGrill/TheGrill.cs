@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TheGrill : OnDropAreaInfo, IPointerClickHandler {
+public class TheGrill : DropArea, IPointerClickHandler {
 
     public GrillTemperature GrillSettings;
     [HideInInspector]
@@ -16,7 +16,7 @@ public class TheGrill : OnDropAreaInfo, IPointerClickHandler {
     public readonly float EndHeat = 0.905f;//This Is Going To Become 1, Its Just That I Need To Make a Sprite With Correct Dimentions.
 
     public bool DropAreaOccupied; // occupied
-    float _GrillTopHeat = 0;
+    float _GrillTopHeat = 60;
 
     [SerializeField]
     private float _HeatOfBurger = 0;
@@ -109,16 +109,16 @@ public class TheGrill : OnDropAreaInfo, IPointerClickHandler {
     }
 
     public override void OnDrop(PointerEventData eventData) {
-
         if (DropAreaOccupied == false) {
-            _TheBurgerInfo = eventData.pointerDrag.GetComponent<Draggable>() as BurgerDrag;
+            _TheBurgerInfo = eventData.pointerDrag.GetComponent<BurgerDrag>();
 
             if (_TheBurgerInfo != null) {
 
                 if (_TheBurgerInfo.TheIngredientGameObject.ingredient.IngredientType == Ingredient.IngredientTypes.HamBurger_Meat) {
 
+                    Debug.Log("SETTING PARENT");
                     _TheBurgerInfo.ResetPositionParent = transform;
-                    _TheBurgerInfo.transform.SetParent(transform);
+            //        _TheBurgerInfo.transform.SetParent(transform);
                     _TheBurgerInfo.transform.position = transform.position;
 
                     BurgerIngredience = _TheBurgerInfo.TheIngredientGameObject.ingredient as BurgersMeat;
@@ -133,7 +133,7 @@ public class TheGrill : OnDropAreaInfo, IPointerClickHandler {
 
 
     public override void DropAreaOnBeginDrag() {
-
+         
         EvaluateQuality();
         DropAreaOccupied = false;
         transform.GetChild(0).gameObject.SetActive(false);

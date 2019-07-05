@@ -9,8 +9,8 @@ public class CustomerWalk : MonoBehaviour {
 
 
 
-        //all referance som har med customer å gjøre
-        //walking With Animations
+    //all referance som har med customer å gjøre
+    //walking With Animations
 
     TestManager testin;
 
@@ -18,8 +18,8 @@ public class CustomerWalk : MonoBehaviour {
         testin = te;
     }
 
-     Transform Door;
-     Transform Cashier;
+    Transform Door;
+    Transform Cashier;
     public float MoveSpeed = 1;
 
     bool ReachedEnd = false;
@@ -31,7 +31,7 @@ public class CustomerWalk : MonoBehaviour {
 
     private void Start() {
         test = GetComponent<OrderGenerator>();
-        
+
     }
 
 
@@ -42,7 +42,7 @@ public class CustomerWalk : MonoBehaviour {
 
     private void Update() {
 
-        if(ReachedEnd == false) {
+        if (ReachedEnd == false) {
             transform.position = Vector3.MoveTowards(transform.position, Cashier.position, MoveSpeed * Time.deltaTime);
             if (transform.position == Cashier.position) {
                 ReachedEnd = true;
@@ -50,10 +50,10 @@ public class CustomerWalk : MonoBehaviour {
             }
         } else {
 
-            if(GoIn == true) {//StartDialog And/Or Order Generator
-                              //TODO connect To Order Generator And Wait For Response;
+            if (GoIn == true) {//StartDialog And/Or Order Generator
+                               //TODO connect To Order Generator And Wait For Response;
 
-                if(onceorder == true) {
+                if (onceorder == true) {
                     Debug.Log("AT THE GOAL");
                     test.RequestOrder();
                     testin.SetOrder(this);

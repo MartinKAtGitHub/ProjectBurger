@@ -2,7 +2,7 @@
 using UnityEngine;
 
 //In The Future, Make The Burger Lose Its Freshness If On The Wait Area For To Long?
-public class BurgerWaitArea : OnDropAreaInfo {
+public class BurgerWaitArea : DropArea {
 
     public Ingredient.IngredientTypes WhatCanDropOnHere;
     public bool ConstantHeat = true;

@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GrillPlateStack : OnDropAreaInfo {
+public class GrillPlateStack : DropArea {
 
     [SerializeField]
     private GameObject _Ingredience = null;
@@ -12,6 +13,9 @@ public class GrillPlateStack : OnDropAreaInfo {
     [SerializeField]
     private bool _PresetSpawn = false;
     public int IngredienceSpawnAmout;
+
+    int StackCount = -1;
+    BurgerDrag BurgerCheck;
 
 
     private void Start() {
@@ -23,21 +27,38 @@ public class GrillPlateStack : OnDropAreaInfo {
     }
 
     private void SpawnIngredience() {
-        _SpawnedIngredients = Instantiate(_Ingredience, transform).GetComponent<Draggable>() as BurgerDrag;
+        _SpawnedIngredients = Instantiate(_Ingredience, transform).GetComponent<BurgerDrag>();
 
         _SpawnedIngredients.ResetPositionParent = transform;
-        _SpawnedIngredients.SetStartParent(transform.position + (Vector3.up * transform.childCount * 8) + (Vector3.up * 28.5f), transform);
-
-        _SpawnedIngredients.GetComponent<RectTransform>().position = transform.position + (Vector3.up * transform.childCount * 8) + (Vector3.up * 28.5f);
+        _SpawnedIngredients.GetComponent<RectTransform>().position = transform.position + (Vector3.up * ++StackCount * 8) + (Vector3.up * 28.5f);
     }
 
+
     public override void DropAreaOnBeginDrag() {
+        StackCount -= 1;
 
-        if(transform.childCount < 1) {
+        for(int i = 0; i <= StackCount; i++) {
+            transform.GetChild(i).transform.position = transform.position + (Vector3.up * i * 8) + (Vector3.up * 28.5f);
+        }
 
+        if (StackCount < 0) {
             SpawnIngredience();
 
         }
     }
-    
+
+    public override void OnDrop(PointerEventData eventData) {
+        
+        BurgerCheck = eventData.pointerDrag.GetComponent<BurgerDrag>() ;
+
+        if(BurgerCheck != null) {
+
+            if(BurgerCheck.TheBurgerInfos.MyVariablesUp._BurgerHeat == 0 && BurgerCheck.TheBurgerInfos.MyVariablesDown._BurgerHeat == 0) {
+                StackCount += 1;
+                BurgerCheck.ResetPositionParent = transform;
+                BurgerCheck.GetComponent<RectTransform>().position = transform.position + (Vector3.up * StackCount * 8) + (Vector3.up * 28.5f);
+            }
+        } 
+    }
+
 }

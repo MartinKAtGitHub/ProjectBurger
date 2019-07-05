@@ -139,7 +139,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 97a098adfe350c44b8514909f061ee36, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22d676abbd402384b954a5445926037e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -333,7 +333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.5, y: 24}
+  m_AnchoredPosition: {x: -0.5, y: 8}
   m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3600168031842651323
@@ -369,8 +369,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.5, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: -0.5, y: -8}
+  m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4304389600862180979
 GameObject:
@@ -437,7 +437,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 94190506d6dc12b44a66d1f0026077fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f825ccf49d3f9244ba650813ef5a5b9e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -511,7 +511,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3c0ab47956945724d932a3d2569a9eba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7d54b941875db45b998c71e013dcdd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -572,7 +572,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f66bc8299858f4fb40d75ff36021ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _customerName: Sup M. Kay?
+  _CustomerWaitingTime: 0
+  _customerName: TheCustomer
   _OrderGenerator: {fileID: 223520889014273738}
   _CustomerStates: {fileID: 4000002164745539283}
 --- !u!114 &4000002164745539283
@@ -590,12 +591,14 @@ MonoBehaviour:
   CustomerStates:
   - walkingPositions:
     - {fileID: 0}
-    Talk: 0
-    WaitingTime: 0
-  - walkingPositions:
     - {fileID: 0}
     Talk: 0
-    WaitingTime: 0
+    WaitingTime: 75
+  - walkingPositions:
+    - {fileID: 0}
+    - {fileID: 0}
+    Talk: 0
+    WaitingTime: 75
   _MoveSpeed: 250
 --- !u!114 &223520889014273738
 MonoBehaviour:
@@ -611,27 +614,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RemoveIngredients: 0
   _recipeBook: {fileID: 11400000, guid: 4551bc7341af94b48a1e06c551ebb029, type: 2}
-  _multiOrderAmount: 4
-  _multiOrderChance: 100
+  _multiOrderAmount: 3
+  _multiOrderChance: 65
   _order:
-    CustomerName: 
+    CustomerName: TheCustomer
     OrderRecipes:
     - OrderIngredients:
       - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
       - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
-      - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
-      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
-      DiscaredIngredients: []
-    - OrderIngredients:
-      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
-      - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
       - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
       - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
       DiscaredIngredients: []
     - OrderIngredients:
       - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
       - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
-      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
       - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
       DiscaredIngredients: []
     - OrderIngredients:

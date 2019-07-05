@@ -48,10 +48,6 @@ public class ScoreManager : MonoBehaviour {
         }
     }
 
-    //Hmm Should we have random generated burgers? or should be instead make multiple burgers and just spawn those?
-    //If We just spawn a burger from its recipe it much easier to do the check, if its the correct item.
-    //+ If we want a cost on the burger itself, then that wont be possible, cuz its rng generated. then the cost will always be based on the ingredients and how much of them there are.
-
 
 
     //Simple Check If Ingredient Are Correct And Give Score Based On Ingredient Cost, So The More And Expensive Ingredients The More Money Earned.
@@ -90,39 +86,33 @@ public class ScoreManager : MonoBehaviour {
 
 
 
-    //IN PROGRESS, Might Not Even Happen
-    public void CalculateScoreMultipleItems(Order theOrder, Food theItem) {
+    //TODO.. IN PROGRESS, Might Not Even Happen
+    public void CalculateScoreMultipleItems(Customer customer) {
+        float addingMoney = 0;
+        float foodScore = 0;
+        float foodScoreDiff = 0;
 
-        for (int i = 0; i < theOrder.OrderRecipes.Count; i++) {//Going Through All Recipes Connected To The Order
+        for (int i = 0; i < customer.Order.OrderRecipes.Count; i++) {//Setting Cost Based On RecipeTimer
+            addingMoney += customer.Order.OrderRecipes[i].BaseRecipe.RecipeCost;
+            foodScoreDiff = 0;
+            foodScore = 0;
 
-            for (int j = 0; j < theOrder.OrderRecipes[i].OrderIngredients.Count; j++) {//Iterating Through The Ingredient Of The Selected Recipe
-
-                if (theOrder.OrderRecipes[i].OrderIngredients[j] == theItem.GameObjectIngredients[j]) {//If Recipe And Checking Item Have Same Ingredients Continue, If Not Check Next Recipe
-
-                    if (j == theOrder.OrderRecipes[i].OrderIngredients.Count - 1) {//Found A Match, And At The Last Ingredient
-
-                        for (int k = 0; k < theOrder.OrderRecipes[i].OrderIngredients.Count; k++) {
-                            Money += theOrder.OrderRecipes[i].OrderIngredients[k].IngredientCost * (1 + (0.01f * ++_Combo));
-
-                            if (_Combo > 30) {//Just A Simple ComboTime Setter
-                                _ComboTime = Time.time + 30;
-                            } else {
-                                _ComboTime = Time.time + (60 - _Combo);
-                            }
-
-                        }
-                        return;//Only 1 Item Is Checked Currently
-
-                    }
-                } else {
-                    break;
-                }
+            for (int j = 0; j < customer.Order.OrderRecipes[i].BaseRecipe.Ingredients.Count; j++) {//Recipe Cost
+                foodScore += customer.Order.OrderRecipes[i].BaseRecipe.Ingredients[j].IngredientCost;
             }
+
+            for (int j = 0; j < customer.Order.OrderRecipes[i].OrderIngredients.Count; j++) {//Order Cost
+                foodScoreDiff += customer.Order.OrderRecipes[i].OrderIngredients[j].IngredientCost;
+            }
+            addingMoney -= (foodScore - foodScoreDiff);
         }
+
+        _Money += addingMoney;
+
 
         _Combo = 0;
         Mistakes++;
-        //Send Info To "Happiness" Display, To Show If Combo Increase And Money Gained When Customer Exiting Building
+
     }
 
 

@@ -70,6 +70,7 @@ public class OrderGenerator : MonoBehaviour
     private OrderRecipe CreateOrderRecipe(Recipe orderBaseRecipe)
     {
         OrderRecipe orderRecipe = new OrderRecipe();
+        orderRecipe.BaseRecipe = orderBaseRecipe;
         //orderRecipe.CustomerName = gameObject.name;
 
         for (int i = 0; i < orderBaseRecipe.Ingredients.Count; i++) // Rolls to check if a ingredient will be removed

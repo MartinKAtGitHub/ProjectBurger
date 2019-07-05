@@ -37,6 +37,7 @@ public class Ingredient : ScriptableObject
      [Range(0,100)]
     public int RemoveChance = 0;
     public float IngredientCost = 1;//Used To Calculate Cost Of The Burger/MenuItem
+    public float IngredientTime = 1;//Used To Calculate Cost Of The Burger/MenuItem
 
     public Sprite IngredientSprite { get { return _ingredientSprite; } }
 }

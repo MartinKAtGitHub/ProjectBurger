@@ -25,6 +25,8 @@ public abstract class Recipe : ScriptableObject
 
     [SerializeField]
     private float _recipeCost;
+    [SerializeField]
+    private float _recipeTime;
 
 
     private int _reputationGain;
@@ -55,6 +57,15 @@ public abstract class Recipe : ScriptableObject
         set  {
             if (_recipeCost != 0) {
                 _recipeCost = value;
+            }
+        }
+    }
+
+    public float RecipeTime {//If The Recipe Have No Cost, Then It Will Give It A New Cost. So It Can Be Overrided If You Want To Give A Recipe A Spesific Cost And Not Just Ingredient Cost.
+        get => _recipeTime;
+        set {
+            if (_recipeTime != 0) {
+                _recipeTime = value;
             }
         }
     }

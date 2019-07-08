@@ -77,6 +77,7 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
             {
                 Debug.Log("NO FOOD PLACED ON FOODTRAY !!!!!");
                 _orderSuccessful = false;
+                return;
             }
 
             if (amountOfOrderRecipes == _foods.Count)
@@ -156,8 +157,6 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
                     ResultImage.color = Color.red;
                     _orderSuccessful = false;
                 }
-
-
             }
             else
             {
@@ -169,7 +168,6 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
         {
             Debug.Log("FoodTray has no Order = null");
         }
-
     }
 
     private void OnSuccessfulOrder()
@@ -178,6 +176,7 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
         for (int i = 0; i < _foods.Count; i++)
         {
             var food = _foods[i].gameObject;
+
             _foods.RemoveAt(i);
             Destroy(food); // PERFORMANCE FoodTray.cs | Destroying food On successful.
         }

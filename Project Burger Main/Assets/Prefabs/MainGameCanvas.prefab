@@ -99,7 +99,7 @@ RectTransform:
   m_LocalScale: {x: 3.5754192, y: 3.5754192, z: 3.5754192}
   m_Children: []
   m_Father: {fileID: 8727089984607184489}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -124,6 +124,7 @@ MonoBehaviour:
   CustomerSpawner: {fileID: 0}
   SalesManager: {fileID: 127417319464679396}
   ShuffleBag: {fileID: 5530641185789147020}
+  ScoreManager: {fileID: 0}
   _preparationTime: 1
   _customerSpawnTimerMinMax: {x: 1, y: 5}
 --- !u!114 &1083111156
@@ -668,7 +669,7 @@ RectTransform:
   m_Children:
   - {fileID: 3900268302325956487}
   m_Father: {fileID: 8727089984607184489}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1166,7 +1167,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8727089984607184489}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -2104,10 +2105,10 @@ RectTransform:
   - {fileID: 8727089984517639785}
   - {fileID: 8727089983249893036}
   - {fileID: 8727089984814766912}
+  - {fileID: 1093772511701783413}
   - {fileID: 6781278070778198384}
   - {fileID: 8214037374754832715}
   - {fileID: 5877327423906311659}
-  - {fileID: 1093772511701783413}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4851,7 +4852,7 @@ PrefabInstance:
     - target: {fileID: 2812263084129758020, guid: fca25ee02eaadf94cb18e4f6ec8891cd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2812263084129758020, guid: fca25ee02eaadf94cb18e4f6ec8891cd,
         type: 3}

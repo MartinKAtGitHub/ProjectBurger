@@ -33,7 +33,6 @@ public class BurgerDrag : Draggable {
             transform.position = LastPosition;
             transform.SetParent(ResetPositionParent);
         }
-
     }
 
     public void SetStartParent(Vector3 pos, Transform transfor) {

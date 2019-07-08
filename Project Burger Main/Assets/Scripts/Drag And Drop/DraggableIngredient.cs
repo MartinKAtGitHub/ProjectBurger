@@ -26,7 +26,6 @@ public class DraggableIngredient : Draggable
     {
         base.OnEndDrag(eventData);
 
-      
         if (FoodCombinationDropArea != null) // This will only run if we drop on foodcombi, not on reset
         {
             if (FoodCombinationDropArea.IsFoodReady)

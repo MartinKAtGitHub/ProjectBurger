@@ -10,44 +10,19 @@ public class Customer : MonoBehaviour
 
     [SerializeField] private RectTransform _customerInteractionContainer;
     [SerializeField] private RectTransform _customerNotInFocusContainer;
-
     [SerializeField] private int _CustomerWaitingTime;
-
-
-
-
     [SerializeField] private string _customerName;
-    public string CustomerName { get => _customerName; }
     [SerializeField] private bool _isWaiting;
-
+    [SerializeField]  private CustomerState _CustomerStates = null;
 
     private Order _order;
     private CustomerSelect _customerSelect;
 
+    public string CustomerName { get => _customerName; }
     public OrderGenerator OrderGenerator { get; private set; }
     public Order Order { get => _order; }
-    public string CustomerName { get => _customerName; }
     public bool IsWaiting { get => _isWaiting; }
-
-    [SerializeField]
-    private OrderGenerator _OrderGenerator = null;
-    public OrderGenerator OrderGenerator
-    {
-        get
-        {
-            return _OrderGenerator;
-        }
-    }
-
-    [SerializeField]
-    private CustomerState _CustomerStates = null;
-    public CustomerState CustomerStates
-    {
-        get
-        {
-            return _CustomerStates;
-        }
-    }
+    public CustomerState CustomerStates{ get => _CustomerStates; }
 
     private void OnDestroy()
     {
@@ -57,6 +32,7 @@ public class Customer : MonoBehaviour
     private void Awake()
     {
         OrderGenerator = GetComponent<OrderGenerator>();
+
     }
 
     private void OnEnable()
@@ -76,7 +52,12 @@ public class Customer : MonoBehaviour
         //Stop At Disc
         //Start Dialog;
 
-        _CustomerStates.StartCustomerStates();
+       // _CustomerStates.StartCustomerStates();
+        _customerSelect = LevelManager.Instance.CustomerSelect;
+        if (TestingRandomTimeout)
+        {
+            Invoke("CustomerTimeout", Random.Range(10, 20));
+        }
 
     }
 
@@ -102,14 +83,6 @@ public class Customer : MonoBehaviour
         {
             _CustomerStates.SetBehaviours(
            Paths.PathInGroup[i].PositionsInPath, Paths.PathInGroup[i].Talking, _order.OrderRecipes.Count * 25f * Paths.PathInGroup[i].Patience);
-        }
-    }
-    private void Start()
-    {
-        _customerSelect = LevelManager.Instance.CustomerSelect;
-        if (TestingRandomTimeout)
-        {
-            Invoke("CustomerTimeout", Random.Range(10, 20));
         }
     }
 
@@ -152,7 +125,4 @@ public class Customer : MonoBehaviour
 
         }
     }
-
-
-
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 /// We need this object so we can hold and get the data from ingredient SO.
 /// 
 /// </summary>
-public class IngredientGameObject : MonoBehaviour
+public class IngredientGameObject : MonoBehaviour //TODO  put this in Ingredient Drag 
 {
     public Ingredient ingredient;
 

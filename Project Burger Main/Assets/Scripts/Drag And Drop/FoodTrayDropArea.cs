@@ -53,17 +53,17 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
     /// <summary>
     /// The food will sold the moment the amount of foodstacks = to the amount of foodstack the order requers
     /// </summary>
-    private void AutoSell()
-    {
-        if (_order.OrderRecipes.Count == _foods.Count)
-        {
-            CheckFoodStacksAgainstOrder();
-        }
-        else
-        {
-            Debug.Log("Missing rest of the order -> Order recipes(" + _order.OrderRecipes.Count + ") FoodStacks(" + _foods.Count + ")");
-        }
-    }
+    //private void AutoSell()
+    //{
+    //    if (_order.OrderRecipes.Count == _foods.Count)
+    //    {
+    //        CheckFoodStacksAgainstOrder();
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("Missing rest of the order -> Order recipes(" + _order.OrderRecipes.Count + ") FoodStacks(" + _foods.Count + ")");
+    //    }
+    //}
 
     //PERFORMANCE Foodtray CheckFoodStacksAgainstOrder() we can check food per Drop instead of all the food at 1 time. check all the results on sell
     public void CheckFoodStacksAgainstOrder() // TODO FoodTray.cs | CheckFoodStacksAgainstOrder() can be moved to another script to make it cleaner 

@@ -5,10 +5,9 @@ using UnityEngine.EventSystems;
 
 public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
 {
-    public Food Food { get => _food; set => _food = value; }
-    public bool IsFoodReady { get => _isFoodReady; set => _isFoodReady = value; }
-    public bool OccupiedByFood { get => _occupiedByFood; set => _occupiedByFood = value; }
 
+
+    [SerializeField] private float _ingredientOffsetAmount;
     [SerializeField] private GameObject _foodGameObjectPrefab;
     /// <summary>
     /// When this ingredient is added to the stack, it marks that the food is ready to be sold 
@@ -25,7 +24,13 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
     /// Needs to start at -1 because of 0 index in start point
     /// </summary>
     private int _foodIngredientsIndex = -1;
+    private float _ingredientOffset;
     private Food _food;
+
+
+    public Food Food { get => _food; set => _food = value; }
+    public bool IsFoodReady { get => _isFoodReady; set => _isFoodReady = value; }
+    public bool OccupiedByFood { get => _occupiedByFood; set => _occupiedByFood = value; }
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -34,22 +39,21 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
             var food = eventData.pointerDrag.GetComponent<Food>();
             var draggableComponent = eventData.pointerDrag.GetComponent<DraggableIngredient>();
 
-            if (food != null && !_occupiedByIngredient) // && Not occipied by ingredient
+            if (food != null && !_occupiedByIngredient)
             {
                 _occupiedByFood = true;
                 food.FoodDrag.FoodCombinationDropArea = this;
                 food.FoodDrag.ResetPositionParent = this.transform;
-               // food.FoodDrag.FoodCombinationTransform = this.transform; 
+                // food.FoodDrag.FoodCombinationTransform = this.transform; 
             }
             else if (draggableComponent != null)
             {
-               
                 CreateFoodGameObject();
 
                 draggableComponent.FoodCombinationDropArea = this;
                 draggableComponent.ResetPositionParent = this.transform;
 
-                var ingredientGameObject = eventData.pointerDrag.GetComponent<IngredientGameObject>(); // PERFORMANCE maybe DraggableIngredient inside of this so we dont have to getcomp on every drop
+                var ingredientGameObject = eventData.pointerDrag.GetComponent<IngredientGameObject>();
 
                 if (ingredientGameObject != null)
                 {
@@ -57,7 +61,7 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
                     CheckFoodStackWithRecepies();
                     CheckIFFinalIngredientIsPlaced(ingredientGameObject.ingredient);
 
-                    if(_isFoodReady)
+                    if (_isFoodReady)
                     {
                         _occupiedByFood = true;
                         _occupiedByIngredient = false;
@@ -79,7 +83,7 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
         }
     }
 
-    
+
     private void AddIngredientsToFood(IngredientGameObject ingredient)
     {
         _food.GameObjectIngredients.Add(ingredient);
@@ -95,6 +99,9 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
     {
         _food.GameObjectIngredients.RemoveAt(_food.GameObjectIngredients.Count - 1); // Removes the top ingredient 
         _foodIngredientsIndex--;
+        
+        _ingredientOffsetAmount -= _ingredientOffsetAmount;
+        Debug.Log($"Offset removed new offset= {_ingredientOffsetAmount}" );
 
         if (_foodIngredientsIndex <= -1)
         {
@@ -102,6 +109,10 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
         }
     }
 
+    /// <summary>
+    /// Checks to see if the ingredient matches the position and type of any recipe in the recipe book
+    /// If we reach the end of the function, the Warning UI will trigger and single the player that no match was found. 
+    /// </summary>
     private void CheckFoodStackWithRecepies()
     {
         for (int i = 0; i < _recipeBook.Recipes.Count; i++)
@@ -142,6 +153,8 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
         if (_food.GameObjectIngredients.Count > 1 && ingredient.IngredientType == _foodStackFinishConditionIngredient.IngredientType)
         {
             _isFoodReady = true;
+            //MakeFoodDraggable();
+            //ParentIngredientsToFood();
         }
         else
         {
@@ -149,6 +162,28 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
         }
 
         //_isFoodReady = (ingredient.IngredientType == _foodStackFinishConditionIngredient.IngredientType) ? true : false;
+    }
+
+
+    public void MakeFoodDraggable()
+    {
+        for (int i = 0; i < _food.GameObjectIngredients.Count; i++)
+        {
+            _food.GameObjectIngredients[i].GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
+        _food.GetComponent<CanvasGroup>().blocksRaycasts = true;
+    }
+
+    public void ParentIngredientsToFood()
+    {
+        _food.ParentIngredientsToFoodObject();
+    }
+
+    public void OffsetIngredientObject(Transform ingredientTrans)
+    {
+        ingredientTrans.localPosition = new Vector2(0, _ingredientOffset + ingredientTrans.localPosition.y);
+        _ingredientOffset += _ingredientOffsetAmount;
+        Debug.Log($"Offset ADDED new offset = {_ingredientOffsetAmount}");
     }
 }
 

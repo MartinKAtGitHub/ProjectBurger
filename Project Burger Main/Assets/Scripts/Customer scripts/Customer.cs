@@ -33,17 +33,17 @@ public class Customer : MonoBehaviour
     {
         OrderGenerator = GetComponent<OrderGenerator>();
 
-    }
-
-    private void OnEnable()
-    {
-
-        if (_order != null)
+        if (_order == null)
         {
             _customerName = gameObject.name;
             _order = OrderGenerator.RequestOrder();
             _order.CustomerName = _customerName;
         }
+    }
+
+    private void OnEnable()
+    {
+
     }
 
     private void Start()

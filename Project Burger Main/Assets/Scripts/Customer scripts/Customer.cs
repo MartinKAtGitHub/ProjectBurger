@@ -13,16 +13,19 @@ public class Customer : MonoBehaviour
     [SerializeField] private int _CustomerWaitingTime;
     [SerializeField] private string _customerName;
     [SerializeField] private bool _isWaiting;
-    [SerializeField]  private CustomerState _CustomerStates = null;
+    [SerializeField] private CustomerState _CustomerStates = null;
 
     private Order _order;
     private CustomerSelect _customerSelect;
+    private OrderWindow _orderWindow;
+    private OrderGenerator _orderGenerator;
 
     public string CustomerName { get => _customerName; }
-    public OrderGenerator OrderGenerator { get; private set; }
+    public OrderGenerator OrderGenerator { get => _orderGenerator; private set => _orderGenerator = value; }
     public Order Order { get => _order; }
     public bool IsWaiting { get => _isWaiting; }
-    public CustomerState CustomerStates{ get => _CustomerStates; }
+    public CustomerState CustomerStates { get => _CustomerStates; }
+    public OrderWindow OrderWindow { get => _orderWindow; }
 
     private void OnDestroy()
     {
@@ -31,7 +34,8 @@ public class Customer : MonoBehaviour
 
     private void Awake()
     {
-        OrderGenerator = GetComponent<OrderGenerator>();
+        _orderGenerator = GetComponent<OrderGenerator>();
+        _orderWindow = GetComponent<OrderWindow>();
 
         if (_order == null)
         {
@@ -41,24 +45,18 @@ public class Customer : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-
-    }
-
     private void Start()
     {
         //Start Walk
         //Stop At Disc
         //Start Dialog;
 
-       // _CustomerStates.StartCustomerStates();
+        // _CustomerStates.StartCustomerStates();
         _customerSelect = LevelManager.Instance.CustomerSelect;
         if (TestingRandomTimeout)
         {
             Invoke("CustomerTimeout", Random.Range(10, 20));
         }
-
     }
 
 
@@ -113,6 +111,7 @@ public class Customer : MonoBehaviour
         Debug.Log($"{name} Removed No Anim");
         LevelManager.Instance.CustomerSelect.OnTimeOut(this);
         LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
+
     }
 
     private void TimeOutPlayAnim()
@@ -122,7 +121,7 @@ public class Customer : MonoBehaviour
             Debug.Log($"{name} Removed Play Anim");
             LevelManager.Instance.CustomerSelect.OnTimeOut(this);
             LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
-
+            OrderWindow.CloseWindow();
         }
     }
 }

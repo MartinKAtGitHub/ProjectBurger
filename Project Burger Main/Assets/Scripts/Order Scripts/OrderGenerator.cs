@@ -33,13 +33,14 @@ public class OrderGenerator : MonoBehaviour
     {
         //_customer = GetComponent<Customer>();
     }
+
     /// <summary>
     /// Generates a new order(s) based on chance, the ingredients can be set to be removed at which point
     /// there will be chance to remove the ingredients
     /// </summary>
     public Order RequestOrder()
     {
-        Debug.Log(name + " Is requesting a Order");
+        //Debug.Log(name + " Is requesting a Order");
         _order = new Order();
         //   _order.CustomerName = _customer.CustomerName;
 
@@ -99,7 +100,8 @@ public class OrderGenerator : MonoBehaviour
             if (_recipeBook.Recipes[j].AccumulatedWight >= recipeRoll)
             {
                 // var orderBaseRecipe = _recipeBook.Recipes[j]; // This turns into null for some reason, but only for the first spawn lel
-                _order.OrderRecipes.Add(CreateOrderRecipe(_recipeBook.Recipes[j]));
+                _orderBaseRecipe = _recipeBook.Recipes[j];
+                _order.OrderRecipes.Add(CreateOrderRecipe(_orderBaseRecipe));
 
                 return; // If i find a recipe then no need to loop through the rest
             }

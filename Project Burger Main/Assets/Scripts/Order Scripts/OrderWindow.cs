@@ -8,22 +8,23 @@ using System.Collections.Generic;
 /// </summary>
 public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer ?
 {
-    [SerializeField]
-    private GameObject _orderWindowPrefab;
+    [SerializeField] private GameObject _orderWindowParent;
+    [SerializeField] private GameObject _orderWindowPrefab;
 
     private OrderWindowData _orderWindowData;
     private OrderGenerator _orderGenerator;
-
     private GameObject _orderWindow;
     private void Awake()
     {
         _orderGenerator = GetComponent<OrderGenerator>();
         CreateOrderWindow();
+        _orderWindowParent = GameObject.FindGameObjectWithTag("MainCanvas");
     }
 
     public void OpenWindow()
     {
-        // Fade INN Window / enable window = true
+        // Anim Fade INN Window / enable window = true
+    
         UpdateUI();
         _orderWindow.SetActive(true);
     }
@@ -33,7 +34,7 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
         // Fade OUT Window / enable window = false
         //set all to null
         _orderWindow.SetActive(false);
-       // Destroy(_orderWindow);
+        // Destroy(_orderWindow);
     }
 
     public void UpdateUI()
@@ -47,11 +48,14 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
         }
     }
 
-    private void CreateOrderWindow()
+    private void CreateOrderWindow() //TODO OrderWindow.cs | Don't need to instantiate this if every Customer has it. Just child prefab to Customer
     {
-        _orderWindow = Instantiate(_orderWindowPrefab,transform);
+        //_orderWindow = Instantiate(_orderWindowPrefab, transform.parent);
+        _orderWindow = Instantiate(_orderWindowPrefab, _orderWindowParent.transform);
 
+        //_orderWindow.transform.SetParent(_orderWindowParent);
         _orderWindowData = _orderWindow.GetComponent<OrderWindowData>();
+        _orderWindow.name = $"ORDER WINDOW {name}";
         _orderWindow.SetActive(false);
 
     }

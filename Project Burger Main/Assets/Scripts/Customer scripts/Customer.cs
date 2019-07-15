@@ -55,6 +55,7 @@ public class Customer : MonoBehaviour
         _customerSelect = LevelManager.Instance.CustomerSelect;
         if (TestingRandomTimeout)
         {
+            Debug.Log($"CUSTOMER TIMEOUT = {name}");
             Invoke("CustomerTimeout", Random.Range(10, 20));
         }
     }
@@ -109,7 +110,7 @@ public class Customer : MonoBehaviour
     private void TimeOutInstantRemove()
     {
         Debug.Log($"{name} Removed No Anim");
-        LevelManager.Instance.CustomerSelect.OnTimeOut(this);
+        _customerSelect.OnTimeOut(this);
         LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
 
     }
@@ -119,9 +120,11 @@ public class Customer : MonoBehaviour
         if (!IsWaiting)
         {
             Debug.Log($"{name} Removed Play Anim");
-            LevelManager.Instance.CustomerSelect.OnTimeOut(this);
+            _customerSelect.OnTimeOut(this);
+            _customerSelect.CircularRight();
             LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
             OrderWindow.CloseWindow();
+           
         }
     }
 }

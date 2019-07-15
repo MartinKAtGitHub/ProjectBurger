@@ -4175,6 +4175,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5120073371209215687, guid: c9eceda9495c8da40a29ee11ce2a36a2,
+        type: 3}
+      propertyPath: m_Padding.m_Top
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4427589737253141983, guid: c9eceda9495c8da40a29ee11ce2a36a2,
         type: 3}
       propertyPath: _queueDotParent

@@ -8,40 +8,66 @@ public class QueueManager : MonoBehaviour
 
     [SerializeField] private RectTransform _customerNotInFocusContainer;
     [SerializeField] private RectTransform _customerInteractionContainer;
+    [SerializeField] private GameObject _queueSlotPrefab;
     [SerializeField] private int _activeQueueLimit;
-    [SerializeField] private int _activeQueueCounter;
-    [SerializeField] private List<Customer> _activeCustomerQueue = new List<Customer>();
-    [SerializeField] private Customer[] _limitedActiveCustomerQueue;
+    [SerializeField] private int _currentActiveCustomer;
+    // [SerializeField] private List<Customer> _activeCustomerQueue = new List<Customer>();
+    [SerializeField] private QueueSlot[] _queueSlots;
 
     // private CustomerSelect _customerSelect;
     // private QueueDotIndicators _queueDotIndicators;
-    public List<Customer> ActiveCustomerQueue { get => _activeCustomerQueue; }
-    public Customer[] LimitedActiveCustomerQueue { get => _limitedActiveCustomerQueue; }
+    public List<Customer> ActiveCustomerQueue { get => null /*_activeCustomerQueue*/; }
+    public QueueSlot[] QueueSlots { get => _queueSlots; }
     public int ActiveQueueLimit { get => _activeQueueLimit; }
-    public int ActiveQueueCounter { get => _activeQueueCounter; }
+    public int CurrentActiveCustomer { get => _currentActiveCustomer; }
+    public GameObject QueueSlotPrefab { get => _queueSlotPrefab;  }
 
     private void Awake()
     {
         //_customerSelect = GetComponent<CustomerSelect>();
         //_queueDotIndicators = GetComponent<QueueDotIndicators>();
 
-        _limitedActiveCustomerQueue = new Customer[_activeQueueLimit];
+       
+        GenerateQueueSlots();
+    }
+
+    private void GenerateQueueSlots()
+    {
+        _queueSlots = new QueueSlot[_activeQueueLimit];
+
+        for (int i = 0; i < _queueSlots.Length; i++)
+        {
+            var queueSlot = Instantiate(_queueSlotPrefab, _customerNotInFocusContainer.transform);
+            _queueSlots[i] = queueSlot.GetComponent<QueueSlot>();
+
+        }
+
+    }
+
+    private void SearchQueueSlotsForEmptySlot(Customer customer)
+    {
+        for (int i = 0; i < _queueSlots.Length; i++)
+        {
+            if (_queueSlots[i].CurrentCustomer == null)
+            {
+                Debug.Log($"Slot {i} is empty, setting {customer.name} in this Position");
+                var slot = _queueSlots[i];
+
+                slot.CurrentCustomer = customer;
+                customer.transform.SetParent(slot.transform);
+                customer.transform.localPosition = Vector2.zero;
+                return;
+            }
+        }
     }
 
     public void AddCustomerToQueue(Customer customer)
     {
         customer.gameObject.SetActive(true);
-        _activeQueueCounter++;
 
-        for (int i = 0; i < _limitedActiveCustomerQueue.Length; i++)
-        {
-            if (_limitedActiveCustomerQueue[i] == null)
-            {
-                Debug.Log($"Slot {i} is empty, setting {customer.name} in this Position");
-                _limitedActiveCustomerQueue[i] = customer;
-                return;
-            }
-        }
+        _currentActiveCustomer++;
+
+        SearchQueueSlotsForEmptySlot(customer);
 
 
         // _activeCustomerQueue.Add(customer);
@@ -62,15 +88,15 @@ public class QueueManager : MonoBehaviour
 
     public void RemoveCustomerFromQueue(Customer customer)
     {
-        _activeQueueCounter--;
+        _currentActiveCustomer--;
 
-        for (int i = 0; i < _limitedActiveCustomerQueue.Length; i++)
+        for (int i = 0; i < _queueSlots.Length; i++)
         {
-            if (_limitedActiveCustomerQueue[i] != null)
+            if (_queueSlots[i] != null)
             {
-                if (_limitedActiveCustomerQueue[i].Equals(customer))
+                if (_queueSlots[i].Equals(customer))
                 {
-                    _limitedActiveCustomerQueue[i] = null;
+                    _queueSlots[i] = null;
                     Destroy(customer.gameObject); // PERFORMANCE Queumanager.cs | this can cause lags, might need to pool ouer characters
                 }
             }
@@ -90,7 +116,6 @@ public class QueueManager : MonoBehaviour
         //    Debug.LogError("Quemanager.cs  RemoveCustomerFromQueue() | You are trying to remove a customer from a empty list");
         //}
     }
-
 
 
 }

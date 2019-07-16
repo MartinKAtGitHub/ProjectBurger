@@ -65,7 +65,7 @@ public class LevelManager : MonoBehaviour
             yield return new WaitUntil(() =>
             {
               //  return QueueManager.ActiveCustomerQueue.Count < QueueManager.ActiveQueueLimit;
-                return QueueManager.ActiveQueueCounter < QueueManager.ActiveQueueLimit;
+                return QueueManager.CurrentActiveCustomer < QueueManager.ActiveQueueLimit;
            
 
             }); // PERFORMANCE Levelmanager.cs | StartLevel() The bool is checked every frame, until it turns true

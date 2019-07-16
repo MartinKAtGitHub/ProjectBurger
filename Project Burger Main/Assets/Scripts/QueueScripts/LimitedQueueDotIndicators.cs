@@ -16,11 +16,12 @@ public class LimitedQueueDotIndicators : MonoBehaviour
     void Awake()
     {
         _queueManager = GetComponent<QueueManager>();
+        GenerateQueueDotContainers();
     }
 
     private void Start()
     {
-        GenerateQueueDotContainers();
+        
     }
     
     private void GenerateQueueDotContainers()

@@ -11,23 +11,25 @@ public class QueueManager : MonoBehaviour
     [SerializeField] private GameObject _queueSlotPrefab;
     [SerializeField] private int _activeQueueLimit;
     [SerializeField] private int _currentActiveCustomer;
-    // [SerializeField] private List<Customer> _activeCustomerQueue = new List<Customer>();
     [SerializeField] private QueueSlot[] _queueSlots;
 
+    private LimitedQueueDotIndicators _limitedQueueDotIndicators;
+
+    // [SerializeField] private List<Customer> _activeCustomerQueue = new List<Customer>();
     // private CustomerSelect _customerSelect;
     // private QueueDotIndicators _queueDotIndicators;
     public List<Customer> ActiveCustomerQueue { get => null /*_activeCustomerQueue*/; }
     public QueueSlot[] QueueSlots { get => _queueSlots; }
     public int ActiveQueueLimit { get => _activeQueueLimit; }
     public int CurrentActiveCustomer { get => _currentActiveCustomer; }
-    public GameObject QueueSlotPrefab { get => _queueSlotPrefab;  }
+    public GameObject QueueSlotPrefab { get => _queueSlotPrefab; }
 
     private void Awake()
     {
         //_customerSelect = GetComponent<CustomerSelect>();
         //_queueDotIndicators = GetComponent<QueueDotIndicators>();
+        _limitedQueueDotIndicators = GetComponent<LimitedQueueDotIndicators>();
 
-       
         GenerateQueueSlots();
     }
 
@@ -56,6 +58,8 @@ public class QueueManager : MonoBehaviour
                 slot.CurrentCustomer = customer;
                 customer.transform.SetParent(slot.transform);
                 customer.transform.localPosition = Vector2.zero;
+
+                _limitedQueueDotIndicators.IsQueueSlotOccupied(i, true);
                 return;
             }
         }
@@ -92,11 +96,14 @@ public class QueueManager : MonoBehaviour
 
         for (int i = 0; i < _queueSlots.Length; i++)
         {
-            if (_queueSlots[i] != null)
+            if (_queueSlots[i].CurrentCustomer != null)
             {
-                if (_queueSlots[i].Equals(customer))
+                if (_queueSlots[i].CurrentCustomer.Equals(customer))
                 {
-                    _queueSlots[i] = null;
+                    Debug.Log($"Removing {customer.name} in Slot {i}");
+                    _queueSlots[i].CurrentCustomer = null;
+                    _limitedQueueDotIndicators.IsQueueSlotOccupied(i, false);
+
                     Destroy(customer.gameObject); // PERFORMANCE Queumanager.cs | this can cause lags, might need to pool ouer characters
                 }
             }

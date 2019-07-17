@@ -37,6 +37,12 @@ public class LimitedQueueDotIndicators : MonoBehaviour
         }
     }
 
+    public void IsQueueSlotOccupied(int index, bool isOccupied)
+    {
+        // Maybe a Animation, something more smooth the just pop in/out -> like a little shake and a bell sound
+        _queuePositions[index].transform.GetChild(0).GetChild(1).gameObject.SetActive(isOccupied);
+    }
+
     public void SetDotFocus(int index)
     {
         if (_dotInFocus != null)

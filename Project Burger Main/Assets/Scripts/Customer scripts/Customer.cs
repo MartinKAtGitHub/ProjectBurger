@@ -55,7 +55,7 @@ public class Customer : MonoBehaviour
         _customerSelect = LevelManager.Instance.CustomerSelect;
         if (TestingRandomTimeout)
         {
-            Debug.Log($"CUSTOMER TIMEOUT = {name}");
+            //Debug.Log($"CUSTOMER TIMEOUT = {name}");
             Invoke("CustomerTimeout", Random.Range(10, 20));
         }
     }
@@ -105,12 +105,13 @@ public class Customer : MonoBehaviour
         Debug.Log($"{name} has been Flagged for Deletion");
         // TODO Customer.cs | Timeout(), We need to make sure the customer doesn't timeout while in a animation.
         _isWaiting = false;
+        TimeOutInstantRemove();
     }
 
     private void TimeOutInstantRemove()
     {
         Debug.Log($"{name} Removed No Anim");
-        _customerSelect.OnTimeOut(this);
+      //  _customerSelect.OnTimeOut(this);
         LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
 
     }

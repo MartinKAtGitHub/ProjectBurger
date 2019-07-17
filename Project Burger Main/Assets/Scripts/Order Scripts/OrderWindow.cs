@@ -42,11 +42,16 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
         _orderWindowData.RecipeNameText.text = _orderGenerator.OrderBaseRecipe.RecipeName;
         _orderWindowData.RecipeImg.sprite = _orderGenerator.OrderBaseRecipe.RecipeImg;
 
+        //set sprite to REMOVE
         for (int i = 0; i < _orderGenerator.DiscaredIngredients.Count; i++)
         {
             _orderWindowData.DiscardedIngredients[i].sprite = _orderGenerator.DiscaredIngredients[i].IngredientSprite;
         }
-    }
+
+        // Set Sprite to ADD
+
+        // FOR loop() -> add extra ingreinds list
+   }
 
     private void CreateOrderWindow() //TODO OrderWindow.cs | Don't need to instantiate this if every Customer has it. Just child prefab to Customer
     {

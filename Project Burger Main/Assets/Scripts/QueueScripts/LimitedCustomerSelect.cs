@@ -11,7 +11,6 @@ public class LimitedCustomerSelect : MonoBehaviour
     [SerializeField] private int _queueSlotIndex = 0;
     [SerializeField] private QueueSlot _queueSlotInFocus;
     [SerializeField] private float _easing;
-    [SerializeField] private List<GameObject> _queueSlots = new List<GameObject>();
 
     private float _horizontalLayoutGroupSpacing;
     private float _customerWidth;
@@ -65,7 +64,6 @@ public class LimitedCustomerSelect : MonoBehaviour
 
             StartCoroutine(TransistionLogic(_customerInteractionContainer.anchoredPosition, newPos, _easing));
 
-            // SetQueueSlotInFocus(_queueSlotIndex, _queueManager.QueueSlots[_queueSlotIndex].transform.SetAsLastSibling);
         }
 
     }
@@ -85,13 +83,12 @@ public class LimitedCustomerSelect : MonoBehaviour
             _queueManager.QueueSlots[_queueSlotIndex].transform.SetParent(_customerInteractionContainer);
             _queueManager.QueueSlots[_queueSlotIndex].transform.SetAsFirstSibling();
 
-            var newPos = _customerInteractionContainer.anchoredPosition;
-            _customerInteractionContainer.anchoredPosition += new Vector2(-1 * (_distanceBetweenCustomers), 0);
+            // Because off the way Layoutgroups work we need to offset the container Immediately when going to the left
+            var originalPos = _customerInteractionContainer.anchoredPosition;
+            _customerInteractionContainer.anchoredPosition += new Vector2(-1 * (_distanceBetweenCustomers), 0); // Immediately offset the container
 
-            StartCoroutine(TransistionLogic(_customerInteractionContainer.anchoredPosition, newPos, _easing));
-            
+            StartCoroutine(TransistionLogic(_customerInteractionContainer.anchoredPosition, originalPos, _easing)); // smooth transition back to original pos
 
-            //  SetQueueSlotInFocus(_queueSlotIndex, _queueManager.QueueSlots[_queueSlotIndex].transform.SetAsFirstSibling);
         }
 
 

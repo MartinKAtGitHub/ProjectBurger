@@ -34,17 +34,15 @@ public class Customer : MonoBehaviour
         //Destoyed
     }
 
-    private void Awake()
-    {
+    private void Awake() {
         _orderGenerator = GetComponent<OrderGenerator>();
         _orderWindow = GetComponent<OrderWindow>();
 
-        if (_order == null)
-        {
+        if (_order == null) {
             _customerName = gameObject.name;
             _order = OrderGenerator.RequestOrder();
             _order.CustomerName = _customerName;
-            _customerPatience.SetOrderPatience(_order);
+
         }
     }
 
@@ -56,6 +54,7 @@ public class Customer : MonoBehaviour
 
         // _CustomerStates.StartCustomerStates();
         //  _customerSelect = LevelManager.Instance.CustomerSelect;
+            _customerPatience.SetOrderPatience(_order);
         if (TestingRandomTimeout)
         {
             //Debug.Log($"CUSTOMER TIMEOUT = {name}");

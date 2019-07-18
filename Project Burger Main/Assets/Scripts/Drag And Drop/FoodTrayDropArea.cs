@@ -10,28 +10,15 @@ using UnityEngine.UI;
 public class FoodTrayDropArea : MonoBehaviour, IDropHandler
 {
     public Image ResultImage;
-    
-    [SerializeField]  private Order _order; // Get order from Customer
+
+    [SerializeField] private Order _order; // Get order from Customer
     [SerializeField] private bool _orderSuccessful;
 
-     public Order Order { set => _order = value; }
-
+    public Order Order { set => _order = value; }
     public bool OrderSuccessful { get => _orderSuccessful; }
-
     [Space(20)]
     public List<Food> _foods = new List<Food>();
 
-    
-    private void Awake()
-    {
-    }
-
-
-    public void Initialize()
-    {
-        //LevelManager.Instance.FoodTrayDropArea = this;
-        LevelManager.Instance.SalesManager.OnSale += CheckFoodStacksAgainstOrder;
-    }
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -61,6 +48,8 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
         _foods.RemoveAt(_foods.Count - 1);
     }
 
+
+
     /// <summary>
     /// The food will sold the moment the amount of foodstacks = to the amount of foodstack the order requers
     /// </summary>
@@ -82,94 +71,114 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
         var amountOfOrderRecipes = _order.OrderRecipes.Count;
         var amountOffoodStackMatches = 0;
 
-        if(_foods.Count == 0)
+        if (_order != null)
         {
-            Debug.Log("NO FOOD PLACED ON FOODTRAY !!!!!");
-            _orderSuccessful = false;
-        }
-
-        if (amountOfOrderRecipes == _foods.Count)
-        {
-            for (int i = 0; i < _foods.Count; i++) // for every foodstack
+            if (_foods.Count == 0)
             {
-                //Debug.Log("This should not decrease " + _order.OrderRecipes.Count);
-                //then maybe remove it here _order.OrderRecipes.Count marked as completed or failed
-                var tempOrderRecipes = _order.OrderRecipes;
-                var ingredientMatchFoundInOrderRecipeIndex = 0;
-                var failCounter = 0;
+                Debug.Log("NO FOOD PLACED ON FOODTRAY !!!!!");
+                _orderSuccessful = false;
+                return;
+            }
 
-                for (int j = 0; j < _foods[i].GameObjectIngredients.Count; j++) // ingredients in foodstack loop
+            if (amountOfOrderRecipes == _foods.Count)
+            {
+                for (int i = 0; i < _foods.Count; i++) // for every foodstack
                 {
-                    var currentIngredient = _foods[i].GameObjectIngredients[j].ingredient;
-                    var currentIngredientIndex = j;
+                    //Debug.Log("This should not decrease " + _order.OrderRecipes.Count);
+                    //then maybe remove it here _order.OrderRecipes.Count marked as completed or failed
+                    var tempOrderRecipes = _order.OrderRecipes;
+                    var ingredientMatchFoundInOrderRecipeIndex = 0;
+                    var failCounter = 0;
 
-                    for (int k = ingredientMatchFoundInOrderRecipeIndex; k < tempOrderRecipes.Count; k++) // Order recipes Loop
+                    for (int j = 0; j < _foods[i].GameObjectIngredients.Count; j++) // ingredients in foodstack loop
                     {
-                        if (_foods[i].GameObjectIngredients.Count <= tempOrderRecipes[k].OrderIngredients.Count)
+                        var currentIngredient = _foods[i].GameObjectIngredients[j].ingredient;
+                        var currentIngredientIndex = j;
+
+                        for (int k = ingredientMatchFoundInOrderRecipeIndex; k < tempOrderRecipes.Count; k++) // Order recipes Loop
                         {
-                            if (currentIngredient.IngredientType == tempOrderRecipes[k].OrderIngredients[currentIngredientIndex].IngredientType)
+                            if (_foods[i].GameObjectIngredients.Count <= tempOrderRecipes[k].OrderIngredients.Count)
                             {
-                                // Debug.Log("Match found ! | " + _foodStacks[i].name + "(" + currentIngredient.IngredientType + ") == (" + tempOrderRecipes[k].OrderIngredients[currentIngredientIndex].IngredientType + ")");
-                                ingredientMatchFoundInOrderRecipeIndex = k;
-                                break; // Go to next FoodStack ingredient
+                                if (currentIngredient.IngredientType == tempOrderRecipes[k].OrderIngredients[currentIngredientIndex].IngredientType)
+                                {
+                                    // Debug.Log("Match found ! | " + _foodStacks[i].name + "(" + currentIngredient.IngredientType + ") == (" + tempOrderRecipes[k].OrderIngredients[currentIngredientIndex].IngredientType + ")");
+                                    ingredientMatchFoundInOrderRecipeIndex = k;
+                                    break; // Go to next FoodStack ingredient
+                                }
+                                else
+                                {
+                                    // Foodstack ingredient didn't match this order recipe ingredient
+                                    failCounter++;
+                                }
                             }
                             else
                             {
-                                // Foodstack ingredient didn't match this order recipe ingredient
+                                // Foodstack is to big for this OrderRecipe[k]
                                 failCounter++;
                             }
                         }
-                        else
+
+                        // Next Foodstack ingredient
+                        if (failCounter == tempOrderRecipes.Count)
                         {
-                            // Foodstack is to big for this OrderRecipe[k]
-                            failCounter++;
+                            // The ingredient didn't match any order recipe ingredient so go to next foodstack
+                            _foods[i].DidStackMatchOrder = false;
+                            break;
+                        }
+                        else // TODO foodtray optimization,  _foodStacks[i].DidStackMatchOrder = true;
+                        {
+                            _foods[i].DidStackMatchOrder = true;
                         }
                     }
 
-                    // Next Foodstack ingredient
-                    if (failCounter == tempOrderRecipes.Count)
+                    // Next foodStack
+                    if (!_foods[i].DidStackMatchOrder)
                     {
-                        // The ingredient didn't match any order recipe ingredient so go to next foodstack
-                        _foods[i].DidStackMatchOrder = false;
-                        break;
+                        Debug.Log("FAIL " + _foods[i].name);
+                        continue;
                     }
-                    else // TODO foodtray optimization,  _foodStacks[i].DidStackMatchOrder = true;
+                    else
                     {
                         _foods[i].DidStackMatchOrder = true;
+                        tempOrderRecipes.RemoveAt(ingredientMatchFoundInOrderRecipeIndex);
+                        amountOffoodStackMatches++;
                     }
                 }
 
-                // Next foodStack
-                if (!_foods[i].DidStackMatchOrder)
+                if (amountOffoodStackMatches == amountOfOrderRecipes)
                 {
-                    Debug.Log("FAIL " + _foods[i].name);
-                    continue;
+                  
+                    _orderSuccessful = true;
+                    OnSuccessfulOrder();
+
                 }
                 else
                 {
-                    _foods[i].DidStackMatchOrder = true;
-                    tempOrderRecipes.RemoveAt(ingredientMatchFoundInOrderRecipeIndex);
-                    amountOffoodStackMatches++;
+                    ResultImage.color = Color.red;
+                    _orderSuccessful = false;
                 }
-            }
-
-            if (amountOffoodStackMatches == amountOfOrderRecipes)
-            {
-                ResultImage.color = Color.green;
-                _orderSuccessful = true;
             }
             else
             {
-                ResultImage.color = Color.red;
+                Debug.Log("Can not sell food, Amount of food is not the same in order, Give player FAIL for selling to early ?");
                 _orderSuccessful = false;
             }
-
-
         }
         else
         {
-            Debug.Log("Can not sell food, Amount of food is not the same in order, Give player FAIL for selling to early ?");
-            _orderSuccessful =  false;
+            Debug.Log("FoodTray has no Order = null");
+        }
+    }
+
+    private void OnSuccessfulOrder()
+    {
+        ResultImage.color = Color.green;
+        for (int i = 0; i < _foods.Count; i++)
+        {
+            var food = _foods[i].gameObject;
+
+            _foods.RemoveAt(i);
+            Destroy(food); // PERFORMANCE FoodTray.cs | Destroying food On successful.
         }
     }
 }

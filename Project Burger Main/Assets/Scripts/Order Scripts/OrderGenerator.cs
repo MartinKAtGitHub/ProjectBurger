@@ -46,7 +46,7 @@ public class OrderGenerator : MonoBehaviour
 
         if (multiOrderRoll < _multiOrderChance)
         {
-            Debug.Log("Requesting Multi food recipe order");
+          //  Debug.Log("Requesting Multi food recipe order");
             for (int i = 0; i < _multiOrderAmount; i++)
             {
                 SelectRandomRecipe();
@@ -56,7 +56,7 @@ public class OrderGenerator : MonoBehaviour
         }
         else
         {
-            Debug.Log("Requesting Single food order");
+            //Debug.Log("Requesting Single food order");
             SelectRandomRecipe();
             return _order;
         }
@@ -104,7 +104,7 @@ public class OrderGenerator : MonoBehaviour
                 return; // If i find a recipe then no need to loop through the rest
             }
         }
-        Debug.LogError("SelectRandomRecipe() Failed to role a recipe | Rollnum: " + recipeRoll);
+        //Debug.LogError("SelectRandomRecipe() Failed to role a recipe | Rollnum: " + recipeRoll);
     }
 
 

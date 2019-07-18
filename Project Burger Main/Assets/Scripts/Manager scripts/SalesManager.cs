@@ -6,23 +6,36 @@ using UnityEngine;
 public class SalesManager : MonoBehaviour
 {
 
-    public Action OnSale;
+    private CustomerSelect _customerSelect;
+    private QueueManager _queueManager;
+    private Action _onSale;
+    public Action OnSale { get => _onSale; set => _onSale = value; }
 
-  
-
-    public void Initialize()
+    private void Awake()
     {
-        LevelManager.Instance.SalesManager = this;
+        _customerSelect = GetComponent<CustomerSelect>();
+        _queueManager = GetComponent<QueueManager>();
     }
-
     /// <summary>
     /// Triggers the onSale event;
     /// </summary>
     public void OnSell()
     {
-        // Call this on a button
-        // event.Fire();
 
-        OnSale?.Invoke();
+        var customer = _customerSelect.CustomerInFocus;
+        if (customer != null)
+        {
+            if (!_customerSelect.InSmoothTransition)
+            {
+                LevelManager.Instance.FoodTrayDropArea.CheckFoodStacksAgainstOrder();
+
+                _customerSelect.OnSell();
+                _queueManager.RemoveCustomerFromQueue(customer);
+            }
+        }
+        else
+        {
+            Debug.Log("No customer too sell to");
+        }
     }
 }

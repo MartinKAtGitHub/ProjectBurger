@@ -60,7 +60,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
             if (ArtificialQueueLength > 0 && _ArtificialTimeWaited < Time.time) {//Made An Artificial Queue To Increase The Spawn Amount If We Have A Full Queue For The Next Customer.
 
-                if (_TheQueue.ActiveQueueLimit.Count < _TheQueue.MaxActiveCustomerAmount) {
+                if (_TheQueue.ActiveCustomerQueue.Count < _TheQueue.ActiveQueueLimit) {
                     SetAditionalSpawningInfo();
                     ArtificialQueueLength--;
                 } else {
@@ -73,7 +73,7 @@ public class TheCustomSpawner : MonoBehaviour {
                     TimeWaited = Time.time + spawntime;
 
 
-                    if (_TheQueue.ActiveQueueLimit.Count < _TheQueue.MaxActiveCustomerAmount) {//Spawning Customer In Here
+                    if (_TheQueue.ActiveCustomerQueue.Count < _TheQueue.ActiveQueueLimit) {//Spawning Customer In Here
                         SetAditionalSpawningInfo();
                     } else {//Adding To Artificial Queue
                         if (MakeArtificialQueue == true) {//When Added To Artificial Queue, Make The Timer 20% Of Normal SpawnTime.
@@ -84,7 +84,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
                 }
 
-                if (SpeedSpawn == false && _TheQueue.ActiveQueueLimit.Count == 0) {//When There Are NoOne In The Queue Spawn Customer At An Increased Rate
+                if (SpeedSpawn == false && _TheQueue.ActiveCustomerQueue.Count == 0) {//When There Are NoOne In The Queue Spawn Customer At An Increased Rate
                     SpeedSpawn = true;
 
                     TimeWaited = Time.time + (spawntime * 0.8f); //Start Spawn Time

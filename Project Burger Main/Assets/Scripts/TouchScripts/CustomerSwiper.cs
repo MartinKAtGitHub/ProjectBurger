@@ -33,9 +33,9 @@ public class CustomerSwiper : MonoBehaviour, IDragHandler, IBeginDragHandler {
             //Debug.Log("Over The Limit, Start Changing Customer");
 
             if (eventData.position.x < StartPos.x) {
-                //_leftbutton.onClick.Invoke(); //Script Was Not Attached To The Button, So Could Not Test It
+                Debug.Log("Over The Limit, Start Changing Customer"); _leftbutton.onClick.Invoke(); //Script Was Not Attached To The Button, So Could Not Test It
             } else {
-                //_rightbutton.onClick.Invoke(); //Script Was Not Attached To The Button, So Could Not Test It
+                Debug.Log("Over The Limit, Start Changing Customer"); _rightbutton.onClick.Invoke(); //Script Was Not Attached To The Button, So Could Not Test It
             }
 
 

@@ -5,9 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(OrderGenerator))]
 public class Customer : MonoBehaviour
 {
+
     public bool TestingRandomTimeout;
     public GameObject QueuePositionDot;
 
+    [SerializeField] private CustomerPatience _customerPatience;
     [SerializeField] private RectTransform _customerInteractionContainer;
     [SerializeField] private RectTransform _customerNotInFocusContainer;
     [SerializeField] private int _CustomerWaitingTime;
@@ -38,10 +40,10 @@ public class Customer : MonoBehaviour
     private void OnEnable()
     {
 
-       
             _customerName = gameObject.name;
             _order = OrderGenerator.RequestOrder();
             _order.CustomerName = _customerName;
+            _customerPatience.SetOrderPatience(_order);
         
     }
 

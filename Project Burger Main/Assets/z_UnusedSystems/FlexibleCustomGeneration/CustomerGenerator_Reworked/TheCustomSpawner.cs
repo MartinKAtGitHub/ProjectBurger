@@ -13,7 +13,6 @@ public class TheCustomSpawner : MonoBehaviour {
     public float spawntime = 30;
  //   public float timetime = 0;
 
-    QueueManager _TheQueue;
     GameObject spawned;
 
     public bool MakeArtificialQueue = false;//This Allows Good Player Performance To Spawn More Customer More Often.
@@ -46,7 +45,6 @@ public class TheCustomSpawner : MonoBehaviour {
         if (SpawnStartPos == null)
             SpawnStartPos = transform;
 
-        _TheQueue = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<QueueManager>();
         StartSpawning();
 
     }
@@ -60,7 +58,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
             if (ArtificialQueueLength > 0 && _ArtificialTimeWaited < Time.time) {//Made An Artificial Queue To Increase The Spawn Amount If We Have A Full Queue For The Next Customer.
 
-                if (_TheQueue.ActiveCustomerQueue.Count < _TheQueue.ActiveQueueLimit) {
+                if (LevelManager.Instance.QueueManager.ActiveCustomerQueue.Count < LevelManager.Instance.QueueManager.ActiveQueueLimit) {
                     SetAditionalSpawningInfo();
                     ArtificialQueueLength--;
                 } else {
@@ -73,7 +71,7 @@ public class TheCustomSpawner : MonoBehaviour {
                     TimeWaited = Time.time + spawntime;
 
 
-                    if (_TheQueue.ActiveCustomerQueue.Count < _TheQueue.ActiveQueueLimit) {//Spawning Customer In Here
+                    if (LevelManager.Instance.QueueManager.ActiveCustomerQueue.Count < LevelManager.Instance.QueueManager.ActiveQueueLimit) {//Spawning Customer In Here
                         SetAditionalSpawningInfo();
                     } else {//Adding To Artificial Queue
                         if (MakeArtificialQueue == true) {//When Added To Artificial Queue, Make The Timer 20% Of Normal SpawnTime.
@@ -84,7 +82,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
                 }
 
-                if (SpeedSpawn == false && _TheQueue.ActiveCustomerQueue.Count == 0) {//When There Are NoOne In The Queue Spawn Customer At An Increased Rate
+                if (SpeedSpawn == false && LevelManager.Instance.QueueManager.ActiveCustomerQueue.Count == 0) {//When There Are NoOne In The Queue Spawn Customer At An Increased Rate
                     SpeedSpawn = true;
 
                     TimeWaited = Time.time + (spawntime * 0.8f); //Start Spawn Time
@@ -99,7 +97,7 @@ public class TheCustomSpawner : MonoBehaviour {
         spawned = _CustomerCreation.SettingUpCustomer(_ThemeDayCustomers.CusomterSpawnRandom(), this);//Getting Customer To Spawn
         spawned = Instantiate(spawned, SpawnStartPos.position, Quaternion.identity, gameObject.transform) as GameObject;
 
-         _TheQueue.AddCustomerToQueue(spawned.GetComponent<Customer>());
+        LevelManager.Instance.QueueManager.AddCustomerToQueue(spawned.GetComponent<Customer>());
         SpeedSpawn = false;
     }
 

@@ -62,14 +62,14 @@ public class CustomerPatience {
     private void AddQueuePatience() {
         
         //Aditional Check Can Be Made Here, Like Check If The Other Customers Time Is Almost Out, Or Their Order Is Almost Complete, Then Dont Give As Much Patience Time
-        _customerWaitingTime  *= 1 + (0.1f * LevelManager.Instance.QueueManager.ActiveQueueLimit.Count);//Just Adding 10% For Every Customer In The Queue
+        _customerWaitingTime  *= 1 + (0.1f * LevelManager.Instance.QueueManager.ActiveCustomerQueue.Count);//Just Adding 10% For Every Customer In The Queue
         
     }
 
     public void AddQueuePatienceTime(float time) {//If We Spawn Something That We Want To Make The Player Focus On, Then That Object Can Add Some Extra Waiting Time, Like If A Music Group Plays Or A Scene (A FoodFight Or Brawl Between Two Dudes)
 
         //Aditional Check Can Be Made Here, Like Check If The Other Customers Time Is Almost Out, Or Their Order Is Almost Complete, Then Dont Give As Much Patience Time
-        _customerWaitingTime *= 1 + (0.1f * LevelManager.Instance.QueueManager.ActiveQueueLimit.Count);//Just Adding 10% For Every Customer In The Queue
+        _customerWaitingTime *= 1 + (0.1f * LevelManager.Instance.QueueManager.ActiveCustomerQueue.Count);//Just Adding 10% For Every Customer In The Queue
 
     }
 

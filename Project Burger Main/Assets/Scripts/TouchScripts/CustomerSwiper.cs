@@ -37,7 +37,7 @@ public class CustomerSwiper : MonoBehaviour, IDragHandler, IBeginDragHandler {
                 Debug.Log("left"); _leftbutton.onClick.Invoke(); //Script Was Not Attached To The Button, So Could Not Test It
             }
 
-            StartPos = eventData.position;
+            StartPos = eventData.position; 
 
         }
     }

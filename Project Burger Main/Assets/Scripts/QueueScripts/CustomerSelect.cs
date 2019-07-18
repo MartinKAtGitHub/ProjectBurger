@@ -106,7 +106,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         }
 
         SetNewActiveCustomer(_customerIndex);
-        _customerInFocus.OrderWindow.OpenWindow();
+        
 
         _customerInteractionContainer.anchoredPosition = Vector2.zero;
         _inSmoothTransition = false;
@@ -122,6 +122,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
             var customer = _queueManager.ActiveCustomerQueue[index];
             _customerInFocus = customer;
             ChangeFoodTrayOrder(_customerInFocus.Order);
+            _customerInFocus.OrderWindow.OpenWindow(_customerInFocus);
         }
         else
         {

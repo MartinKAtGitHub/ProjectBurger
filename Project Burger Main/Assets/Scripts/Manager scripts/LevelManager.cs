@@ -5,12 +5,14 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public QueueManager QueueManager;
-    public CustomerSelect CustomerSelect;
+    // public CustomerSelect CustomerSelect;
     public FoodTrayDropArea FoodTrayDropArea;
     public CustomerSpawner CustomerSpawner;
     public SalesManager SalesManager;
     public ShuffleBag ShuffleBag;
     public ScoreManager ScoreManager;
+    public LimitedCustomerSelect CustomerSelect;
+    public OrderWindow OrderWindow;
 
     [SerializeField] private float _preparationTime;
     [SerializeField] private Vector2 _customerSpawnTimerMinMax;
@@ -28,14 +30,13 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("Found another LevelManager in the same Scene, make sure only 1 LevelManager exist per scene");
             Destroy(gameObject); // Destroy myself is Instance already has a ref
         }
+        
     }
 
     void Start()
     {
-     
-       StartCoroutine(CustomerSpawnSystemInit());
-        Debug.Log("WAIT FOR FIRST TO SAPWN");
-       
+        
+        StartCoroutine(CustomerSpawnSystemInit());
     }
 
     /// <summary>
@@ -48,7 +49,7 @@ public class LevelManager : MonoBehaviour
 
         var customer = ShuffleBag.Next();
         QueueManager.AddCustomerToQueue(customer);
-       // CustomerSelect.ZeroIndexCustomer();
+        // CustomerSelect.ZeroIndexCustomer();
 
         yield return new WaitForSeconds(3);
         StartCoroutine(CustomerSpawnSystemLoop());
@@ -58,24 +59,24 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     private IEnumerator CustomerSpawnSystemLoop()
     {
-    
+
         //for (int i = 0; i < ShuffleBag.CustomerPool.Count; i++) // This over shoots the Limit
-        while(ShuffleBag.MaxCount > 0)
+        while (ShuffleBag.MaxCount > 0)
         {
             yield return new WaitUntil(() =>
             {
-              //  return QueueManager.ActiveCustomerQueue.Count < QueueManager.ActiveQueueLimit;
+                //  return QueueManager.ActiveCustomerQueue.Count < QueueManager.ActiveQueueLimit;
                 return QueueManager.CurrentActiveCustomer < QueueManager.ActiveQueueLimit;
-           
+
 
             }); // PERFORMANCE Levelmanager.cs | StartLevel() The bool is checked every frame, until it turns true
 
             yield return new WaitForSeconds(Random.Range(_customerSpawnTimerMinMax.x, _customerSpawnTimerMinMax.y));
-      
+
             var customer = ShuffleBag.Next();
             QueueManager.AddCustomerToQueue(customer);
-        //    counter++;
-           // Debug.Log("Count = " + counter);
+            //    counter++;
+            // Debug.Log("Count = " + counter);
             yield return null;
         }
         // Signal end of loop, maybe have an event and fire this metod again

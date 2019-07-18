@@ -16,7 +16,7 @@ public class Customer : MonoBehaviour
     [SerializeField] private CustomerState _CustomerStates = null;
 
     private Order _order;
-    private CustomerSelect _customerSelect;
+   // private CustomerSelect _customerSelect;
     private OrderWindow _orderWindow;
     private OrderGenerator _orderGenerator;
 
@@ -52,7 +52,7 @@ public class Customer : MonoBehaviour
         //Start Dialog;
 
         // _CustomerStates.StartCustomerStates();
-        _customerSelect = LevelManager.Instance.CustomerSelect;
+        //  _customerSelect = LevelManager.Instance.CustomerSelect;
         if (TestingRandomTimeout)
         {
             //Debug.Log($"CUSTOMER TIMEOUT = {name}");
@@ -87,17 +87,17 @@ public class Customer : MonoBehaviour
 
     private void Update()
     {
-        if (!_isWaiting && !_customerSelect.InSmoothTransition)
-        {
-            if (transform.parent == _customerNotInFocusContainer)
-            {
-                TimeOutInstantRemove();
-            }
-            else if (transform.parent == _customerInteractionContainer)
-            {
-                TimeOutPlayAnim();
-            }
-        }
+        //if (!_isWaiting && !_customerSelect.InSmoothTransition)
+        //{
+        //    if (transform.parent == _customerNotInFocusContainer)
+        //    {
+        //        TimeOutInstantRemove();
+        //    }
+        //    else if (transform.parent == _customerInteractionContainer)
+        //    {
+        //        TimeOutPlayAnim();
+        //    }
+        //}
     }
 
     private void CustomerTimeout()
@@ -111,7 +111,7 @@ public class Customer : MonoBehaviour
     private void TimeOutInstantRemove()
     {
         Debug.Log($"{name} Removed No Anim");
-      //  _customerSelect.OnTimeOut(this);
+        //  _customerSelect.OnTimeOut(this);
         LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
 
     }
@@ -121,11 +121,11 @@ public class Customer : MonoBehaviour
         if (!IsWaiting)
         {
             Debug.Log($"{name} Removed Play Anim");
-            _customerSelect.OnTimeOut(this);
-            _customerSelect.CircularRight();
+            //_customerSelect.OnTimeOut(this);
+            //_customerSelect.CircularRight();
             LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
             OrderWindow.CloseWindow();
-           
+
         }
     }
 }

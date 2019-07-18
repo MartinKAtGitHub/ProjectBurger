@@ -14,6 +14,7 @@ public class QueueManager : MonoBehaviour
     [SerializeField] private QueueSlot[] _queueSlots;
 
     private LimitedQueueDotIndicators _limitedQueueDotIndicators;
+    private LimitedCustomerSelect _limitedCustomerSelect;
 
     // [SerializeField] private List<Customer> _activeCustomerQueue = new List<Customer>();
     // private CustomerSelect _customerSelect;
@@ -29,6 +30,7 @@ public class QueueManager : MonoBehaviour
         //_customerSelect = GetComponent<CustomerSelect>();
         //_queueDotIndicators = GetComponent<QueueDotIndicators>();
         _limitedQueueDotIndicators = GetComponent<LimitedQueueDotIndicators>();
+        _limitedCustomerSelect = GetComponent<LimitedCustomerSelect>();
 
         GenerateQueueSlots();
     }
@@ -52,6 +54,7 @@ public class QueueManager : MonoBehaviour
         {
             if (_queueSlots[i].CurrentCustomer == null)
             {
+
                 Debug.Log($"Slot {i} is empty, setting {customer.name} in this Position");
                 var slot = _queueSlots[i];
 
@@ -60,6 +63,11 @@ public class QueueManager : MonoBehaviour
                 customer.transform.localPosition = Vector2.zero;
 
                 _limitedQueueDotIndicators.IsQueueSlotOccupied(i, true);
+
+                if (i == _limitedCustomerSelect.QueueSlotIndex)
+                {
+                    _limitedCustomerSelect.InstaFocusSlot();
+                }
                 return;
             }
         }

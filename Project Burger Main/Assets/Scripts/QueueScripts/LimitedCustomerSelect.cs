@@ -19,13 +19,17 @@ public class LimitedCustomerSelect : MonoBehaviour
     private QueueManager _queueManager;
     private LimitedQueueDotIndicators _limitedQueueDotIndicators;
     private FoodTrayDropArea _foodTrayDropArea;
+
+    public int QueueSlotIndex { get => _queueSlotIndex;}
+
     private delegate void SetSibling();
     private void Awake()
     {
+        
+        LevelManager.Instance.CustomerSelect = this;
         _queueManager = GetComponent<QueueManager>();
         _limitedQueueDotIndicators = GetComponent<LimitedQueueDotIndicators>();
        
-
         _horizontalLayoutGroupSpacing = _customerInteractionContainer.GetComponent<HorizontalLayoutGroup>().spacing;
         _customerWidth = _queueManager.QueueSlotPrefab.GetComponent<RectTransform>().sizeDelta.x;
         _distanceBetweenCustomers = _horizontalLayoutGroupSpacing + _customerWidth;
@@ -35,6 +39,7 @@ public class LimitedCustomerSelect : MonoBehaviour
     {
         Initialize();
         _foodTrayDropArea = LevelManager.Instance.FoodTrayDropArea;
+       
     }
 
     private void Initialize()
@@ -42,6 +47,71 @@ public class LimitedCustomerSelect : MonoBehaviour
         _limitedQueueDotIndicators.SetDotFocus(_queueSlotIndex);
         SetQueueSlotInFocus(_queueSlotIndex);
         _queueManager.QueueSlots[_queueSlotIndex].transform.SetParent(_customerInteractionContainer);
+    }
+
+    private IEnumerator TransistionLogic(Vector2 startPos, Vector2 endPos, float sec)
+    {
+        _inSmoothTransition = true;
+        LevelManager.Instance.OrderWindow.CloseWindow();
+
+
+        float t = 0f;
+        while (t <= 1.0)
+        {
+            t += Time.deltaTime / sec;
+            _customerInteractionContainer.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
+            yield return null;
+        }
+
+        var oldSlot = _queueSlotInFocus;
+
+        if (oldSlot != null) // TODO CustomerSelect | SmootTransition -> BUG , when there is only 1 person left the player cant select because he gets sendt back to NotInFocusArea
+        {
+            oldSlot.transform.SetParent(_customerNotInFocusContainer);
+            oldSlot.transform.localPosition = Vector2.zero;
+
+          //  oldSlot.CurrentCustomer?.OrderWindow.CloseWindow();
+        }
+
+        SetQueueSlotInFocus(_queueSlotIndex);
+      //  _queueSlotInFocus.CurrentCustomer?.OrderWindow.OpenWindow();
+
+        _customerInteractionContainer.anchoredPosition = Vector2.zero;
+        _inSmoothTransition = false;
+
+        yield return null;
+    }
+
+    private void SetQueueSlotInFocus(int index/*, SetSibling setSibling*/)
+    {
+        if (_queueManager.QueueSlots.Length > 0)
+        {
+            _queueSlotInFocus = _queueManager.QueueSlots[index];
+
+            //  Debug.Log($"Setting Customer | {_queueSlotInFocus.name} | In focus");
+
+            if (_queueSlotInFocus.CurrentCustomer != null)
+            {
+                var customer = _queueSlotInFocus.CurrentCustomer;
+                ChangeFoodTrayOrder(customer.Order);
+            
+                LevelManager.Instance.OrderWindow.OpenWindow(customer);
+            }
+
+            // _queueManager.QueueSlots[_queueSlotIndex].transform.SetParent(_customerInteractionContainer);
+            // setSibling();
+        }
+    }
+    private void ChangeFoodTrayOrder(Order order)
+    {
+        _foodTrayDropArea.Order = order;
+    }
+
+
+    public void InstaFocusSlot()
+    {
+        Debug.Log("Customer spawnd on Slot in focus, forcing focus");
+        SetQueueSlotInFocus(_queueSlotIndex);
     }
 
     public void NextCustomer()
@@ -95,58 +165,5 @@ public class LimitedCustomerSelect : MonoBehaviour
     }
 
 
-    IEnumerator TransistionLogic(Vector2 startPos, Vector2 endPos, float sec)
-    {
-        _inSmoothTransition = true;
-
-        float t = 0f;
-        while (t <= 1.0)
-        {
-            t += Time.deltaTime / sec;
-            _customerInteractionContainer.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
-            yield return null;
-        }
-
-        var oldSlot = _queueSlotInFocus;
-
-        if (oldSlot != null) // TODO CustomerSelect | SmootTransition -> BUG , when there is only 1 person left the player cant select because he gets sendt back to NotInFocusArea
-        {
-            oldSlot.transform.SetParent(_customerNotInFocusContainer);
-            oldSlot.transform.localPosition = Vector2.zero;
-
-            oldSlot.CurrentCustomer?.OrderWindow.CloseWindow();
-        }
-
-        SetQueueSlotInFocus(_queueSlotIndex);
-        _queueSlotInFocus.CurrentCustomer?.OrderWindow.OpenWindow();
-
-        _customerInteractionContainer.anchoredPosition = Vector2.zero;
-        _inSmoothTransition = false;
-
-        yield return null;
-    }
-
-    private void SetQueueSlotInFocus(int index/*, SetSibling setSibling*/)
-    {
-        if (_queueManager.QueueSlots.Length > 0)
-        {
-            var slot = _queueManager.QueueSlots[index];
-
-            Debug.Log($"Setting Customer | {slot.name} | In focus");
-
-            _queueSlotInFocus = slot;
-
-            if (_queueSlotInFocus.CurrentCustomer != null)
-            {
-                ChangeFoodTrayOrder(_queueSlotInFocus.CurrentCustomer.Order);
-            }
-
-            // _queueManager.QueueSlots[_queueSlotIndex].transform.SetParent(_customerInteractionContainer);
-            // setSibling();
-        }
-    }
-    private void ChangeFoodTrayOrder(Order order)
-    {
-        _foodTrayDropArea.Order = order;
-    }
+   
 }

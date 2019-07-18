@@ -45,7 +45,7 @@ public class Customer : MonoBehaviour
             _order = OrderGenerator.RequestOrder();
             _order.CustomerName = _customerName;
             _customerPatience.SetOrderPatience(_order);
-        
+        }
     }
 
     private void Start()

@@ -65,7 +65,6 @@ public class CustomerWardrobe : MonoBehaviour {
 
 
         CustomerOrderG.RequestOrderTrial(a.RecipeB, a.MultiorderAmount, a.MultiorderChance);
-        _Customer.SetCustomerStates(spawener);
 
      //   spawned = Instantiate(CustomerPrefab, transform.localPosition, Quaternion.identity, transform);
         return CustomerPrefab;

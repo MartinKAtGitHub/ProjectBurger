@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ingredientSprite: {fileID: 21300000, guid: d8d8a8209478d1a4682dfbbc36c6a5a2, type: 3}
   _ingredientName: HamburgerMeat
-  ingredientType: 2
+  ingredientType: 4
   RemoveChance: 0
   IngredientCost: 5
+  IngredientTime: 1
   MeatTimers:
     serializedVersion: 2
     key0: {r: 0.41251338, g: 0.46900716, b: 0.8490566, a: 1}
@@ -56,5 +57,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4aedcd607324a8049a4c4d0157912f02, type: 2}
   - {fileID: 11400000, guid: 26f4117fff29e7c4db6988789827d1a7, type: 2}
   - {fileID: 11400000, guid: dc116972fdb44784385233b49f2ace12, type: 2}
-  AllBurgerStages: {fileID: 4343727234628468602, guid: 255b06a76557d9b4bb4c71683dbee8cd,
-    type: 2}

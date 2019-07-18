@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     public SalesManager SalesManager;
     public ShuffleBag ShuffleBag;
     public ScoreManager ScoreManager;
+    public WinLooseManager WinLooseManager;
 
     [SerializeField] private float _preparationTime;
     [SerializeField] private Vector2 _customerSpawnTimerMinMax;
@@ -19,7 +20,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance == null) 
         {
             Instance = this;
         }

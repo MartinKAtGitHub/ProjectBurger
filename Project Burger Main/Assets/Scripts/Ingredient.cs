@@ -13,6 +13,12 @@ public class Ingredient : ScriptableObject
 
         HamBurger_BottomBun,
         HamBurger_Meat,
+        HamBurger_Meat_Raw,
+        HamBurger_Meat_Rare,
+        HamBurger_Meat_Medium,
+        HamBurger_Meat_MediumWell,
+        HamBurger_Meat_WellDone,
+        HamBurger_Meat_Overcooked,
         HamBurger_Cheese,
         HamBurger_Lettuce,
         HamBurger_Onions,

@@ -15,16 +15,19 @@ public class Customer : MonoBehaviour
     [SerializeField] private int _CustomerWaitingTime;
     [SerializeField] private string _customerName;
     [SerializeField] private bool _isWaiting;
-    [SerializeField]  private CustomerState _CustomerStates = null;
+    [SerializeField] private CustomerState _CustomerStates = null;
 
     private Order _order;
-    private CustomerSelect _customerSelect;
+   // private CustomerSelect _customerSelect;
+    private OrderWindow _orderWindow;
+    private OrderGenerator _orderGenerator;
 
     public string CustomerName { get => _customerName; }
-    public OrderGenerator OrderGenerator { get; private set; }
+    public OrderGenerator OrderGenerator { get => _orderGenerator; private set => _orderGenerator = value; }
     public Order Order { get => _order; }
     public bool IsWaiting { get => _isWaiting; }
-    public CustomerState CustomerStates{ get => _CustomerStates; }
+    public CustomerState CustomerStates { get => _CustomerStates; }
+    public OrderWindow OrderWindow { get => _orderWindow; }
 
     private void OnDestroy()
     {
@@ -33,13 +36,11 @@ public class Customer : MonoBehaviour
 
     private void Awake()
     {
-        OrderGenerator = GetComponent<OrderGenerator>();
+        _orderGenerator = GetComponent<OrderGenerator>();
+        _orderWindow = GetComponent<OrderWindow>();
 
-    }
-
-    private void OnEnable()
-    {
-
+        if (_order == null)
+        {
             _customerName = gameObject.name;
             _order = OrderGenerator.RequestOrder();
             _order.CustomerName = _customerName;
@@ -53,13 +54,13 @@ public class Customer : MonoBehaviour
         //Stop At Disc
         //Start Dialog;
 
-       // _CustomerStates.StartCustomerStates();
-        _customerSelect = LevelManager.Instance.CustomerSelect;
+        // _CustomerStates.StartCustomerStates();
+        //  _customerSelect = LevelManager.Instance.CustomerSelect;
         if (TestingRandomTimeout)
         {
+            //Debug.Log($"CUSTOMER TIMEOUT = {name}");
             Invoke("CustomerTimeout", Random.Range(10, 20));
         }
-
     }
 
 
@@ -89,17 +90,17 @@ public class Customer : MonoBehaviour
 
     private void Update()
     {
-        if (!_isWaiting && !_customerSelect.InSmoothTransition)
-        {
-            if (transform.parent == _customerNotInFocusContainer)
-            {
-                TimeOutInstantRemove();
-            }
-            else if (transform.parent == _customerInteractionContainer)
-            {
-                TimeOutPlayAnim();
-            }
-        }
+        //if (!_isWaiting && !_customerSelect.InSmoothTransition)
+        //{
+        //    if (transform.parent == _customerNotInFocusContainer)
+        //    {
+        //        TimeOutInstantRemove();
+        //    }
+        //    else if (transform.parent == _customerInteractionContainer)
+        //    {
+        //        TimeOutPlayAnim();
+        //    }
+        //}
     }
 
     private void CustomerTimeout()
@@ -107,13 +108,15 @@ public class Customer : MonoBehaviour
         Debug.Log($"{name} has been Flagged for Deletion");
         // TODO Customer.cs | Timeout(), We need to make sure the customer doesn't timeout while in a animation.
         _isWaiting = false;
+        TimeOutInstantRemove();
     }
 
     private void TimeOutInstantRemove()
     {
         Debug.Log($"{name} Removed No Anim");
-        LevelManager.Instance.CustomerSelect.OnTimeOut(this);
+        //  _customerSelect.OnTimeOut(this);
         LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
+
     }
 
     private void TimeOutPlayAnim()
@@ -121,8 +124,10 @@ public class Customer : MonoBehaviour
         if (!IsWaiting)
         {
             Debug.Log($"{name} Removed Play Anim");
-            LevelManager.Instance.CustomerSelect.OnTimeOut(this);
+            //_customerSelect.OnTimeOut(this);
+            //_customerSelect.CircularRight();
             LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
+            OrderWindow.CloseWindow();
 
         }
     }

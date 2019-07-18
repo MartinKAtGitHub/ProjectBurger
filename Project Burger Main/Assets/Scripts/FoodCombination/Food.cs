@@ -25,7 +25,7 @@ public class Food : MonoBehaviour
         _foodDrag = GetComponent<FoodDrag>();
     }
 
-    public void CreateFoodGameObjectWithIngredients()
+    public void ParentIngredientsToFoodObject()
     {
         for (int i = 0; i < GameObjectIngredients.Count; i++)
         {

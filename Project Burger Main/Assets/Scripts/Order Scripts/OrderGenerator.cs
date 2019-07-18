@@ -10,13 +10,13 @@ public class OrderGenerator : MonoBehaviour
     public bool RemoveIngredients;
 
     [SerializeField] private RecipeBook _recipeBook;
-    [Range(2,6)]
+    [Range(2, 6)]
     [SerializeField] private int _multiOrderAmount;
     [SerializeField] private int _multiOrderChance = 50;
     /// <summary>
     /// the Order recipe that is left after we have discarded all the ingredients the customer didn't want
     /// </summary>
-    [SerializeField]  private Order _order;
+    [SerializeField] private Order _order;
 
     private Recipe _orderBaseRecipe;
     private Customer _customer;
@@ -33,20 +33,22 @@ public class OrderGenerator : MonoBehaviour
     {
         //_customer = GetComponent<Customer>();
     }
+
     /// <summary>
     /// Generates a new order(s) based on chance, the ingredients can be set to be removed at which point
     /// there will be chance to remove the ingredients
     /// </summary>
     public Order RequestOrder()
     {
+        //Debug.Log(name + " Is requesting a Order");
         _order = new Order();
-     //   _order.CustomerName = _customer.CustomerName;
+        //   _order.CustomerName = _customer.CustomerName;
 
         var multiOrderRoll = Random.Range(1, 100);
 
         if (multiOrderRoll < _multiOrderChance)
         {
-          //  Debug.Log("Requesting Multi food recipe order");
+            //  Debug.Log("Requesting Multi food recipe order");
             for (int i = 0; i < _multiOrderAmount; i++)
             {
                 SelectRandomRecipe();
@@ -99,7 +101,8 @@ public class OrderGenerator : MonoBehaviour
             if (_recipeBook.Recipes[j].AccumulatedWight >= recipeRoll)
             {
                 // var orderBaseRecipe = _recipeBook.Recipes[j]; // This turns into null for some reason, but only for the first spawn lel
-                _order.OrderRecipes.Add(CreateOrderRecipe(_recipeBook.Recipes[j]));
+                _orderBaseRecipe = _recipeBook.Recipes[j];
+                _order.OrderRecipes.Add(CreateOrderRecipe(_orderBaseRecipe));
 
                 return; // If i find a recipe then no need to loop through the rest
             }
@@ -127,7 +130,8 @@ public class OrderGenerator : MonoBehaviour
 
 
     //----------------Trial Code, Need To Get This Somehow To Get My Code To Work-------------------------------------------------
-    public void RequestOrderTrial(RecipeBook a, int b, int c) {//If We Have 2 ThemeDays At Some Point, Like Green Day And A BurthDay Where A Woman Can Buy A Cake Or Just Plain Salad
+    public void RequestOrderTrial(RecipeBook a, int b, int c)
+    {//If We Have 2 ThemeDays At Some Point, Like Green Day And A BurthDay Where A Woman Can Buy A Cake Or Just Plain Salad
         _recipeBook = a;
         _multiOrderAmount = b;
         _multiOrderChance = c;

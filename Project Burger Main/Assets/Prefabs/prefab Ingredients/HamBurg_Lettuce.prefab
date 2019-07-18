@@ -12,18 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HamBurg_Lettuce
       objectReference: {fileID: 0}
-    - target: {fileID: 4364827356571203016, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: ingredient
-      value: 
-      objectReference: {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7,
-        type: 2}
-    - target: {fileID: 295963924765048990, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 41f1c4efff78ee949aa845ce4b8e0c8f,
-        type: 3}
     - target: {fileID: 295963924765048985, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
       propertyPath: m_IgnoreParentGroups
@@ -134,6 +122,18 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 295963924765048990, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9f0d82c3bb288e94fbf728f3c49258d7,
+        type: 3}
+    - target: {fileID: 4364827356571203016, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: ingredient
+      value: 
+      objectReference: {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7,
+        type: 2}
     - target: {fileID: 295963924765048988, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
       propertyPath: ingredientType

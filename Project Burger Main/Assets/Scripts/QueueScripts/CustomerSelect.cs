@@ -96,6 +96,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
             oldCustomer.transform.SetParent(_customerNotInFocusContainer);
             oldCustomer.transform.localPosition = Vector2.zero;
 
+            oldCustomer.OrderWindow.CloseWindow();
             //Debug.Log($"Old customer Waiting({oldCustomer.IsWaiting})");
             //oldCustomer.CheckCustomerTimout();
         }
@@ -105,6 +106,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         }
 
         SetNewActiveCustomer(_customerIndex);
+        
 
         _customerInteractionContainer.anchoredPosition = Vector2.zero;
         _inSmoothTransition = false;
@@ -117,12 +119,10 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
         if (_queueManager.ActiveCustomerQueue.Count > 0)
         {
             Debug.Log($"Length = {_queueManager.ActiveCustomerQueue.Count}  index = {index}  MaxIndex ={_queueManager.ActiveCustomerQueue.Count - 1}");
-
-            // TODO BUG CustomerSelect.cs when customer is deleted the list is rescales and index is out of range
             var customer = _queueManager.ActiveCustomerQueue[index];
-
             _customerInFocus = customer;
             ChangeFoodTrayOrder(_customerInFocus.Order);
+            _customerInFocus.OrderWindow.OpenWindow(_customerInFocus);
         }
         else
         {

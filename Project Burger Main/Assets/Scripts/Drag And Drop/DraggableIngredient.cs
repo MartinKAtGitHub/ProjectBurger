@@ -25,15 +25,28 @@ public class DraggableIngredient : Draggable
     public override void OnEndDrag(PointerEventData eventData)
     {
         base.OnEndDrag(eventData);
+        OnFoodReady();
+       
+    }
 
+    /// <summary>
+    /// When the final ingredient is dropped we combine the ingredients into the food object.
+    /// </summary>
+    private void OnFoodReady() 
+    {
+        // NOTE -> Because OnEndDrag runs after OnDrop any changes done will be overwritten
+        // So the HAMABUER TOP is not added if we DONT run code here
         if (FoodCombinationDropArea != null) // This will only run if we drop on foodcombi, not on reset
         {
+
+            FoodCombinationDropArea.OffsetIngredientObject(this.transform);
+
             if (FoodCombinationDropArea.IsFoodReady)
             {
-                MakeFoodDraggable();
-                ParentIngredientsToFood();
+                FoodCombinationDropArea.MakeFoodDraggable();
+                FoodCombinationDropArea.ParentIngredientsToFood();
                 FoodCombinationDropArea.IsFoodReady = false;
-                //TODO DraggableIngredient.cs | make an event fire here, so this class doesn't have to do illogical stuff.
+               
             }
             else
             {
@@ -44,23 +57,6 @@ public class DraggableIngredient : Draggable
         {
             canvasGroup.blocksRaycasts = true;
         }
-    }
-
-    /// <summary>
-    /// This disables the drag on ingredients AND enables it on the final Food Gameobject.
-    /// </summary>
-    private void MakeFoodDraggable() // PERFORMANCE DraggableIngredient.cs -> the OnFoodIsReady() is check every time a ingredient is dropped on the foodcombination pad.
-    {
-        for (int i = 0; i < FoodCombinationDropArea.Food.GameObjectIngredients.Count; i++)
-        {
-            FoodCombinationDropArea.Food.GameObjectIngredients[i].GetComponent<CanvasGroup>().blocksRaycasts = false;
-        }
-        FoodCombinationDropArea.Food.GetComponent<CanvasGroup>().blocksRaycasts = true;
-    }
-
-    private void ParentIngredientsToFood()
-    {
-        FoodCombinationDropArea.Food.CreateFoodGameObjectWithIngredients();
     }
 }
 

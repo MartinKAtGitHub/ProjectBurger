@@ -196,7 +196,6 @@ GameObject:
   - component: {fileID: 5503328911389282101}
   - component: {fileID: 7074188276319587271}
   - component: {fileID: 5503328911389282091}
-  - component: {fileID: 5503328911389282100}
   m_Layer: 5
   m_Name: CUSTOMER
   m_TagString: Untagged
@@ -236,7 +235,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f66bc8299858f4fb40d75ff36021ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TestingRandomTimeout: 0
+  QueuePositionDot: {fileID: 0}
+  _customerInteractionContainer: {fileID: 0}
+  _customerNotInFocusContainer: {fileID: 0}
+  _CustomerWaitingTime: 0
   _customerName: 
+  _isWaiting: 0
+  _CustomerStates: {fileID: 0}
 --- !u!114 &5503328911389282091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,17 +262,3 @@ MonoBehaviour:
   _order:
     CustomerName: 
     OrderRecipes: []
---- !u!114 &5503328911389282100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5503328911389282102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b63a9135faf4b74d83a08399e8a7b53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _orderWindowPrefab: {fileID: 2812263084129758021, guid: fca25ee02eaadf94cb18e4f6ec8891cd,
-    type: 3}

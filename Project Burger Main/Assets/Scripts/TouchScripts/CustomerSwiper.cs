@@ -29,15 +29,15 @@ public class CustomerSwiper : MonoBehaviour, IDragHandler, IBeginDragHandler {
 
     public void OnDrag(PointerEventData eventData) {
         if (Vector2.Distance(eventData.position, StartPos) > MaxDist) {
-            StartPos = eventData.position;
             //Debug.Log("Over The Limit, Start Changing Customer");
 
             if (eventData.position.x < StartPos.x) {
-                Debug.Log("Over The Limit, Start Changing Customer"); _leftbutton.onClick.Invoke(); //Script Was Not Attached To The Button, So Could Not Test It
+                Debug.Log("right"); _rightbutton.onClick.Invoke(); //Script Was Not Attached To The Button, So Could Not Test It
             } else {
-                Debug.Log("Over The Limit, Start Changing Customer"); _rightbutton.onClick.Invoke(); //Script Was Not Attached To The Button, So Could Not Test It
+                Debug.Log("left"); _leftbutton.onClick.Invoke(); //Script Was Not Attached To The Button, So Could Not Test It
             }
 
+            StartPos = eventData.position;
 
         }
     }

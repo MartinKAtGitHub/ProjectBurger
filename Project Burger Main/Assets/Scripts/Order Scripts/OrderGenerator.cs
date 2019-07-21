@@ -20,15 +20,13 @@ public class OrderGenerator : MonoBehaviour
 
     private Recipe _orderBaseRecipe;
     private Customer _customer;
-    private List<Ingredient> _discaredIngredients = new List<Ingredient>();
+  
 
     /// <summary>
     /// The recipe the order is being generated from
     /// </summary>
     public Recipe OrderBaseRecipe { get { return _orderBaseRecipe; } }
-    public List<Ingredient> DiscaredIngredients { get { return _discaredIngredients; } }
-    // public Order Order { get { return _order; } }
-
+  
     private void Awake()
     {
         //_customer = GetComponent<Customer>();
@@ -58,7 +56,6 @@ public class OrderGenerator : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Requesting Single food order");
             SelectRandomRecipe();
             return _order;
         }
@@ -73,14 +70,16 @@ public class OrderGenerator : MonoBehaviour
     {
         OrderRecipe orderRecipe = new OrderRecipe();
         orderRecipe.BaseRecipe = orderBaseRecipe;
-        //orderRecipe.CustomerName = gameObject.name;
+        orderRecipe.OrderRecipePrice = OrderBaseRecipe.Price; 
 
         for (int i = 0; i < orderBaseRecipe.Ingredients.Count; i++) // Rolls to check if a ingredient will be removed
         {
             var roll = Random.Range(1, 100);
             if (RemoveIngredients && roll < orderBaseRecipe.Ingredients[i].RemoveChance)// Roll will never be 0% or 100% => %0 safe %100 removed
             {
-                orderRecipe.DiscaredIngredients.Add(orderBaseRecipe.Ingredients[i]);
+                var ingredient = orderBaseRecipe.Ingredients[i];
+                orderRecipe.OrderRecipePrice -= ingredient.IngredientCost;
+                orderRecipe.DiscaredIngredients.Add(ingredient);
             }
             else
             {
@@ -102,7 +101,10 @@ public class OrderGenerator : MonoBehaviour
             {
                 // var orderBaseRecipe = _recipeBook.Recipes[j]; // This turns into null for some reason, but only for the first spawn lel
                 _orderBaseRecipe = _recipeBook.Recipes[j];
-                _order.OrderRecipes.Add(CreateOrderRecipe(_orderBaseRecipe));
+
+                var orderRecipe = CreateOrderRecipe(_orderBaseRecipe);
+                _order.PriceTotal += orderRecipe.OrderRecipePrice; 
+                _order.OrderRecipes.Add(orderRecipe);
 
                 return; // If i find a recipe then no need to loop through the rest
             }

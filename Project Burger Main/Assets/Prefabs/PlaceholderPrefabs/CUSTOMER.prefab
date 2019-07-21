@@ -235,13 +235,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f66bc8299858f4fb40d75ff36021ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestingRandomTimeout: 0
+  TestingRandomTimeout: 1
   QueuePositionDot: {fileID: 0}
+  _customerPatience:
+    _customerWaitingTime: 0
+    _customerGold: 0
   _customerInteractionContainer: {fileID: 0}
   _customerNotInFocusContainer: {fileID: 0}
   _CustomerWaitingTime: 0
   _customerName: 
-  _isWaiting: 0
+  _isWaiting: 1
   _CustomerStates: {fileID: 0}
 --- !u!114 &5503328911389282091
 MonoBehaviour:

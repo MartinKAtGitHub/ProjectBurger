@@ -22,7 +22,7 @@ public class GuiUpdater : MonoBehaviour {
     }
     
     private void GoldChanged() {
-        gold.text = "" + (LevelManager.Instance.ScoreManager.GoldEarned - LevelManager.Instance.ScoreManager.GoldLost) + " / " + LevelManager.Instance.WinLooseManager.GoldWinAmount;
+        gold.text = "" + (LevelManager.Instance.ScoreManager.Gold - LevelManager.Instance.ScoreManager.GoldLost) + " / " + LevelManager.Instance.WinLooseManager.GoldWinAmount;
     }
 
     private void LifeChanged() {

@@ -11,4 +11,9 @@ public class OrderRecipe
     public Recipe BaseRecipe;
     public List<Ingredient> OrderIngredients = new List<Ingredient>();
     public List<Ingredient> DiscaredIngredients = new List<Ingredient>();
+    public List<Ingredient> ExtraIngredients = new List<Ingredient>();
+
+    private int _orderRecipePrice;
+
+    public int OrderRecipePrice { get => _orderRecipePrice; set => _orderRecipePrice = value; }
 }

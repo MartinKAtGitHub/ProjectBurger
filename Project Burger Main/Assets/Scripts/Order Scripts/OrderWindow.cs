@@ -8,12 +8,12 @@ using System.Collections.Generic;
 /// </summary>
 public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer ?
 {
-    [SerializeField] private GameObject _orderWindowParent;
-    [SerializeField] private GameObject _orderWindowPrefab;
+
     /// <summary>
     /// text object dedicated to holding the name of the recipe
     /// </summary>
     [SerializeField] private TextMeshProUGUI _recipeNameText;
+    [SerializeField] private TextMeshProUGUI _OrderPriceText;
     /// <summary>
     /// Image object which holds the finished food image of a recipe
     /// </summary>
@@ -23,7 +23,7 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
     /// </summary>
     [SerializeField] private Image[] _discardedIngredients;
 
-  
+
     private GameObject _orderWindow;
 
 
@@ -58,19 +58,16 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
 
     public void UpdateUI(Customer customer)
     {
+        _OrderPriceText.text = customer.Order.PriceTotal.ToString();
 
-        _recipeNameText.text = customer.OrderGenerator.OrderBaseRecipe.RecipeName;
-        _recipeImg.sprite = customer.OrderGenerator.OrderBaseRecipe.RecipeImg;
+        // for( order.orderrecipes)
+        //set all the text and shit
 
-        //set sprite to REMOVE
-        for (int i = 0; i < customer.OrderGenerator.DiscaredIngredients.Count; i++)
-        {
-            _discardedIngredients[i].sprite = customer.OrderGenerator.DiscaredIngredients[i].IngredientSprite;
-        }
 
-        // Set Sprite to ADD
 
-        // FOR loop() -> add extra ingreinds list
+
+        //   _recipeNameText.text = customer.OrderGenerator.OrderBaseRecipe.RecipeName;
+        // _recipeImg.sprite = customer.OrderGenerator.OrderBaseRecipe.RecipeImg;
     }
 
     //private void CreateOrderWindow() //TODO OrderWindow.cs | Don't need to instantiate this if every Customer has it. Just child prefab to Customer

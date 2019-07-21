@@ -6,13 +6,12 @@ using UnityEngine;
 public class Customer : MonoBehaviour
 {
 
-    public bool TestingRandomTimeout;
     public GameObject QueuePositionDot;
 
     [SerializeField] private CustomerPatience _customerPatience;
     [SerializeField] private RectTransform _customerInteractionContainer;
     [SerializeField] private RectTransform _customerNotInFocusContainer;
-    [SerializeField] private int _CustomerWaitingTime;
+    //[SerializeField] private int _customerWaitingTime;
     [SerializeField] private string _customerName;
     [SerializeField] private bool _isWaiting;
     [SerializeField] private CustomerState _CustomerStates = null;
@@ -42,33 +41,15 @@ public class Customer : MonoBehaviour
             _customerName = gameObject.name;
             _order = OrderGenerator.RequestOrder();
             _order.CustomerName = _customerName;
-
         }
     }
 
     private void Start()
     {
-        //Start Walk
-        //Stop At Disc
-        //Start Dialog;
-
-        // _CustomerStates.StartCustomerStates();
-        //  _customerSelect = LevelManager.Instance.CustomerSelect;
             _customerPatience.SetOrderPatience(_order);
-        if (TestingRandomTimeout)
-        {
-            //Debug.Log($"CUSTOMER TIMEOUT = {name}");
-            Invoke("CustomerTimeout", Random.Range(10, 20));
-        }
+
+            Invoke("CustomerTimeout", _customerPatience.CustomerWaitingTime);
     }
-
-
-    void SetWaitingTime()
-    {
-
-    }
-
-
 
     public void SetCustomerStates(TheCustomSpawner spawner)
     {

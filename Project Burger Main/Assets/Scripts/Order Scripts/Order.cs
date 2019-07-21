@@ -9,6 +9,8 @@ using System.Collections.Generic;
 public class Order
 {
     public string CustomerName;
+    public int PriceTotal = 0;
     //public List<Sprite> FoodSpritesInThisOrder; // Holds the sprites of the recipes.
     public List<OrderRecipe> OrderRecipes = new List<OrderRecipe>();
+
 }

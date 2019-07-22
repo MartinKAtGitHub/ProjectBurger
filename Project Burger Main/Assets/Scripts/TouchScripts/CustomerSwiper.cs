@@ -18,10 +18,10 @@ public class CustomerSwiper : MonoBehaviour, IDragHandler, IBeginDragHandler {
 
 
 
-    private void OnRectTransformDimensionsChange() {//Im Not Sure Why But This Is Called Several Timer, I Think It Has Something To Do With Canvas Scaler.
+/*    private void OnRectTransformDimensionsChange() {//Im Not Sure Why But This Is Called Several Timer, I Think It Has Something To Do With Canvas Scaler.
         MaxDist = canvas.sizeDelta.x * canvas.localScale.x * HowFarToSwipe;//Might Need To Change This At Some Point. But Currently its Working As Intended, by Checking Horizontal Swipe 
         //Debug.Log("Changing Max Screen Size " + MaxDist);
-    }
+    }*/
 
     public void OnBeginDrag(PointerEventData eventData) {
         StartPos = eventData.pressPosition;

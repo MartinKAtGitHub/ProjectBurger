@@ -43,7 +43,6 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
     public void OpenWindow(Customer customer)
     {
         // Anim Fade INN Window / enable window = true
-
         UpdateUI(customer);
         _orderWindow.SetActive(true);
     }
@@ -62,7 +61,6 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
 
         // for( order.orderrecipes)
         //set all the text and shit
-
 
 
 

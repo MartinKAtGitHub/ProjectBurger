@@ -36,7 +36,6 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        
         StartCoroutine(CustomerSpawnSystemInit());
     }
 
@@ -82,5 +81,14 @@ public class LevelManager : MonoBehaviour
         }
         // Signal end of loop, maybe have an event and fire this metod again
         // OR StartCoroutine(CustomerSpawnSystemLoop()); call it again, might crash 
+    }
+
+
+    private void NullChecking(object componant)
+    {
+        if(componant == null)
+        {
+            Debug.LogError($"Component {nameof(componant)} is NULL");
+        }
     }
 }

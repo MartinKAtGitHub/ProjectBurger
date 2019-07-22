@@ -20,13 +20,9 @@ public class TableSwipeSetter : MonoBehaviour {
     private int _addedAdditionalTablesToSwipe = 0;
     private int _maximumTables = 2;
     private float _time = 0;
-    private float _canvasScale = 0;
+    private float _canvasScale = 1920;
 
-/*    private void OnRectTransformDimensionsChange() {//Im Not Sure Why But This Is Called Several Timer, I Think It Has Something To Do With Canvas Scaler.
-                                                    //   MaxDist = canvas.sizeDelta.x * canvas.localScale.x;
-        _canvasScale = _canvas.sizeDelta.x;//If We Change sizeDelta, I Need The Updated Value
-        _moveToPos.y = transform.localPosition.y;
-    }*/
+
 
     private void Start() {
         _moveToPos = transform.localPosition;

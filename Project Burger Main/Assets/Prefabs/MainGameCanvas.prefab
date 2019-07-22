@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456de03cd7bf5354fbb6c2bf5f1b770c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _customerSelect: {fileID: 0}
 --- !u!114 &7508731604119894275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +235,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083111153}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 356312f527675cf4a916214931c980ce, type: 3}
   m_Name: 
@@ -2233,7 +2234,7 @@ GameObject:
   - component: {fileID: 8727089984517639787}
   - component: {fileID: 8727089984517639784}
   m_Layer: 5
-  m_Name: Tabel
+  m_Name: HamburgerStation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

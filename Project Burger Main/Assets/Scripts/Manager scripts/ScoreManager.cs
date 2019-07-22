@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreManager : MonoBehaviour { 
+public class ScoreManager : MonoBehaviour
+{
 
     #region EventsAndDelegates
 
@@ -21,31 +22,31 @@ public class ScoreManager : MonoBehaviour {
     #region ScoreStats
 
     //Serializing For Testing
-    [SerializeField] private float _goldEarned = 0;
-    [SerializeField] private float _goldLost = 0;
-    [SerializeField] private float _lifeLost = 0;
+    [SerializeField] private int _gold = 0;
+    [SerializeField] private int _goldLost = 0;
+    [SerializeField] private int _lifeLost = 0;
     [SerializeField] private float _timeUsed = 0;
 
-    [SerializeField] private float _orderItemPartsWaisted = 0;
-    [SerializeField] private float _orderItemPartsUsed = 0;
-    [SerializeField] private float _orderItemPartsOverused = 0;
+    [SerializeField] private int _orderItemPartsWaisted = 0;
+    [SerializeField] private int _orderItemPartsUsed = 0;
+    [SerializeField] private int _orderItemPartsOverused = 0;
 
-    [SerializeField] private float _customersMade = 0;
-    [SerializeField] private float _customersLeave = 0;
-    [SerializeField] private float _specialEncounters = 0;
+    [SerializeField] private int _customersMade = 0;
+    [SerializeField] private int _customersLeave = 0;
+    [SerializeField] private int _specialEncounters = 0;
 
-    [SerializeField] private float _itemsOrdered = 0;
-    [SerializeField] private float _itemsCompleted = 0;
-    [SerializeField] private float _itemsFailed = 0;
-    [SerializeField] private float _itemsIgnored = 0;
+    [SerializeField] private int _itemsOrdered = 0;
+    [SerializeField] private int _itemsCompleted = 0;
+    [SerializeField] private int _itemsFailed = 0;
+    [SerializeField] private int _itemsIgnored = 0;
 
-    [SerializeField] private float _ordersOrdered = 0;
-    [SerializeField] private float _ordersCompleted = 0;
-    [SerializeField] private float _ordersFailed = 0;
-    [SerializeField] private float _ordersIgnored = 0;
+    [SerializeField] private int _ordersOrdered = 0;
+    [SerializeField] private int _ordersCompleted = 0;
+    [SerializeField] private int _ordersFailed = 0;
+    [SerializeField] private int _ordersIgnored = 0;
 
-    [SerializeField] private float _combosApplied = 0;
-    [SerializeField] private float _comboHighest = 0;
+    [SerializeField] private int _combosApplied = 0;
+    [SerializeField] private int _comboHighest = 0;
 
     //Tables Swiped? Customers Swiped? 
 
@@ -58,10 +59,12 @@ public class ScoreManager : MonoBehaviour {
     /// += value.
     /// If We Want To Display How Much Ingredient Are Wasted And The Gold Lost, And Also Gold Gained 
     /// </summary>
-    public float GoldEarned {
-        get => _goldEarned;
-        set {
-            _goldEarned += value;
+    public int Gold
+    {
+        get => _gold;
+        set
+        {
+            _gold = value;
             OnGoldChange();
         }
     }
@@ -69,10 +72,12 @@ public class ScoreManager : MonoBehaviour {
     /// <summary>
     /// += value.
     /// </summary>
-    public float GoldLost {
+    public int GoldLost
+    {
         get => _goldLost;
-        set {
-            _goldLost += value;
+        set
+        {
+            _goldLost = value;
             OnGoldChange();
         }
     }
@@ -80,10 +85,12 @@ public class ScoreManager : MonoBehaviour {
     /// <summary>
     /// += value.
     /// </summary>
-    public float LifeLost {
+    public int LifeLost
+    {
         get => _lifeLost;
-        set {
-            _lifeLost += value;
+        set
+        {
+            _lifeLost = value;
             OnLifeChange();
         }
     }
@@ -91,45 +98,53 @@ public class ScoreManager : MonoBehaviour {
     /// <summary>
     /// += value.
     /// </summary>
-    public float TimeUsed {
+    public float TimeUsed
+    {
         get => _timeUsed;
-        set {
+        set
+        {
             _timeUsed += value;
             OnTimeChange();//This Will Be Called Once A Second. Dont Know If This Is Something I Want Or Not.
         }
     }
-    public float OrderItemPartsWaisted { get => _orderItemPartsWaisted; set => _orderItemPartsWaisted += value; }
-    public float OrderItemPartsUsed { get => _orderItemPartsUsed; set => _orderItemPartsUsed += value; }
-    public float OrderItemPartsOverused { get => _orderItemPartsOverused; set => _orderItemPartsOverused += value; }
-    public float CustomersMade { get => _customersMade; set => _customersMade += value; }
-    public float CustomersLeave { get => _customersLeave; set => _customersLeave += value; }
-    public float SpecialEncounters { get => _specialEncounters; set => _specialEncounters += value; }
-    public float ItemsOrdered { get => _itemsOrdered; set => _itemsOrdered += value; }
-    public float ItemsCompleted { get => _itemsCompleted; set => _itemsCompleted += value; }
-    public float ItemsFailed { get => _itemsFailed; set => _itemsFailed += value; }
-    public float ItemsIgnored { get => _itemsIgnored; set => _itemsIgnored += value; }
-    public float OrdersOrdered { get => _ordersOrdered; set => _ordersOrdered += value; }
-    public float OrdersCompleted { get => _ordersCompleted; set => _ordersCompleted += value; }
-    public float OrdersFailed { get => _ordersFailed; set => _ordersFailed += value; }
-    public float OrdersIgnored { get => _ordersIgnored; set => _ordersIgnored += value; }
+    public int OrderItemPartsWaisted { get => _orderItemPartsWaisted; set => _orderItemPartsWaisted += value; }
+    public int OrderItemPartsUsed { get => _orderItemPartsUsed; set => _orderItemPartsUsed += value; }
+    public int OrderItemPartsOverused { get => _orderItemPartsOverused; set => _orderItemPartsOverused += value; }
+    public int CustomersMade { get => _customersMade; set => _customersMade += value; }
+    public int CustomersLeave { get => _customersLeave; set => _customersLeave += value; }
+    public int SpecialEncounters { get => _specialEncounters; set => _specialEncounters += value; }
+    public int ItemsOrdered { get => _itemsOrdered; set => _itemsOrdered += value; }
+    public int ItemsCompleted { get => _itemsCompleted; set => _itemsCompleted += value; }
+    public int ItemsFailed { get => _itemsFailed; set => _itemsFailed += value; }
+    public int ItemsIgnored { get => _itemsIgnored; set => _itemsIgnored += value; }
+    public int OrdersOrdered { get => _ordersOrdered; set => _ordersOrdered += value; }
+    public int OrdersCompleted { get => _ordersCompleted; set => _ordersCompleted += value; }
+    public int OrdersFailed { get => _ordersFailed; set => _ordersFailed += value; }
+    public int OrdersIgnored { get => _ordersIgnored; set => _ordersIgnored += value; }
 
-    public float CombosApplied {
+    public int CombosApplied
+    {
         get => _combosApplied;
-        set {
+        set
+        {
 
-            if (_combosApplied > 0) {//Stop Old To Reapply Time
+            if (_combosApplied > 0)
+            {//Stop Old To Reapply Time
                 Debug.Log("stopping");
-                StopCoroutine(CountDown(0));
+                StopCoroutine(ComboCountDown(0));
             }
 
-            if (_combosApplied > 30) {//Just A Simple ComboTime Setter
-                StartCoroutine(CountDown(4));
-        //        StartCoroutine(CountDown(Time.time + 30));
-            } else {
-                StartCoroutine(CountDown(4));
-        //        StartCoroutine(CountDown(Time.time + (60 - _combosApplied)));
+            if (_combosApplied > 30)
+            {//Just A Simple ComboTime Setter
+                StartCoroutine(ComboCountDown(4));
+                //        StartCoroutine(CountDown(Time.time + 30));
             }
-           
+            else
+            {
+                StartCoroutine(ComboCountDown(4));
+                //        StartCoroutine(CountDown(Time.time + (60 - _combosApplied)));
+            }
+
             _combosApplied += value;
 
             if (_combosApplied > _comboHighest)
@@ -137,24 +152,30 @@ public class ScoreManager : MonoBehaviour {
         }
     }
 
-    public float ComboHighest { get => _comboHighest;}
+    public float ComboHighest { get => _comboHighest; }
 
     #endregion
 
 
-    private void Start() {
-        if(LevelManager.Instance == null) {
+    private void Awake()
+    {
+        if (LevelManager.Instance == null)
+        {
             Debug.LogWarning("FORGOT TO ADD A LEVEL MANAGER???");
-        } else {
+        }
+        else
+        {
             LevelManager.Instance.ScoreManager = this;
         }
 
     }
 
-    private IEnumerator CountDown(float CountDown) {
+    private IEnumerator ComboCountDown(float CountDown)
+    {
         float duration = CountDown; // 3 seconds you can change this 
-      
-        while (duration > 0) {
+
+        while (duration > 0)
+        {
             yield return new WaitForSeconds(1);
             duration--;
         }
@@ -167,25 +188,33 @@ public class ScoreManager : MonoBehaviour {
 
 
     //Simple Check If Ingredient Are Correct And Give Score Based On Ingredient Cost, So The More And Expensive Ingredients The More Money Earned.
-    public void CalculateScore(Order theOrder, Food theItem) {
-        for (int i = 0; i < theOrder.OrderRecipes.Count; i++) {//Going Through All Recipes Connected To The Order
+    public void CalculateScore(Order theOrder, Food theItem)
+    {
+        for (int i = 0; i < theOrder.OrderRecipes.Count; i++)
+        {//Going Through All Recipes Connected To The Order
 
-            for (int j = 0; j < theOrder.OrderRecipes[i].OrderIngredients.Count; j++) {//Iterating Through The Ingredient Of The Selected Recipe
+            for (int j = 0; j < theOrder.OrderRecipes[i].OrderIngredients.Count; j++)
+            {//Iterating Through The Ingredient Of The Selected Recipe
 
-                if (theOrder.OrderRecipes[i].OrderIngredients[j] == theItem.GameObjectIngredients[j]) {//If Recipe And Checking Item Have Same Ingredients Continue, If Not Check Next Recipe
+                if (theOrder.OrderRecipes[i].OrderIngredients[j] == theItem.GameObjectIngredients[j])
+                {//If Recipe And Checking Item Have Same Ingredients Continue, If Not Check Next Recipe
 
-                    if (j == theOrder.OrderRecipes[i].OrderIngredients.Count - 1) {//Found A Match, And At The Last Ingredient
+                    if (j == theOrder.OrderRecipes[i].OrderIngredients.Count - 1)
+                    {//Found A Match, And At The Last Ingredient
 
-                        for (int k = 0; k < theOrder.OrderRecipes[i].OrderIngredients.Count; k++) {
-                            GoldEarned += theOrder.OrderRecipes[i].OrderIngredients[k].IngredientCost;
-                      //      GoldEarned += theOrder.OrderRecipes[i].OrderIngredients[k].IngredientCost * (1 + (0.01f * (CombosApplied = 1)));
+                        for (int k = 0; k < theOrder.OrderRecipes[i].OrderIngredients.Count; k++)
+                        {
+                            Gold += theOrder.OrderRecipes[i].OrderIngredients[k].IngredientCost; // TODO scoremanager.cs |wont this be wrong with the property also doing +=
+                            //      GoldEarned += theOrder.OrderRecipes[i].OrderIngredients[k].IngredientCost * (1 + (0.01f * (CombosApplied = 1)));
                         }
 
                         OrdersCompleted++;
                         return;//Only 1 Item Is Checked Currently
 
                     }
-                } else {
+                }
+                else
+                {
                     break;
                 }
             }
@@ -197,9 +226,21 @@ public class ScoreManager : MonoBehaviour {
     }
 
 
+    public void AddScore(int orderPrice)
+    {
+        Gold += orderPrice;
+        Debug.Log($"Score is ={Gold}");
+    }
+
+    public void RemoveLife()
+    {
+        LifeLost++; // This feels wrong. i feel this should just be life-- and lifelost++. Lifelost feels like a counter representing how many times a player has lost a life not the actual life lost
+    }
+
 
     //TODO.. IN PROGRESS, Might Not Even Happen
-    public void CalculateScoreMultipleItems(Customer customer) {
+    public void CalculateScoreMultipleItems(Customer customer)
+    {
         //float addingMoney = 0;
         //float foodScore = 0;
         //float foodScoreDiff = 0;
@@ -226,8 +267,5 @@ public class ScoreManager : MonoBehaviour {
         //Mistakes++;
 
     }
-
-
-
 
 }

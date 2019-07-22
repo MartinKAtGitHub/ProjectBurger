@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recipeImg: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
   _recipeName: Hamburger
-  _foodType: 1
   _orderChance: 50
   _accumulatedWight: 50
-  _recipeCost: 25
+  _price: 25
   _recipeTime: 25
   Ingredients:
   - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}

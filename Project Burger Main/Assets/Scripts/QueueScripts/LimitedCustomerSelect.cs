@@ -21,6 +21,8 @@ public class LimitedCustomerSelect : MonoBehaviour
     private FoodTrayDropArea _foodTrayDropArea;
 
     public int QueueSlotIndex { get => _queueSlotIndex;}
+    public QueueSlot QueueSlotInFocus { get => _queueSlotInFocus; }
+    public bool InSmoothTransition { get => _inSmoothTransition; }
 
     private delegate void SetSibling();
     private void Awake()

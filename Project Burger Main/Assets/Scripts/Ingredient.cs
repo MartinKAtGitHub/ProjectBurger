@@ -40,11 +40,13 @@ public class Ingredient : ScriptableObject
     /// The chance of this ingredient not being included in the Order, 
     /// set this in the recipe so we avoid situation where a cheeseburger doesn't have cheese
     /// </summary>
-     [Range(0,100)]
-    public int RemoveChance = 0;
-    public float IngredientCost = 1;//Used To Calculate Cost Of The Burger/MenuItem
+    [Range(0, 100)] public int RemoveChance = 0;
+
+    private int _ingredientCost = 1;//Used To Calculate Cost Of The Burger/MenuItem
     public float IngredientTime = 1;//Used To Calculate Cost Of The Burger/MenuItem
 
     public Sprite IngredientSprite { get { return _ingredientSprite; } }
+
+    public int IngredientCost { get => _ingredientCost;}
 }
 

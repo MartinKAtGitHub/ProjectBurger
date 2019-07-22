@@ -9,15 +9,14 @@ using UnityEngine.UI;
 /// </summary>
 public class FoodTrayDropArea : MonoBehaviour, IDropHandler
 {
-    public Image ResultImage;
-
+   
     [SerializeField] private Order _order; // Get order from Customer
     [SerializeField] private bool _orderSuccessful;
 
+
     public Order Order { set => _order = value; }
     public bool OrderSuccessful { get => _orderSuccessful; }
-    [Space(20)]
-    public List<Food> _foods = new List<Food>();
+    [Space(20)] public List<Food> _foods = new List<Food>();
 
 
     public void OnDrop(PointerEventData eventData)
@@ -76,7 +75,7 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
             if (_foods.Count == 0)
             {
                 Debug.Log("NO FOOD PLACED ON FOODTRAY !!!!!");
-                _orderSuccessful = false;
+                OnFailOrder();
                 return;
             }
 
@@ -85,7 +84,7 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
                 for (int i = 0; i < _foods.Count; i++) // for every foodstack
                 {
                     //Debug.Log("This should not decrease " + _order.OrderRecipes.Count);
-                    //then maybe remove it here _order.OrderRecipes.Count marked as completed or failed
+               
                     var tempOrderRecipes = _order.OrderRecipes;
                     var ingredientMatchFoundInOrderRecipeIndex = 0;
                     var failCounter = 0;
@@ -123,6 +122,8 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
                         {
                             // The ingredient didn't match any order recipe ingredient so go to next foodstack
                             _foods[i].DidStackMatchOrder = false;
+                            // If 1 foodstack fails do we fail the whole thing or give half points ?
+                            // Beacuse we dont need to loop trhoug the whole thing if we fail here
                             break;
                         }
                         else // TODO foodtray optimization,  _foodStacks[i].DidStackMatchOrder = true;
@@ -131,7 +132,7 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
                         }
                     }
 
-                    // Next foodStack
+                    // Check this foodStack Fail or success
                     if (!_foods[i].DidStackMatchOrder)
                     {
                         Debug.Log("FAIL " + _foods[i].name);
@@ -147,21 +148,17 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
 
                 if (amountOffoodStackMatches == amountOfOrderRecipes)
                 {
-                  
-                    _orderSuccessful = true;
                     OnSuccessfulOrder();
-
                 }
                 else
                 {
-                    ResultImage.color = Color.red;
-                    _orderSuccessful = false;
+                    OnFailOrder();
                 }
             }
             else
             {
                 Debug.Log("Can not sell food, Amount of food is not the same in order, Give player FAIL for selling to early ?");
-                _orderSuccessful = false;
+                OnFailOrder();
             }
         }
         else
@@ -172,7 +169,21 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
 
     private void OnSuccessfulOrder()
     {
-        ResultImage.color = Color.green;
+        _orderSuccessful = true;
+        RemoveFoodFromGame();
+        LevelManager.Instance.ScoreManager.AddScore(_order.PriceTotal);
+    }
+
+    private  void OnFailOrder()
+    {
+        _orderSuccessful = false;
+        RemoveFoodFromGame();
+        LevelManager.Instance.ScoreManager.RemoveLife();
+
+    }
+
+    private void RemoveFoodFromGame()
+    {
         for (int i = 0; i < _foods.Count; i++)
         {
             var food = _foods[i].gameObject;

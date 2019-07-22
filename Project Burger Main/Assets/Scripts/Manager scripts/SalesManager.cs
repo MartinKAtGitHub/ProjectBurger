@@ -6,14 +6,14 @@ using UnityEngine;
 public class SalesManager : MonoBehaviour
 {
 
-    private CustomerSelect _customerSelect;
+    [SerializeField]private LimitedCustomerSelect _customerSelect;
     private QueueManager _queueManager;
     private Action _onSale;
     public Action OnSale { get => _onSale; set => _onSale = value; }
 
     private void Awake()
     {
-        _customerSelect = GetComponent<CustomerSelect>();
+        _customerSelect = GetComponent<LimitedCustomerSelect>();
         _queueManager = GetComponent<QueueManager>();
     }
     /// <summary>
@@ -22,14 +22,14 @@ public class SalesManager : MonoBehaviour
     public void OnSell()
     {
 
-        var customer = _customerSelect.CustomerInFocus;
+        var customer = _customerSelect.QueueSlotInFocus.CurrentCustomer;
         if (customer != null)
         {
             if (!_customerSelect.InSmoothTransition)
             {
                 LevelManager.Instance.FoodTrayDropArea.CheckFoodStacksAgainstOrder();
 
-                _customerSelect.OnSell();
+               // _customerSelect.OnSell();
                 _queueManager.RemoveCustomerFromQueue(customer);
             }
         }

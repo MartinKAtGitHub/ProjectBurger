@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class TheCustomSpawner : MonoBehaviour {
 
-    public Transform SpawnStartPos;
-    public Transform SpawnEndPos;
-
- //   public float MinimumTimeOfEmptyQueue = 5f;
+    //   public float MinimumTimeOfEmptyQueue = 5f;
 
     float TimeWaited = 0f;
     public float spawntime = 30;
@@ -30,20 +27,7 @@ public class TheCustomSpawner : MonoBehaviour {
     [SerializeField]
     private ThemeDaySetup _ThemeDayCustomers = null; 
 
-
-
-    [SerializeField]
-    private SetWalkingPositions _WalkingPositions = null;
-     
-    public SetWalkingPositions WalkingPositions { 
-        get { return _WalkingPositions; } 
-    }
-
-
     void Start() {
-
-        if (SpawnStartPos == null)
-            SpawnStartPos = transform;
 
         StartSpawning();
 
@@ -58,7 +42,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
             if (ArtificialQueueLength > 0 && _ArtificialTimeWaited < Time.time) {//Made An Artificial Queue To Increase The Spawn Amount If We Have A Full Queue For The Next Customer.
 
-                if (LevelManager.Instance.QueueManager.ActiveCustomerQueue.Count < LevelManager.Instance.QueueManager.ActiveQueueLimit) {
+                if (LevelManager.Instance.QueueManager.CurrentActiveCustomer < LevelManager.Instance.QueueManager.ActiveQueueLimit) {
                     SetAditionalSpawningInfo();
                     ArtificialQueueLength--;
                 } else {
@@ -70,8 +54,8 @@ public class TheCustomSpawner : MonoBehaviour {
                 if (TimeWaited < Time.time) {//When Its Time To Spawn A Customer This Is True 
                     TimeWaited = Time.time + spawntime;
 
-
-                    if (LevelManager.Instance.QueueManager.ActiveCustomerQueue.Count < LevelManager.Instance.QueueManager.ActiveQueueLimit) {//Spawning Customer In Here
+                    Debug.Log(LevelManager.Instance.QueueManager.CurrentActiveCustomer + " | " + LevelManager.Instance.QueueManager.ActiveQueueLimit);
+                    if (LevelManager.Instance.QueueManager.CurrentActiveCustomer < LevelManager.Instance.QueueManager.ActiveQueueLimit) {//Spawning Customer In Here
                         SetAditionalSpawningInfo();
                     } else {//Adding To Artificial Queue
                         if (MakeArtificialQueue == true) {//When Added To Artificial Queue, Make The Timer 20% Of Normal SpawnTime.
@@ -82,7 +66,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
                 }
 
-                if (SpeedSpawn == false && LevelManager.Instance.QueueManager.ActiveCustomerQueue.Count == 0) {//When There Are NoOne In The Queue Spawn Customer At An Increased Rate
+                if (SpeedSpawn == false && LevelManager.Instance.QueueManager.CurrentActiveCustomer == 0) {//When There Are NoOne In The Queue Spawn Customer At An Increased Rate
                     SpeedSpawn = true;
 
                     TimeWaited = Time.time + (spawntime * 0.8f); //Start Spawn Time
@@ -95,7 +79,9 @@ public class TheCustomSpawner : MonoBehaviour {
 
     void SetAditionalSpawningInfo() {
         spawned = _CustomerCreation.SettingUpCustomer(_ThemeDayCustomers.CusomterSpawnRandom(), this);//Getting Customer To Spawn
-        spawned = Instantiate(spawned, SpawnStartPos.position, Quaternion.identity, gameObject.transform) as GameObject;
+        spawned = Instantiate(spawned, transform.position, Quaternion.identity, gameObject.transform) as GameObject;
+
+        spawned.gameObject.SetActive(false);
 
         LevelManager.Instance.QueueManager.AddCustomerToQueue(spawned.GetComponent<Customer>());
         SpeedSpawn = false;

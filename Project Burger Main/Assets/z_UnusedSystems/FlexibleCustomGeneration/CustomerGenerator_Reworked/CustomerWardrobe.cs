@@ -12,7 +12,7 @@ public class CustomerWardrobe : MonoBehaviour {
     //Can Be A Struct That Hold CustomerType And An Int And The Manager Loops Through The Struct To Add The Values To The Spawner
 
     public GameObject CustomerPrefab;
-
+ 
     RectTransform RTTorso;
     RectTransform RTHead;
 

@@ -10,7 +10,7 @@ public class CustomerPatience {
 
     private float RecipeTime = 0;
     private float RecipeOrderTime = 0;
-
+    private float EndTime = 0;
 
     public float CustomerGold {
         get {
@@ -63,15 +63,25 @@ public class CustomerPatience {
         
         //Aditional Check Can Be Made Here, Like Check If The Other Customers Time Is Almost Out, Or Their Order Is Almost Complete, Then Dont Give As Much Patience Time
         _customerWaitingTime  *= 1 + (0.1f * LevelManager.Instance.QueueManager.QueueSlots.Length);//Just Adding 10% For Every Customer In The Queue
-        
+        EndTime = Time.time + _customerWaitingTime;
     }
 
     public void AddQueuePatienceTime(float time) {//If We Spawn Something That We Want To Make The Player Focus On, Then That Object Can Add Some Extra Waiting Time, Like If A Music Group Plays Or A Scene (A FoodFight Or Brawl Between Two Dudes)
 
         //Aditional Check Can Be Made Here, Like Check If The Other Customers Time Is Almost Out, Or Their Order Is Almost Complete, Then Dont Give As Much Patience Time
         _customerWaitingTime *= 1 + (0.1f * LevelManager.Instance.QueueManager.QueueSlots.Length);//Just Adding 10% For Every Customer In The Queue
+        EndTime = Time.time + _customerWaitingTime;
 
     }
 
+    public float TimeLeft() {
+
+        if(EndTime <= Time.time) {
+            return 0;
+        } else {
+            return EndTime - Time.time;
+        }
+
+    }
 
 }

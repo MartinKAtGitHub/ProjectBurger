@@ -18,6 +18,10 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
     public bool OrderSuccessful { get => _orderSuccessful; }
     [Space(20)] public List<Food> _foods = new List<Food>();
 
+    private void Awake()
+    {
+        LevelManager.Instance.FoodTrayDropArea = this;
+    }
 
     public void OnDrop(PointerEventData eventData)
     {

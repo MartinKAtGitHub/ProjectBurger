@@ -10,7 +10,6 @@ using UnityEngine;
 public class IngredientGameObject : MonoBehaviour //TODO  put this in Ingredient Drag 
 {
     public Ingredient ingredient;
-
     private void SetData()
     {
         // set sprite 

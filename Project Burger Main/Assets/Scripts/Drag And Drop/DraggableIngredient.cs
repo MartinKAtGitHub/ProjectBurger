@@ -39,7 +39,7 @@ public class DraggableIngredient : Draggable
         if (FoodCombinationDropArea != null) // This will only run if we drop on foodcombi, not on reset
         {
 
-            FoodCombinationDropArea.OffsetIngredientObject(this.transform);
+            //FoodCombinationDropArea.OffsetIngredientObject(this.transform);
 
             if (FoodCombinationDropArea.IsFoodReady)
             {

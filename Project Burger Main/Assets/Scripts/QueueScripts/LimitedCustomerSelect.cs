@@ -112,7 +112,7 @@ public class LimitedCustomerSelect : MonoBehaviour
 
     public void InstaFocusSlot()
     {
-        Debug.Log("Customer spawnd on Slot in focus, forcing focus");
+       // Debug.Log("Customer spawnd on Slot in focus, forcing focus");
         SetQueueSlotInFocus(_queueSlotIndex);
     }
 

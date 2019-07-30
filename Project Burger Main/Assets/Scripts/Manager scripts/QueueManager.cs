@@ -55,7 +55,7 @@ public class QueueManager : MonoBehaviour
             if (_queueSlots[i].CurrentCustomer == null)
             {
 
-                Debug.Log($"Slot {i} is empty, setting {customer.name} in this Position");
+              //  Debug.Log($"Slot {i} is empty, setting {customer.name} in this Position");
                 var slot = _queueSlots[i];
 
                 slot.CurrentCustomer = customer;

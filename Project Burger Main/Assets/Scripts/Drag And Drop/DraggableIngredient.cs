@@ -15,8 +15,8 @@ public class DraggableIngredient : Draggable
 
         if (FoodCombinationDropArea != null)
         {
-            FoodCombinationDropArea.RemoveIngredientFromFood();
-            FoodCombinationDropArea = null;
+            //FoodCombinationDropArea.RemoveIngredientFromFood();
+            //FoodCombinationDropArea = null;
         }
 
         //_onFoodCombiDropArea = false;
@@ -25,14 +25,24 @@ public class DraggableIngredient : Draggable
     public override void OnEndDrag(PointerEventData eventData)
     {
         base.OnEndDrag(eventData);
+
+        if (FoodCombinationDropArea != null)
+        {
+            if (ResetPositionParent != FoodCombinationDropArea.transform)
+            {
+                FoodCombinationDropArea.RemoveIngredientFromFood();
+                FoodCombinationDropArea = null;
+            }
+        }
+
         OnFoodReady();
-       
+
     }
 
     /// <summary>
     /// When the final ingredient is dropped we combine the ingredients into the food object.
     /// </summary>
-    private void OnFoodReady() 
+    private void OnFoodReady()
     {
         // NOTE -> Because OnEndDrag runs after OnDrop any changes done will be overwritten
         // So the HAMABUER TOP is not added if we DONT run code here
@@ -46,7 +56,7 @@ public class DraggableIngredient : Draggable
                 FoodCombinationDropArea.MakeFoodDraggable();
                 FoodCombinationDropArea.ParentIngredientsToFood();
                 FoodCombinationDropArea.IsFoodReady = false;
-               
+
             }
             else
             {

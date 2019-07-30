@@ -951,10 +951,16 @@ MonoBehaviour:
   BotBunsprite: {fileID: 21300000, guid: d63b38fe1214d3e409daec9318d5820b, type: 3}
   TopBunsprite: {fileID: 21300000, guid: 19df6b78b7763a44ebd81bd94d4f4205, type: 3}
   IngredientOffsetValue: 0
-  FoodGOOffsetValue: 0
+  FoodGOOffsetValueX: 0
+  FoodGOOffsetValueY: 0
   BurgerSize: 030000000400000005000000060000000700000008000000090000000a000000
   BurgersPerRow: 7
   BurgerRows: 5
+  BunsLayerImg: []
+  MeatLayerImg: []
+  CheeseLayerImg: []
+  SaladLayerImg: []
+  TopLayerImg: []
 --- !u!1 &2513357940321171783
 GameObject:
   m_ObjectHideFlags: 0
@@ -4584,7 +4590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 16
+  m_ReferencePixelsPerUnit: 32
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0

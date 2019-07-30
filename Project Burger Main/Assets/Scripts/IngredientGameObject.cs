@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// This is the physical/gameobject version of a ingredient.
@@ -10,9 +11,19 @@ using UnityEngine;
 public class IngredientGameObject : MonoBehaviour //TODO  put this in Ingredient Drag 
 {
     public Ingredient ingredient;
-    private void SetData()
+
+    private Image _ingredientImage;
+
+    private void Awake()
     {
-        // set sprite 
+        ingredient.InitializeIngredient();
+
+        _ingredientImage = GetComponent<Image>();
+    }
+
+    public void SetIngredientSpriteForLayer(int layer)
+    {
+        _ingredientImage.sprite = ingredient.IngredientLayerSprites[layer];
         // set name
     }
 }

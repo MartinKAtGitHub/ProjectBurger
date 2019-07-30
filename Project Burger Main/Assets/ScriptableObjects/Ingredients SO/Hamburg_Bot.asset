@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868ad1209047edc4fa2fd6a1969fc8c0, type: 3}
   m_Name: Hamburg_Bot
   m_EditorClassIdentifier: 
+  _ingredientLayerSprites:
+  - {fileID: -8083819362954138540, guid: c57f3e141078e7e499caca6273b7a9aa, type: 3}
+  - {fileID: -5565650412583470979, guid: c57f3e141078e7e499caca6273b7a9aa, type: 3}
+  - {fileID: 7870816100478769319, guid: c57f3e141078e7e499caca6273b7a9aa, type: 3}
+  - {fileID: -7819673125433389760, guid: c57f3e141078e7e499caca6273b7a9aa, type: 3}
+  - {fileID: 4789150930348710839, guid: c57f3e141078e7e499caca6273b7a9aa, type: 3}
   _ingredientSprite: {fileID: 21300000, guid: 53a32349bae35784bb56b852e7a97d22, type: 3}
-  _ingredientName: 
+  _ingredientName: BotBun
   ingredientType: 1
   RemoveChance: 0
+  IngredientTime: 1

@@ -12,6 +12,7 @@ public class CustomerPatience
 
     private float RecipeTime = 0;
     private float RecipeOrderTime = 0;
+    private float EndTime = 0;
 
 
     public float CustomerWaitingTime{ get =>  _customerWaitingTime; }
@@ -57,8 +58,19 @@ public class CustomerPatience
 
         //Additional Check Can Be Made Here, Like Check If The Other Customers Time Is Almost Out, Or Their Order Is Almost Complete, Then Dont Give As Much Patience Time
         _customerWaitingTime *= 1 + (_queueSizeTimeGainModifer * LevelManager.Instance.QueueManager.QueueSlots.Length);//Just Adding 10% For Every Customer In The Queue
+        //Aditional Check Can Be Made Here, Like Check If The Other Customers Time Is Almost Out, Or Their Order Is Almost Complete, Then Dont Give As Much Patience Time
+        EndTime = Time.time + _customerWaitingTime;
 
     }
 
+    public float TimeLeft() {
+
+        if(EndTime <= Time.time) {
+            return 0;
+        } else {
+            return EndTime - Time.time;
+        }
+
+    }
 
 }

@@ -14,7 +14,7 @@ public class Customer : MonoBehaviour
     //[SerializeField] private int _customerWaitingTime;
     [SerializeField] private string _customerName;
     [SerializeField] private bool _isWaiting;
-    [SerializeField] private CustomerState _CustomerStates = null;
+ //   [SerializeField] private CustomerState _CustomerStates = null;
 
     private Order _order;
    // private CustomerSelect _customerSelect;
@@ -25,7 +25,7 @@ public class Customer : MonoBehaviour
     public OrderGenerator OrderGenerator { get => _orderGenerator; private set => _orderGenerator = value; }
     public Order Order { get => _order; }
     public bool IsWaiting { get => _isWaiting; }
-    public CustomerState CustomerStates { get => _CustomerStates; }
+ //   public CustomerState CustomerStates { get => _CustomerStates; }
     public OrderWindow OrderWindow { get => _orderWindow; }
 
     private void OnDestroy()
@@ -53,19 +53,19 @@ public class Customer : MonoBehaviour
 
     public void SetCustomerStates(TheCustomSpawner spawner)
     {
-        TransformArray2 Paths = spawner.WalkingPositions.WalkingPossibilities[0].GroupInGroups[Random.Range(0, spawner.WalkingPositions.WalkingPossibilities[0].GroupInGroups.Length)];
-        _CustomerStates.MakeNewInstance(Paths.PathInGroup.Length);
+     //   TransformArray2 Paths = spawner.WalkingPositions.WalkingPossibilities[0].GroupInGroups[Random.Range(0, spawner.WalkingPositions.WalkingPossibilities[0].GroupInGroups.Length)];
+     //   _CustomerStates.MakeNewInstance(Paths.PathInGroup.Length);
 
         _customerName = gameObject.name;
         _order = OrderGenerator.RequestOrder();
         _order.CustomerName = _customerName;
 
 
-        for (int i = 0; i < Paths.PathInGroup.Length; i++)
+     /*   for (int i = 0; i < Paths.PathInGroup.Length; i++)
         {
             _CustomerStates.SetBehaviours(
            Paths.PathInGroup[i].PositionsInPath, Paths.PathInGroup[i].Talking, _order.OrderRecipes.Count * 25f * Paths.PathInGroup[i].Patience);
-        }
+        }*/
     }
 
     private void Update()
@@ -111,4 +111,5 @@ public class Customer : MonoBehaviour
 
         }
     }
+
 }

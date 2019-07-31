@@ -83,9 +83,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7953252691955027431}
-  - component: {fileID: 8179745660326573183}
+  - component: {fileID: 2142764420}
+  - component: {fileID: 2142764421}
   m_Layer: 0
-  m_Name: CustomerPrefab
+  m_Name: SpawningCustomer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +113,7 @@ RectTransform:
   m_AnchoredPosition: {x: -465, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8179745660326573183
+--- !u!114 &2142764420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,22 +122,73 @@ MonoBehaviour:
   m_GameObject: {fileID: 4569979271278904720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891f69b2bfe22374a90214c50368f9fc, type: 3}
+  m_Script: {fileID: 11500000, guid: b68c12f31253e48449266402555e602f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TorsoSprites: {fileID: 8893891765464613388}
-  HeadSprites: {fileID: 8893891765464613389}
-  TorsoRectTransform: {fileID: 6863566301267075839}
-  HeadRectTransform: {fileID: 4652459034527097403}
-  TorsoRef: {fileID: 1128429750916784257}
-  HeadRef: {fileID: 25677088193205681}
-  EyeRef: {fileID: 7102224951955450076}
-  NoseRef: {fileID: 6664858643669036869}
-  MouthRef: {fileID: 23704273718689642}
-  HairRef: {fileID: 1443704512059227624}
-  RecipeB: {fileID: 11400000, guid: 4551bc7341af94b48a1e06c551ebb029, type: 2}
-  MultiorderAmount: 2
-  MultiorderChance: 50
+  RemoveIngredients: 0
+  _recipeBook: {fileID: 11400000, guid: 9766ba8e4d331924da23f8fd98434781, type: 2}
+  _multiOrderAmount: 5
+  _multiOrderChance: 150
+  _order:
+    CustomerName: 
+    OrderRecipes:
+    - BaseRecipe: {fileID: 11400000, guid: e94da6e22bd3e064e82c565b685357cf, type: 2}
+      OrderIngredients:
+      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
+      DiscaredIngredients: []
+    - BaseRecipe: {fileID: 11400000, guid: e94da6e22bd3e064e82c565b685357cf, type: 2}
+      OrderIngredients:
+      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
+      DiscaredIngredients: []
+    - BaseRecipe: {fileID: 11400000, guid: e94da6e22bd3e064e82c565b685357cf, type: 2}
+      OrderIngredients:
+      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
+      DiscaredIngredients: []
+    - BaseRecipe: {fileID: 11400000, guid: e94da6e22bd3e064e82c565b685357cf, type: 2}
+      OrderIngredients:
+      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
+      DiscaredIngredients: []
+    - BaseRecipe: {fileID: 11400000, guid: e94da6e22bd3e064e82c565b685357cf, type: 2}
+      OrderIngredients:
+      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
+      DiscaredIngredients: []
+--- !u!114 &2142764421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4569979271278904720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94f66bc8299858f4fb40d75ff36021ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TestingRandomTimeout: 0
+  QueuePositionDot: {fileID: 0}
+  _customerPatience:
+    _customerWaitingTime: 0
+    _customerGold: 0
+  _customerInteractionContainer: {fileID: 0}
+  _customerNotInFocusContainer: {fileID: 0}
+  _CustomerWaitingTime: 0
+  _customerName: 
+  _isWaiting: 0
 --- !u!1 &5681663685263564038
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +568,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6863566301267075839}
-  - component: {fileID: 8893891765464613388}
   m_Layer: 0
   m_Name: TheTorso
   m_TagString: Untagged
@@ -544,20 +595,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.5, y: 0}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8893891765464613388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8893891765464613386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 926a1e6bfbc735b4a85f9cd2db29e363, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Torsos:
-  - {fileID: 21300000, guid: 6e7d54b941875db45b998c71e013dcdd, type: 3}
 --- !u!1 &8893891765464613387
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +604,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4652459034527097403}
-  - component: {fileID: 8893891765464613389}
   m_Layer: 0
   m_Name: TheHead
   m_TagString: Untagged
@@ -599,25 +635,3 @@ RectTransform:
   m_AnchoredPosition: {x: -0.5, y: 24}
   m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8893891765464613389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8893891765464613387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d8585a1ec4a9664c8c71b628cd5b7be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Heads:
-  - {fileID: 21300000, guid: 22d676abbd402384b954a5445926037e, type: 3}
-  Eyes:
-  - {fileID: 21300000, guid: 33cd9eaf260c5f548b3fdeb7a477fc2d, type: 3}
-  Noses:
-  - {fileID: 21300000, guid: 33cd9eaf260c5f548b3fdeb7a477fc2d, type: 3}
-  Mouths:
-  - {fileID: 21300000, guid: 093a3975d761a9b438ebfdbf420516fd, type: 3}
-  Hair:
-  - {fileID: 21300000, guid: f825ccf49d3f9244ba650813ef5a5b9e, type: 3}

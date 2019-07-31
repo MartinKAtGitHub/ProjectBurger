@@ -12,16 +12,10 @@ public class CustomerSwiper : MonoBehaviour, IDragHandler, IBeginDragHandler {
     [SerializeField] private Button _leftbutton = null;
     [SerializeField] private Button _rightbutton = null;
 
-    private float MaxDist = 0;
+    private float MaxDist = 1920;
     private Vector2 StartPos = Vector2.zero;
 
 
-
-
-    private void OnRectTransformDimensionsChange() {//Im Not Sure Why But This Is Called Several Timer, I Think It Has Something To Do With Canvas Scaler.
-        MaxDist = canvas.sizeDelta.x * canvas.localScale.x * HowFarToSwipe;//Might Need To Change This At Some Point. But Currently its Working As Intended, by Checking Horizontal Swipe 
-        //Debug.Log("Changing Max Screen Size " + MaxDist);
-    }
 
     public void OnBeginDrag(PointerEventData eventData) {
         StartPos = eventData.pressPosition;
@@ -37,7 +31,7 @@ public class CustomerSwiper : MonoBehaviour, IDragHandler, IBeginDragHandler {
                 Debug.Log("left"); _leftbutton.onClick.Invoke(); //Script Was Not Attached To The Button, So Could Not Test It
             }
 
-            StartPos = eventData.position;
+            StartPos = eventData.position; 
 
         }
     }

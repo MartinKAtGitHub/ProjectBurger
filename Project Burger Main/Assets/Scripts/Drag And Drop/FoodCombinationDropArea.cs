@@ -18,10 +18,10 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
 
 
     /// <summary>
-    /// The position/index  the food stack which will be checked against the recipes.
+    /// The Layer/index  the food stack which will be checked against the recipes.
     /// Needs to start at -1 because of 0 index in start point
     /// </summary>
-    private int _foodIngredientsIndex = -1;
+    private int _ingredientLayer = -1;
     private float _ingredientOffset;
     private Food _food;
 
@@ -74,7 +74,7 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
                         _food.FoodDrag.FoodCombinationDropArea = this;
                         _food.FoodDrag.ResetPositionParent = this.transform;
                         //_food.FoodDrag.FoodCombinationTransform = this.transform;
-                        _foodIngredientsIndex = -1;
+                        _ingredientLayer = -1;
                     }
                 }
                 else
@@ -94,38 +94,38 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
     {
 
         _food.GameObjectIngredients.Add(ingredient);
-        _foodIngredientsIndex++;
-        ingredient.SetIngredientSpriteForLayer(_foodIngredientsIndex);
+        _ingredientLayer++;
+        ingredient.SetIngredientSpriteForLayer(_ingredientLayer);
 
-        if (_foodIngredientsIndex > -1)
+        if (_ingredientLayer > -1)
         {
             _occupiedByIngredient = true;
         }
 
-        if (_foodIngredientsIndex >= Ingredient.MaxIngredientAmount - 1)
+        if (_ingredientLayer >= Ingredient.MaxIngredientAmount - 1)
         {
-            _foodIngredientsIndex = Ingredient.MaxIngredientAmount - 1;
+            _ingredientLayer = Ingredient.MaxIngredientAmount - 1;
             _maxIngredientLimitReached = true;
         }
 
-        Debug.Log(" ADD " + _foodIngredientsIndex);
+      
     }
 
     public void RemoveIngredientFromFood()
     {
         _food.GameObjectIngredients.RemoveAt(_food.GameObjectIngredients.Count - 1);
-        _foodIngredientsIndex--;
+        _ingredientLayer--;
 
-        if (_foodIngredientsIndex <= -1)
+        if (_ingredientLayer <= -1)
         {
             _occupiedByIngredient = false;
         }
 
-        if (_foodIngredientsIndex < Ingredient.MaxIngredientAmount - 1)
+        if (_ingredientLayer < Ingredient.MaxIngredientAmount - 1)
         {
             _maxIngredientLimitReached = false;
         }
-        Debug.Log("Remove " + _foodIngredientsIndex);
+      
     }
 
     /// <summary>
@@ -138,10 +138,10 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
         {
             var currentRecipe = _recipeBook.Recipes[i];
 
-            if (_foodIngredientsIndex < currentRecipe.Ingredients.Count)
+            if (_ingredientLayer < currentRecipe.Ingredients.Count)
             {
                 // If(_foodStackIngredients[_foodStackCheckIndex].classType == currentRecipe.Ingredients[_foodStackCheckIndex].classType)
-                if (_food.GameObjectIngredients[_foodIngredientsIndex].ingredient.IngredientType == currentRecipe.Ingredients[_foodIngredientsIndex].IngredientType)
+                if (_food.GameObjectIngredients[_ingredientLayer].ingredient.IngredientType == currentRecipe.Ingredients[_ingredientLayer].IngredientType)
                 {
                     // Found match 
                     return;

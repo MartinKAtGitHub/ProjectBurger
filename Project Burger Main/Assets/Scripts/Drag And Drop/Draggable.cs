@@ -11,6 +11,7 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     /// This will be the Parent that holds all the Drag and drop elements. If a Draggable obj is parented to this, the obj will not have any restrictions to movement due to Layoutgroups
     /// </summary>
     [SerializeField] private Transform freeMotionParent;
+    [SerializeField] protected Transform _resetPositionParent;
     /// <summary>
     /// Used to calculate drag point. This allows you to drag from anywhere on the img. If we didnt use this it would snap to center of img
     /// </summary>
@@ -22,10 +23,9 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     /// <summary>
     /// This parent object will be the reset point / snap back position when the player stops dragging in a invalid position. 
     /// </summary>
-    public Transform ResetPositionParent { get => _resetPositionParent; set => _resetPositionParent = value; }
 
-    [SerializeField] private Transform _resetPositionParent;
     private RectTransform _rectTransform;
+    public virtual Transform ResetPositionParent { get => _resetPositionParent; set => _resetPositionParent = value; }
 
     private void Awake()
     {

@@ -9,34 +9,38 @@ public class DraggableIngredient : Draggable
 
     public FoodCombinationDropArea FoodCombinationDropArea { get; set; }
 
+    // PERFORMANCE DraggableIngredient.cs | instead of checking when to remove ingredient in OnEndDrag you can do it in when a new reset pos is set
+    //public override Transform ResetPositionParent
+    //{
+    //    get => _resetPositionParent;
+
+    //    set
+    //    {
+    //        if (FoodCombinationDropArea != null)
+    //        {
+    //            if (value != FoodCombinationDropArea.transform)
+    //            {
+    //                FoodCombinationDropArea.RemoveIngredientFromFood();
+    //            }
+    //        }
+    //        else
+    //        {
+    //            _resetPositionParent = value;
+    //        }
+    //    }
+    //}
+
     public override void OnBeginDrag(PointerEventData eventData)
     {
         base.OnBeginDrag(eventData);
-
-        if (FoodCombinationDropArea != null)
-        {
-            //FoodCombinationDropArea.RemoveIngredientFromFood();
-            //FoodCombinationDropArea = null;
-        }
-
-        //_onFoodCombiDropArea = false;
     }
 
     public override void OnEndDrag(PointerEventData eventData)
     {
         base.OnEndDrag(eventData);
 
-        if (FoodCombinationDropArea != null)
-        {
-            if (ResetPositionParent != FoodCombinationDropArea.transform)
-            {
-                FoodCombinationDropArea.RemoveIngredientFromFood();
-                FoodCombinationDropArea = null;
-            }
-        }
-
+        RemoveIngredientFromFoodCombiCheck();
         OnFoodReady();
-
     }
 
     /// <summary>
@@ -68,5 +72,17 @@ public class DraggableIngredient : Draggable
             canvasGroup.blocksRaycasts = true;
         }
     }
+    private void RemoveIngredientFromFoodCombiCheck()
+    {
+        if (FoodCombinationDropArea != null)
+        {
+            if (ResetPositionParent != FoodCombinationDropArea.transform)
+            {
+                FoodCombinationDropArea.RemoveIngredientFromFood();
+                FoodCombinationDropArea = null;
+            }
+        }
+    }
+
 }
 

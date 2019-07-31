@@ -43,6 +43,9 @@ public class Ingredient : ScriptableObject
     public float IngredientTime = 1;//Used To Calculate Cost Of The Burger/MenuItem
     public Sprite IngredientSprite { get { return _ingredientSprite; } }
     public int IngredientCost { get => _ingredientCost; }
+    /// <summary>
+    /// MaxIngredientAmount is essentially the _ingredientLayerSprites.Length. The length also serve as the limit so i need a variable
+    /// </summary>
     public static int MaxIngredientAmount => _maxIngredientAmount;
     public Sprite[] IngredientLayerSprites { get => _ingredientLayerSprites; }
 

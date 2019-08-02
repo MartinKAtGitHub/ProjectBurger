@@ -9,7 +9,7 @@ public class TableSwipeSetter : MonoBehaviour {
     [SerializeField]
     private Transform _deactivatedTable = null;
     [SerializeField]
-    private RectTransform _canvas = null;
+    //private RectTransform _canvas = null;
 
     private Transform _tableSaver;
     private Vector3 _moveToPos = Vector3.zero;

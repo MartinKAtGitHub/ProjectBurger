@@ -10,21 +10,31 @@ using UnityEngine.UI;
 /// </summary>
 public class IngredientGameObject : MonoBehaviour //TODO  put this in Ingredient Drag 
 {
-    public Ingredient ingredient;
-
+    [SerializeField]private Ingredient _ingredient;
     private Image _ingredientImage;
+    private Transform _ingredientPoolTrans;
+
+    public Transform IngredientPoolTrans { get => _ingredientPoolTrans; set => _ingredientPoolTrans = value; }
+    public Ingredient Ingredient { get => _ingredient; set => _ingredient = value; }
 
     private void Awake()
     {
-        ingredient.InitializeIngredient();
-
+        _ingredient.InitializeIngredient();
         _ingredientImage = GetComponent<Image>();
     }
 
     public void SetIngredientSpriteForLayer(int layer)
     {
-        _ingredientImage.sprite = ingredient.IngredientLayerSprites[layer];
-        // set name
+        _ingredientImage.sprite = _ingredient.IngredientLayerSprites[layer];
+    }
+
+    /// <summary>
+    /// when you are done using a ingredient (destroying it) use this method so the ingredient can be reused
+    /// </summary>
+    public void ReturnIngredientToPool()
+    {
+        transform.SetParent(IngredientPoolTrans);
+        transform.localPosition = Vector3.zero;
     }
 }
 

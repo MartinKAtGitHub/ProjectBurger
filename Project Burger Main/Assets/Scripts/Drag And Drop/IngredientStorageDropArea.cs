@@ -16,7 +16,7 @@ public class IngredientStorageDropArea : MonoBehaviour, IDropHandler
     {
         if (_ingredientsSpawner.IngredientPrefab != null)
         {
-            ingredientType = _ingredientsSpawner.IngredientPrefab.GetComponent<IngredientGameObject>().ingredient.IngredientType;
+            ingredientType = _ingredientsSpawner.IngredientPrefab.GetComponent<IngredientGameObject>().Ingredient.IngredientType;
         }
     }
     public void OnDrop(PointerEventData eventData)
@@ -24,7 +24,7 @@ public class IngredientStorageDropArea : MonoBehaviour, IDropHandler
         var draggableComponent = eventData.pointerDrag.GetComponent<DraggableIngredient>();
         if (draggableComponent != null)
         {
-            if (draggableComponent.GetComponent<IngredientGameObject>().ingredient.IngredientType == ingredientType)
+            if (draggableComponent.GetComponent<IngredientGameObject>().Ingredient.IngredientType == ingredientType)
             {
                 draggableComponent.ResetPositionParent = this.transform;
                 draggableComponent.transform.SetParent(this.transform);

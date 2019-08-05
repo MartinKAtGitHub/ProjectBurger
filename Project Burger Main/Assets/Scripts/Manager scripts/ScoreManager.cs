@@ -196,7 +196,7 @@ public class ScoreManager : MonoBehaviour
             for (int j = 0; j < theOrder.OrderRecipes[i].OrderIngredients.Count; j++)
             {//Iterating Through The Ingredient Of The Selected Recipe
 
-                if (theOrder.OrderRecipes[i].OrderIngredients[j] == theItem.GameObjectIngredients[j])
+                if (theOrder.OrderRecipes[i].OrderIngredients[j] == theItem.IngredientsGO[j])
                 {//If Recipe And Checking Item Have Same Ingredients Continue, If Not Check Next Recipe
 
                     if (j == theOrder.OrderRecipes[i].OrderIngredients.Count - 1)

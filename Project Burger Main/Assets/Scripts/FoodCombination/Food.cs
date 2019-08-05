@@ -13,7 +13,7 @@ public class Food : MonoBehaviour
     public bool DidStackMatchOrder { get => _didStackMatchOrder;  set => _didStackMatchOrder = value; }
     public FoodDrag FoodDrag { get => _foodDrag; set => _foodDrag = value; }
 
-    public List<IngredientGameObject> GameObjectIngredients = new List<IngredientGameObject>();
+    public List<IngredientGameObject> IngredientsGO = new List<IngredientGameObject>();
 
     [SerializeField] private bool _didStackMatchOrder;
 
@@ -27,10 +27,20 @@ public class Food : MonoBehaviour
 
     public void ParentIngredientsToFoodObject()
     {
-        for (int i = 0; i < GameObjectIngredients.Count; i++)
+        for (int i = 0; i < IngredientsGO.Count; i++)
         {
-            GameObjectIngredients[i].transform.SetParent(transform);
+            IngredientsGO[i].transform.SetParent(transform);
             // Debug.Log(GameObjectIngredients[i].name + "  PARAENT IS = " + transform.name);
         }
+    }
+
+    public void RemoveFromGame()
+    {
+        for (int i = 0; i < IngredientsGO.Count; i++)
+        {
+            IngredientsGO[i].ReturnIngredientToPool();
+        }
+
+        Destroy(gameObject); // PERFORMANCE Food.cs | Destroying food gameobject. -> make pooling for these maybe. spawn 1 on each foodcombi and on remove just reset
     }
 }

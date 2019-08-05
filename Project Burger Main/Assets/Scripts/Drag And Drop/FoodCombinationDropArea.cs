@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
 {
     [SerializeField] private GameObject _foodGameObjectPrefab;
+    [SerializeField]private Transform _topLayerTrans;
     /// <summary>
     /// When this ingredient is added to the stack, it marks that the food is ready to be sold 
     /// </summary>
@@ -16,26 +17,30 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
     [SerializeField] private bool _occupiedByIngredient;
     [SerializeField] private bool _maxIngredientLimitReached;
 
-
     /// <summary>
     /// The Layer/index  the food stack which will be checked against the recipes.
     /// Needs to start at -1 because of 0 index in start point
     /// </summary>
     private int _ingredientLayer = -1;
-    private float _ingredientOffset;
+    private static int _foodCombiSpotsAmount;
     private Food _food;
 
 
+    
     public Food Food { get => _food; set => _food = value; }
     public bool IsFoodReady { get => _isFoodReady; set => _isFoodReady = value; }
     public bool OccupiedByFood { get => _occupiedByFood; set => _occupiedByFood = value; }
+    public static int FoodCombiSpotsAmount { get => _foodCombiSpotsAmount; set => _foodCombiSpotsAmount = value; }
+
+    private void Awake()
+    {
+        _foodCombiSpotsAmount++;
+    }
 
     public void OnDrop(PointerEventData eventData)
     {
-      
         if (!_occupiedByFood)
         {
-
             if(_maxIngredientLimitReached)
             {
                 Debug.LogError("FoodCombi.cs  _maxIngredientLimitReached can't place more ingredients notify player" );
@@ -65,7 +70,7 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
                 {
                     AddIngredientsToFood(ingredientGameObject);
                     CheckFoodStackWithRecepies();
-                    IsFinalIngredientPlaced(ingredientGameObject.ingredient);
+                    IsFinalIngredientPlaced(ingredientGameObject.Ingredient);
 
                     if (_isFoodReady)
                     {
@@ -89,11 +94,9 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
         }
     }
 
-
     private void AddIngredientsToFood(IngredientGameObject ingredient)
     {
-
-        _food.GameObjectIngredients.Add(ingredient);
+        _food.IngredientsGO.Add(ingredient);
         _ingredientLayer++;
         ingredient.SetIngredientSpriteForLayer(_ingredientLayer);
 
@@ -102,18 +105,16 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
             _occupiedByIngredient = true;
         }
 
-        if (_ingredientLayer >= Ingredient.MaxIngredientAmount - 1)
+        if (_ingredientLayer >= Ingredient.MaxIngredientLayersAmount - 1)
         {
-            _ingredientLayer = Ingredient.MaxIngredientAmount - 1;
+            _ingredientLayer = Ingredient.MaxIngredientLayersAmount - 1;
             _maxIngredientLimitReached = true;
         }
-
-      
     }
 
     public void RemoveIngredientFromFood()
     {
-        _food.GameObjectIngredients.RemoveAt(_food.GameObjectIngredients.Count - 1);
+        _food.IngredientsGO.RemoveAt(_food.IngredientsGO.Count - 1);
         _ingredientLayer--;
 
         if (_ingredientLayer <= -1)
@@ -121,7 +122,7 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
             _occupiedByIngredient = false;
         }
 
-        if (_ingredientLayer < Ingredient.MaxIngredientAmount - 1)
+        if (_ingredientLayer < Ingredient.MaxIngredientLayersAmount - 1)
         {
             _maxIngredientLimitReached = false;
         }
@@ -141,7 +142,7 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
             if (_ingredientLayer < currentRecipe.Ingredients.Count)
             {
                 // If(_foodStackIngredients[_foodStackCheckIndex].classType == currentRecipe.Ingredients[_foodStackCheckIndex].classType)
-                if (_food.GameObjectIngredients[_ingredientLayer].ingredient.IngredientType == currentRecipe.Ingredients[_ingredientLayer].IngredientType)
+                if (_food.IngredientsGO[_ingredientLayer].Ingredient.IngredientType == currentRecipe.Ingredients[_ingredientLayer].IngredientType)
                 {
                     // Found match 
                     return;
@@ -163,13 +164,15 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
         {
          //   Debug.Log("Creating new Food in " + name);
             var clone = Instantiate(_foodGameObjectPrefab, transform);
+            clone.GetComponent<FoodDrag>().TopLayerTransform = _topLayerTrans;
             _food = clone.GetComponent<Food>();
+           
         }
     }
 
     private void IsFinalIngredientPlaced(Ingredient ingredient)
     {
-        if (_food.GameObjectIngredients.Count > 1 && ingredient.IngredientType == _foodStackFinishConditionIngredient.IngredientType)
+        if (_food.IngredientsGO.Count > 1 && ingredient.IngredientType == _foodStackFinishConditionIngredient.IngredientType)
         {
             _isFoodReady = true;
             //MakeFoodDraggable();
@@ -179,16 +182,14 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
         {
             _isFoodReady = false;
         }
-
         //_isFoodReady = (ingredient.IngredientType == _foodStackFinishConditionIngredient.IngredientType) ? true : false;
     }
 
-
     public void MakeFoodDraggable()
     {
-        for (int i = 0; i < _food.GameObjectIngredients.Count; i++)
+        for (int i = 0; i < _food.IngredientsGO.Count; i++)
         {
-            _food.GameObjectIngredients[i].GetComponent<CanvasGroup>().blocksRaycasts = false;
+            _food.IngredientsGO[i].GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
         _food.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }

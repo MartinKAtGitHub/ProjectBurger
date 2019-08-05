@@ -5,17 +5,25 @@ public class IngredientsSpawner : MonoBehaviour, IPointerDownHandler/*, IBeginDr
 {
     [SerializeField] private GameObject _ingredientPrefab;
     /// <summary>
+    /// UI rendering system is driven by hierarchy, so we need to place the dragged object ontop of everything 
+    /// </summary>
+    [SerializeField] private Transform _topLayerTransform;
+    /// <summary>
+    /// The transform needed to hind the ingredient behind the bin img.
+    /// </summary>
+    [SerializeField] private Transform _ingredientPoolTrans;
+    /// <summary>
     /// True = spawner will spawn inn all the ingreadiance at the start of the game.
     /// False = Spawner will spawn on click and hopefully u can drag it.
     /// </summary>
     [SerializeField] private bool _presetSpawn;
-    [SerializeField] private int SpawnAmout;
+
+    private int _poolSize;
 
     public GameObject IngredientPrefab { get => _ingredientPrefab; }
-
-
     private void Awake()
     {
+
         if (_ingredientPrefab == null)
         {
             Debug.LogError($"{name} has no ingredientPrefab");
@@ -31,27 +39,38 @@ public class IngredientsSpawner : MonoBehaviour, IPointerDownHandler/*, IBeginDr
     }
     private void Start()
     {
+
+        _poolSize = Ingredient.MaxIngredientLayersAmount * FoodCombinationDropArea.FoodCombiSpotsAmount;
+
         if (_presetSpawn)
         {
-            for (int i = 0; i < SpawnAmout; i++)
+            for (int i = 0; i < _poolSize; i++)
             {
-                SpawnIngredience();
+                SpawnIngredient();
             }
         }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        // if(!_presetSpawn)
+        if (!_presetSpawn)
         {
-            // Debug.Log("SPAWN ingredience " + _ingredience.name);
-            SpawnIngredience();
+            SpawnIngredient();
         }
     }
 
-    private void SpawnIngredience()
+    private GameObject SpawnIngredient()
     {
-        var clone = Instantiate(_ingredientPrefab, transform);
+        var clone = Instantiate(_ingredientPrefab, _ingredientPoolTrans);
         clone.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+
+        var draggable = clone.GetComponent<DraggableIngredient>();
+        draggable.TopLayerTransform = _topLayerTransform;
+
+        var ingredientGO = clone.GetComponent<IngredientGameObject>();
+        ingredientGO.IngredientPoolTrans = _ingredientPoolTrans;
+        return clone;
     }
+
+
 }

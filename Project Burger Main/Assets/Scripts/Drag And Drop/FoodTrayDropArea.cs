@@ -93,14 +93,14 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
                     var ingredientMatchFoundInOrderRecipeIndex = 0;
                     var failCounter = 0;
 
-                    for (int j = 0; j < _foods[i].GameObjectIngredients.Count; j++) // ingredients in foodstack loop
+                    for (int j = 0; j < _foods[i].IngredientsGO.Count; j++) // ingredients in foodstack loop
                     {
-                        var currentIngredient = _foods[i].GameObjectIngredients[j].ingredient;
+                        var currentIngredient = _foods[i].IngredientsGO[j].Ingredient;
                         var currentIngredientIndex = j;
 
                         for (int k = ingredientMatchFoundInOrderRecipeIndex; k < tempOrderRecipes.Count; k++) // Order recipes Loop
                         {
-                            if (_foods[i].GameObjectIngredients.Count <= tempOrderRecipes[k].OrderIngredients.Count)
+                            if (_foods[i].IngredientsGO.Count <= tempOrderRecipes[k].OrderIngredients.Count)
                             {
                                 if (currentIngredient.IngredientType == tempOrderRecipes[k].OrderIngredients[currentIngredientIndex].IngredientType)
                                 {
@@ -183,17 +183,15 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
         _orderSuccessful = false;
         RemoveFoodFromGame();
         LevelManager.Instance.ScoreManager.RemoveLife();
-
     }
 
     private void RemoveFoodFromGame()
     {
         for (int i = 0; i < _foods.Count; i++)
         {
-            var food = _foods[i].gameObject;
-
+            var food = _foods[i];
             _foods.RemoveAt(i);
-            Destroy(food); // PERFORMANCE FoodTray.cs | Destroying food On successful.
+            food.RemoveFromGame(); 
         }
     }
 }

@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 16fc9c01a8eb79249a0f4c34dee6bab6
+guid: ffe8038318200e9499686641288ebe5d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6630763436121716904
-    second: CheeseLayers4
+      213: -3091606445264257541
+    second: RawMeatLayers4
   - first:
-      213: -1429433876675250517
-    second: CheeseLayers3
+      213: -3395471261050805938
+    second: RawMeatLayers3
   - first:
-      213: -4528130474836676941
-    second: CheeseLayers2
+      213: 1291098743330404517
+    second: RawMeatLayers2
   - first:
-      213: 6264857567315058315
-    second: CheeseLayers1
+      213: 284549650176978333
+    second: RawMeatLayers1
   - first:
-      213: 1571830439801956473
-    second: CheeseLayers0
+      213: 84552078326984462
+    second: RawMeatLayers0
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -73,7 +73,7 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -84,7 +84,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -95,11 +96,24 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CheeseLayers4
+      name: RawMeatLayers4
       rect:
         serializedVersion: 2
         x: 0
@@ -107,20 +121,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f228440cfb02c5b41a4a6103a7394bb4
-      internalID: -6630763436121716904
+      spriteID: 7cf36264b3f216845b252f37e08e8f1d
+      internalID: -3091606445264257541
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CheeseLayers3
+      name: RawMeatLayers3
       rect:
         serializedVersion: 2
         x: 0
@@ -128,20 +142,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c10cef1bfe6174e4eba088949284c6b0
-      internalID: -1429433876675250517
+      spriteID: b4309818336aacd4083478b8a442e2dd
+      internalID: -3395471261050805938
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CheeseLayers2
+      name: RawMeatLayers2
       rect:
         serializedVersion: 2
         x: 0
@@ -149,20 +163,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e21b37fb5b51ddf4aba431a953aee043
-      internalID: -4528130474836676941
+      spriteID: 011616e95a5ec934697ef3382cdeabb1
+      internalID: 1291098743330404517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CheeseLayers1
+      name: RawMeatLayers1
       rect:
         serializedVersion: 2
         x: 0
@@ -170,20 +184,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d8d11362c614a148819121acf804134
-      internalID: 6264857567315058315
+      spriteID: c8ec3e39f54aca043bf071677d2d6bc4
+      internalID: 284549650176978333
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CheeseLayers0
+      name: RawMeatLayers0
       rect:
         serializedVersion: 2
         x: 0
@@ -191,14 +205,14 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ed3431faf3699a4dac0cf3b03a3bb75
-      internalID: 1571830439801956473
+      spriteID: 5f746151256b36f43bc69e5e46a9f534
+      internalID: 84552078326984462
       vertices: []
       indices: 
       edges: []
@@ -206,7 +220,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: de119dd5934da8b468831942a75cf3d9
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

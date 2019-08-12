@@ -13,6 +13,10 @@ public class WinLooseManager : MonoBehaviour
     int _secondCount = 0;
     public int TimeUsed { get => (TimeLimit - _secondCount); }
 
+    private void Awake()
+    {
+        LevelManager.Instance.WinLooseManager = this;
+    }
     private void Start()
     {
         ScoreManager.OnGoldChange += GoldWinCheck;

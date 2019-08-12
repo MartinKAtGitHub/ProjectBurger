@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 public class IngredientStorageDropArea : MonoBehaviour, IDropHandler
 {
     private IngredientsSpawner _ingredientsSpawner;
-
     private Ingredient.IngredientTypes ingredientType;
+
     private void Awake()
     {
         _ingredientsSpawner = GetComponent<IngredientsSpawner>();
@@ -24,11 +24,16 @@ public class IngredientStorageDropArea : MonoBehaviour, IDropHandler
         var draggableComponent = eventData.pointerDrag.GetComponent<DraggableIngredient>();
         if (draggableComponent != null)
         {
-            if (draggableComponent.GetComponent<IngredientGameObject>().Ingredient.IngredientType == ingredientType)
+            var ingredientGo = draggableComponent.GetComponent<IngredientGameObject>();
+            if (ingredientGo.Ingredient.IngredientType == ingredientType)
             {
                 draggableComponent.ResetPositionParent = this.transform;
                 draggableComponent.transform.SetParent(this.transform);
+
+                ingredientGo.RescaleTouchArea(_ingredientsSpawner.IngredientPoolRect); // TODO ingredientGo.RescaleTouchArea happens in all drop areas
             }
         }
     }
+
+
 }

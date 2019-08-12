@@ -10,8 +10,8 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     /// <summary>
     /// This will be the Parent that holds all the Drag and drop elements. If a Draggable obj is parented to this, the obj will not have any restrictions to movement due to Layoutgroups
     /// </summary>
-    [SerializeField] private Transform _topLayerTransform;
-    [SerializeField] protected Transform _resetPositionParent;
+    private Transform _topLayerTransform;
+    protected Transform _resetPositionParent;
     /// <summary>
     /// Used to calculate drag point. This allows you to drag from anywhere on the img. If we didnt use this it would snap to center of img
     /// </summary>
@@ -40,14 +40,15 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     {
         if (_topLayerTransform == null)
         {
-            Debug.LogError($" draggbel.cs| {name} dose not have a _topLayerTransform , might cause the dragged other to be render behind other objects");
+            Debug.LogError($" draggbel.cs| {name} dose not have a _topLayerTransform , might cause the dragged object to be render behind other objects -> set this to be the main canavs");
             _topLayerTransform = transform.parent.parent;
         }
     }
 
     public virtual void OnBeginDrag(PointerEventData eventData)
     {
-        CalculateDragAreaOffset(eventData);
+        // CalculateDragAreaOffset(eventData);
+
         FreeDragMode();
         _canvasGroup.blocksRaycasts = false;
         Debug.Log($"OneBeginDrag -> {name}");
@@ -56,7 +57,7 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = eventData.position + (Vector2)_offset;
-        Debug.Log($"OneDrag -> {name}");
+        Debug.Log($"OneDrag -> {name} , {transform.parent.name}");
     }
 
     public virtual void OnEndDrag(PointerEventData eventData) // THIS FIRES AFTER ONDROP () IN DropArea
@@ -77,7 +78,7 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     }
 
     /// <summary>
-    /// The offset allows the player to drag from corners
+    /// The offset allows the player to drag from corners, without this the ingredient will snap to the finger
     /// </summary>
     /// <param name="eventData"></param>
     private void CalculateDragAreaOffset(PointerEventData eventData)

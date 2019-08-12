@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
     public QueueManager QueueManager;
     // public CustomerSelect CustomerSelect;
     public FoodTrayDropArea FoodTrayDropArea;
-    public CustomerSpawner CustomerSpawner;
+    //public CustomerSpawner CustomerSpawner;
     public SalesManager SalesManager;
     public ShuffleBag ShuffleBag;
     public ScoreManager ScoreManager;
@@ -36,7 +36,19 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        NullCheck<QueueManager>(QueueManager);
+        NullCheck(FoodTrayDropArea);
+       // NullCheck(CustomerSpawner);
+        NullCheck(SalesManager);
+        NullCheck(ShuffleBag);
+        NullCheck(ScoreManager);
+        NullCheck(CustomerSelect);
+        NullCheck(OrderWindow);
+        NullCheck(WinLooseManager);
+
+
         StartCoroutine(CustomerSpawnSystemInit());
+
     }
 
     /// <summary>
@@ -89,6 +101,14 @@ public class LevelManager : MonoBehaviour
         if(componant == null)
         {
             Debug.LogError($"Component {nameof(componant)} is NULL");
+        }
+    }
+
+    private void NullCheck<T>(T reference)
+    {
+        if(reference == null)
+        {
+            Debug.LogError(/*nameof(reference)+*/ "  missing reference -> check below console for type" );
         }
     }
 }

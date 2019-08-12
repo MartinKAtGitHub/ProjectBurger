@@ -24,7 +24,7 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
     private int _ingredientLayer = -1;
     private static int _foodCombiSpotsAmount;
     private Food _food;
-
+    private RectTransform _touchArea;
 
     
     public Food Food { get => _food; set => _food = value; }
@@ -35,6 +35,7 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
     private void Awake()
     {
         _foodCombiSpotsAmount++;
+        _touchArea = GetComponent<RectTransform>();
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -69,6 +70,8 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
                 if (ingredientGameObject != null)
                 {
                     AddIngredientsToFood(ingredientGameObject);
+                    ingredientGameObject.RescaleTouchArea(_touchArea);  // TODO ingredientGo.RescaleTouchArea happens in all drop areas
+
                     CheckFoodStackWithRecepies();
                     IsFinalIngredientPlaced(ingredientGameObject.Ingredient);
 

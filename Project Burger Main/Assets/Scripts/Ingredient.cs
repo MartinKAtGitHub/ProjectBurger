@@ -8,11 +8,11 @@ public class Ingredient : ScriptableObject
 
     [SerializeField] private Sprite[] _ingredientLayerSprites = new Sprite[_maxIngredientLayersAmount];
     [Space(10)]
-    [SerializeField] private Sprite _ingredientSprite;
     [SerializeField] private string _ingredientName;
     [SerializeField] IngredientTypes ingredientType = IngredientTypes.NotDefined;
 
-    private const int _maxIngredientLayersAmount = 5;
+    private Sprite _ingredientSprite;
+    private const int _maxIngredientLayersAmount = 5;// TODO ingredient.cs | maybe move this to a manager class for easy viz
     private int _ingredientCost = 1;//Used To Calculate Cost Of The Burger/MenuItem
     
 
@@ -57,6 +57,7 @@ public class Ingredient : ScriptableObject
     public void InitializeIngredient() 
     {
         CheckAllLayersAreCoverd();
+        _ingredientSprite = _ingredientLayerSprites[0];
     }
 
     private void CheckAllLayersAreCoverd()

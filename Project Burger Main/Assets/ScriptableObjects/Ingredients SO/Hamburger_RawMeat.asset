@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868ad1209047edc4fa2fd6a1969fc8c0, type: 3}
+  m_Name: Hamburger_RawMeat
+  m_EditorClassIdentifier: 
+  IngredientTime: 1
+  _ingredientLayerSprites:
+  - {fileID: 84552078326984462, guid: ffe8038318200e9499686641288ebe5d, type: 3}
+  - {fileID: 284549650176978333, guid: ffe8038318200e9499686641288ebe5d, type: 3}
+  - {fileID: 1291098743330404517, guid: ffe8038318200e9499686641288ebe5d, type: 3}
+  - {fileID: -3395471261050805938, guid: ffe8038318200e9499686641288ebe5d, type: 3}
+  - {fileID: -3091606445264257541, guid: ffe8038318200e9499686641288ebe5d, type: 3}
+  _ingredientName: Raw Hamburger Meat
+  ingredientType: 3
+  RemoveChance: 0

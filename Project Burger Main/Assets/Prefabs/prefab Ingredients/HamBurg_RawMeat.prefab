@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4704975656909335426
+--- !u!1001 &7687573455334716926
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 295963924765048965, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
       propertyPath: m_Name
-      value: HamBurger_Tomato
+      value: HamBurg_RawMeat
       objectReference: {fileID: 0}
     - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
@@ -117,15 +117,27 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 295963924765048990, guid: d6bdb26a075ad64489be7918469951df,
+    - target: {fileID: 4364827356571203016, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: _ingredient
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f8ff79c83ba81246a5f6ef44741c739,
+        type: 2}
+    - target: {fileID: 2046117214151235935, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 295963924765048985, guid: d6bdb26a075ad64489be7918469951df,
+      objectReference: {fileID: 84552078326984462, guid: ffe8038318200e9499686641288ebe5d,
         type: 3}
-      propertyPath: m_IgnoreParentGroups
-      value: 1
+    - target: {fileID: 646263549191932966, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 260
+      objectReference: {fileID: 0}
+    - target: {fileID: 646263549191932966, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6bdb26a075ad64489be7918469951df, type: 3}

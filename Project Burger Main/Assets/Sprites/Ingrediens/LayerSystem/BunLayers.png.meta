@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: e658ff8c42f2cd943ad5977dd47b2d48
+guid: c57f3e141078e7e499caca6273b7a9aa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6820877514651794890
-    second: TopLayers4
+      213: 4789150930348710839
+    second: BunLayers4
   - first:
-      213: -7179758464761169726
-    second: TopLayers3
+      213: -7819673125433389760
+    second: BunLayers3
   - first:
-      213: 4444172052603501224
-    second: TopLayers2
+      213: 7870816100478769319
+    second: BunLayers2
   - first:
-      213: -4681308383172058310
-    second: TopLayers1
+      213: -5565650412583470979
+    second: BunLayers1
   - first:
-      213: 945571124511739519
-    second: TopLayers0
+      213: -8083819362954138540
+    second: BunLayers0
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -73,7 +73,7 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -84,7 +84,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -95,11 +96,12 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TopLayers4
+      name: BunLayers4
       rect:
         serializedVersion: 2
         x: 0
@@ -107,20 +109,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4b8bf32d514ff346ab0cb97b9602c30
-      internalID: 6820877514651794890
+      spriteID: 3afec54a6787e464090be33ef62fa21b
+      internalID: 4789150930348710839
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TopLayers3
+      name: BunLayers3
       rect:
         serializedVersion: 2
         x: 0
@@ -128,20 +130,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57da3b0d3c97e9f45913c68325ab8ee7
-      internalID: -7179758464761169726
+      spriteID: 39af7905a380031489744e0ab66a7ece
+      internalID: -7819673125433389760
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TopLayers2
+      name: BunLayers2
       rect:
         serializedVersion: 2
         x: 0
@@ -149,20 +151,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1cd0dfec8876e244d8ced8557738ce09
-      internalID: 4444172052603501224
+      spriteID: 17515850bd31d3641913d65b9cdfae99
+      internalID: 7870816100478769319
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TopLayers1
+      name: BunLayers1
       rect:
         serializedVersion: 2
         x: 0
@@ -170,20 +172,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f933f7cbfab0fbd4eb1518cd0673a8c2
-      internalID: -4681308383172058310
+      spriteID: 4b7b14bfd80406b4d870028eeca826d7
+      internalID: -5565650412583470979
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TopLayers0
+      name: BunLayers0
       rect:
         serializedVersion: 2
         x: 0
@@ -191,14 +193,14 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 891dac858a8b9b54cae42d417020a4a8
-      internalID: 945571124511739519
+      spriteID: 02be73c5699c2ee42a9da43da82ba985
+      internalID: -8083819362954138540
       vertices: []
       indices: 
       edges: []
@@ -206,7 +208,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 8667f08bafc490d4ba2c6f892e002463
+    spriteID: b2c29c5697c26044a9792b92edad1eca
     internalID: 0
     vertices: []
     indices: 

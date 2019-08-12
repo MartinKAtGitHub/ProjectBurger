@@ -11,7 +11,8 @@ using UnityEngine.UI;
 public class IngredientGameObject : MonoBehaviour //TODO  put this in Ingredient Drag 
 {
     [SerializeField]private Ingredient _ingredient;
-    private Image _ingredientImage;
+    [SerializeField]private Image _ingredientImage;
+    [SerializeField] private RectTransform _touchArea;
     private Transform _ingredientPoolTrans;
 
     public Transform IngredientPoolTrans { get => _ingredientPoolTrans; set => _ingredientPoolTrans = value; }
@@ -20,7 +21,8 @@ public class IngredientGameObject : MonoBehaviour //TODO  put this in Ingredient
     private void Awake()
     {
         _ingredient.InitializeIngredient();
-        _ingredientImage = GetComponent<Image>();
+        //_ingredientImage = GetComponent<Image>();
+        _ingredientImage.sprite = Ingredient.IngredientSprite; 
     }
 
     public void SetIngredientSpriteForLayer(int layer)
@@ -35,6 +37,11 @@ public class IngredientGameObject : MonoBehaviour //TODO  put this in Ingredient
     {
         transform.SetParent(IngredientPoolTrans);
         transform.localPosition = Vector3.zero;
+    }
+
+    public void RescaleTouchArea(RectTransform targetTouchArea)
+    {
+        _touchArea.sizeDelta = targetTouchArea.sizeDelta;
     }
 }
 

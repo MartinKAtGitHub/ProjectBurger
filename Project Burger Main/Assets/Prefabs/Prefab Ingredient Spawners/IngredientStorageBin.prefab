@@ -85,7 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5314522580823151897}
   m_Layer: 5
-  m_Name: IngredientSpawnPool
+  m_Name: IngredientSpawnPool(TouchAreaSetter)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,10 +105,10 @@ RectTransform:
   m_Father: {fileID: 8634727916390808357}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 132, y: 132}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8634727916390808354
 GameObject:
@@ -170,9 +170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c32d67af2d149284c88b9734f7c3f8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ingredientPrefab: {fileID: 0}
+  _ingredientGameObjectPrefab: {fileID: 0}
   _topLayerTransform: {fileID: 0}
-  _ingredientPoolTrans: {fileID: 5314522580823151897}
+  _ingredientPoolRect: {fileID: 5314522580823151897}
   _presetSpawn: 1
 --- !u!114 &1065221506227363826
 MonoBehaviour:

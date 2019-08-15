@@ -17,6 +17,17 @@ public class LevelInfoBoard : MonoBehaviour {
     
     public void SetLevelInfo(OnClickWalk info) {
         theLevel = info;
+
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Respawn");
+
+        for(int i = 0; i < objects.Length; i++) {//If There Are More Objects With This Tag.
+            if(objects[i].GetComponent<LevelEventInfo>() != null) {
+                objects[i].GetComponent<LevelEventInfo>().SetLevelInfo(info);
+            }
+
+        }
+
+
     }
 
     private void OnEnable() {

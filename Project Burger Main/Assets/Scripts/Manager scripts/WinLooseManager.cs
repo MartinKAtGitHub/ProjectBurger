@@ -13,12 +13,28 @@ public class WinLooseManager : MonoBehaviour
     int _secondCount = 0;
     public int TimeUsed { get => (TimeLimit - _secondCount); }
 
+    private void Awake() {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Respawn");
+        LevelEventInfo holder;
+        for (int i = 0; i < objects.Length; i++) {//If There Are More Objects With This Tag.
+            if (objects[i].GetComponent<LevelEventInfo>() != null) {
+                holder = objects[i].GetComponent<LevelEventInfo>();
+                GoldWinAmount = holder.gold;
+                TimeLimit = holder.time;
+                TotalLifes = holder.health;
+                //Dont Know IF We Want To Make Recipes As This, So That Every Level Get What We Say In The LevelSelect. If Not Then It Might Not Be Needed To Do Anything With It.
+                break;
+            }
+
+        }
+    }
+
     private void Start()
     {
         ScoreManager.OnGoldChange += GoldWinCheck;
         ScoreManager.OnLifeChange += LifeCheck;
         ScoreManager.OnTimeChange += TimeCheck;
-        LevelManager.Instance.ScoreManager.CombosApplied = 1;
+        LevelManager.Instance.ScoreManager.CombosApplied = 0;
     }
 
 

@@ -136,19 +136,17 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
         if (DropAreaOccupied == false)
         {
             _theBurgerDrag = eventData.pointerDrag.GetComponent<BurgerDrag>();
+            if (_theBurgerDrag != null) {
+                //   if (_theBurgerDrag.TheIngredientGameObject.ingredient.IngredientType == Ingredient.IngredientTypes.HamBurger_Meat_Raw){//only raw burgers can get on the grill.
 
-            if (_theBurgerDrag != null)
-            {
-                if (_theBurgerDrag.TheIngredientGameObject.ingredient.IngredientType == Ingredient.IngredientTypes.HamBurger_Meat)
-                {
-                    _theBurgerDrag.ResetPositionParent = transform;
-                    _theBurgerDrag.TheGrill = this;
+                _theBurgerDrag.ResetPositionParent = transform;
+                _theBurgerDrag.TheGrill = this;
 
-                    BurgerIngredience = _theBurgerDrag.TheIngredientGameObject.ingredient as BurgersMeat;
+                BurgerIngredience = _theBurgerDrag.TheIngredientGameObject.ingredient as BurgersMeat;
 
-                    Setup();
-                 
-                }
+                Setup();
+
+                //   }
             }
         }
     }
@@ -158,7 +156,7 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
     {
         EvaluateQuality();
         DropAreaOccupied = false;
-        transform.GetChild(0).gameObject.SetActive(false);
+   //     transform.GetChild(0).gameObject.SetActive(false);
     }
 
 
@@ -177,7 +175,7 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
         DropAreaOccupied = true;
         SelectingBurgerSide();
         StartCooking();
-        transform.GetChild(0).gameObject.SetActive(true);
+   //     transform.GetChild(0).gameObject.SetActive(true);
     }
 
     void StartCooking()

@@ -54,7 +54,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 899870053689105725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -65,7 +65,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d409967c56d63824191f11d53b73712e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e7d54b941875db45b998c71e013dcdd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -74,6 +74,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &4569979271278904720
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,10 +128,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RemoveIngredients: 0
   _recipeBook: {fileID: 11400000, guid: 9766ba8e4d331924da23f8fd98434781, type: 2}
-  _multiOrderAmount: 5
-  _multiOrderChance: 150
+  _multiOrderAmount: 2
+  _multiOrderChance: 51
   _order:
     CustomerName: 
+    PriceTotal: 0
     OrderRecipes:
     - BaseRecipe: {fileID: 11400000, guid: e94da6e22bd3e064e82c565b685357cf, type: 2}
       OrderIngredients:
@@ -139,34 +141,7 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
       - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
       DiscaredIngredients: []
-    - BaseRecipe: {fileID: 11400000, guid: e94da6e22bd3e064e82c565b685357cf, type: 2}
-      OrderIngredients:
-      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
-      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
-      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
-      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
-      DiscaredIngredients: []
-    - BaseRecipe: {fileID: 11400000, guid: e94da6e22bd3e064e82c565b685357cf, type: 2}
-      OrderIngredients:
-      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
-      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
-      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
-      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
-      DiscaredIngredients: []
-    - BaseRecipe: {fileID: 11400000, guid: e94da6e22bd3e064e82c565b685357cf, type: 2}
-      OrderIngredients:
-      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
-      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
-      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
-      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
-      DiscaredIngredients: []
-    - BaseRecipe: {fileID: 11400000, guid: e94da6e22bd3e064e82c565b685357cf, type: 2}
-      OrderIngredients:
-      - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
-      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
-      - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
-      - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}
-      DiscaredIngredients: []
+      ExtraIngredients: []
 --- !u!114 &2142764421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,14 +154,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f66bc8299858f4fb40d75ff36021ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestingRandomTimeout: 0
   QueuePositionDot: {fileID: 0}
   _customerPatience:
     _customerWaitingTime: 0
-    _customerGold: 0
+    _queueSizeTimeGainModifer: 0
   _customerInteractionContainer: {fileID: 0}
   _customerNotInFocusContainer: {fileID: 0}
-  _CustomerWaitingTime: 0
   _customerName: 
   _isWaiting: 0
 --- !u!1 &5681663685263564038
@@ -243,7 +216,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5681663685263564038}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -263,6 +236,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6162600826372313400
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +291,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6162600826372313400}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -328,7 +302,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 97a098adfe350c44b8514909f061ee36, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22d676abbd402384b954a5445926037e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -337,6 +311,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7367494249976656667
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +366,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7367494249976656667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -411,6 +386,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7778665351355866935
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,7 +441,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7778665351355866935}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -485,6 +461,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8153605742037702850
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,7 +516,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8153605742037702850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -550,7 +527,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 94190506d6dc12b44a66d1f0026077fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f825ccf49d3f9244ba650813ef5a5b9e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -559,6 +536,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8893891765464613386
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,8 +570,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.5, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: -0.5, y: -8}
+  m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8893891765464613387
 GameObject:
@@ -632,6 +610,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.5, y: 24}
+  m_AnchoredPosition: {x: -0.5, y: 8}
   m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}

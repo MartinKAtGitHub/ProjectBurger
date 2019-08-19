@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IngredientTime: 1
   _ingredientLayerSprites:
-  - {fileID: 84552078326984462, guid: ffe8038318200e9499686641288ebe5d, type: 3}
-  - {fileID: 284549650176978333, guid: ffe8038318200e9499686641288ebe5d, type: 3}
-  - {fileID: 1291098743330404517, guid: ffe8038318200e9499686641288ebe5d, type: 3}
-  - {fileID: -3395471261050805938, guid: ffe8038318200e9499686641288ebe5d, type: 3}
-  - {fileID: -3091606445264257541, guid: ffe8038318200e9499686641288ebe5d, type: 3}
+  - {fileID: -2545240244273942329, guid: 5038721c132cdc64387da070e4db313b, type: 3}
+  - {fileID: 8493067443070245336, guid: 5038721c132cdc64387da070e4db313b, type: 3}
+  - {fileID: -8240138308730508506, guid: 5038721c132cdc64387da070e4db313b, type: 3}
+  - {fileID: 6125103688318448064, guid: 5038721c132cdc64387da070e4db313b, type: 3}
+  - {fileID: -1635447897833527825, guid: 5038721c132cdc64387da070e4db313b, type: 3}
   _ingredientName: Raw Hamburger Meat
   ingredientType: 3
   RemoveChance: 0

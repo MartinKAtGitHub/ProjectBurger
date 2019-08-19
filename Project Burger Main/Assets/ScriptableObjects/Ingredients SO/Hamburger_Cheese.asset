@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868ad1209047edc4fa2fd6a1969fc8c0, type: 3}
   m_Name: Hamburger_Cheese
   m_EditorClassIdentifier: 
+  IngredientTime: 1
   _ingredientLayerSprites:
-  - {fileID: 1571830439801956473, guid: 16fc9c01a8eb79249a0f4c34dee6bab6, type: 3}
-  - {fileID: 6264857567315058315, guid: 16fc9c01a8eb79249a0f4c34dee6bab6, type: 3}
-  - {fileID: -4528130474836676941, guid: 16fc9c01a8eb79249a0f4c34dee6bab6, type: 3}
-  - {fileID: -1429433876675250517, guid: 16fc9c01a8eb79249a0f4c34dee6bab6, type: 3}
-  - {fileID: -6630763436121716904, guid: 16fc9c01a8eb79249a0f4c34dee6bab6, type: 3}
-  _ingredientSprite: {fileID: 21300000, guid: 3bdff8cf1ccf0274a8e943b82ebbee40, type: 3}
+  - {fileID: -6413397715532008403, guid: 5038721c132cdc64387da070e4db313b, type: 3}
+  - {fileID: -7925213341557209106, guid: 5038721c132cdc64387da070e4db313b, type: 3}
+  - {fileID: -8029300711820915981, guid: 5038721c132cdc64387da070e4db313b, type: 3}
+  - {fileID: -4500180103913165674, guid: 5038721c132cdc64387da070e4db313b, type: 3}
+  - {fileID: -846285820541375788, guid: 5038721c132cdc64387da070e4db313b, type: 3}
   _ingredientName: Cheese
   ingredientType: 9
   RemoveChance: 0
-  IngredientTime: 1

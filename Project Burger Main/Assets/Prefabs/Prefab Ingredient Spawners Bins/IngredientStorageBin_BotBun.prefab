@@ -80,12 +80,12 @@ PrefabInstance:
     - target: {fileID: 8634727916390808357, guid: 77acc7fe33498eb4d98f90cbbcea3759,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 132
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 8634727916390808357, guid: 77acc7fe33498eb4d98f90cbbcea3759,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 132
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 8634727916390808357, guid: 77acc7fe33498eb4d98f90cbbcea3759,
         type: 3}
@@ -122,6 +122,12 @@ PrefabInstance:
       propertyPath: _ingredientPrefab
       value: 
       objectReference: {fileID: 5593362381484572212, guid: 45f7aa41748788e4f960628f6dbc4c4b,
+        type: 3}
+    - target: {fileID: 1748886529749906790, guid: 77acc7fe33498eb4d98f90cbbcea3759,
+        type: 3}
+      propertyPath: _ingredientGameObjectPrefab
+      value: 
+      objectReference: {fileID: 8436965821687614329, guid: 45f7aa41748788e4f960628f6dbc4c4b,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77acc7fe33498eb4d98f90cbbcea3759, type: 3}

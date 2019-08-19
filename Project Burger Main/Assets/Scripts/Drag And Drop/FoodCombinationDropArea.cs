@@ -7,6 +7,7 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
 {
     [SerializeField] private GameObject _foodGameObjectPrefab;
     [SerializeField]private Transform _topLayerTrans;
+    [SerializeField]private Transform _dropPoint;
     /// <summary>
     /// When this ingredient is added to the stack, it marks that the food is ready to be sold 
     /// </summary>

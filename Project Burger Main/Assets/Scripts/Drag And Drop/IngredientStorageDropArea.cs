@@ -27,7 +27,7 @@ public class IngredientStorageDropArea : MonoBehaviour, IDropHandler
             var ingredientGo = draggableComponent.GetComponent<IngredientGameObject>();
             if (ingredientGo.Ingredient.IngredientType == ingredientType)
             {
-                draggableComponent.ResetPositionParent = this.transform;
+                draggableComponent.ResetPositionParent = _ingredientsSpawner.IngredientPoolRect.transform;
                 draggableComponent.transform.SetParent(this.transform);
 
                 ingredientGo.RescaleTouchArea(_ingredientsSpawner.IngredientPoolRect); // TODO ingredientGo.RescaleTouchArea happens in all drop areas

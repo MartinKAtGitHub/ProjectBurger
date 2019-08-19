@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868ad1209047edc4fa2fd6a1969fc8c0, type: 3}
   m_Name: Hamburg_Lettuce
   m_EditorClassIdentifier: 
-  _ingredientLayerSprites:
-  - {fileID: 6363755239683739016, guid: 4b1f1aabf54a2144ab8dd543b5a3b5bb, type: 3}
-  - {fileID: -7379469916736289003, guid: 4b1f1aabf54a2144ab8dd543b5a3b5bb, type: 3}
-  - {fileID: -4471894981536174222, guid: 4b1f1aabf54a2144ab8dd543b5a3b5bb, type: 3}
-  - {fileID: -3473961265927069663, guid: 4b1f1aabf54a2144ab8dd543b5a3b5bb, type: 3}
-  - {fileID: 7442963150771511774, guid: 4b1f1aabf54a2144ab8dd543b5a3b5bb, type: 3}
-  _ingredientSprite: {fileID: 21300000, guid: 41f1c4efff78ee949aa845ce4b8e0c8f, type: 3}
-  _ingredientName: Lettuce
-  ingredientType: 4
-  RemoveChance: 50
   IngredientTime: 1
+  _ingredientLayerSprites:
+  - {fileID: -1273844357858067319, guid: 5038721c132cdc64387da070e4db313b, type: 3}
+  - {fileID: 7832086751740305920, guid: 5038721c132cdc64387da070e4db313b, type: 3}
+  - {fileID: -6947809478729880102, guid: 5038721c132cdc64387da070e4db313b, type: 3}
+  - {fileID: -1772990449820600389, guid: 5038721c132cdc64387da070e4db313b, type: 3}
+  - {fileID: -4336959638167630607, guid: 5038721c132cdc64387da070e4db313b, type: 3}
+  _ingredientName: Lettuce
+  ingredientType: 10
+  RemoveChance: 50

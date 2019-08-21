@@ -52,9 +52,9 @@ public class ShuffleBag : MonoBehaviour
                 return _customer;
             }
 
-            _customer = CustomerPool[0];
-           // Debug.Log("FINAL Customer = " + _customer.name);
-            return _customer;
+           // _customer = CustomerPool[0];
+           //// Debug.Log("FINAL Customer = " + _customer.name);
+           // return _customer;
         }
 
         var randomIndex = Random.Range(0, _maxCount);

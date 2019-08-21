@@ -23,14 +23,14 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
     /// </summary>
     [SerializeField] private Image[] _discardedIngredients;
 
-
     private GameObject _orderWindow;
-
+    private Customer _activeCustomer;
 
     public TextMeshProUGUI RecipeNameText { get { return _recipeNameText; } }
     public Image RecipeImg { get { return _recipeImg; } }
     public Image[] DiscardedIngredients { get { return _discardedIngredients; } }
 
+    public Customer ActiveCustomer { get => _activeCustomer;}
 
     private void Awake()
     {
@@ -43,7 +43,8 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
     public void OpenWindow(Customer customer)
     {
         // Anim Fade INN Window / enable window = true
-        UpdateUI(customer);
+        //UpdateUI(customer);
+        _activeCustomer = customer;
         _orderWindow.SetActive(true);
     }
 
@@ -57,7 +58,7 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
 
     public void UpdateUI(Customer customer)
     {
-        _OrderPriceText.text = customer.Order.PriceTotal.ToString();
+       // _OrderPriceText.text = customer.Order.PriceTotal.ToString();
 
         // for( order.orderrecipes)
         //set all the text and shit

@@ -3,7 +3,7 @@ using TMPro;
 
 public class OrderWindowFoodItemPage : MonoBehaviour
 {
-    [SerializeField] int _tmpMax = 6; // TODO  OrderWindowFoodItemPage.cs | Connect Max limit to Manager
+    [SerializeField] int _tmpMax = 6; // TODO  OrderWindowFoodItemPage.cs | Connect Max request pnls/discarded/add ingredietn limit to Manager
     [SerializeField] TextMeshProUGUI _recipeName;
     [SerializeField] Transform _specialRequestGroupTransform;
     [SerializeField] GameObject _specialRequestElement;
@@ -30,8 +30,13 @@ public class OrderWindowFoodItemPage : MonoBehaviour
     public void UpdateThisPage(OrderRecipe foodItem)
     {
         _recipeName.text = foodItem.BaseRecipe.RecipeName;
+
         // Update all the other shit + and - stuff
     }
 
+    private void SetSpecialRequestFoodIngredients(OrderRecipe foodItem)
+    {
+        // TODO Need to rework the special request system
 
+    }
 }

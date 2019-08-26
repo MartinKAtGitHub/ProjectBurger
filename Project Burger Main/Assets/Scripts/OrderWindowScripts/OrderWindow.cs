@@ -9,75 +9,72 @@ using System.Collections.Generic;
 public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer ?
 {
 
+    [SerializeField] private int _tmpMax = 6; // TODO  OrderWindow.cs | Connect Max limit pnls/ fooditems per customer to Manager
+    [SerializeField] private GameObject _foodItemPnlPrefab;
     /// <summary>
-    /// text object dedicated to holding the name of the recipe
+    /// Holds the pnls with the information on fooditem which are not in focus from the player.
     /// </summary>
-    [SerializeField] private TextMeshProUGUI _recipeNameText;
-    [SerializeField] private TextMeshProUGUI _OrderPriceText;
-    /// <summary>
-    /// Image object which holds the finished food image of a recipe
-    /// </summary>
-    [SerializeField] private Image _recipeImg;
-    /// <summary>
-    /// Array of Image objects dedicated to displaying discarded ingredients
-    /// </summary>
-    [SerializeField] private Image[] _discardedIngredients;
+    [SerializeField] private RectTransform _notInFocusPnls;
 
-    private GameObject _orderWindow;
+    private GameObject[] foodItemElements;
     private Customer _activeCustomer;
 
-    public TextMeshProUGUI RecipeNameText { get { return _recipeNameText; } }
-    public Image RecipeImg { get { return _recipeImg; } }
-    public Image[] DiscardedIngredients { get { return _discardedIngredients; } }
-
-    public Customer ActiveCustomer { get => _activeCustomer;}
+    public Customer ActiveCustomer { get => _activeCustomer; }
+    public RectTransform NotInFocusPnls { get => _notInFocusPnls; }
+    public GameObject[] FoodItemElements { get => foodItemElements; }
+    public GameObject FoodItemPnlPrefab { get => _foodItemPnlPrefab;  }
 
     private void Awake()
     {
         LevelManager.Instance.OrderWindow = this;
-        _orderWindow = this.gameObject;
-        //_orderWindowParent = GameObject.FindGameObjectWithTag("MainCanvas");
-        // CreateOrderWindow();
+        //GenerateFoodItemPnls();
     }
 
     public void OpenWindow(Customer customer)
     {
         // Anim Fade INN Window / enable window = true
-        //UpdateUI(customer);
-        _activeCustomer = customer;
-        _orderWindow.SetActive(true);
+        
+       // UpdateUI(customer);
+        gameObject.SetActive(true);
     }
 
     public void CloseWindow()
     {
         // Fade OUT Window / enable window = false
         //set all to null
-        _orderWindow.SetActive(false);
+        gameObject.SetActive(false);
         // Destroy(_orderWindow);
     }
 
     public void UpdateUI(Customer customer)
     {
-       // _OrderPriceText.text = customer.Order.PriceTotal.ToString();
+        _activeCustomer = customer;
+        var foodItemsInOrder = _activeCustomer.Order.OrderRecipes.Count;
 
-        // for( order.orderrecipes)
-        //set all the text and shit
+        if(foodItemsInOrder <= _tmpMax)
+        {
+            for (int i = 0; i < _activeCustomer.Order.OrderRecipes.Count; i++) // This can never be more the tmpMax 
+            {
+                var foodItemPnl = FoodItemElements[i];
+                foodItemPnl.gameObject.SetActive(true);
+                foodItemPnl.GetComponent<OrderWindowFoodItemPage>().UpdateThisPage(_activeCustomer.Order.OrderRecipes[i]);
+            }
+        }
+        else
+        {
+            Debug.LogError($"Customer {_activeCustomer.name} has more then {_tmpMax} food items Ordered, this will overflow array" );
+        }
 
-
-
-        //   _recipeNameText.text = customer.OrderGenerator.OrderBaseRecipe.RecipeName;
-        // _recipeImg.sprite = customer.OrderGenerator.OrderBaseRecipe.RecipeImg;
     }
 
-    //private void CreateOrderWindow() //TODO OrderWindow.cs | Don't need to instantiate this if every Customer has it. Just child prefab to Customer
+    //private void GenerateFoodItemPnls() // move to touch
     //{
-    //    //_orderWindow = Instantiate(_orderWindowPrefab, transform.parent);
-    //    _orderWindow = Instantiate(_orderWindowPrefab, _orderWindowParent.transform);
-
-    //    //_orderWindow.transform.SetParent(_orderWindowParent);
-    //    _orderWindowData = _orderWindow.GetComponent<OrderWindowData>();
-    //    _orderWindow.name = $"ORDER WINDOW {name}";
-    //    _orderWindow.SetActive(false);
-
+    //    foodItemElements = new GameObject[_tmpMax]; // TODO OrderwinSipe.cs | Connect the max limit to Manager so its not hardcoded
+    //    for (int i = 0; i < _tmpMax; i++)
+    //    {
+    //        var clone = Instantiate(_foodItemPnlPrefab, _notInFocusPnls.transform);
+    //        clone.SetActive(false);
+    //       // foodItemPnls[i] = clone.GetComponent<OrderWindowFoodItemPage>();
+    //    }
     //}
 }

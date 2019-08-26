@@ -11,6 +11,7 @@ public class OrderRecipe
     public List<Ingredient> OrderIngredients = new List<Ingredient>();
     public List<Ingredient> DiscaredIngredients = new List<Ingredient>();
     public List<Ingredient> ExtraIngredients = new List<Ingredient>();
+    // public SpecialRequest
 
     private int _orderRecipePrice;
 

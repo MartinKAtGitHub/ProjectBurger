@@ -21,4 +21,4 @@ MonoBehaviour:
   - {fileID: -846285820541375788, guid: 5038721c132cdc64387da070e4db313b, type: 3}
   _ingredientName: Cheese
   ingredientType: 9
-  RemoveChance: 0
+  RemoveChance: 50

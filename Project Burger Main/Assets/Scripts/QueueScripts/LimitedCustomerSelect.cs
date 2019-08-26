@@ -54,7 +54,7 @@ public class LimitedCustomerSelect : MonoBehaviour
     private IEnumerator TransistionLogic(Vector2 startPos, Vector2 endPos, float sec)
     {
         _inSmoothTransition = true;
-        LevelManager.Instance.OrderWindow.CloseWindow();
+       // LevelManager.Instance.OrderWindow.CloseWindow();
 
 
         float t = 0f;

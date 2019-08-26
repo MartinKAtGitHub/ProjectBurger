@@ -8,6 +8,7 @@ public class LevelSelectManager : MonoBehaviour {
     public DrivingBurgerCar Player = null;
 
     public LevelInfoBoard LevelInfo;
+    public CameraFollower CameraFollow;
 
     public static LevelSelectManager Instance { get; private set; }
 

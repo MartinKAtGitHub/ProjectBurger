@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Node : MonoBehaviour {
 
+    [SerializeField]
+    public NodeBehaviour ThisNodesBehaviours;
+
+
+
+
     [HideInInspector] public bool NodeSearchedThrough = false;
     [HideInInspector] public float PosX = 0;
     [HideInInspector] public float PosY = 0;

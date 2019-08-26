@@ -25,12 +25,12 @@ public class LevelEventInfo : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
    
-    public void SetLevelInfo(OnClickWalk info) {
-        loadLevel = info.loadLevel;
-        health = info.health;
-        gold = info.gold;
-        time = info.time;
-        NewRecipes = info.NewRecipes;
+    public void SetLevelInfo(LevelSelectLevelNode info) {
+        loadLevel = info.LoadLevel;
+        health = info.Health;
+        gold = info.Gold;
+        time = info.Time;
+        NewRecipes = info.NewRecipe;
         Stars = info.Stars;
 
     }

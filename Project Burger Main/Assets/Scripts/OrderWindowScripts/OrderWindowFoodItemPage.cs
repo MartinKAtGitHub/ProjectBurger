@@ -9,7 +9,10 @@ public class OrderWindowFoodItemPage : MonoBehaviour
     [SerializeField] GameObject _specialRequestElement;
 
     private OrderWindow _orderWindow;
-    private RectTransform[] _requestElements; 
+    private RectTransform[] _requestElements;
+
+    public TextMeshProUGUI RecipeName { get => _recipeName; set => _recipeName = value; }
+
     private void Awake()
     {
         _orderWindow = GetComponentInParent<OrderWindow>();

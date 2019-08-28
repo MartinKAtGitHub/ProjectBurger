@@ -4844,6 +4844,11 @@ PrefabInstance:
       propertyPath: _easing
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 7062749299409539459, guid: c9eceda9495c8da40a29ee11ce2a36a2,
+        type: 3}
+      propertyPath: percentSwipeThreshold
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 96621341258608455, guid: c9eceda9495c8da40a29ee11ce2a36a2,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -4868,6 +4873,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4585236131471895374, guid: c9eceda9495c8da40a29ee11ce2a36a2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9eceda9495c8da40a29ee11ce2a36a2, type: 3}

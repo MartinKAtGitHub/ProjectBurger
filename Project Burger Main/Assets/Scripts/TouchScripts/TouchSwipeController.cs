@@ -12,12 +12,10 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     [SerializeField] private float percentSwipeThreshold = 0.2f;
     [Tooltip("How smooth the slide/snap anim is after a swipe")]
     [SerializeField] private float _easing = 0.8f;
-    [Tooltip("The Rect Transform which will be moved when swiped")]
-    [SerializeField] private RectTransform _swipeContainer;
-    [Tooltip("Container which holds all the elements not visible to the player")]
-    [SerializeField] private RectTransform _notInFocusContainer;
     [Tooltip("The element gameobject which will be used inside the Swipe container ")]
     [SerializeField] private GameObject _swipeContainerElementPrefab;
+    [Tooltip("The Rect Transform which will be moved when swiped")]
+    [SerializeField] private RectTransform _swipeContainer;
     [Tooltip("Used to calculate the X distance needed to swipe, in case of additional spacing")]
     [SerializeField] private HorizontalLayoutGroup _swipeContainerHorizontalLayoutGroup;
 
@@ -25,16 +23,19 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     private Vector2 _currentSwipeContainerPos;
     private float _swipeDistance;
     private bool _inSmoothTransition;
-    private int _elementIndex;
+    private int _elementIndex = 0;
     private RectTransform _elementInFocus;
     private RectTransform[] _elements;
 
+    private int _nextCount;
+    private int _prevCount;
 
 
     virtual protected void Awake()
     {
         _swipeDistance = _swipeContainerElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
 
+        Debug.Log(_swipeDistance);
         InitializeTouchControll();
     }
 
@@ -48,7 +49,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     {
         GenerateElements();
 
-        var element = _elements[0];
+        var element = _elements[_elementIndex];
         element.SetParent(_swipeContainer);
         _elementInFocus = element;
     }
@@ -64,19 +65,17 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     {
         float percentage = (eventData.pressPosition.x - eventData.position.x) / Screen.width;
 
-        if (Mathf.Abs(percentage) >= percentSwipeThreshold && _notInFocusContainer.childCount > 0)
+        if (Mathf.Abs(percentage) >= percentSwipeThreshold/* && _notInFocusContainer.childCount > 0*/)
         {
-            var newPos = _currentSwipeContainerPos;
+            //  var newPos = _currentSwipeContainerPos;
 
             if (percentage > 0)
             {
-
                 // newPos += new Vector2(-_swipeDistance, 0);
                 NextElement(_tmpMaxElementLimit); // maxlimit needs to be the order.recipe.length
             }
             else if (percentage < 0)
             {
-
                 //newPos += new Vector2(_swipeDistance, 0);
                 PreviousElement(_tmpMaxElementLimit); // MaxLimit needs to be the order.recipe.length
             }
@@ -90,14 +89,10 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         }
     }
 
-    private void ResetPnl()
-    {
-        Debug.Log("Reset swipe container back to original position");
-        _swipeContainer.anchoredPosition = _currentSwipeContainerPos;
-    }
 
 
-    private IEnumerator TransistionLogic(Vector2 startPos, Vector2 endPos, float sec)
+
+    private IEnumerator TransistionNextLogic(Vector2 startPos, Vector2 endPos, float sec, int lastIndex)
     {
         _inSmoothTransition = true;
         // LevelManager.Instance.OrderWindow.CloseWindow();
@@ -110,22 +105,91 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
             _swipeContainer.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
             yield return null;
         }
-        //AfterTrans();
 
-        var oldSlot = _elementInFocus;
-
-        if (oldSlot != null) // TODO CustomerSelect | SmootTransition -> BUG , when there is only 1 person left the player cant select because he gets sendt back to NotInFocusArea
-        {
-            oldSlot.transform.SetParent(_swipeContainer);
-            oldSlot.transform.localPosition = Vector2.zero;
-        }
-
-        _elementInFocus = _elements[_elementIndex];
+        _elements[lastIndex].SetAsLastSibling();
+        
         _swipeContainer.anchoredPosition = Vector2.zero;
+        _currentSwipeContainerPos = Vector2.zero;
+
+
         _inSmoothTransition = false;
 
         yield return null;
     }
+
+    private IEnumerator TransistionPrevLogic(Vector2 startPos, Vector2 endPos, float sec)
+    {
+        _inSmoothTransition = true;
+
+        _elements[_elementIndex].SetAsFirstSibling();
+
+
+        float t = 0f;
+        while (t <= 1.0)
+        {
+            t += Time.deltaTime / sec;
+            _swipeContainer.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
+            yield return null;
+        }
+
+        _swipeContainer.anchoredPosition = Vector2.zero;
+        _currentSwipeContainerPos = Vector2.zero;
+
+
+        _inSmoothTransition = false;
+
+        yield return null;
+    }
+
+    private IEnumerator TransistionResetLogic(Vector2 startPos, Vector2 endPos, float sec)
+    {
+        _inSmoothTransition = true;
+        // LevelManager.Instance.OrderWindow.CloseWindow();
+
+
+        float t = 0f;
+        while (t <= 1.0)
+        {
+            t += Time.deltaTime / sec;
+            _swipeContainer.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
+            yield return null;
+        }
+
+        _currentSwipeContainerPos = endPos;
+        _inSmoothTransition = false;
+
+        yield return null;
+    }
+
+
+    //private IEnumerator TransistionSeperateContainerLogic(Vector2 startPos, Vector2 endPos, float sec)
+    //{
+    //    _inSmoothTransition = true;
+    //    // LevelManager.Instance.OrderWindow.CloseWindow();
+
+
+    //    float t = 0f;
+    //    while (t <= 1.0)
+    //    {
+    //        t += Time.deltaTime / sec;
+    //        _swipeContainer.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
+    //        yield return null;
+    //    }
+
+    //    var oldSlot = _elementInFocus;
+
+    //    if (oldSlot != null) // TODO CustomerSelect | SmootTransition -> BUG , when there is only 1 person left the player cant select because he gets sendt back to NotInFocusArea
+    //    {
+    //        oldSlot.transform.SetParent(_notInFocusContainer);
+    //        oldSlot.transform.localPosition = Vector2.zero;
+    //    }
+
+    //    _elementInFocus = _elements[_elementIndex];
+    //    _swipeContainer.anchoredPosition = Vector2.zero;
+    //    _inSmoothTransition = false;
+
+    //    yield return null;
+    //}
 
     /// <summary>
     /// Triggers the swipe anim for the next element in the array. 
@@ -139,9 +203,9 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
             return;
         }
 
-        if (!_inSmoothTransition && _notInFocusContainer.childCount > 0)
+        if (!_inSmoothTransition /*&& _notInFocusContainer.childCount > 0*/)
         {
-            Debug.Log("Next Element");
+            var lastIndex = _elementIndex;
             _elementIndex++;
 
             if (_elementIndex > MaxLimit - 1)
@@ -149,15 +213,15 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
                 _elementIndex = 0;
             }
 
-            //_limitedQueueDotIndicators.SetDotFocus(_queueSlotIndex);
-            _elements[_elementIndex].transform.SetParent(_swipeContainer);
-            _elements[_elementIndex].transform.SetAsLastSibling();
-
-            var newPos = _swipeContainer.anchoredPosition;
+            var newPos = _currentSwipeContainerPos;
             newPos += new Vector2(-1 * (_swipeDistance), 0);
 
-            StartCoroutine(TransistionLogic(_swipeContainer.anchoredPosition, newPos, _easing));
+            StartCoroutine(TransistionNextLogic(_swipeContainer.anchoredPosition, newPos, _easing, lastIndex));
 
+
+
+
+            // Debug.Log("NEXT COUNT" + _nextCount + " | " + _swipeContainer.anchoredPosition.x);
         }
     }
 
@@ -173,9 +237,10 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
             return;
         }
 
-        if (!_inSmoothTransition && _notInFocusContainer.childCount > 0)
+        if (!_inSmoothTransition /*&& _notInFocusContainer.childCount > 0*/)
         {
             Debug.Log("Previous Element");
+        
             _elementIndex--;
 
             if (_elementIndex < 0)
@@ -183,32 +248,33 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
                 _elementIndex = MaxLimit - 1;
             }
 
-            _elements[_elementIndex].transform.SetParent(_swipeContainer);
-            _elements[_elementIndex].transform.SetAsFirstSibling();
-
-
-            // Because off the way Layout groups work we need to offset the container Immediately when going to the left
-            var originalPos = _swipeContainer.anchoredPosition;
-            _swipeContainer.anchoredPosition += new Vector2(-1 * (_swipeDistance), 0); // Immediately offset the container
-
-            StartCoroutine(TransistionLogic(_swipeContainer.anchoredPosition, originalPos, _easing)); // smooth transition back to original pos
-
+            var newPos = _currentSwipeContainerPos;
+            newPos += new Vector2(_swipeDistance, 0);
+            StartCoroutine(TransistionPrevLogic(_swipeContainer.anchoredPosition, newPos, _easing));
 
         }
     }
 
+
+    private void ResetPnl()
+    {
+        Debug.Log("Reset swipe container back to original position");
+
+        //_swipeContainer.anchoredPosition = _currentSwipeContainerPos;
+        StartCoroutine(TransistionResetLogic(_swipeContainer.anchoredPosition, _currentSwipeContainerPos, _easing));
+    }
     protected void GenerateElements()
     {
         _elements = new RectTransform[_tmpMaxElementLimit];
 
         for (int i = 0; i < _elements.Length; i++)
         {
-            var clone = Instantiate(_swipeContainerElementPrefab, _notInFocusContainer.transform);
-            clone.name = "ELEMENT " + i;
+            //var clone = Instantiate(_swipeContainerElementPrefab, _notInFocusContainer.transform);
+            var clone = Instantiate(_swipeContainerElementPrefab, _swipeContainer.transform);
+            clone.GetComponent<OrderWindowFoodItemPage>().RecipeName.text = "ELEMENT " + i;
             _elements[i] = clone.GetComponent<RectTransform>();
 
         }
     }
 
-    //protected abstract void AfterTrans(); // Then add per script logic
 }

@@ -4814,11 +4814,6 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8780949261502024964, guid: c9eceda9495c8da40a29ee11ce2a36a2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3132109584268904750, guid: c9eceda9495c8da40a29ee11ce2a36a2,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -4848,6 +4843,11 @@ PrefabInstance:
         type: 3}
       propertyPath: percentSwipeThreshold
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7062749299409539459, guid: c9eceda9495c8da40a29ee11ce2a36a2,
+        type: 3}
+      propertyPath: _tmpMaxElementLimit
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 96621341258608455, guid: c9eceda9495c8da40a29ee11ce2a36a2,
         type: 3}

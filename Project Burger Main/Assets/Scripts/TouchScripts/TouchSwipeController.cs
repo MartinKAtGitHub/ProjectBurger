@@ -21,16 +21,15 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
 
     private Vector2 _currentSwipeContainerPos;
-    private Vector2 _newPos;
-    private float _swipeDistance;
     private bool _inSmoothTransition;
-    private int _elementIndex = 0;
-    private RectTransform _elementInFocus;
-    private RectTransform[] _elements;
     private int _activeElements = 3;
 
-    private int _nextCount;
-    private int _prevCount;
+
+    protected Vector2 _newPos;
+    protected float _swipeDistance;
+    protected  RectTransform _elementInFocus;
+    protected int _elementIndex = 0;
+    protected RectTransform[] _elements;
 
     public int ActiveElements { get => _activeElements; set => _activeElements = value; }
 
@@ -53,10 +52,9 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         GenerateElements();
 
         var element = _elements[_elementIndex];
-        element.SetParent(_swipeContainer);
+        // element.SetParent(_swipeContainer);
         _elementInFocus = element;
     }
-
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -70,8 +68,8 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
         if (Mathf.Abs(percentage) >= percentSwipeThreshold/* && _notInFocusContainer.childCount > 0*/)
         {
-             _newPos = _currentSwipeContainerPos;
-            Debug.Log(_elementIndex);
+            _newPos = _currentSwipeContainerPos;
+            
             if (percentage > 0 && _elementIndex < _activeElements - 1)
             {
                 // newPos += new Vector2(-_swipeDistance, 0);
@@ -92,8 +90,6 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
             ResetPnl();
         }
     }
-
-
 
 
     private IEnumerator TransistionNextLogic(Vector2 startPos, Vector2 endPos, float sec, int lastIndex)
@@ -276,22 +272,31 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         yield return null;
     }
 
-    private void LimitedNextElement()
+    protected virtual void LimitedNextElement()
     {
-        Debug.Log("NEXT");
-        _elementIndex ++;
-       
+        Debug.Log("BASIC NEXT");
+        _elementIndex++;
+
+        if (_elementIndex > _elements.Length)
+        {
+            _elementIndex = _elements.Length - 1;
+        }
+
+        // _elements[_elementIndex] == null then increment agains
         _newPos += new Vector2(-1 * (_swipeDistance), 0);
 
-     
+
     }
-    private void LimitedPrevElement()
+    protected virtual void LimitedPrevElement()
     {
         Debug.Log("PREV");
         _elementIndex--;
-      
+
+        if (_elementIndex < 0)
+        {
+            _elementIndex = 0;
+        }
         _newPos += new Vector2(_swipeDistance, 0);
-   
     }
 
 
@@ -301,7 +306,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
         StartCoroutine(TransistionResetLogic(_swipeContainer.anchoredPosition, _currentSwipeContainerPos, _easing));
     }
-    protected void GenerateElements()
+    protected void GenerateElements() // eks Queueslot and FoodItemPage
     {
         _elements = new RectTransform[_tmpMaxElementLimit];
 

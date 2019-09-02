@@ -10,7 +10,7 @@ public class QueueManager : MonoBehaviour
     [SerializeField] private RectTransform _customerInteractionContainer;
     [SerializeField] private GameObject _queueSlotPrefab;
     [SerializeField] private int _activeQueueLimit;
-    [SerializeField] private int _currentActiveCustomer;
+    [SerializeField] private int _numOfActiveCustomers;
     [SerializeField] private QueueSlot[] _queueSlots;
 
     private LimitedQueueDotIndicators _limitedQueueDotIndicators;
@@ -22,7 +22,7 @@ public class QueueManager : MonoBehaviour
     public List<Customer> ActiveCustomerQueue { get => null /*_activeCustomerQueue*/; }
     public QueueSlot[] QueueSlots { get => _queueSlots; }
     public int ActiveQueueLimit { get => _activeQueueLimit; }
-    public int CurrentActiveCustomer { get => _currentActiveCustomer; }
+    public int NumOfActiveCustomers { get => _numOfActiveCustomers; }
     public GameObject QueueSlotPrefab { get => _queueSlotPrefab; }
 
     private void Awake()
@@ -32,23 +32,56 @@ public class QueueManager : MonoBehaviour
         _limitedQueueDotIndicators = GetComponent<LimitedQueueDotIndicators>();
         _limitedCustomerSelect = GetComponent<LimitedCustomerSelect>();
 
-        GenerateQueueSlots();
+        //GenerateQueueSlots();
     }
 
-    private void GenerateQueueSlots()
+    private void Start()
     {
-        _queueSlots = new QueueSlot[_activeQueueLimit];
+        _queueSlots = LevelManager.Instance.CustomerSelectSwiper.QueueSlots;
+    }
+
+    //private void GenerateQueueSlots()
+    //{
+    //    _queueSlots = new QueueSlot[_activeQueueLimit];
+
+    //    for (int i = 0; i < _queueSlots.Length; i++)
+    //    {
+    //        var queueSlot = Instantiate(_queueSlotPrefab, _customerNotInFocusContainer.transform);
+    //        _queueSlots[i] = queueSlot.GetComponent<QueueSlot>();
+
+    //    }
+
+    //}
+
+    public void AddCustomerToQueue(Customer customer)
+    {
+        customer.gameObject.SetActive(true);
+        _numOfActiveCustomers++;
+        SearchForEmptyQueueSlot(customer);
+
+    }
+
+    public void RemoveCustomerFromQueue(Customer customer)
+    {
+        _numOfActiveCustomers--;
 
         for (int i = 0; i < _queueSlots.Length; i++)
         {
-            var queueSlot = Instantiate(_queueSlotPrefab, _customerNotInFocusContainer.transform);
-            _queueSlots[i] = queueSlot.GetComponent<QueueSlot>();
+            if (_queueSlots[i].CurrentCustomer != null)
+            {
+                if (_queueSlots[i].CurrentCustomer.Equals(customer))
+                {
+                    Debug.Log($"Removing {customer.name} in Slot {i}");
+                    _queueSlots[i].CurrentCustomer = null;
+                    _limitedQueueDotIndicators.IsQueueSlotOccupied(i, false);
+
+                    Destroy(customer.gameObject); // PERFORMANCE Queumanager.cs | this can cause lags, might need to pool our characters
+                }
+            }
 
         }
-
     }
-
-    private void SearchQueueSlotsForEmptySlot(Customer customer)
+    private void SearchForEmptyQueueSlot(Customer customer)
     {
         for (int i = 0; i < _queueSlots.Length; i++)
         {
@@ -73,64 +106,8 @@ public class QueueManager : MonoBehaviour
         }
     }
 
-    public void AddCustomerToQueue(Customer customer)
-    {
-        customer.gameObject.SetActive(true);
+   
 
-        _currentActiveCustomer++;
-
-        SearchQueueSlotsForEmptySlot(customer);
-
-
-        // _activeCustomerQueue.Add(customer);
-
-        // customer.QueuePositionDot = _queueDotIndicators.SpawnDot();
-
-        //if (_activeCustomerQueue.Count == 1)
-        //{
-        //  //  _customerSelect.ZeroIndexCustomer();
-        //}
-        //else
-        //{
-        //    customer.transform.SetParent(_customerNotInFocusContainer);
-        //    customer.transform.localPosition = Vector2.zero;
-        //}
-
-    }
-
-    public void RemoveCustomerFromQueue(Customer customer)
-    {
-        _currentActiveCustomer--;
-
-        for (int i = 0; i < _queueSlots.Length; i++)
-        {
-            if (_queueSlots[i].CurrentCustomer != null)
-            {
-                if (_queueSlots[i].CurrentCustomer.Equals(customer))
-                {
-                    Debug.Log($"Removing {customer.name} in Slot {i}");
-                    _queueSlots[i].CurrentCustomer = null;
-                    _limitedQueueDotIndicators.IsQueueSlotOccupied(i, false);
-
-                    Destroy(customer.gameObject); // PERFORMANCE Queumanager.cs | this can cause lags, might need to pool ouer characters
-                }
-            }
-
-        }
-
-
-
-        //if (ActiveCustomerQueue.Count != 0)
-        //{
-        //    _activeCustomerQueue.Remove(customer);
-        //    //  _queueDotIndicators.RemoveDots(customer.QueuePositionDot);
-        //    Destroy(customer.gameObject); // PERFORMANCE Queumanager.cs | this can cause lags, might need to pool ouer characters
-        //}
-        //else
-        //{
-        //    Debug.LogError("Quemanager.cs  RemoveCustomerFromQueue() | You are trying to remove a customer from a empty list");
-        //}
-    }
 
 
 }

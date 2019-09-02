@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     public ShuffleBag ShuffleBag;
     public ScoreManager ScoreManager;
     public LimitedCustomerSelect CustomerSelect;
+    public CustomerSelectSwiper CustomerSelectSwiper;
     public OrderWindow OrderWindow;
     public WinLooseManager WinLooseManager;
 
@@ -78,7 +79,7 @@ public class LevelManager : MonoBehaviour
             yield return new WaitUntil(() =>
             {
                 //  return QueueManager.ActiveCustomerQueue.Count < QueueManager.ActiveQueueLimit;
-                return QueueManager.CurrentActiveCustomer < QueueManager.ActiveQueueLimit;
+                return QueueManager.NumOfActiveCustomers < QueueManager.ActiveQueueLimit;
 
 
             }); // PERFORMANCE Levelmanager.cs | StartLevel() The bool is checked every frame, until it turns true

@@ -42,7 +42,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
             if (ArtificialQueueLength > 0 && _ArtificialTimeWaited < Time.time) {//Made An Artificial Queue To Increase The Spawn Amount If We Have A Full Queue For The Next Customer.
 
-                if (LevelManager.Instance.QueueManager.CurrentActiveCustomer < LevelManager.Instance.QueueManager.ActiveQueueLimit) {
+                if (LevelManager.Instance.QueueManager.NumOfActiveCustomers < LevelManager.Instance.QueueManager.ActiveQueueLimit) {
                     SetAditionalSpawningInfo();
                     ArtificialQueueLength--;
                 } else {
@@ -54,8 +54,8 @@ public class TheCustomSpawner : MonoBehaviour {
                 if (TimeWaited < Time.time) {//When Its Time To Spawn A Customer This Is True 
                     TimeWaited = Time.time + spawntime;
 
-                    Debug.Log(LevelManager.Instance.QueueManager.CurrentActiveCustomer + " | " + LevelManager.Instance.QueueManager.ActiveQueueLimit);
-                    if (LevelManager.Instance.QueueManager.CurrentActiveCustomer < LevelManager.Instance.QueueManager.ActiveQueueLimit) {//Spawning Customer In Here
+                    Debug.Log(LevelManager.Instance.QueueManager.NumOfActiveCustomers + " | " + LevelManager.Instance.QueueManager.ActiveQueueLimit);
+                    if (LevelManager.Instance.QueueManager.NumOfActiveCustomers < LevelManager.Instance.QueueManager.ActiveQueueLimit) {//Spawning Customer In Here
                         SetAditionalSpawningInfo();
                     } else {//Adding To Artificial Queue
                         if (MakeArtificialQueue == true) {//When Added To Artificial Queue, Make The Timer 20% Of Normal SpawnTime.
@@ -66,7 +66,7 @@ public class TheCustomSpawner : MonoBehaviour {
 
                 }
 
-                if (SpeedSpawn == false && LevelManager.Instance.QueueManager.CurrentActiveCustomer == 0) {//When There Are NoOne In The Queue Spawn Customer At An Increased Rate
+                if (SpeedSpawn == false && LevelManager.Instance.QueueManager.NumOfActiveCustomers == 0) {//When There Are NoOne In The Queue Spawn Customer At An Increased Rate
                     SpeedSpawn = true;
 
                     TimeWaited = Time.time + (spawntime * 0.8f); //Start Spawn Time

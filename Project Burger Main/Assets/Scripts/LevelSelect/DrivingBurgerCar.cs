@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class DrivingBurgerCar : MonoBehaviour {
 
-    public Node PreviousNode;
+    [SerializeField]
+    private Node _previousNode = null;
+    [SerializeField]
+    private Node _currentNode = null;
+    [SerializeField]
+    private Node _goToDirectionNode = null;
+    [SerializeField]
+    private Node _goToNode = null;
+    [SerializeField]
+    private Node _endNode = null;
+    [SerializeField]
+    private List<Node> myPath = null;
 
-    public Node CurrentNode;
-    public Node NextNode;
-    public Node EndNode;
-
-    public List<Node> myPath;
-
-    public bool Walking = false;
-    public float speed = 1;
-
-    public bool _continueMoving = true;
+    [SerializeField]
+    private bool _walking = false;
+    [SerializeField]
+    private bool _continueMoving = true;
+    [SerializeField]
+    private float _speed = 1;
 
     public void ContinueMoving(bool move) {
         if (move == true) {
@@ -25,19 +32,21 @@ public class DrivingBurgerCar : MonoBehaviour {
         }
     }
 
-    bool _checkup = true;
-    bool _ignoreClick = false;
-  
+
+    private bool _ignoreClick = false;
+    public bool IgnoreClick { get => _ignoreClick; set { _ignoreClick = value; } }
+
     // Update is called once per frame
     void Update() {
 
-        if (Walking == true && _continueMoving == true) {
-            transform.position = Vector2.MoveTowards(transform.position, myPath[0].transform.position, 1 * speed);
+        if (_walking == true && _continueMoving == true) {
+            transform.position = Vector2.MoveTowards(transform.position, myPath[0].transform.position, 1 * Time.deltaTime * _speed);
+
             if (Vector2.Distance(transform.position, myPath[0].transform.position) < 0.1f) {
                 transform.position = myPath[0].transform.position;
 
                 if (myPath.Count == 1) {//At Last Node
-                    Walking = false;
+                    _walking = false;
 
                     if (myPath[0].ThisNodesBehaviours == null) {
                         StopOnNode();
@@ -61,29 +70,54 @@ public class DrivingBurgerCar : MonoBehaviour {
     }
 
     public void ContinueToNextNode() {
-        Walking = true;
-        PreviousNode = CurrentNode;
-        CurrentNode = myPath[0];
+        _walking = true;
+        _previousNode = _goToDirectionNode;
+        _currentNode = _goToDirectionNode;
+
         myPath.RemoveAt(0);
-        NextNode = myPath[0];
+
+        _goToNode = myPath[0];
+        _goToDirectionNode = myPath[0];
 
     }
 
     public void StopOnNode() {
-        Walking = false;
-        PreviousNode = CurrentNode;
-        CurrentNode = myPath[0];
-        NextNode = null;
+        _walking = false;
+
+        if (_goToDirectionNode != null)
+            _currentNode = _goToDirectionNode;
+
+        _goToNode = null;
+        _goToDirectionNode = null;
+
         _ignoreClick = false;
 
     }
 
+    public void StopAndHold() {
+        StopOnNode();
+        _ignoreClick = true;
+    }
+
+    public void CanMove() {
+        _ignoreClick = false;
+    }
+
+
 
     public void ForceWalkBack() {
-        PreviousNode = CurrentNode;
-        CurrentNode = myPath[0];
+        StopAndHold();
 
-        Clicked(PreviousNode);
+        _ignoreClick = false;
+        Clicked(_previousNode);
+        _ignoreClick = true;
+
+    }
+
+    public void SendPlayerToPreviousPosition() {
+
+        _ignoreClick = false;
+        Clicked(_previousNode);
         _ignoreClick = true;
 
     }
@@ -92,39 +126,44 @@ public class DrivingBurgerCar : MonoBehaviour {
         if (_ignoreClick == true)
             return;
 
-        EndNode = End;
-        Walking = true;
+        _endNode = End;
+        _walking = true;
 
-        myPath = LevelSelectManager.Instance.AStarSearch.StartRunning(CurrentNode, EndNode);//Will Always Return 1 Element
+        myPath = LevelSelectManager.Instance.AStarSearch.StartRunning(_currentNode, _endNode);//Will Always Return 1 Element. Current
         LevelSelectManager.Instance.CameraFollow.CameraFollow();
 
-        if (NextNode != null) {//!Null Means That Im Walking
-            if (myPath.Count > 1) {
-                if (myPath[1] == NextNode) {
-                    myPath.RemoveAt(0);//Ignoring The First Node, Cuz Alrdy Walking To It
+        if (myPath.Count == 1) {//If Player Is Clicking On A Spot That Isnt Walkable, Then The A* Is Returning CurrentNode As The Path. So If EndNode Isnt EndNode Then I Know That The Player Clicked Outside.
+
+            if (_endNode != myPath[0]) {
+                if (_goToNode != null) {
+                    myPath[0] = _goToDirectionNode;
+                }
+            } else {
+                if (_goToNode != null) {
+                    _goToDirectionNode = myPath[0];
+                }
+            }
+        } else {
+            if (_goToNode == null) {//Standing Still
+                _previousNode = myPath[0];
+                _currentNode = myPath[0];
+                if (myPath[0].ThisNodesBehaviours != null) {
+                    myPath[0].ThisNodesBehaviours.SteppingOffEndNodeBehaviour();
+                }
+                myPath.RemoveAt(0);
+                _goToNode = myPath[0];
+                _goToDirectionNode = myPath[0];
+            } else {
+                if (myPath[0] == _currentNode && myPath[1] == _goToNode) {
+                    myPath.RemoveAt(0);
+                    _goToDirectionNode = _goToNode;
+                } else {
+                    _goToDirectionNode = _currentNode;
                 }
             }
         }
-
-        if (Vector2.Distance(transform.position, myPath[0].transform.position) == 0) {//If Im On The First Node
-            if (myPath[0].ThisNodesBehaviours == null) {
-
-            } else {
-                myPath[0].ThisNodesBehaviours.SteppingOffEndNodeBehaviour();
-            }
-
-            PreviousNode = myPath[0];
-            CurrentNode = myPath[0];
-            myPath.RemoveAt(0);
-
-            if (myPath.Count >= 1) {
-                NextNode = myPath[0];
-            } else {
-                Walking = false;
-            }
-
-        }
-
     }
 
 }
+
+

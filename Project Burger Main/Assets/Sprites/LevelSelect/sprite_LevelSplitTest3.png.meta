@@ -5,6 +5,18 @@ TextureImporter:
   - first:
       213: 7338293013522000353
     second: sprite_LevelSplitTest3_0
+  - first:
+      213: -3127670862301575688
+    second: sprite_LevelSplitTest3_1
+  - first:
+      213: -1657106139519175281
+    second: sprite_LevelSplitTest3_2
+  - first:
+      213: -1014099360776732032
+    second: sprite_LevelSplitTest3_3
+  - first:
+      213: 28138969292074089
+    second: sprite_LevelSplitTest3_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -97,7 +109,7 @@ TextureImporter:
         width: 240
         height: 135
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -105,6 +117,90 @@ TextureImporter:
       bones: []
       spriteID: 4673563cf621ec04fa4ab1f9cbbe1c80
       internalID: 7338293013522000353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_LevelSplitTest3_1
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 201
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91ba860ac4c7e1d46876386e51560725
+      internalID: -3127670862301575688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_LevelSplitTest3_2
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 201
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0468847b45c35b4d96106049984ef48
+      internalID: -1657106139519175281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_LevelSplitTest3_3
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 210
+        width: 15
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf720f58624f1654bbbfd92483cc4e48
+      internalID: -1014099360776732032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_LevelSplitTest3_4
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 200
+        width: 15
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd5107ccbd100d642a66abdeaa352638
+      internalID: 28138969292074089
       vertices: []
       indices: 
       edges: []

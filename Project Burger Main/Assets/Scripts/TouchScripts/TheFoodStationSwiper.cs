@@ -8,13 +8,13 @@ public class TheFoodStationSwiper : MonoBehaviour, IDragHandler, IBeginDragHandl
     [SerializeField]
     private float HowFarToSwipe = 0.1f;
     [SerializeField]
-    private RectTransform canvas;
+    private RectTransform canvas = null;
 
     private float MaxDist = 0;
     private Vector2 StartPos = Vector2.zero;
 
     [SerializeField]
-    private TableSwipeSetter _tableSwipeSetter;
+    private TableSwipeSetter _tableSwipeSetter = null;
 
 
     private void OnRectTransformDimensionsChange() {//Im Not Sure Why But This Is Called Several Timer, I Think It Has Something To Do With Canvas Scaler.

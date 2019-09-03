@@ -20,6 +20,7 @@ public class CameraFollower : MonoBehaviour {
     public float Speed = 1;
 
     private void Start() {
+        transform.position = Player.transform.position - (Vector3.forward * 10);
         MapCenter = MapCentert.position;
         GoToSpot.z = -10;
     }
@@ -49,7 +50,7 @@ public class CameraFollower : MonoBehaviour {
 
             if (PlayerCompleteWalking == false) {
 
-                if (Player.position.x < MapCenter.x - MapCenterOffset.x) {
+                if (Player.position.x < MapCenter.x - MapCenterOffset.x) {  
                     GoToSpot.x = MapCenter.x - MapCenterOffset.x;
                 } else if (Player.position.x > MapCenter.x + MapCenterOffset.x) {
                     GoToSpot.x = MapCenter.x + MapCenterOffset.x;
@@ -67,7 +68,7 @@ public class CameraFollower : MonoBehaviour {
 
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, GoToSpot, 1 * Time.deltaTime * (Speed * Vector3.Distance(transform.position, GoToSpot)));
+           transform.position = Vector3.MoveTowards(transform.position, GoToSpot, 1 * Time.deltaTime * (Speed * Vector3.Distance(transform.position, GoToSpot)));
 
             if (PlayerCompleteWalking == true && Vector3.Distance(transform.position, GoToSpot) <= 0.01) {
                 UpdateCamera = false;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelInfoBoard : MonoBehaviour {
@@ -13,7 +14,6 @@ public class LevelInfoBoard : MonoBehaviour {
     public Image[] Recipes;
 
     private LevelSelectLevelNode theLevel;
-   [SerializeField] private GoToLevel goToLevel;
     
     public void SetLevelInfo(LevelSelectLevelNode info) {
         theLevel = info;
@@ -21,8 +21,8 @@ public class LevelInfoBoard : MonoBehaviour {
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Respawn");
 
         for(int i = 0; i < objects.Length; i++) {//If There Are More Objects With This Tag.
-            if(objects[i].GetComponent<LevelEventInfo>() != null) {
-                objects[i].GetComponent<LevelEventInfo>().SetLevelInfo(info);
+            if(objects[i].GetComponent<DontDestoyObject>() != null) {
+                objects[i].GetComponent<DontDestoyObject>().SetLevelInfo(info);
             }
 
         }
@@ -70,7 +70,15 @@ public class LevelInfoBoard : MonoBehaviour {
             Recipes[i].gameObject.SetActive(false);
         }
 
-        goToLevel.levelID = theLevel.LoadLevel;
-
     }
+
+    public void ExitScoreboard() {
+        gameObject.SetActive(false);
+        LevelSelectManager.Instance.Player.IgnoreClick = false;
+    }
+
+    public void EnterLevel() {
+        SceneManager.LoadScene(theLevel.LoadLevel);
+    }
+
 }

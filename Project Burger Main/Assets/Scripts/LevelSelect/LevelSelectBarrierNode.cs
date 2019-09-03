@@ -7,8 +7,22 @@ public class LevelSelectBarrierNode : NodeBehaviour, IPointerClickHandler {
 
 
     private Node _myNode;
+    private bool Unlocked = false;
 
-    public bool CanIWalk = false;
+    [SerializeField]
+    private string _levelInfo = null;
+    [SerializeField]
+    [TextArea(3, 10)]
+    private string _levelText = null;
+    [SerializeField]
+    private int _goldPrice = 0;
+    [SerializeField]
+    private int _gemPrice = 0;
+
+    public string LevelInfo { get => _levelInfo; }
+    public string LevelText { get => _levelText; }
+    public int GoldPrice { get => _goldPrice; }
+    public int GemPrice { get => _gemPrice; }
 
 
     private void Awake() {
@@ -27,21 +41,36 @@ public class LevelSelectBarrierNode : NodeBehaviour, IPointerClickHandler {
 
 
     public override void TransitionNodeBehaviour() {
-        if(CanIWalk == false) {
-            LevelSelectManager.Instance.Player.ForceWalkBack();
-        } else {
+        if (Unlocked == true) {
             LevelSelectManager.Instance.Player.ContinueToNextNode();
+        } else {
+            LevelSelectManager.Instance.Player.StopAndHold();
+            LevelSelectManager.Instance.BarrierInfo.Activate(this);
         }
     }
 
 
     public override void SteppingOnEndNodeBehaviour() {
-        //Do A Check And If False, Move Player Back. Show Display That Informs The Player What He Need To Continue? Text Bubble? Currently Just A Boolean :D
-        if (CanIWalk == false) {
-            LevelSelectManager.Instance.Player.ForceWalkBack();//When Having A Display, Make The Display Do This Call.
-        }
-        //   LevelSelectManager.Instance.LevelInfo.gameObject.SetActive(true);
 
+        if(Unlocked == true) {
+            LevelSelectManager.Instance.Player.StopOnNode();
+        } else {
+            LevelSelectManager.Instance.Player.StopAndHold();
+            LevelSelectManager.Instance.BarrierInfo.Activate(this);
+        }
+    }
+
+    public void UnlockedBarrier() {
+        Unlocked = true;
+    }
+
+
+    public override bool NodeWalkable() {
+        if (Unlocked == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -48,7 +48,7 @@ public class AStar : MonoBehaviour
 
         #region A* Algorythm
 
-        while (ClosedListIndex < AStarMaxLength) {//If The ClosedListAtIndex Is Equalt To Or Greater The Total Amount Of Nodes Then This Is False And The Search Is Stopped
+        while (openListIndex > 0) {//If The ClosedListAtIndex Is Equalt To Or Greater The Total Amount Of Nodes Then This Is False And The Search Is Stopped
             lowestFCost = 10000000;
 
             for (int i = 0; i < openListIndex; i++) {//Iterating Through The List With Unused Nodes To Find The Node With The Lowerst FCost
@@ -71,17 +71,22 @@ public class AStar : MonoBehaviour
             }
 
             saverCount = _CurrentNode.Neighbour.Count;//This Is An Improvement Rather Then Getting The Length Each i++ (Not Much But Some)
+            if (_CurrentNode != StartNode && _CurrentNode.ThisNodesBehaviours != null &&  _CurrentNode.ThisNodesBehaviours.NodeWalkable() == false) {
 
-            for (int i = 0; i < saverCount; i++) {
+            } else {
 
-                _NodeSaver = _CurrentNode.Neighbour[i];
-                if (_NodeSaver.NodeSearchedThrough == false) {//If false Then The Node Havent Been Searched Through And Info Need To Be Set
-                //Debug.Log(_NodeSaver.name + " adding");
+                for (int i = 0; i < saverCount; i++) {
+                    _NodeSaver = _CurrentNode.Neighbour[i];
 
-                    _NodeSaver.SetFirstAdding(_CurrentNode, end);
-                    _OpenList[openListIndex++] = _NodeSaver;
-                } else if (_CurrentNode.gCost < _NodeSaver.Parent.gCost) {//If Current.Gcost Is Less Then Nodeholder.parent.Gcost Then A New ParentNode Is Set  ...... If Errors Occur Use (_NodeHolder.GCost > _CurrentNode.GCost + (PathfindingNodeID[CollisionID[_NodeHolder.PosX, _NodeHolder.PosY]] * 1.4f))
-                    _NodeSaver.SetNewParent(_CurrentNode);
+                    if (_NodeSaver.NodeSearchedThrough == false) {//If false Then The Node Havent Been Searched Through And Info Need To Be Set
+                        _NodeSaver.SetFirstAdding(_CurrentNode, end);
+                        _OpenList[openListIndex++] = _NodeSaver;
+
+                    } else if (_CurrentNode.gCost < _NodeSaver.Parent.gCost) {//If Current.Gcost Is Less Then Nodeholder.parent.Gcost Then A New ParentNode Is Set  ...... If Errors Occur Use (_NodeHolder.GCost > _CurrentNode.GCost + (PathfindingNodeID[CollisionID[_NodeHolder.PosX, _NodeHolder.PosY]] * 1.4f))
+                        _NodeSaver.SetNewParent(_CurrentNode);
+
+                    }
+
                 }
             }
 
@@ -90,8 +95,8 @@ public class AStar : MonoBehaviour
         #endregion
 
         Debug.LogWarning("No Path Detected, Initiating Self Destruct Algorythms.... 3..... 2..... 1..... .");
-
-
+        AStarPath.Clear();
+        AStarPath.Add(StartNode);
 
         return AStarPath;
 

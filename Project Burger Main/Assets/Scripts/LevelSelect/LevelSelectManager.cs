@@ -9,6 +9,12 @@ public class LevelSelectManager : MonoBehaviour {
 
     public LevelInfoBoard LevelInfo;
     public CameraFollower CameraFollow;
+    public BarrierInfoBoard BarrierInfo;
+    public MerchantInfoBoard MerchantInfo;
+
+
+    public int PlayerGoldAquired = 0;
+    public int PlayerGemsAquired = 0;
 
     public static LevelSelectManager Instance { get; private set; }
 
@@ -20,5 +26,8 @@ public class LevelSelectManager : MonoBehaviour {
             Destroy(gameObject); // Destroy myself is Instance already has a ref
         }
 
+    }
+    private void Start() {
+        CameraFollow.CameraFollow();
     }
 }

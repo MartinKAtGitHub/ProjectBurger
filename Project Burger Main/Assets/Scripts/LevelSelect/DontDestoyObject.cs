@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelEventInfo : MonoBehaviour {
+public class DontDestoyObject : MonoBehaviour {
 
     public int loadLevel = 0;
     public int health = 0;
@@ -18,8 +18,10 @@ public class LevelEventInfo : MonoBehaviour {
     void Awake() {
         GameObject[] checker = GameObject.FindGameObjectsWithTag("Respawn");
         for(int i = 0; i < checker.Length; i++) {
-            if (checker[i] != gameObject && checker[i].GetComponent<LevelEventInfo>() != null)
+            if (checker[i] != gameObject && checker[i].GetComponent<DontDestoyObject>() != null) {
+
                 Destroy(gameObject);
+            }
         }
 
         DontDestroyOnLoad(gameObject);

@@ -26,5 +26,9 @@ public class NodeBehaviour : MonoBehaviour {
         Debug.Log("Calling this method when entering a node, seems to be empty (should not be called)");
     }
 
+    public virtual bool NodeWalkable() {
+        return true;
+    }
+
 
 }

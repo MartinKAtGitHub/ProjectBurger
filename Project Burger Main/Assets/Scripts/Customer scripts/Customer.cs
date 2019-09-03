@@ -49,50 +49,50 @@ public class Customer : MonoBehaviour
         Invoke("CustomerTimeout", _customerPatience.CustomerWaitingTime);
     }
 
-    public void SetCustomerStates(TheCustomSpawner spawner)
-    {
-        //   TransformArray2 Paths = spawner.WalkingPositions.WalkingPossibilities[0].GroupInGroups[Random.Range(0, spawner.WalkingPositions.WalkingPossibilities[0].GroupInGroups.Length)];
-        //   _CustomerStates.MakeNewInstance(Paths.PathInGroup.Length);
+    //public void SetCustomerStates(TheCustomSpawner spawner)
+    //{
+    //    //   TransformArray2 Paths = spawner.WalkingPositions.WalkingPossibilities[0].GroupInGroups[Random.Range(0, spawner.WalkingPositions.WalkingPossibilities[0].GroupInGroups.Length)];
+    //    //   _CustomerStates.MakeNewInstance(Paths.PathInGroup.Length);
 
-        _customerName = gameObject.name;
-        _order = OrderGenerator.RequestOrder();
-        _order.CustomerName = _customerName;
+    //    _customerName = gameObject.name;
+    //    _order = OrderGenerator.RequestOrder();
+    //    _order.CustomerName = _customerName;
 
 
-        /*   for (int i = 0; i < Paths.PathInGroup.Length; i++)
-           {
-               _CustomerStates.SetBehaviours(
-              Paths.PathInGroup[i].PositionsInPath, Paths.PathInGroup[i].Talking, _order.OrderRecipes.Count * 25f * Paths.PathInGroup[i].Patience);
-           }*/
-    }
+    //    /*   for (int i = 0; i < Paths.PathInGroup.Length; i++)
+    //       {
+    //           _CustomerStates.SetBehaviours(
+    //          Paths.PathInGroup[i].PositionsInPath, Paths.PathInGroup[i].Talking, _order.OrderRecipes.Count * 25f * Paths.PathInGroup[i].Patience);
+    //       }*/
+    //}
 
-    private void CustomerTimeout()
-    {
-        Debug.Log($"{name} has been Flagged for Deletion");
-        // TODO Customer.cs | Timeout(), We need to make sure the customer doesn't timeout while in a animation.
-        _isWaiting = false;
-        TimeOutInstantRemove();
-    }
+    //private void CustomerTimeout()
+    //{
+    //    Debug.Log($"{name} has been Flagged for Deletion");
+    //    // TODO Customer.cs | Timeout(), We need to make sure the customer doesn't timeout while in a animation.
+    //    _isWaiting = false;
+    //    TimeOutInstantRemove();
+    //}
 
-    private void TimeOutInstantRemove()
-    {
-        Debug.Log($"{name} Removed No Anim");
-        //  _customerSelect.OnTimeOut(this);
-        LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
+    //private void TimeOutInstantRemove()
+    //{
+    //    Debug.Log($"{name} Removed No Anim");
+    //    //  _customerSelect.OnTimeOut(this);
+    //    LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
 
-    }
+    //}
 
-    private void TimeOutPlayAnim()
-    {
-        if (!IsWaiting)
-        {
-            Debug.Log($"{name} Removed Play Anim");
-            //_customerSelect.OnTimeOut(this);
-            //_customerSelect.CircularRight();
-            LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
-            OrderWindow.CloseWindow();
+    //private void TimeOutPlayAnim()
+    //{
+    //    if (!IsWaiting)
+    //    {
+    //        Debug.Log($"{name} Removed Play Anim");
+    //        //_customerSelect.OnTimeOut(this);
+    //        //_customerSelect.CircularRight();
+    //        LevelManager.Instance.QueueManager.RemoveCustomerFromQueue(this);
+    //        OrderWindow.CloseWindow();
 
-        }
-    }
+    //    }
+    //}
 
 }

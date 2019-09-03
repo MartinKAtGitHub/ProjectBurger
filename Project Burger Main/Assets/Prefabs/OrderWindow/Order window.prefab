@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1244397934331316551}
   - component: {fileID: 3557051698686327347}
   m_Layer: 5
-  m_Name: Mask
+  m_Name: TouchRegister_Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,7 +168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4002352564630673586
 RectTransform:
   m_ObjectHideFlags: 0

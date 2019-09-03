@@ -18,8 +18,12 @@ public class CustomerSelectSwiper : TouchSwipeController
 
     protected override void LimitedNextElement()
     {
-
-        Debug.Log("NEXT SKIP VERSION");
+        _elementIndex++;
+        if(_elementIndex > _elements.Length -1)
+        {
+            _elementIndex = _elements.Length - 1;
+            return;
+        }
 
         var skipDistance = 0f;
         for (int i = _elementIndex; i < _queueSlots.Length; i++)
@@ -32,14 +36,38 @@ public class CustomerSelectSwiper : TouchSwipeController
             {
                 _elementIndex = i;
                 _newPos += new Vector2(-1 * (_swipeDistance + skipDistance), 0);
-                break;
+                Debug.Log("Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
+                return;
             }
         }
+
+        //ResetPnl();
     }
 
     protected override void LimitedPrevElement()
     {
+        _elementIndex--;
+        if(_elementIndex < 0)
+        {
+            _elementIndex = 0;
+        }
 
+        var skipDistance = 0f;
+
+        for (int i = _elementIndex; i >= 0; i--)
+        {
+            if (_queueSlots[i].CurrentCustomer == null)
+            {
+                skipDistance += _swipeDistance;
+            }
+            else
+            {
+                _elementIndex = i;
+                _newPos += new Vector2(_swipeDistance + skipDistance, 0);
+                Debug.Log("Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
+                return;
+            }
+        }
     }
 
 

@@ -55,8 +55,8 @@ public class QueueManager : MonoBehaviour
 
     public void AddCustomerToQueue(Customer customer)
     {
-        customer.gameObject.SetActive(true);
         _numOfActiveCustomers++;
+        customer.gameObject.SetActive(true);
         SearchForEmptyQueueSlot(customer);
 
     }

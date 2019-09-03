@@ -27,9 +27,9 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
     protected Vector2 _newPos;
     protected float _swipeDistance;
-    protected  RectTransform _elementInFocus;
+    protected RectTransform _elementInFocus;
     protected int _elementIndex = 0;
-    protected RectTransform[] _elements;
+    [SerializeField] protected RectTransform[] _elements;
 
     public int ActiveElements { get => _activeElements; set => _activeElements = value; }
 
@@ -49,7 +49,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
     private void InitializeTouchControll()
     {
-        GenerateElements();
+       // GenerateElements();
 
         var element = _elements[_elementIndex];
         // element.SetParent(_swipeContainer);
@@ -300,7 +300,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     }
 
 
-    private void ResetPnl()
+    protected virtual void ResetPnl()
     {
         Debug.Log("Reset swipe container back to original position");
 
@@ -314,9 +314,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         {
             //var clone = Instantiate(_swipeContainerElementPrefab, _notInFocusContainer.transform);
             var clone = Instantiate(_swipeContainerElementPrefab, _swipeContainer.transform);
-            clone.GetComponent<OrderWindowFoodItemPage>().RecipeName.text = "ELEMENT " + i;
             _elements[i] = clone.GetComponent<RectTransform>();
-
         }
     }
 

@@ -21,8 +21,8 @@ public class LevelInfoBoard : MonoBehaviour {
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Respawn");
 
         for(int i = 0; i < objects.Length; i++) {//If There Are More Objects With This Tag.
-            if(objects[i].GetComponent<DontDestoyObject>() != null) {
-                objects[i].GetComponent<DontDestoyObject>().SetLevelInfo(info);
+            if(objects[i].GetComponent<GameInfoHolder>() != null) {
+                objects[i].GetComponent<GameInfoHolder>().SetLevelInfo(info);
             }
 
         }

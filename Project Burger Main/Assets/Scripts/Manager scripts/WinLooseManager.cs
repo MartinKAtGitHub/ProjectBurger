@@ -15,10 +15,10 @@ public class WinLooseManager : MonoBehaviour
 
     private void Awake() {
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Respawn");
-        DontDestoyObject holder;
+        GameInfoHolder holder;
         for (int i = 0; i < objects.Length; i++) {//If There Are More Objects With This Tag.
-            if (objects[i].GetComponent<DontDestoyObject>() != null) {
-                holder = objects[i].GetComponent<DontDestoyObject>();
+            if (objects[i].GetComponent<GameInfoHolder>() != null) {
+                holder = objects[i].GetComponent<GameInfoHolder>();
                 GoldWinAmount = holder.gold;
                 TimeLimit = holder.time;
                 TotalLifes = holder.health;

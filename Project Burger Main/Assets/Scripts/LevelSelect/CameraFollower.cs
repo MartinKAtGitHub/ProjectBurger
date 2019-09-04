@@ -4,88 +4,150 @@ using UnityEngine;
 
 public class CameraFollower : MonoBehaviour {
 
-    public Transform MapCentert;
+    [SerializeField]
+    private float _speed = 1;
 
-    public Vector2 MapCenter = Vector2.zero;
-    public Vector2 MapCenterOffset = Vector2.zero;
+    private float MapXLeft = 0;
+    private float MapXRight = 0;
+    private float MapYDown = 0;
+    private float MapYUp = 0;
 
-    public Vector3 GoToSpot = Vector2.zero;
+    [SerializeField]
+    private Vector3 GoToSpot = Vector3.zero;
 
-    public Transform Player;
+    [SerializeField]
+    private Transform _player = null;
+    [SerializeField]
+    private AreaPoints _points = null;
 
-    public bool UpdateCamera = false;
-    public bool PlayerRunning = false;
-    public bool PlayerCompleteWalking = false;
+    [SerializeField]
+    private bool _updateCamera = false;
+    [SerializeField]
+    private bool _playerRunning = false;
 
-    public float Speed = 1;
 
-    private void Start() {
-        transform.position = Player.transform.position - (Vector3.forward * 10);
-        MapCenter = MapCentert.position;
+    private void Awake() {
         GoToSpot.z = -10;
     }
 
+
+
     void Update() {
 
-        if(PlayerRunning == true) {
+        if (_playerRunning == true) {
+            if (_player.position.x > MapXLeft && _player.position.x < MapXRight) {//Update Camera Positions If Player Is Withing The Updating Positions.
+                _updateCamera = true;
 
-            if (Player.position.x < MapCenter.x - MapCenterOffset.x) {
-            } else if (Player.position.x > MapCenter.x + MapCenterOffset.x) {
-            } else {
-                UpdateCamera = true;
-                PlayerRunning = false;
-            }
-
-            if (Player.position.y < MapCenter.y - MapCenterOffset.y) {
-            } else if (Player.position.y > MapCenter.y + MapCenterOffset.y) {
-            } else {
-                UpdateCamera = true;
-            PlayerRunning = false;
-            }
-
-
-        }
-
-        if (UpdateCamera == true) {
-
-            if (PlayerCompleteWalking == false) {
-
-                if (Player.position.x < MapCenter.x - MapCenterOffset.x) {  
-                    GoToSpot.x = MapCenter.x - MapCenterOffset.x;
-                } else if (Player.position.x > MapCenter.x + MapCenterOffset.x) {
-                    GoToSpot.x = MapCenter.x + MapCenterOffset.x;
+                if (_player.position.x < MapXLeft) {
+                    GoToSpot.x = MapXLeft;
+                } else if (_player.position.x > MapXRight) {
+                    GoToSpot.x = MapXRight;
                 } else {
-                    GoToSpot.x = Player.position.x;
+                    GoToSpot.x = _player.position.x;
                 }
+            }
 
-                if (Player.position.y < MapCenter.y - MapCenterOffset.y) {
-                    GoToSpot.y = MapCenter.y - MapCenterOffset.y;
-                } else if (Player.position.y > MapCenter.y + MapCenterOffset.y) {
-                    GoToSpot.y = MapCenter.y + MapCenterOffset.y;
+            if (_player.position.y > MapYDown && _player.position.y < MapYUp) {//Update Camera Positions If Player Is Withing The Updating Positions.
+                _updateCamera = true;
+
+                if (_player.position.y < MapYDown) {
+                    GoToSpot.y = MapYDown;
+                } else if (_player.position.y > MapYUp) {
+                    GoToSpot.y = MapYUp;
                 } else {
-                    GoToSpot.y = Player.position.y;
+                    GoToSpot.y = _player.position.y;
                 }
 
             }
 
-           transform.position = Vector3.MoveTowards(transform.position, GoToSpot, 1 * Time.deltaTime * (Speed * Vector3.Distance(transform.position, GoToSpot)));
+        }
 
-            if (PlayerCompleteWalking == true && Vector3.Distance(transform.position, GoToSpot) <= 0.01) {
-                UpdateCamera = false;
+        if (_updateCamera == true) {
+
+            transform.position = Vector3.MoveTowards(transform.position, GoToSpot, 1 * Time.deltaTime * (_speed * Vector3.Distance(transform.position, GoToSpot)));
+
+            if (_playerRunning == false && Vector3.Distance(transform.position, GoToSpot) <= 0.01) {
+                transform.position = GoToSpot;
+                _updateCamera = false;
             }
 
         }
-        
+
     }
 
     public void CameraFollow() {
-        PlayerRunning = true;
-        PlayerCompleteWalking = false;
+        _playerRunning = true;
+
     }
 
-    public void CompletedWalk() {
-        PlayerCompleteWalking = true;
+    public void CompletedWalk() {//Doing The Final Update To The Camera Cuz Player Finished
+        _playerRunning = false;
+        CheckPosition();
+
     }
 
+    /// <summary>
+    /// Changes The Offset Values And Updates Which AreaPoints Are Active
+    /// </summary>
+    /// <param name="points">Offset Points</param>
+    public void UpdateAreaOffset(AreaPoints points) {
+        _points = points;
+        GameInfoHolder.Instance.SetCameraPoint(points);
+        UpdateMapOffsetValues();
+        CheckPosition();
+        _updateCamera = true;
+
+    }
+
+    /// <summary>
+    /// Changes The Offset Values And Updates Which AreaPoints Are Active. And Updates The Camera Position To The Player
+    /// </summary>
+    /// <param name="points"></param>
+    public void UpdateAndApplyAreaOffsetValues(AreaPoints points) {
+        _points = points;
+        UpdateMapOffsetValues();
+        CheckPosition();
+
+        transform.position = GoToSpot;
+        _updateCamera = false;
+
+    }
+
+    public void SetStartValues() {
+        UpdateMapOffsetValues();
+        CheckPosition();
+        transform.position = GoToSpot;
+        _updateCamera = false;
+
+    }
+
+
+    void UpdateMapOffsetValues() {
+        MapXLeft = _points.AreaOffsetX.x;
+        MapXRight = _points.AreaOffsetX.y;
+
+        MapYDown = _points.AreaOffsetY.x;
+        MapYUp = _points.AreaOffsetY.y;
+
+    }
+
+    void CheckPosition() {
+        if (_player.position.x < MapXLeft) {
+            GoToSpot.x = MapXLeft;
+        } else if (_player.position.x > MapXRight) {
+            GoToSpot.x = MapXRight;
+        } else {
+            GoToSpot.x = _player.position.x;
+        }
+
+        if (_player.position.y < MapYDown) {
+            GoToSpot.y = MapYDown;
+        } else if (_player.position.y > MapYUp) {
+            GoToSpot.y = MapYUp;
+        } else {
+            GoToSpot.y = _player.position.y;
+        }
+
+    }
 
 }

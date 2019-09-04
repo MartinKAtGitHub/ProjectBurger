@@ -54,6 +54,7 @@ public class DrivingBurgerCar : MonoBehaviour {
                         myPath[0].ThisNodesBehaviours.SteppingOnEndNodeBehaviour();
                     }
 
+                    LevelSelectManager.Instance.CameraFollow.CompletedWalk();
                 } else {
                     if (myPath[0].ThisNodesBehaviours == null) {//Continuing Is Default, When No Behaviour Is Present
                         //  StopOnNode(); //If You Want Auto Stop On Node
@@ -80,6 +81,37 @@ public class DrivingBurgerCar : MonoBehaviour {
         _goToDirectionNode = myPath[0];
 
     }
+
+    public bool InvisibleNodeContinueWalk() {//Ignoring This Node Cuz Its A Transition Node To Change The Camera To A Different Area On The Map
+        _walking = true;
+
+        if (myPath[0].Neighbour[0] == myPath[1]) {//Neighbour 0, Needs To Be The Right Node (if walking left-right) Or Upper Node (if walking down-up). If That Is True Then I Know That The Player Is Walking In A Specific Direction
+            myPath.RemoveAt(0);
+            _goToNode = myPath[0];
+            _goToDirectionNode = myPath[0];
+
+            return true;
+            //change camera to value 0
+        } else {
+            myPath.RemoveAt(0);
+            _goToNode = myPath[0];
+            _goToDirectionNode = myPath[0];
+
+            return false;
+            //change camera to value 1
+        }
+
+    }
+
+    public void SetPlayerStartPosition(Node previous, Node current) {
+        _previousNode = previous;
+        _currentNode = current;
+
+        transform.position = _currentNode.transform.position;
+
+    }
+
+
 
     public void StopOnNode() {
         _walking = false;

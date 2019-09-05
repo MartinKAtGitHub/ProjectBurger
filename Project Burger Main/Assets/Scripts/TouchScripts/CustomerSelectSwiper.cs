@@ -6,55 +6,33 @@ public class CustomerSelectSwiper : TouchSwipeController
 {
 
     private QueueSlot[] _queueSlots;
-
-    public QueueSlot[] QueueSlots { get => _queueSlots;}
+    private Customer _customerInFocus;
+    public QueueSlot[] QueueSlots { get => _queueSlots; }
 
     protected override void Awake()
     {
         base.Awake();
+       
         LevelManager.Instance.CustomerSelectSwiper = this;
+
+        // Maybe make an init
         CacheQueueSlotsFromElements();
+        _elementInFocus.GetComponent<QueueSlot>().QueueSlotInFocus = true;
+
     }
 
     protected override void LimitedNextElement()
     {
-        _elementIndex++;
-        if(_elementIndex > _elements.Length -1)
+        var index =  _elementIndex;
+        index++;
+        if (index > Elements.Length - 1)
         {
-            _elementIndex = _elements.Length - 1;
+            _elementIndex = Elements.Length - 1;
             return;
         }
 
         var skipDistance = 0f;
-        for (int i = _elementIndex; i < _queueSlots.Length; i++)
-        {
-            if(_queueSlots[i].CurrentCustomer == null)
-            {
-                skipDistance += _swipeDistance;
-            }
-            else
-            {
-                _elementIndex = i;
-                _newPos += new Vector2(-1 * (_swipeDistance + skipDistance), 0);
-                Debug.Log("Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
-                return;
-            }
-        }
-
-        //ResetPnl();
-    }
-
-    protected override void LimitedPrevElement()
-    {
-        _elementIndex--;
-        if(_elementIndex < 0)
-        {
-            _elementIndex = 0;
-        }
-
-        var skipDistance = 0f;
-
-        for (int i = _elementIndex; i >= 0; i--)
+        for (int i = index; i < _queueSlots.Length; i++)
         {
             if (_queueSlots[i].CurrentCustomer == null)
             {
@@ -62,59 +40,71 @@ public class CustomerSelectSwiper : TouchSwipeController
             }
             else
             {
+                var oldSlot = _queueSlots[_elementIndex];
+                oldSlot.QueueSlotInFocus = false;
+
                 _elementIndex = i;
-                _newPos += new Vector2(_swipeDistance + skipDistance, 0);
-                Debug.Log("Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
+
+                var newSlot = _queueSlots[_elementIndex];
+                newSlot.QueueSlotInFocus = true;
+                _customerInFocus = newSlot.CurrentCustomer;
+
+                LevelManager.Instance.OrderWindow.UpdateUI(_customerInFocus);
+
+                _newPos += new Vector2(-1 * (_swipeDistance + skipDistance), 0);
+                Debug.Log(" NEXT Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
                 return;
             }
         }
+
+        Debug.Log(_elementIndex + "INDEX");
+        //ResetPnl();
     }
 
-
-    private void CheckSkipNextQueueSlot(int index)
+    protected override void LimitedPrevElement()
     {
-        if(index >= _elements.Length - 1)
+        var index =  _elementIndex;
+        index--;
+        if (index < 0)
         {
-            // Dont need to move here bacuse there is nothing at the end
-            return;
+            _elementIndex = 0;
         }
-        else
+
+        var skipDistance = 0f;
+
+        for (int i = index; i >= 0; i--)
         {
-            //if(_elements[index].GetComponent<QueueSlot>().CurrentCustomer == null)
-            if (_queueSlots[index].CurrentCustomer == null)
+            if (_queueSlots[i].CurrentCustomer == null)
             {
-                _newPos += new Vector2(-1 * (_swipeDistance), 0); // Add more distance since the next spot is empty
-                index++;
-                if (index > _elements.Length - 1)
-                {
-                    return;
-                }
-                else
-                {
-                    CheckSkipNextQueueSlot(index);
-                }
+                skipDistance += _swipeDistance;
             }
             else
             {
+                var oldSlot = _queueSlots[_elementIndex];
+                oldSlot.QueueSlotInFocus = false;
+
+                _elementIndex = i;
+
+                var newSlot = _queueSlots[_elementIndex];
+                newSlot.QueueSlotInFocus = true;
+                _customerInFocus = newSlot.CurrentCustomer;
+
+                _newPos += new Vector2(_swipeDistance + skipDistance, 0);
+                Debug.Log(" PREV Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
                 return;
             }
         }
-
-       
+        Debug.Log(_elementIndex + "INDEX");
     }
 
-    private void CheckSkipQueueSlot()
-    {
-
-    }
 
     private void CacheQueueSlotsFromElements()
     {
-        _queueSlots = new QueueSlot[_elements.Length];
+        _queueSlots = new QueueSlot[Elements.Length];
 
-        for (int i = 0; i < _elements.Length; i++)
+        for (int i = 0; i < Elements.Length; i++)
         {
-            _queueSlots[i] = _elements[i].GetComponent<QueueSlot>();
+            _queueSlots[i] = Elements[i].GetComponent<QueueSlot>();
         }
     }
 

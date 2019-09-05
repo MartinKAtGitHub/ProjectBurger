@@ -46,7 +46,7 @@ public class Customer : MonoBehaviour
     {
         _customerPatience.SetOrderPatience(_order);
 
-        Invoke("CustomerTimeout", _customerPatience.CustomerWaitingTime);
+        //Invoke("CustomerTimeout", _customerPatience.CustomerWaitingTime);
     }
 
     //public void SetCustomerStates(TheCustomSpawner spawner)

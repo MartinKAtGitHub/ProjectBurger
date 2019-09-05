@@ -48,7 +48,7 @@ public class LevelManager : MonoBehaviour
         NullCheck(WinLooseManager);
 
 
-        //StartCoroutine(CustomerSpawnSystemInit());
+        StartCoroutine(CustomerSpawnSystemInit());
 
     }
 

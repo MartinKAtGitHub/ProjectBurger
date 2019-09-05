@@ -13,8 +13,8 @@ public class QueueManager : MonoBehaviour
     [SerializeField] private int _numOfActiveCustomers;
     [SerializeField] private QueueSlot[] _queueSlots;
 
-    private LimitedQueueDotIndicators _limitedQueueDotIndicators;
-    private LimitedCustomerSelect _limitedCustomerSelect;
+    //private LimitedQueueDotIndicators _limitedQueueDotIndicators;
+    //private LimitedCustomerSelect _limitedCustomerSelect;
 
     // [SerializeField] private List<Customer> _activeCustomerQueue = new List<Customer>();
     // private CustomerSelect _customerSelect;
@@ -29,8 +29,8 @@ public class QueueManager : MonoBehaviour
     {
         //_customerSelect = GetComponent<CustomerSelect>();
         //_queueDotIndicators = GetComponent<QueueDotIndicators>();
-        _limitedQueueDotIndicators = GetComponent<LimitedQueueDotIndicators>();
-        _limitedCustomerSelect = GetComponent<LimitedCustomerSelect>();
+        //_limitedQueueDotIndicators = GetComponent<LimitedQueueDotIndicators>();
+        //_limitedCustomerSelect = GetComponent<LimitedCustomerSelect>();
 
         //GenerateQueueSlots();
     }
@@ -57,8 +57,9 @@ public class QueueManager : MonoBehaviour
     {
         _numOfActiveCustomers++;
         customer.gameObject.SetActive(true);
-        SearchForEmptyQueueSlot(customer);
 
+        SearchForEmptyQueueSlot(customer);
+        
     }
 
     public void RemoveCustomerFromQueue(Customer customer)
@@ -73,7 +74,8 @@ public class QueueManager : MonoBehaviour
                 {
                     Debug.Log($"Removing {customer.name} in Slot {i}");
                     _queueSlots[i].CurrentCustomer = null;
-                    _limitedQueueDotIndicators.IsQueueSlotOccupied(i, false);
+
+                   // _limitedQueueDotIndicators.IsQueueSlotOccupied(i, false);
 
                     Destroy(customer.gameObject); // PERFORMANCE Queumanager.cs | this can cause lags, might need to pool our characters
                 }
@@ -90,17 +92,25 @@ public class QueueManager : MonoBehaviour
 
               //  Debug.Log($"Slot {i} is empty, setting {customer.name} in this Position");
                 var slot = _queueSlots[i];
-
                 slot.CurrentCustomer = customer;
+
+                // ANIM AND STUFF WOULD GO HERE
                 customer.transform.SetParent(slot.transform);
                 customer.transform.localPosition = Vector2.zero;
 
-                _limitedQueueDotIndicators.IsQueueSlotOccupied(i, true);
-
-                if (i == _limitedCustomerSelect.QueueSlotIndex)
+                if(slot.QueueSlotInFocus)
                 {
-                    _limitedCustomerSelect.InstaFocusSlot();
+                    LevelManager.Instance.OrderWindow.UpdateUI(customer);
                 }
+                
+                //_limitedQueueDotIndicators.IsQueueSlotOccupied(i, true);
+
+                //if (i == _limitedCustomerSelect.QueueSlotIndex)
+                //{
+                //    _limitedCustomerSelect.InstaFocusSlot();
+                //}
+
+
                 return;
             }
         }

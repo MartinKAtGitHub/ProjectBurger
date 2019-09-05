@@ -16,18 +16,17 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
     /// </summary>
     [SerializeField] private RectTransform _notInFocusPnls;
 
-    private GameObject[] foodItemElements;
     private Customer _activeCustomer;
+    private OrderWindowSwiper _orderWindowSwiper;
 
     public Customer ActiveCustomer { get => _activeCustomer; }
     public RectTransform NotInFocusPnls { get => _notInFocusPnls; }
-    public GameObject[] FoodItemElements { get => foodItemElements; }
     public GameObject FoodItemPnlPrefab { get => _foodItemPnlPrefab;  }
 
     private void Awake()
     {
         LevelManager.Instance.OrderWindow = this;
-        //GenerateFoodItemPnls();
+        _orderWindowSwiper = GetComponent<OrderWindowSwiper>();
     }
 
     public void OpenWindow(Customer customer)
@@ -55,7 +54,7 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
         {
             for (int i = 0; i < _activeCustomer.Order.OrderRecipes.Count; i++) // This can never be more the tmpMax 
             {
-                var foodItemPnl = FoodItemElements[i];
+                var foodItemPnl = _orderWindowSwiper.Elements[i];
                 foodItemPnl.gameObject.SetActive(true);
                 foodItemPnl.GetComponent<OrderWindowFoodItemPage>().UpdateThisPage(_activeCustomer.Order.OrderRecipes[i]);
             }
@@ -66,15 +65,4 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
         }
 
     }
-
-    //private void GenerateFoodItemPnls() // move to touch
-    //{
-    //    foodItemElements = new GameObject[_tmpMax]; // TODO OrderwinSipe.cs | Connect the max limit to Manager so its not hardcoded
-    //    for (int i = 0; i < _tmpMax; i++)
-    //    {
-    //        var clone = Instantiate(_foodItemPnlPrefab, _notInFocusPnls.transform);
-    //        clone.SetActive(false);
-    //       // foodItemPnls[i] = clone.GetComponent<OrderWindowFoodItemPage>();
-    //    }
-    //}
 }

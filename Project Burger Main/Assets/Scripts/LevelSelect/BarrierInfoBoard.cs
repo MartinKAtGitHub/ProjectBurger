@@ -23,7 +23,6 @@ public class BarrierInfoBoard : MonoBehaviour {
 
     public void ExitBoard() {
         gameObject.SetActive(false);
-        LevelSelectManager.Instance.Player.IgnoreClick = false; 
         LevelSelectManager.Instance.Player.SendPlayerToPreviousPosition();
 
     }

@@ -12,11 +12,13 @@ public class CameraAreaChange : NodeBehaviour {
 
     public override void TransitionNodeBehaviour() {
         if (LevelSelectManager.Instance.Player.InvisibleNodeContinueWalk() == true) {
-            LevelSelectManager.Instance.CameraFollow.UpdateAreaOffset(Area0.points);
+            GameInfoHolder.Instance.TheSaveFile.PlayerInfo.SetCameraOffset(Area0.MapPoints.AreaOffsetX.x, Area0.MapPoints.AreaOffsetX.y, Area0.MapPoints.AreaOffsetY.x, Area0.MapPoints.AreaOffsetY.y);
         } else {
-            LevelSelectManager.Instance.CameraFollow.UpdateAreaOffset(Area1.points);
+            GameInfoHolder.Instance.TheSaveFile.PlayerInfo.SetCameraOffset(Area1.MapPoints.AreaOffsetX.x, Area1.MapPoints.AreaOffsetX.y, Area1.MapPoints.AreaOffsetY.x, Area1.MapPoints.AreaOffsetY.y);
         }
-    
+
+        LevelSelectManager.Instance.CameraFollow.UpdateAreaOffset();
+
     }
 
 

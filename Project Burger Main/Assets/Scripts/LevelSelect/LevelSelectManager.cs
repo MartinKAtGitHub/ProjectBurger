@@ -11,10 +11,15 @@ public class LevelSelectManager : MonoBehaviour {
     public CameraFollower CameraFollow;
     public BarrierInfoBoard BarrierInfo;
     public MerchantInfoBoard MerchantInfo;
-
+    public GetEasyAccessToNodes NodeList;
 
     public int PlayerGoldAquired = 0;
     public int PlayerGemsAquired = 0;
+
+    [SerializeField]
+    private AreaMapPositions _mapStartPosition;
+    public AreaMapPositions AreaMapStartSection { get => _mapStartPosition; }
+
 
     public static LevelSelectManager Instance { get; private set; }
 
@@ -27,7 +32,6 @@ public class LevelSelectManager : MonoBehaviour {
         }
 
     }
-    private void Start() {
-        CameraFollow.CameraFollow();
-    }
+    
+
 }

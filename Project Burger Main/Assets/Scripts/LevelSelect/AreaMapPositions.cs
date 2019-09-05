@@ -5,17 +5,16 @@ using UnityEngine;
 public class AreaMapPositions : MonoBehaviour {
 
     [SerializeField]
-    public AreaPoints points;
+    private Node _startNodes;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private AreaPoints _points;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-} 
+
+    public Node StartNode { get => _startNodes; }
+    public AreaPoints MapPoints { get => _points; }
+
+
+
+
+}

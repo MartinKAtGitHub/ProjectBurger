@@ -6,7 +6,7 @@ public class Node : MonoBehaviour {
 
     [SerializeField]
     public NodeBehaviour ThisNodesBehaviours;
-
+    public int NodeIndexInArray = 0;
 
 
 

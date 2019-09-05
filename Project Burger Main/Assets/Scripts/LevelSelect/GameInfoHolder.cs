@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GameInfoHolder : MonoBehaviour {
 
+    public SaveFileLevelSelect TheSaveFile = null;
+    public static GameInfoHolder Instance { get; private set; }
+    public int previousScene = 0;
+
+
+
     public int loadLevel = 0;
     public int health = 0;
     public int gold = 0;
@@ -14,75 +20,57 @@ public class GameInfoHolder : MonoBehaviour {
     public int Stars = 0;
 
 
-    private Node PlayerPreviousPosition;
-    private Node PlayerCurrentPosition;
-    private AreaPoints Positions = new AreaPoints();
-
     // Start is called before the first frame update
-    public static GameInfoHolder Instance { get; private set; }
-    int previousScene = 0;
 
     void Awake() {
-        DontDestroyOnLoad(gameObject);
-        SceneManager.sceneLoaded += LevelWasLoaded;
-
         if (Instance == null) {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += LevelWasLoaded;
         } else {
             Debug.LogError("Found another LevelSelectManager in the same Scene, make sure only 1 LevelSelectManager exist per scene");
             Destroy(gameObject); // Destroy myself is Instance already has a ref
         }
 
+        TheSaveFile = SaveInfoLevelSelect.LoadSaveFile();
+
+        if (TheSaveFile == null) {
+            Debug.Log("No Save Have Been Made, Creating A New Game");
+            SaveInfoLevelSelect.NewSaveFile(ref TheSaveFile);
+        }
+
     }
+
+    public bool save = false;
+
+    private void Update() {
+        if(save == true) {
+            save = false;
+            SaveInfoLevelSelect.Saver(TheSaveFile);//Save Level Select Info When Coming From LevelSelect. TODO Change To The Place Where The Next Scene Is Placed
+        }
+    }
+
 
     private void OnDestroy() {
         SceneManager.sceneLoaded -= LevelWasLoaded;
     }
 
     private void LevelWasLoaded(Scene scene, LoadSceneMode mode) {
-        if (scene.buildIndex == 2) {
-            if (previousScene == 0) {//Load From Previous Position If True
-                //TODO LOAD If Player Not At Start Position.
-                if (!true) {
-                    //If True, Then There Exist A Savefile, Meaning That The Player Are Not At The Start
-                } else {//New Fresh Game.
-                    LevelSelectManager.Instance.CameraFollow.SetStartValues();
-                    Debug.Log("HERE");
-                }
-
-            } else {
-                LevelSelectManager.Instance.Player.SetPlayerStartPosition(PlayerPreviousPosition, PlayerCurrentPosition);
-                LevelSelectManager.Instance.CameraFollow.UpdateAndApplyAreaOffsetValues(Positions);
-            }
-
-
-            Debug.Log("LOADED WHILE GOING IN?");
+        if(previousScene > 1) {
+            SaveInfoLevelSelect.Saver(TheSaveFile);//Save Level Select Info When Coming From LevelSelect. TODO Change To The Place Where The Next Scene Is Placed
         }
 
-
+        Debug.Log("LOADED WHILE GOING IN?");
         previousScene = scene.buildIndex;
     }
 
-
-
     public void SetLevelInfo(LevelSelectLevelNode info) {
-        loadLevel = info.LoadLevel;
+        loadLevel = info.LoadLevel; 
         health = info.Health;
         gold = info.Gold;
         time = info.Time;
         NewRecipes = info.NewRecipe;
         Stars = info.Stars;
-    }
-
-
-    public void SetPlayerNodes(Node previous, Node current) {
-        PlayerPreviousPosition = previous;
-        PlayerCurrentPosition = current;
-    }
-
-
-    public void SetCameraPoint(AreaPoints point) {
-        Positions = point;
     }
 
 }

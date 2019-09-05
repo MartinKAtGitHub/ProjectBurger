@@ -44,7 +44,7 @@ public class LevelSelectBarrierNode : NodeBehaviour, IPointerClickHandler {
         if (Unlocked == true) {
             LevelSelectManager.Instance.Player.ContinueToNextNode();
         } else {
-            LevelSelectManager.Instance.Player.StopAndHold();
+            LevelSelectManager.Instance.Player.StopAndIgnoreClick();
             LevelSelectManager.Instance.BarrierInfo.Activate(this);
         }
     }
@@ -55,7 +55,7 @@ public class LevelSelectBarrierNode : NodeBehaviour, IPointerClickHandler {
         if(Unlocked == true) {
             LevelSelectManager.Instance.Player.StopOnNode();
         } else {
-            LevelSelectManager.Instance.Player.StopAndHold();
+            LevelSelectManager.Instance.Player.StopAndIgnoreClick();
             LevelSelectManager.Instance.BarrierInfo.Activate(this);
         }
     }

@@ -7,18 +7,17 @@ public class CameraFollower : MonoBehaviour {
     [SerializeField]
     private float _speed = 1;
 
-    private float MapXLeft = 0;
-    private float MapXRight = 0;
-    private float MapYDown = 0;
-    private float MapYUp = 0;
+    public float MapXLeft = 0;
+    public float MapXRight = 0;
+    public float MapYDown = 0;
+    public float MapYUp = 0;
 
     [SerializeField]
     private Vector3 GoToSpot = Vector3.zero;
 
     [SerializeField]
     private Transform _player = null;
-    [SerializeField]
-    private AreaPoints _points = null;
+
 
     [SerializeField]
     private bool _updateCamera = false;
@@ -26,8 +25,20 @@ public class CameraFollower : MonoBehaviour {
     private bool _playerRunning = false;
 
 
-    private void Awake() {
+    private void Start() {
         GoToSpot.z = -10;
+
+        MapXLeft = GameInfoHolder.Instance.TheSaveFile.PlayerInfo.CameraOffsecLeftX;
+        MapXRight = GameInfoHolder.Instance.TheSaveFile.PlayerInfo.CameraOffsecRightX;
+
+        MapYDown = GameInfoHolder.Instance.TheSaveFile.PlayerInfo.CameraOffsecDownY;
+        MapYUp = GameInfoHolder.Instance.TheSaveFile.PlayerInfo.CameraOffsecUpY;
+
+    }
+
+    public void StartCamera() {
+        CheckPosition();
+        transform.position = GoToSpot;
     }
 
 
@@ -90,44 +101,20 @@ public class CameraFollower : MonoBehaviour {
     /// Changes The Offset Values And Updates Which AreaPoints Are Active
     /// </summary>
     /// <param name="points">Offset Points</param>
-    public void UpdateAreaOffset(AreaPoints points) {
-        _points = points;
-        GameInfoHolder.Instance.SetCameraPoint(points);
+    public void UpdateAreaOffset() {  
         UpdateMapOffsetValues();
         CheckPosition();
         _updateCamera = true;
 
     }
 
-    /// <summary>
-    /// Changes The Offset Values And Updates Which AreaPoints Are Active. And Updates The Camera Position To The Player
-    /// </summary>
-    /// <param name="points"></param>
-    public void UpdateAndApplyAreaOffsetValues(AreaPoints points) {
-        _points = points;
-        UpdateMapOffsetValues();
-        CheckPosition();
-
-        transform.position = GoToSpot;
-        _updateCamera = false;
-
-    }
-
-    public void SetStartValues() {
-        UpdateMapOffsetValues();
-        CheckPosition();
-        transform.position = GoToSpot;
-        _updateCamera = false;
-
-    }
-
-
     void UpdateMapOffsetValues() {
-        MapXLeft = _points.AreaOffsetX.x;
-        MapXRight = _points.AreaOffsetX.y;
 
-        MapYDown = _points.AreaOffsetY.x;
-        MapYUp = _points.AreaOffsetY.y;
+        MapXRight = GameInfoHolder.Instance.TheSaveFile.PlayerInfo.CameraOffsecRightX;
+        MapXLeft = GameInfoHolder.Instance.TheSaveFile.PlayerInfo.CameraOffsecLeftX;
+
+        MapYDown = GameInfoHolder.Instance.TheSaveFile.PlayerInfo.CameraOffsecDownY;
+        MapYUp = GameInfoHolder.Instance.TheSaveFile.PlayerInfo.CameraOffsecUpY;
 
     }
 

@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -265,6 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -421,6 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -533,6 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 96257031}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -647,6 +651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -759,6 +764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 157757920}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -780,13 +786,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 16
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -880,6 +888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -1068,6 +1077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -1180,6 +1190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -1427,6 +1438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -1539,6 +1551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 227561161}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -1560,13 +1573,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 0
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -1739,6 +1754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 244990264}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -1760,13 +1776,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
+  _loadLevel: 2
   _levelText: 1
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -1935,6 +1953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -2375,6 +2394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -2863,6 +2883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 374932008}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -3136,6 +3157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -3249,6 +3271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -3361,6 +3384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 462492596}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -3475,6 +3499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 465664374}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -3496,13 +3521,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 3
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -3596,6 +3623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 473025100}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -3859,6 +3887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -3947,6 +3976,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 487059901}
+  - component: {fileID: 487059902}
   m_Layer: 5
   m_Name: Nodes (Abit Time Consuming To Setup, But Once Up Its Realy Efficient.) (1)
   m_TagString: Untagged
@@ -3980,6 +4010,126 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &487059902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487059900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca1b5907483d2943b753c4fa9e735e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 1600376213}
+  - {fileID: 215416531}
+  - {fileID: 1328142399}
+  - {fileID: 1818779250}
+  - {fileID: 608581432}
+  - {fileID: 1527339970}
+  - {fileID: 1944803116}
+  - {fileID: 1036513871}
+  - {fileID: 1226220060}
+  - {fileID: 18231590}
+  - {fileID: 1907409078}
+  - {fileID: 2063340612}
+  - {fileID: 508791353}
+  - {fileID: 1412604337}
+  - {fileID: 791300101}
+  - {fileID: 446611416}
+  - {fileID: 2015616708}
+  - {fileID: 1953464176}
+  - {fileID: 2147389214}
+  - {fileID: 1176498946}
+  - {fileID: 615061389}
+  - {fileID: 1179343788}
+  - {fileID: 1489068656}
+  - {fileID: 833266278}
+  - {fileID: 171493097}
+  - {fileID: 757845454}
+  - {fileID: 701710598}
+  - {fileID: 609609521}
+  - {fileID: 810472150}
+  - {fileID: 1183071283}
+  - {fileID: 1966155962}
+  - {fileID: 1727260052}
+  - {fileID: 1442324686}
+  - {fileID: 497771823}
+  - {fileID: 149079387}
+  - {fileID: 1931937636}
+  - {fileID: 1326571342}
+  - {fileID: 1639115658}
+  - {fileID: 1300592403}
+  - {fileID: 1105172050}
+  - {fileID: 1660369926}
+  - {fileID: 680759789}
+  - {fileID: 189666560}
+  - {fileID: 966067028}
+  - {fileID: 2013229019}
+  - {fileID: 923848131}
+  - {fileID: 1913292342}
+  - {fileID: 1992181373}
+  - {fileID: 456806777}
+  - {fileID: 89974498}
+  - {fileID: 5797486}
+  - {fileID: 864878277}
+  - {fileID: 751369939}
+  - {fileID: 226333026}
+  - {fileID: 1929107494}
+  - {fileID: 658736128}
+  - {fileID: 1013442790}
+  - {fileID: 334553021}
+  - {fileID: 1130897172}
+  - {fileID: 1889448414}
+  - {fileID: 884992306}
+  - {fileID: 2072153309}
+  - {fileID: 1871928155}
+  - {fileID: 1204169867}
+  - {fileID: 1406079817}
+  - {fileID: 1016973801}
+  - {fileID: 568628209}
+  - {fileID: 1672474750}
+  - {fileID: 1501063352}
+  - {fileID: 1457254010}
+  - {fileID: 1462150276}
+  - {fileID: 290068867}
+  - {fileID: 486344932}
+  - {fileID: 913367858}
+  - {fileID: 737139775}
+  - {fileID: 792038568}
+  - {fileID: 227561160}
+  - {fileID: 244990263}
+  - {fileID: 1953035236}
+  - {fileID: 465664373}
+  - {fileID: 1017285505}
+  - {fileID: 542054264}
+  - {fileID: 1215054701}
+  - {fileID: 714591617}
+  - {fileID: 1310549183}
+  - {fileID: 1842797731}
+  - {fileID: 1685296967}
+  - {fileID: 652538954}
+  - {fileID: 1976229468}
+  - {fileID: 1130691365}
+  - {fileID: 1154279647}
+  - {fileID: 1356682802}
+  - {fileID: 157757919}
+  - {fileID: 791591738}
+  - {fileID: 1472526208}
+  - {fileID: 1304693537}
+  - {fileID: 1762485376}
+  - {fileID: 1748840577}
+  - {fileID: 473025099}
+  - {fileID: 708849457}
+  - {fileID: 722794969}
+  - {fileID: 1313170096}
+  - {fileID: 679191881}
+  - {fileID: 1692441680}
+  - {fileID: 907720430}
+  - {fileID: 1804269904}
+  - {fileID: 2137972536}
 --- !u!1 &497771822
 GameObject:
   m_ObjectHideFlags: 0
@@ -4013,6 +4163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -4279,6 +4430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -4472,6 +4624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 542054265}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -4493,13 +4646,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 5
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -4725,6 +4880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -4879,6 +5035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 603710475}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -4993,6 +5150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -5106,6 +5264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -5293,6 +5452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -5502,8 +5662,10 @@ MonoBehaviour:
   CameraFollow: {fileID: 1079218135}
   BarrierInfo: {fileID: 1368821983}
   MerchantInfo: {fileID: 1089904096}
+  NodeList: {fileID: 487059902}
   PlayerGoldAquired: 300
   PlayerGemsAquired: 0
+  _mapStartPosition: {fileID: 1390593796}
 --- !u!114 &630026025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5692,6 +5854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 652538955}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -5714,13 +5877,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 11
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -5814,6 +5979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -6003,6 +6169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 679191882}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -6122,6 +6289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -6317,6 +6485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -6429,6 +6598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 708849458}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -6542,6 +6712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 714591618}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -6564,13 +6735,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 7
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -6664,6 +6837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 722794970}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -6783,6 +6957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -6970,6 +7145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -7082,6 +7258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -7345,6 +7522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -7458,6 +7636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 791591739}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -7479,13 +7658,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 17
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -7579,6 +7760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -7691,6 +7873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -8037,6 +8220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -8224,6 +8408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -8411,6 +8596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -8656,6 +8842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 907720431}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -8855,6 +9042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -8967,6 +9155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -9252,6 +9441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 946123574}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -9366,6 +9556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 960080902}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -9480,6 +9671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -9890,6 +10082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -10002,6 +10195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -10114,6 +10308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1017285506}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -10135,13 +10330,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 4
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -10314,6 +10511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -10547,7 +10745,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079218131}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 427, y: 840, z: -10}
+  m_LocalPosition: {x: 1313, y: 720, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10568,9 +10766,6 @@ MonoBehaviour:
   _speed: 5
   GoToSpot: {x: 480, y: 810, z: 0}
   _player: {fileID: 1787208857}
-  _points:
-    AreaOffsetX: {x: 427, y: 593}
-    AreaOffsetY: {x: 728, y: 840}
   _updateCamera: 0
   _playerRunning: 0
 --- !u!1 &1085890947
@@ -10868,6 +11063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -10980,6 +11176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1130691366}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -11001,13 +11198,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 13
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -11101,6 +11300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -11387,6 +11587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1154279648}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -11409,13 +11610,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 14
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -11509,6 +11712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -11622,6 +11826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -11735,6 +11940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -11926,6 +12132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -12113,6 +12320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1215054702}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -12134,13 +12342,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 6
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -12249,9 +12459,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2381f5b1152334d9884bde3a481f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points:
+  _startNodes: {fileID: 1762485376}
+  _points:
     AreaOffsetX: {x: 1327, y: 1493}
-    AreaOffsetY: {x: 728, y: 840}
+    AreaOffsetY: {x: 720, y: 840}
 --- !u!1 &1226220059
 GameObject:
   m_ObjectHideFlags: 0
@@ -12285,6 +12496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -12611,6 +12823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -12723,6 +12936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1304693538}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -12745,13 +12959,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 19
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -12845,6 +13061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1310549184}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -12866,13 +13083,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 8
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -12966,6 +13185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1313170097}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -13085,6 +13305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -13197,6 +13418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -13325,8 +13547,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2381f5b1152334d9884bde3a481f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points:
-    AreaOffsetX: {x: 427, y: 593}
+  _startNodes: {fileID: 1762485376}
+  _points:
+    AreaOffsetX: {x: 426, y: 593}
     AreaOffsetY: {x: 240, y: 360}
 --- !u!1 &1356682801
 GameObject:
@@ -13361,6 +13584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1356682803}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -13382,13 +13606,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 15
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -13573,6 +13799,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b4045a4a2113147b02ed20ba2aa7d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TheSaveFile:
+    PlayerInfo:
+      PlayerPreviousNode: 0
+      PlayerCurrentNode: 0
+      CameraOffsecLeftX: 0
+      CameraOffsecRightX: 0
+      CameraOffsecDownY: 0
+      CameraOffsecUpY: 0
+    LevelInfo:
+      Levels: []
+  previousScene: 0
   loadLevel: 0
   health: 0
   gold: 0
@@ -13719,9 +13956,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2381f5b1152334d9884bde3a481f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points:
-    AreaOffsetX: {x: 427, y: 593}
-    AreaOffsetY: {x: 728, y: 840}
+  _startNodes: {fileID: 1762485376}
+  _points:
+    AreaOffsetX: {x: 426, y: 593}
+    AreaOffsetY: {x: 720, y: 840}
 --- !u!1 &1401469913
 GameObject:
   m_ObjectHideFlags: 0
@@ -13830,6 +14068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -14021,6 +14260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -14134,6 +14374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1421794660}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -14333,6 +14574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -14524,6 +14766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -14636,6 +14879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -14827,6 +15071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1472526209}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -14848,13 +15093,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 18
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -14948,6 +15195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -15060,6 +15308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -15267,7 +15516,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2381f5b1152334d9884bde3a481f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points:
+  _startNodes: {fileID: 1762485376}
+  _points:
     AreaOffsetX: {x: 1327, y: 1493}
     AreaOffsetY: {x: 240, y: 360}
 --- !u!1 &1527339969
@@ -15303,6 +15553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -15656,6 +15907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -15769,6 +16021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -15956,6 +16209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -16068,6 +16322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -16180,6 +16435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1685296968}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -16202,13 +16458,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 10
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -16459,6 +16717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1692441681}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -16735,6 +16994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -16923,6 +17183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1748840578}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -17169,6 +17430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1762485377}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -17587,6 +17849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1804269905}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -17706,6 +17969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -17933,6 +18197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1842797732}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -17955,13 +18220,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 9
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -18200,6 +18467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -18312,6 +18580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -18424,6 +18693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -18537,6 +18807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -18858,6 +19129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1925678734}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -18972,6 +19244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -19084,6 +19357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -19196,6 +19470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -19309,6 +19584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1953035237}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -19331,13 +19607,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 2
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -19431,6 +19709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -19544,6 +19823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -19656,6 +19936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 1976229469}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -19678,13 +19959,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331a3bed866c3a44b2b8da791d115e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadLevel: 0
-  _levelText: 1
+  _loadLevel: 2
+  _levelText: 12
   _health: 3
   _gold: 750
+  _goldEarned: 750
   _time: 1000
   _newRecipes: []
   _stars: 0
+  _timesPlayer: 0
   _earnedStar: {fileID: 21300000, guid: d83ca1f8272ed1849a1793dfff8515e4, type: 3}
   _notEarnedStar: {fileID: 21300000, guid: 4f57775460e0bba45b2df3e72d8e6fab, type: 3}
   _healthSprite: {fileID: 21300000, guid: f9adc175916e4ec409536183dc1b8e16, type: 3}
@@ -19778,6 +20061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -19890,6 +20174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -20002,6 +20287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -20115,6 +20401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -20303,6 +20590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -20795,6 +21083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 2137972533}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0
@@ -20838,6 +21127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisNodesBehaviours: {fileID: 0}
+  NodeIndexInArray: 0
   NodeSearchedThrough: 0
   PosX: 0
   PosY: 0

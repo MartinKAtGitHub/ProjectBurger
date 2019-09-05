@@ -36,6 +36,17 @@ public class DrivingBurgerCar : MonoBehaviour {
     private bool _ignoreClick = false;
     public bool IgnoreClick { get => _ignoreClick; set { _ignoreClick = value; } }
 
+
+    void Start() {
+        _previousNode = LevelSelectManager.Instance.NodeList.nodes[GameInfoHolder.Instance.TheSaveFile.PlayerInfo.PlayerPreviousNode];
+        _currentNode = LevelSelectManager.Instance.NodeList.nodes[GameInfoHolder.Instance.TheSaveFile.PlayerInfo.PlayerCurrentNode];
+
+        transform.position = _currentNode.transform.position;
+        LevelSelectManager.Instance.CameraFollow.StartCamera();
+
+    }
+
+
     // Update is called once per frame
     void Update() {
 
@@ -70,6 +81,9 @@ public class DrivingBurgerCar : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Normal Node Method, When Just Walking Past A Node Then This Should Be Called.
+    /// </summary>
     public void ContinueToNextNode() {
         _walking = true;
         _previousNode = _goToDirectionNode;
@@ -82,7 +96,10 @@ public class DrivingBurgerCar : MonoBehaviour {
 
     }
 
-    public bool InvisibleNodeContinueWalk() {//Ignoring This Node Cuz Its A Transition Node To Change The Camera To A Different Area On The Map
+    /// <summary>
+    ///If There Is A Transition Node That Cannot Be Walked Back To, Its Just There To Signal That Something Should Happen Here, This Just Sends The Player To The Next Node Nothing More.
+    /// </summary>
+    public bool InvisibleNodeContinueWalk() {
         _walking = true;
 
         if (myPath[0].Neighbour[0] == myPath[1]) {//Neighbour 0, Needs To Be The Right Node (if walking left-right) Or Upper Node (if walking down-up). If That Is True Then I Know That The Player Is Walking In A Specific Direction
@@ -103,21 +120,16 @@ public class DrivingBurgerCar : MonoBehaviour {
 
     }
 
-    public void SetPlayerStartPosition(Node previous, Node current) {
-        _previousNode = previous;
-        _currentNode = current;
-
-        transform.position = _currentNode.transform.position;
-
-    }
-
-
-
+    /// <summary>
+    /// When Stopping To Do Something On A Node, This Is Called.
+    /// </summary>
     public void StopOnNode() {
         _walking = false;
 
         if (_goToDirectionNode != null)
             _currentNode = _goToDirectionNode;
+
+        GameInfoHolder.Instance.TheSaveFile.PlayerInfo.SetPlayerNodeIndexes(_previousNode.NodeIndexInArray, _currentNode.NodeIndexInArray);
 
         _goToNode = null;
         _goToDirectionNode = null;
@@ -126,7 +138,8 @@ public class DrivingBurgerCar : MonoBehaviour {
 
     }
 
-    public void StopAndHold() {
+
+    public void StopAndIgnoreClick() {
         StopOnNode();
         _ignoreClick = true;
     }
@@ -136,18 +149,10 @@ public class DrivingBurgerCar : MonoBehaviour {
     }
 
 
-
-    public void ForceWalkBack() {
-        StopAndHold();
-
-        _ignoreClick = false;
-        Clicked(_previousNode);
-        _ignoreClick = true;
-
-    }
-
+    /// <summary>
+    /// Sending The Player Back To The Previous Position + Ignoring Click Untill StopOnNode
+    /// </summary>
     public void SendPlayerToPreviousPosition() {
-
         _ignoreClick = false;
         Clicked(_previousNode);
         _ignoreClick = true;

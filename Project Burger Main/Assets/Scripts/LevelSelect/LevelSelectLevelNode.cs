@@ -62,11 +62,11 @@ public class LevelSelectLevelNode : NodeBehaviour, IPointerClickHandler {
 
     private void Start() {
         _myNode = GetComponent<Node>();
-        SetInfo(GameInfoHolder.Instance.TheSaveFile.LevelInfo.Levels[_levelText]);//This Sometimes Makes A NULLREF From Levels[_levelText]  The Place im Setting This Is In Awake, While This Code Is in Start. Sooooooooooo im ont sure whats wrong here, need to do some checkes
+        SetInfo(GameInfoHolder.Instance.TheSaveFile.LevelSelectData.LevelData.TheLevels[_levelText]);
 
     }
 
-    void SetInfo(TheLevels info) {
+    void SetInfo(LevelData info) {
         _goldEarned = info.GoldEarned;
         _stars = info.StarsGained;
         _timesPlayer = info.TimesPlayer;

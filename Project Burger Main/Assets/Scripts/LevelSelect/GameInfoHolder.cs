@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameInfoHolder : MonoBehaviour {
 
-    public SaveFileLevelSelect TheSaveFile = null;
+    public SaveFile TheSaveFile = new SaveFile();
+    
+
     public static GameInfoHolder Instance { get; private set; }
     public int previousScene = 0;
 
@@ -32,11 +34,11 @@ public class GameInfoHolder : MonoBehaviour {
             Destroy(gameObject); // Destroy myself is Instance already has a ref
         }
 
-        TheSaveFile = SaveInfoLevelSelect.LoadSaveFile();
-
-        if (TheSaveFile == null) {
+        if (TheSaver.DoesSaveFileExist() == false) {
             Debug.Log("No Save Have Been Made, Creating A New Game");
-            SaveInfoLevelSelect.NewSaveFile(ref TheSaveFile);
+            TheSaver.NewSaveFile(ref TheSaveFile);
+        } else {
+            TheSaveFile = TheSaver.LoadSaveFile();
         }
 
     }
@@ -46,18 +48,30 @@ public class GameInfoHolder : MonoBehaviour {
     private void Update() {
         if(save == true) {
             save = false;
-            SaveInfoLevelSelect.Saver(TheSaveFile);//Save Level Select Info When Coming From LevelSelect. TODO Change To The Place Where The Next Scene Is Placed
+            TheSaver.NewSaveFile(ref TheSaveFile);
+            TheSaveFile.LevelSelectData = new LevelSelectData(LevelSelectManager.Instance.AreaMapStartSection);
+
+            TheSaver.Saver(TheSaveFile);//Save Level Select Info When Coming From LevelSelect. TODO Change To The Place Where The Next Scene Is Placed
         }
     }
 
 
     private void OnDestroy() {
-        SceneManager.sceneLoaded -= LevelWasLoaded;
+        if(Instance == this) {
+            SceneManager.sceneLoaded -= LevelWasLoaded;
+        }
+
     }
 
     private void LevelWasLoaded(Scene scene, LoadSceneMode mode) {
-        if(previousScene > 1) {
-            SaveInfoLevelSelect.Saver(TheSaveFile);//Save Level Select Info When Coming From LevelSelect. TODO Change To The Place Where The Next Scene Is Placed
+        if (scene.buildIndex == 1) {
+            if (TheSaveFile.LevelSelectData == null) {//If This Is The First Time Coming To Level Select This Should Be Null
+                Debug.Log("CREATING LEVEL SELECT DATA");
+                TheSaveFile.LevelSelectData = new LevelSelectData(LevelSelectManager.Instance.AreaMapStartSection);
+            }
+            //     SaveInfoLevelSelect.Saver(TheSaveFile);//Save Level Select Info When Coming From LevelSelect. TODO Change To The Place Where The Next Scene Is Placed
+        } else if (scene.buildIndex == 2) {
+
         }
 
         Debug.Log("LOADED WHILE GOING IN?");

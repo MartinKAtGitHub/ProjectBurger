@@ -142,7 +142,7 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
                 _theBurgerDrag.ResetPositionParent = transform;
                 _theBurgerDrag.TheGrill = this;
 
-                BurgerIngredience = _theBurgerDrag.TheIngredientGameObject.ingredient as BurgersMeat;
+                BurgerIngredience = _theBurgerDrag.TheIngredientGameObject.Ingredient as BurgersMeat;
 
                 Setup();
 
@@ -197,13 +197,13 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
         if (_theBurgerDrag.TheBurgerInfos.UpOrDown == true)
         {//Setting What BurgerSide To Grill
             _theBurgerDrag.TheImage.sprite = BurgerIngredience.AllBurgerState[_theBurgerDrag.TheBurgerInfos.MyVariablesUp._BurgerState].IngredientSprite;
-            _theBurgerDrag.TheIngredientGameObject.ingredient = BurgerIngredience.AllBurgerState[_theBurgerDrag.TheBurgerInfos.MyVariablesUp._BurgerState];
+            _theBurgerDrag.TheIngredientGameObject.Ingredient = BurgerIngredience.AllBurgerState[_theBurgerDrag.TheBurgerInfos.MyVariablesUp._BurgerState];
             //  _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + _TheBurgerInfo.TheBurgerInfos.MyVariablesUp._BurgerState);
         }
         else
         {
             _theBurgerDrag.TheImage.sprite = BurgerIngredience.AllBurgerState[_theBurgerDrag.TheBurgerInfos.MyVariablesDown._BurgerState].IngredientSprite;
-            _theBurgerDrag.TheIngredientGameObject.ingredient = BurgerIngredience.AllBurgerState[_theBurgerDrag.TheBurgerInfos.MyVariablesDown._BurgerState];
+            _theBurgerDrag.TheIngredientGameObject.Ingredient = BurgerIngredience.AllBurgerState[_theBurgerDrag.TheBurgerInfos.MyVariablesDown._BurgerState];
             //  _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + _TheBurgerInfo.TheBurgerInfos.MyVariablesDown._BurgerState);
         }
 
@@ -247,7 +247,7 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
                         burgerside._BurgerState++;
 
                         _theBurgerDrag.TheImage.sprite = BurgerIngredience.AllBurgerState[burgerside._BurgerState].IngredientSprite;
-                        _theBurgerDrag.TheIngredientGameObject.ingredient = BurgerIngredience.AllBurgerState[burgerside._BurgerState];
+                        _theBurgerDrag.TheIngredientGameObject.Ingredient = BurgerIngredience.AllBurgerState[burgerside._BurgerState];
                         //     _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + burgerside._BurgerState);
                    //     SetupFlip();//MOAHAHAHAH AUTOFLIP
                     }

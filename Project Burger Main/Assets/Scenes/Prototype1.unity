@@ -2800,6 +2800,21 @@ PrefabInstance:
       propertyPath: _customerPatience._queueSizeTimeGainModifer
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 3509828516724711618, guid: c9eceda9495c8da40a29ee11ce2a36a2,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8113208
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509828516724711618, guid: c9eceda9495c8da40a29ee11ce2a36a2,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.08036668
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509828516724711618, guid: c9eceda9495c8da40a29ee11ce2a36a2,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.08036668
+      objectReference: {fileID: 0}
     - target: {fileID: 1600897799797548273, guid: c9eceda9495c8da40a29ee11ce2a36a2,
         type: 3}
       propertyPath: m_textInfo.characterCount

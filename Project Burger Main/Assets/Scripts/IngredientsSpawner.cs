@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class IngredientsSpawner : MonoBehaviour, IPointerDownHandler/*, IBeginDragHandler, IDragHandler, IEndDragHandler*/
+public class IngredientsSpawner : MonoBehaviour/*, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler*/
 {
     [SerializeField] private IngredientGameObject _ingredientGameObjectPrefab;
     /// <summary>
@@ -16,7 +16,6 @@ public class IngredientsSpawner : MonoBehaviour, IPointerDownHandler/*, IBeginDr
     /// True = spawner will spawn inn all the ingreadiance at the start of the game.
     /// False = Spawner will spawn on click and hopefully u can drag it.
     /// </summary>
-    [SerializeField] private bool _presetSpawn;
 
     private int _poolSize;
 
@@ -33,25 +32,17 @@ public class IngredientsSpawner : MonoBehaviour, IPointerDownHandler/*, IBeginDr
     }
     private void Start()
     {
-
         _poolSize = Ingredient.MaxIngredientLayersAmount * FoodCombinationDropArea.FoodCombiSpotsAmount;
-
-        if (_presetSpawn)
-        {
-            for (int i = 0; i < _poolSize; i++)
-            {
-                SpawnIngredient();
-            }
-        }
+        GenerateMaximumAmountOfIngredients(_poolSize);
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (!_presetSpawn)
-        {
-            SpawnIngredient();
-        }
-    }
+    //public void OnPointerDown(PointerEventData eventData)
+    //{
+    //    if (!_presetSpawn)
+    //    {
+    //        SpawnIngredient();
+    //    }
+    //}
 
     private GameObject SpawnIngredient()
     {
@@ -67,5 +58,12 @@ public class IngredientsSpawner : MonoBehaviour, IPointerDownHandler/*, IBeginDr
         return clone;
     }
 
+    private void GenerateMaximumAmountOfIngredients(int maxAmount)
+    {
+        for (int i = 0; i < maxAmount; i++)
+        {
+            SpawnIngredient();
+        }
+    }
 
 }

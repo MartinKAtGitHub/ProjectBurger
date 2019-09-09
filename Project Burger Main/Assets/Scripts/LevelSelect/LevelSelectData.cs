@@ -8,10 +8,8 @@ public class LevelSelectData {
 
     private const int LevelsOnTheMaps = 20;
 
-    public LevelSelectPlayerData PlayerData = new LevelSelectPlayerData();
-    public LevelSelectLevelData LevelData = new LevelSelectLevelData();
-
-    
+    public LevelSelectPositionData TheLevelSelectPositionData = new LevelSelectPositionData();//PositionData Mainly Of Player And The Camera, But Camera Is Kinda UseLess Atm Cuz "Disabled" Zone Snapping.
+    public LevelSelectLevelData TheLevelSelectLevelData = new LevelSelectLevelData();//LevelData, What Was Earned And Stuff During The Level.
 
 
     /// <summary>
@@ -19,16 +17,18 @@ public class LevelSelectData {
     /// </summary>
     /// <param name="startPoints"></param>
     public LevelSelectData(AreaMapPositions startPoints) {
-        PlayerData.SetCameraOffset(startPoints.MapPoints);
-        PlayerData.SetPlayerNodeIndexes(startPoints);
+        TheLevelSelectPositionData.SetCameraOffset(startPoints.MapPoints);
+        TheLevelSelectPositionData.SetPlayerNodeIndexes(startPoints);
 
-        LevelData.InitializeArray(LevelsOnTheMaps);
+        TheLevelSelectLevelData.InitializeArray(LevelsOnTheMaps);
     }
 
 }
 
+
+
 [System.Serializable]
-public class LevelSelectPlayerData {
+public class LevelSelectPositionData {
     public int PlayerPreviousNode = 0;
     public int PlayerCurrentNode = 0;
 
@@ -59,6 +59,13 @@ public class LevelSelectPlayerData {
 
 
 
+
+
+
+
+
+#region LevelData
+
 [System.Serializable]
 public class LevelSelectLevelData {
 
@@ -84,3 +91,5 @@ public class LevelData {
     public int GoldEarned = 0;
     public int StarsGained = 0;
 }
+
+#endregion

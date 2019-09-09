@@ -28,11 +28,11 @@ public class CameraFollower : MonoBehaviour {
     private void Start() {
         GoToSpot.z = -10;
 
-        MapXLeft = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.PlayerData.CameraOffsecLeftX;
-        MapXRight = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.PlayerData.CameraOffsecRightX;
+        MapXLeft = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecLeftX;
+        MapXRight = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecRightX;
 
-        MapYDown = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.PlayerData.CameraOffsecDownY;
-        MapYUp = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.PlayerData.CameraOffsecUpY;
+        MapYDown = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecDownY;
+        MapYUp = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecUpY;
 
     }
 
@@ -110,11 +110,11 @@ public class CameraFollower : MonoBehaviour {
 
     void UpdateMapOffsetValues() {
 
-        MapXRight = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.PlayerData.CameraOffsecRightX;
-        MapXLeft = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.PlayerData.CameraOffsecLeftX;
+        MapXRight = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecRightX;
+        MapXLeft = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecLeftX;
 
-        MapYDown = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.PlayerData.CameraOffsecDownY;
-        MapYUp = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.PlayerData.CameraOffsecUpY;
+        MapYDown = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecDownY;
+        MapYUp = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecUpY;
 
     }
 

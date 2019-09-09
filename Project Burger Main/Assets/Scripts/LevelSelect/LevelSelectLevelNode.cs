@@ -62,7 +62,7 @@ public class LevelSelectLevelNode : NodeBehaviour, IPointerClickHandler {
 
     private void Start() {
         _myNode = GetComponent<Node>();
-        SetInfo(GameInfoHolder.Instance.TheSaveFile.LevelSelectData.LevelData.TheLevels[_levelText]);
+        SetInfo(GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectLevelData.TheLevels[_levelText]);
 
     }
 

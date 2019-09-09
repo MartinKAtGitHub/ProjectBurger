@@ -48,8 +48,8 @@ public class GameInfoHolder : MonoBehaviour {
     private void Update() {
         if(save == true) {
             save = false;
-            TheSaver.NewSaveFile(ref TheSaveFile);
-            TheSaveFile.LevelSelectData = new LevelSelectData(LevelSelectManager.Instance.AreaMapStartSection);
+      //      TheSaver.NewSaveFile(ref TheSaveFile);
+      //      TheSaveFile.LevelSelectData = new LevelSelectData(LevelSelectManager.Instance.AreaMapStartSection);
 
             TheSaver.Saver(TheSaveFile);//Save Level Select Info When Coming From LevelSelect. TODO Change To The Place Where The Next Scene Is Placed
         }

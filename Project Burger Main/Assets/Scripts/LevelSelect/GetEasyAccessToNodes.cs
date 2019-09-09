@@ -11,5 +11,5 @@ public class GetEasyAccessToNodes : MonoBehaviour {
         for (int i = 0; i < nodes.Length; i++)
             nodes[i].NodeIndexInArray = i;
     }
-
+   
 }

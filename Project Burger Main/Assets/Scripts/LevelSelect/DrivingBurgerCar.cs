@@ -38,8 +38,8 @@ public class DrivingBurgerCar : MonoBehaviour {
 
 
     void Start() {
-        _previousNode = LevelSelectManager.Instance.NodeList.nodes[GameInfoHolder.Instance.TheSaveFile.LevelSelectData.PlayerData.PlayerPreviousNode];
-        _currentNode = LevelSelectManager.Instance.NodeList.nodes[GameInfoHolder.Instance.TheSaveFile.LevelSelectData.PlayerData.PlayerCurrentNode];
+        _previousNode = LevelSelectManager.Instance.NodeList.nodes[GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.PlayerPreviousNode];
+        _currentNode = LevelSelectManager.Instance.NodeList.nodes[GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.PlayerCurrentNode];
 
         transform.position = _currentNode.transform.position;
         LevelSelectManager.Instance.CameraFollow.StartCamera();
@@ -129,7 +129,7 @@ public class DrivingBurgerCar : MonoBehaviour {
         if (_goToDirectionNode != null)
             _currentNode = _goToDirectionNode;
 
-        GameInfoHolder.Instance.TheSaveFile.LevelSelectData.PlayerData.SetPlayerNodeIndexes(_previousNode, _currentNode);
+        GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.SetPlayerNodeIndexes(_previousNode, _currentNode);
 
         _goToNode = null;
         _goToDirectionNode = null;

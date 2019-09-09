@@ -10722,7 +10722,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 240
+  orthographic size: 270
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10746,7 +10746,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079218131}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1313, y: 720, z: -10}
+  m_LocalPosition: {x: 480, y: 810, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -13858,15 +13858,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TheSaveFile:
     LevelSelectData:
-      PlayerData:
+      TheLevelSelectPositionData:
         PlayerPreviousNode: 0
         PlayerCurrentNode: 0
         CameraOffsecLeftX: 0
         CameraOffsecRightX: 0
         CameraOffsecDownY: 0
         CameraOffsecUpY: 0
-      LevelData:
+      TheLevelSelectLevelData:
         TheLevels: []
+    PlayerData:
+      _gold: 0
+      _gems: 0
+      _upgrades: 
   previousScene: 0
   loadLevel: 0
   health: 0
@@ -17738,7 +17742,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -210, y: 210}
+  m_AnchoredPosition: {x: -90, y: 210}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1787208858

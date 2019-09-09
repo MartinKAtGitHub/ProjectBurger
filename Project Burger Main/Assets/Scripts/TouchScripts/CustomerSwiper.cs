@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class CustomerSwiper : MonoBehaviour, IDragHandler, IBeginDragHandler {
 
 
-    [SerializeField] private float HowFarToSwipe = 0.1f;
-    [SerializeField] private RectTransform canvas = null;
+    //[SerializeField] private float HowFarToSwipe = 0.1f;
+    //[SerializeField] private RectTransform canvas = null;
     [SerializeField] private Button _leftbutton = null;
     [SerializeField] private Button _rightbutton = null;
 

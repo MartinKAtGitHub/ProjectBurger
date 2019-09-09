@@ -26,7 +26,7 @@ public class ScoreBoard : MonoBehaviour {
         _ignoredCustomers.text = "" + LevelManager.Instance.ScoreManager.CustomersMade;
         _biggestCombo.text = "" + LevelManager.Instance.ScoreManager.ComboHighest;
         _timeRemaining.text = "" + (LevelManager.Instance.WinLooseManager.TimeLimit - (int)LevelManager.Instance.ScoreManager.TimeUsed);
-    
+        Debug.Log("HERE");
         //TODO Rewards?
 
 

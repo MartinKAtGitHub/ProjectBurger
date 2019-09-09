@@ -136,19 +136,17 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
         if (DropAreaOccupied == false)
         {
             _theBurgerDrag = eventData.pointerDrag.GetComponent<BurgerDrag>();
+            if (_theBurgerDrag != null) {
+                //   if (_theBurgerDrag.TheIngredientGameObject.ingredient.IngredientType == Ingredient.IngredientTypes.HamBurger_Meat_Raw){//only raw burgers can get on the grill.
 
-            if (_theBurgerDrag != null)
-            {
-                if (_theBurgerDrag.TheIngredientGameObject.Ingredient.IngredientType == Ingredient.IngredientTypes.HamBurger_Meat)
-                {
-                    _theBurgerDrag.ResetPositionParent = transform;
-                    _theBurgerDrag.TheGrill = this;
+                _theBurgerDrag.ResetPositionParent = transform;
+                _theBurgerDrag.TheGrill = this;
 
-                    BurgerIngredience = _theBurgerDrag.TheIngredientGameObject.Ingredient as BurgersMeat;
+                BurgerIngredience = _theBurgerDrag.TheIngredientGameObject.ingredient as BurgersMeat;
 
-                    Setup();
-                 
-                }
+                Setup();
+
+                //   }
             }
         }
     }
@@ -158,7 +156,7 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
     {
         EvaluateQuality();
         DropAreaOccupied = false;
-        transform.GetChild(0).gameObject.SetActive(false);
+   //     transform.GetChild(0).gameObject.SetActive(false);
     }
 
 
@@ -177,7 +175,7 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
         DropAreaOccupied = true;
         SelectingBurgerSide();
         StartCooking();
-        transform.GetChild(0).gameObject.SetActive(true);
+   //     transform.GetChild(0).gameObject.SetActive(true);
     }
 
     void StartCooking()
@@ -199,13 +197,13 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
         if (_theBurgerDrag.TheBurgerInfos.UpOrDown == true)
         {//Setting What BurgerSide To Grill
             _theBurgerDrag.TheImage.sprite = BurgerIngredience.AllBurgerState[_theBurgerDrag.TheBurgerInfos.MyVariablesUp._BurgerState].IngredientSprite;
-            _theBurgerDrag.TheIngredientGameObject.Ingredient = BurgerIngredience.AllBurgerState[_theBurgerDrag.TheBurgerInfos.MyVariablesUp._BurgerState];
+            _theBurgerDrag.TheIngredientGameObject.ingredient = BurgerIngredience.AllBurgerState[_theBurgerDrag.TheBurgerInfos.MyVariablesUp._BurgerState];
             //  _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + _TheBurgerInfo.TheBurgerInfos.MyVariablesUp._BurgerState);
         }
         else
         {
             _theBurgerDrag.TheImage.sprite = BurgerIngredience.AllBurgerState[_theBurgerDrag.TheBurgerInfos.MyVariablesDown._BurgerState].IngredientSprite;
-            _theBurgerDrag.TheIngredientGameObject.Ingredient = BurgerIngredience.AllBurgerState[_theBurgerDrag.TheBurgerInfos.MyVariablesDown._BurgerState];
+            _theBurgerDrag.TheIngredientGameObject.ingredient = BurgerIngredience.AllBurgerState[_theBurgerDrag.TheBurgerInfos.MyVariablesDown._BurgerState];
             //  _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + _TheBurgerInfo.TheBurgerInfos.MyVariablesDown._BurgerState);
         }
 
@@ -249,7 +247,7 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
                         burgerside._BurgerState++;
 
                         _theBurgerDrag.TheImage.sprite = BurgerIngredience.AllBurgerState[burgerside._BurgerState].IngredientSprite;
-                        _theBurgerDrag.TheIngredientGameObject.Ingredient = BurgerIngredience.AllBurgerState[burgerside._BurgerState];
+                        _theBurgerDrag.TheIngredientGameObject.ingredient = BurgerIngredience.AllBurgerState[burgerside._BurgerState];
                         //     _TheBurgerInfo.TheImage.sprite = BurgerIngredience.AllBurgerStages.GetSprite("Hamburgers_Beef_" + burgerside._BurgerState);
                    //     SetupFlip();//MOAHAHAHAH AUTOFLIP
                     }

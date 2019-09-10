@@ -34,6 +34,7 @@ public class DrivingBurgerCar : MonoBehaviour {
 
 
     private bool _ignoreClick = false;
+    public float Speed { get => _speed; set { _speed = value; } }
     public bool IgnoreClick { get => _ignoreClick; set { _ignoreClick = value; } }
 
 
@@ -42,7 +43,6 @@ public class DrivingBurgerCar : MonoBehaviour {
         _currentNode = LevelSelectManager.Instance.NodeList.nodes[GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.PlayerCurrentNode];
 
         transform.position = _currentNode.transform.position;
-        LevelSelectManager.Instance.CameraFollow.StartCamera();
 
     }
 
@@ -61,11 +61,11 @@ public class DrivingBurgerCar : MonoBehaviour {
 
                     if (myPath[0].ThisNodesBehaviours == null) {
                         StopOnNode();
+                        LevelSelectManager.Instance.CameraFollow.CompletedWalk();
                     } else {
                         myPath[0].ThisNodesBehaviours.SteppingOnEndNodeBehaviour();
                     }
 
-                    LevelSelectManager.Instance.CameraFollow.CompletedWalk();
                 } else {
                     if (myPath[0].ThisNodesBehaviours == null) {//Continuing Is Default, When No Behaviour Is Present
                         //  StopOnNode(); //If You Want Auto Stop On Node
@@ -158,6 +158,12 @@ public class DrivingBurgerCar : MonoBehaviour {
         _ignoreClick = true;
 
     }
+
+    public void TeleportPlayerToPreviousPosition() {
+        transform.position = _currentNode.transform.position;
+    }
+
+
 
     public void Clicked(Node End) {
         if (_ignoreClick == true)

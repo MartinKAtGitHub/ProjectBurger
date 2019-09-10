@@ -24,24 +24,20 @@ public class CameraFollower : MonoBehaviour {
     [SerializeField]
     private bool _playerRunning = false;
 
+    public bool NoOffset = false;
 
     private void Start() {
         GoToSpot.z = -10;
-
+       
         MapXLeft = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecLeftX;
         MapXRight = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecRightX;
 
         MapYDown = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecDownY;
         MapYUp = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecUpY;
 
-    }
-
-    public void StartCamera() {
         CheckPosition();
         transform.position = GoToSpot;
     }
-
-
 
     void Update() {
 
@@ -75,7 +71,13 @@ public class CameraFollower : MonoBehaviour {
 
         if (_updateCamera == true) {
 
+            if(NoOffset == true) {
+                transform.position = GoToSpot;
+            } else {
+
+
             transform.position = Vector3.MoveTowards(transform.position, GoToSpot, 1 * Time.deltaTime * (_speed * Vector3.Distance(transform.position, GoToSpot)));
+            }
 
             if (_playerRunning == false && Vector3.Distance(transform.position, GoToSpot) <= 0.01) {
                 transform.position = GoToSpot;
@@ -86,6 +88,7 @@ public class CameraFollower : MonoBehaviour {
 
     }
 
+
     public void CameraFollow() {
         _playerRunning = true;
 
@@ -93,6 +96,12 @@ public class CameraFollower : MonoBehaviour {
 
     public void CompletedWalk() {//Doing The Final Update To The Camera Cuz Player Finished
         _playerRunning = false;
+        CheckPosition();
+
+    }
+
+    public void TeleportToPlayerwithOffset(Vector3 pos) {
+        transform.position = LevelSelectManager.Instance.Player.transform.position + pos;
         CheckPosition();
 
     }
@@ -110,6 +119,7 @@ public class CameraFollower : MonoBehaviour {
 
     void UpdateMapOffsetValues() {
 
+        Debug.Log("UPDATEINGTEST");
         MapXRight = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecRightX;
         MapXLeft = GameInfoHolder.Instance.TheSaveFile.LevelSelectData.TheLevelSelectPositionData.CameraOffsecLeftX;
 
@@ -119,6 +129,7 @@ public class CameraFollower : MonoBehaviour {
     }
 
     void CheckPosition() {
+
         if (_player.position.x < MapXLeft) {
             GoToSpot.x = MapXLeft;
         } else if (_player.position.x > MapXRight) {

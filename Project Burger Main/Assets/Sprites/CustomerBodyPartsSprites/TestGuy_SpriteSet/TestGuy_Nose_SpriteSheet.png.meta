@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: f672db5ab880ba144a12d2815c88b67b
+guid: 9bfcdec38a7fc3349896c1b41bdc1eca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6187235265573364397
-    second: TestGuyBody_Green
+      213: -723811143993510823
+    second: TestGuy_Nose_Set_0
   - first:
-      213: -7774066009538422830
-    second: TestGuyBody_Orange
+      213: 4846170624377713232
+    second: TestGuy_Nose_Set_1
   - first:
-      213: -8177528928287073874
-    second: TestGuyBody_Purple
+      213: 8804229008835180868
+    second: TestGuy_Nose_Set_2
   - first:
-      213: 3421493295386615257
-    second: TestGuyBody_Red
+      213: -2301823467413972004
+    second: TestGuy_Nose_Set_3
   - first:
-      213: 7924935985308276784
-    second: TestGuyBody_Blue
+      213: -8786643322009920226
+    second: TestGuy_Nose_Set_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -97,23 +97,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TestGuyBody_Green
+      name: TestGuy_Nose_Set_0
       rect:
         serializedVersion: 2
         x: 0
@@ -127,14 +115,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22cf3a04e69bcca418b03a61ee04452a
-      internalID: 6187235265573364397
+      spriteID: 3a3b46bb6062ea549bc7bbfc69efc422
+      internalID: -723811143993510823
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TestGuyBody_Orange
+      name: TestGuy_Nose_Set_1
       rect:
         serializedVersion: 2
         x: 64
@@ -148,14 +136,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a4a378dfe3d32048807d97b1050a7ca
-      internalID: -7774066009538422830
+      spriteID: 0d74b64b39621c445b90e5a31b90abaa
+      internalID: 4846170624377713232
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TestGuyBody_Purple
+      name: TestGuy_Nose_Set_2
       rect:
         serializedVersion: 2
         x: 128
@@ -169,14 +157,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d2d76b56d56ab94c92b634a66d79ec6
-      internalID: -8177528928287073874
+      spriteID: e863d2aad73d1ed48b17cc9089c437da
+      internalID: 8804229008835180868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TestGuyBody_Red
+      name: TestGuy_Nose_Set_3
       rect:
         serializedVersion: 2
         x: 192
@@ -190,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d2d8443cf84dde4fa3b3db3373ebe9c
-      internalID: 3421493295386615257
+      spriteID: d5e980f9c158df149994f5c35b7e9379
+      internalID: -2301823467413972004
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TestGuyBody_Blue
+      name: TestGuy_Nose_Set_4
       rect:
         serializedVersion: 2
         x: 256
@@ -211,8 +199,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06f02913d280a5e499c2b89db4da5fba
-      internalID: 7924935985308276784
+      spriteID: 4a9f29c2accecdd43baa1886ed02aa95
+      internalID: -8786643322009920226
       vertices: []
       indices: 
       edges: []

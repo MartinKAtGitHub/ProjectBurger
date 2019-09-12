@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb8c9972e2baca4cba5be81dbba4dc5, type: 3}
+  m_Name: TESTDaySO
+  m_EditorClassIdentifier: 
+  CustomerSpawnValues:
+  - CustomerToIncreaseSpawnValue: {fileID: 384010950422032117, guid: 7c2f7d56bdb8baf4ea0eeea0cd09d283,
+      type: 3}
+    SpawnValue: 5
+    MinRng: 0
+    MaxRng: 5
+  - CustomerToIncreaseSpawnValue: {fileID: 384010950422032117, guid: ea4193747e2b5064b9eed9e7fecc2ebd,
+      type: 3}
+    SpawnValue: 5
+    MinRng: 5
+    MaxRng: 10
+  MinRng: 0
+  MaxRng: 10
+  ThemeRngChance: 10

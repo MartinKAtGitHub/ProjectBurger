@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private float _preparationTime;
     [SerializeField] private Vector2 _customerSpawnTimerMinMax;
+    [SerializeField]private bool _enableSpawner;
 
     public static LevelManager Instance { get; private set; }
 
@@ -47,8 +48,11 @@ public class LevelManager : MonoBehaviour
         NullCheck(OrderWindow);
         NullCheck(WinLooseManager);
 
+        if(_enableSpawner)
+        {
+            StartCoroutine(CustomerSpawnSystemInit());
 
-        StartCoroutine(CustomerSpawnSystemInit());
+        }
 
     }
 

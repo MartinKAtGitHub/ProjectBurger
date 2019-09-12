@@ -30,7 +30,7 @@ public class ChangeAreaNode : NodeBehaviour, IPointerClickHandler {
     public override void SteppingOnEndNodeBehaviour() {
         LevelSelectManager.Instance.Player.StopOnNode();
         LevelSelectManager.Instance.Player.Clicked(NextAreaNode);
-
+        GameObject.Find("RepeaterNode").GetComponent<ObjectSender>().Starting();
         //if (Unlocked == true) {
         //    LevelSelectManager.Instance.Player.StopOnNode();    
         //} else {

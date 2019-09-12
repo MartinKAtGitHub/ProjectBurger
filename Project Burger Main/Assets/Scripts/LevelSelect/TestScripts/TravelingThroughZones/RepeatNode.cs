@@ -27,10 +27,14 @@ public class RepeatNode : NodeBehaviour {
        
         } else {*/
             LevelSelectManager.Instance.Player.ContinueToNextNode();
-        LevelSelectManager.Instance.Player.Speed = 200;
+        if (LevelSelectManager.Instance.Player.Speed > 50)
+            LevelSelectManager.Instance.Player.Speed = 50;
+        else
+            LevelSelectManager.Instance.Player.Speed = 200;
 
-          //  Backgorund.RemoveMovingObject();
-     //   }
+
+        //  Backgorund.RemoveMovingObject();
+        //   }
 
 
         //if (Unlocked == true) {

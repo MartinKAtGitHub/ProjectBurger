@@ -15,7 +15,10 @@ public class AttatchBackgroundNode : NodeBehaviour {
     public override void TransitionNodeBehaviour() {
         LevelSelectManager.Instance.Player.ContinueToNextNode();
    //     Background.SetMovingObject(LevelSelectManager.Instance.Player.transform);
+   if(LevelSelectManager.Instance.Player.Speed > 50)
         LevelSelectManager.Instance.Player.Speed = 50;
+   else
+        LevelSelectManager.Instance.Player.Speed = 200;
         //  Background.transform.parent = LevelSelectManager.Instance.Player.transform;
 
 

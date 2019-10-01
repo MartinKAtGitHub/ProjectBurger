@@ -168,7 +168,7 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
         {
          //   Debug.Log("Creating new Food in " + name);
             var clone = Instantiate(_foodGameObjectPrefab, transform);
-            clone.GetComponent<FoodDrag>().TopLayerTransform = _topLayerTrans;
+            clone.GetComponent<FoodDrag>().RenderOrderTransform = _topLayerTrans;
             _food = clone.GetComponent<Food>();
            
         }

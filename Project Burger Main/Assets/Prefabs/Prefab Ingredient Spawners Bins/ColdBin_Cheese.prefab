@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6793187304205585458
+--- !u!1001 &247926776177031349
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 8634727916390808354, guid: 77acc7fe33498eb4d98f90cbbcea3759,
         type: 3}
       propertyPath: m_Name
-      value: IngredientStorageBin_Lettuce
+      value: ColdBin_Cheese
       objectReference: {fileID: 0}
     - target: {fileID: 8634727916390808357, guid: 77acc7fe33498eb4d98f90cbbcea3759,
         type: 3}
@@ -75,17 +75,7 @@ PrefabInstance:
     - target: {fileID: 8634727916390808357, guid: 77acc7fe33498eb4d98f90cbbcea3759,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 272.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8634727916390808357, guid: 77acc7fe33498eb4d98f90cbbcea3759,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 132
-      objectReference: {fileID: 0}
-    - target: {fileID: 8634727916390808357, guid: 77acc7fe33498eb4d98f90cbbcea3759,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 132
+      value: 86.899994
       objectReference: {fileID: 0}
     - target: {fileID: 8634727916390808357, guid: 77acc7fe33498eb4d98f90cbbcea3759,
         type: 3}
@@ -95,7 +85,7 @@ PrefabInstance:
     - target: {fileID: 8634727916390808357, guid: 77acc7fe33498eb4d98f90cbbcea3759,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8634727916390808357, guid: 77acc7fe33498eb4d98f90cbbcea3759,
         type: 3}
@@ -105,7 +95,7 @@ PrefabInstance:
     - target: {fileID: 8634727916390808357, guid: 77acc7fe33498eb4d98f90cbbcea3759,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8634727916390808357, guid: 77acc7fe33498eb4d98f90cbbcea3759,
         type: 3}
@@ -117,53 +107,17 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 5314522580823151897, guid: 77acc7fe33498eb4d98f90cbbcea3759,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5314522580823151897, guid: 77acc7fe33498eb4d98f90cbbcea3759,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5314522580823151897, guid: 77acc7fe33498eb4d98f90cbbcea3759,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5314522580823151897, guid: 77acc7fe33498eb4d98f90cbbcea3759,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5314522580823151897, guid: 77acc7fe33498eb4d98f90cbbcea3759,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5314522580823151897, guid: 77acc7fe33498eb4d98f90cbbcea3759,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1748886529749906790, guid: 77acc7fe33498eb4d98f90cbbcea3759,
         type: 3}
-      propertyPath: _ingredientPrefab
+      propertyPath: _ingredientGameObjectPrefab
       value: 
-      objectReference: {fileID: 316306155418298721, guid: 41a25e7e9978da3439821f9ca3648e11,
+      objectReference: {fileID: 8840783099580237085, guid: e8fb8257a6452dd48b6613a5908be412,
         type: 3}
     - target: {fileID: 7493437851130739444, guid: 77acc7fe33498eb4d98f90cbbcea3759,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 04db411eb9412224c850a1a0b8f4d6a0,
-        type: 3}
-    - target: {fileID: 8634727916390808356, guid: 77acc7fe33498eb4d98f90cbbcea3759,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 04db411eb9412224c850a1a0b8f4d6a0,
+      objectReference: {fileID: 21300000, guid: c9d7379c905d6834a84a5f8ab41c5b76,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77acc7fe33498eb4d98f90cbbcea3759, type: 3}

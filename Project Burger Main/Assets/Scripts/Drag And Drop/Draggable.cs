@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     /// <summary>
-    /// This will be the Parent that holds all the Drag and drop elements. If a Draggable obj is parented to this, the obj will not have any restrictions to movement due to Layoutgroups
+    /// The transform that will determine the render order of the dragged object, think of it as sorting layer but with Transform/hierarchy
     /// </summary>
-    private Transform _topLayerTransform;
+    private Transform _renderOrderTransform;
     protected Transform _resetPositionParent;
     /// <summary>
     /// Used to calculate drag point. This allows you to drag from anywhere on the img. If we didnt use this it would snap to center of img
@@ -26,7 +26,7 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     private RectTransform _rectTransform;
     public virtual Transform ResetPositionParent { get => _resetPositionParent; set => _resetPositionParent = value; }
-    public Transform TopLayerTransform { get => _topLayerTransform; set => _topLayerTransform = value; }
+    public Transform RenderOrderTransform { get => _renderOrderTransform; set => _renderOrderTransform = value; }
     private void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
@@ -38,10 +38,10 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     private void Start()
     {
-        if (_topLayerTransform == null)
+        if (_renderOrderTransform == null)
         {
             Debug.LogError($" draggbel.cs| {name} dose not have a _topLayerTransform , might cause the dragged object to be render behind other objects -> set this to be the main canavs");
-            _topLayerTransform = transform.parent.parent;
+            _renderOrderTransform = transform.parent.parent;
         }
     }
 
@@ -74,7 +74,7 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     /// </summary>
     private void FreeDragMode()
     {
-        transform.SetParent(_topLayerTransform);
+        transform.SetParent(_renderOrderTransform);
     }
 
     /// <summary>

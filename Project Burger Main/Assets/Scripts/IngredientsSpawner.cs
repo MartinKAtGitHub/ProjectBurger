@@ -5,9 +5,9 @@ public class IngredientsSpawner : MonoBehaviour/*, IPointerDownHandler, IBeginDr
 {
     [SerializeField] private IngredientGameObject _ingredientGameObjectPrefab;
     /// <summary>
-    /// UI rendering system is driven by hierarchy, so we need to place the dragged object ontop of everything -> main canvas
+    /// The transform that will determine the render order of the dragged object, think of it as sorting layer but with Transform/hierarchy
     /// </summary>
-    [SerializeField] private Transform _topLayerTransform;
+    private Transform _renderOrderTransform;
     /// <summary>
     /// The transform needed to hind the ingredient behind the bin img.
     /// </summary>
@@ -24,6 +24,11 @@ public class IngredientsSpawner : MonoBehaviour/*, IPointerDownHandler, IBeginDr
 
     private void Awake()
     {
+        _renderOrderTransform = GameObject.FindGameObjectWithTag("MainCanvas").transform;
+        if (_renderOrderTransform == null)
+        {
+            Debug.LogError("Cant find top drag layer, make sure MainCanavs Tag is still the same");
+        }
 
         if (_ingredientGameObjectPrefab == null)
         {
@@ -36,13 +41,6 @@ public class IngredientsSpawner : MonoBehaviour/*, IPointerDownHandler, IBeginDr
         GenerateMaximumAmountOfIngredients(_poolSize);
     }
 
-    //public void OnPointerDown(PointerEventData eventData)
-    //{
-    //    if (!_presetSpawn)
-    //    {
-    //        SpawnIngredient();
-    //    }
-    //}
 
     private GameObject SpawnIngredient()
     {
@@ -50,7 +48,7 @@ public class IngredientsSpawner : MonoBehaviour/*, IPointerDownHandler, IBeginDr
         clone.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
 
         var draggable = clone.GetComponent<DraggableIngredient>();
-        draggable.TopLayerTransform = _topLayerTransform;
+        draggable.RenderOrderTransform = _renderOrderTransform;
 
         var ingredientGO = clone.GetComponent<IngredientGameObject>();
         ingredientGO.IngredientPoolTrans = _ingredientPoolRect;
@@ -60,6 +58,12 @@ public class IngredientsSpawner : MonoBehaviour/*, IPointerDownHandler, IBeginDr
 
     private void GenerateMaximumAmountOfIngredients(int maxAmount)
     {
+        if(maxAmount <=0)
+        {
+            Debug.LogError($"Cant spawn ingredients because no food combination zones are inn the scene so the pool is -> {maxAmount}");
+            return;
+        }
+
         for (int i = 0; i < maxAmount; i++)
         {
             SpawnIngredient();

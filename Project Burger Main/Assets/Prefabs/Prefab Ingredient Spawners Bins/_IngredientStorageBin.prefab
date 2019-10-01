@@ -63,17 +63,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3734934308075209687
 GameObject:
@@ -123,7 +121,7 @@ GameObject:
   - component: {fileID: 1748886529749906790}
   - component: {fileID: 1065221506227363826}
   m_Layer: 5
-  m_Name: IngredientStorageBin
+  m_Name: _IngredientStorageBin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,7 +136,7 @@ RectTransform:
   m_GameObject: {fileID: 8634727916390808354}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 5314522580823151897}
   - {fileID: 4452086162492366917}
@@ -148,7 +146,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -607.4, y: 86.899994}
-  m_SizeDelta: {x: 160, y: 160}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8634727916390808359
 CanvasRenderer:
@@ -171,9 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ingredientGameObjectPrefab: {fileID: 0}
-  _topLayerTransform: {fileID: 0}
   _ingredientPoolRect: {fileID: 5314522580823151897}
-  _presetSpawn: 1
 --- !u!114 &1065221506227363826
 MonoBehaviour:
   m_ObjectHideFlags: 0

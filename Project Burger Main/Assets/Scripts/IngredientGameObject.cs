@@ -39,9 +39,18 @@ public class IngredientGameObject : MonoBehaviour //TODO  put this in Ingredient
         transform.localPosition = Vector3.zero;
     }
 
+    /// <summary>
+    /// The bin determines the touch register area but ingredient itself needs to control the actual dragging so we send over the size dealta to ingredeint tocuh
+    /// keep in mind that the touch area cant be strech mode as it would not have a size delta then
+    /// </summary>
+    /// <param name="targetTouchArea"></param>
     public void RescaleTouchArea(RectTransform targetTouchArea)
     {
-        _touchArea.sizeDelta = targetTouchArea.sizeDelta;
+        // Debug.LogError(" DELTA IS -> " + targetTouchArea.sizeDelta);
+        //_touchArea.sizeDelta = targetTouchArea.sizeDelta;
+        _touchArea.offsetMin = Vector2.zero;
+        _touchArea.offsetMax = Vector2.zero;
+
     }
 }
 

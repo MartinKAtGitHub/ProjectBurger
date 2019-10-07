@@ -44,16 +44,16 @@ public class IngredientsSpawner : MonoBehaviour/*, IPointerDownHandler, IBeginDr
 
     private GameObject SpawnIngredient()
     {
-        var clone = Instantiate(_ingredientGameObjectPrefab.gameObject, _ingredientPoolRect.transform);
-        clone.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        var ingredientClone = Instantiate(_ingredientGameObjectPrefab.gameObject, _ingredientPoolRect.transform);
+        //ingredientClone.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
 
-        var draggable = clone.GetComponent<DraggableIngredient>();
+        var draggable = ingredientClone.GetComponent<DraggableIngredient>();
         draggable.RenderOrderTransform = _renderOrderTransform;
 
-        var ingredientGO = clone.GetComponent<IngredientGameObject>();
+        var ingredientGO = ingredientClone.GetComponent<IngredientGameObject>();
         ingredientGO.IngredientPoolTrans = _ingredientPoolRect;
-        ingredientGO.RescaleTouchArea(_ingredientPoolRect);
-        return clone;
+       // ingredientGO.RescaleTouchArea(_ingredientPoolRect);
+        return ingredientClone;
     }
 
     private void GenerateMaximumAmountOfIngredients(int maxAmount)

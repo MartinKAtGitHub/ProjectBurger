@@ -33,7 +33,6 @@ public class DraggableIngredient : Draggable
     public override void OnBeginDrag(PointerEventData eventData)
     {
         base.OnBeginDrag(eventData);
-        Debug.Log($"OneBeginDrag -> {name}");
     }
 
     public override void OnEndDrag(PointerEventData eventData)

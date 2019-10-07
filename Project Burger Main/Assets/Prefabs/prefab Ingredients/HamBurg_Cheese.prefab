@@ -12,36 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HamBurg_Cheese
       objectReference: {fileID: 0}
-    - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4364827356571203016, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
       propertyPath: ingredient
@@ -54,17 +24,27 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 179ccd142dca7364e8429a653d027283,
         type: 2}
-    - target: {fileID: 295963924765048985, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: m_IgnoreParentGroups
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2046117214151235935, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1571830439801956473, guid: 16fc9c01a8eb79249a0f4c34dee6bab6,
         type: 3}
+    - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 295963924765048985, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: m_IgnoreParentGroups
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 295963924765048990, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
       propertyPath: m_Sprite

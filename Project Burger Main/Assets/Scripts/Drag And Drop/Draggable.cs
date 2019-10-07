@@ -40,8 +40,9 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     {
         if (_renderOrderTransform == null)
         {
-            Debug.LogError($" draggbel.cs| {name} dose not have a _topLayerTransform , might cause the dragged object to be render behind other objects -> set this to be the main canavs");
-            _renderOrderTransform = transform.parent.parent;
+            _renderOrderTransform = GameObject.FindGameObjectWithTag("MainCanvas").transform;
+            Debug.LogError($" draggbel.cs| {name} dose not have a _renderOrderTransform , might cause the dragged object to be render behind other objects -> Setting -> {_renderOrderTransform.name}");
+            // _renderOrderTransform = transform.parent.parent;
         }
     }
 

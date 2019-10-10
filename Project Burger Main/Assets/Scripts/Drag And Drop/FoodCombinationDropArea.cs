@@ -7,7 +7,8 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
 {
     [SerializeField] private GameObject _foodGameObjectPrefab;
     [SerializeField]private Transform _topLayerTrans;
-    [SerializeField]private Transform _dropPoint;
+    //[SerializeField]private Transform _dropPoint;
+    [SerializeField]private Vector2 _imgOnTopOfDropOffset;
     /// <summary>
     /// When this ingredient is added to the stack, it marks that the food is ready to be sold 
     /// </summary>
@@ -25,9 +26,10 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
     private int _ingredientLayer = -1;
     private static int _foodCombiSpotsAmount;
     private Food _food;
-    private RectTransform _touchArea;
+    private RectTransform _thisRectTransform;
+   
 
-    
+
     public Food Food { get => _food; set => _food = value; }
     public bool IsFoodReady { get => _isFoodReady; set => _isFoodReady = value; }
     public bool OccupiedByFood { get => _occupiedByFood; set => _occupiedByFood = value; }
@@ -36,7 +38,8 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
     private void Awake()
     {
         _foodCombiSpotsAmount++;
-        _touchArea = GetComponent<RectTransform>();
+        _thisRectTransform = GetComponent<RectTransform>();
+
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -56,22 +59,25 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
             {
                 _occupiedByFood = true;
                 food.FoodDrag.FoodCombinationDropArea = this;
-                food.FoodDrag.ResetPositionParent = this.transform;
-                // food.FoodDrag.FoodCombinationTransform = this.transform; 
+                //food.FoodDrag.ResetPositionParent = this.transform;
+                food.FoodDrag.ResetPositionParent = _thisRectTransform;
+              
             }
             else if (draggableIngredient != null)
             {
                 CreateFoodGameObject();
 
                 draggableIngredient.FoodCombinationDropArea = this;
-                draggableIngredient.ResetPositionParent = this.transform;
+               // draggableIngredient.ResetPositionParent = this.transform;
+                draggableIngredient.ResetPositionParent = _thisRectTransform;
+                draggableIngredient.ResetPosOffset = _imgOnTopOfDropOffset;
 
                 var ingredientGameObject = eventData.pointerDrag.GetComponent<IngredientGameObject>();
 
                 if (ingredientGameObject != null)
                 {
                     AddIngredientsToFood(ingredientGameObject);
-                    ingredientGameObject.RescaleTouchArea(_touchArea);  // TODO ingredientGo.RescaleTouchArea happens in all drop areas
+                    ingredientGameObject.RescaleTouchArea(_thisRectTransform);  // TODO ingredientGo.RescaleTouchArea happens in all drop areas
 
                     CheckFoodStackWithRecepies();
                     IsFinalIngredientPlaced(ingredientGameObject.Ingredient);
@@ -81,7 +87,10 @@ public class FoodCombinationDropArea : MonoBehaviour, IDropHandler
                         _occupiedByFood = true;
                         _occupiedByIngredient = false;
                         _food.FoodDrag.FoodCombinationDropArea = this;
-                        _food.FoodDrag.ResetPositionParent = this.transform;
+                        //_food.FoodDrag.ResetPositionParent = this.transform;
+                        _food.FoodDrag.ResetPositionParent = _thisRectTransform;
+                        _food.FoodDrag.ResetPosOffset = _imgOnTopOfDropOffset;
+                        Debug.Log("Offset is -> " + _imgOnTopOfDropOffset);
                         //_food.FoodDrag.FoodCombinationTransform = this.transform;
                         _ingredientLayer = -1;
                     }

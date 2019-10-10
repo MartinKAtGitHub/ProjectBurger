@@ -9,6 +9,12 @@ public class BurgerWaitArea : DropArea {
     BurgerDrag _DropOnObject;
     bool _IsSomethingHere = false;
 
+    private RectTransform _thisRectTransform;
+
+    private void Awake()
+    {
+        _thisRectTransform = GetComponent<RectTransform>();
+    }
 
     public override void OnDrop(PointerEventData eventData) {
 
@@ -19,7 +25,7 @@ public class BurgerWaitArea : DropArea {
             if (_DropOnObject != null) {//The Problem Here Is If I Drag Something And Drop It On Here, I Will Get An Error, So I Need A Check Of Some Sort. eventData.pointerDrag != null, will never happen but just for safety.
                 if (_DropOnObject.TheIngredientGameObject.Ingredient.IngredientType == Ingredient.IngredientTypes.HamBurger_Meat) {
 
-                    _DropOnObject.ResetPositionParent = transform;
+                    _DropOnObject.ResetPositionParent = _thisRectTransform;
                     _DropOnObject.transform.position = transform.position;
 
                     _IsSomethingHere = true;

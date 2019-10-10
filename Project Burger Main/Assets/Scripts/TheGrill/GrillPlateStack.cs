@@ -10,6 +10,8 @@ public class GrillPlateStack : DropArea {
     private GameObject _Ingredience = null;
     private BurgerDrag _SpawnedIngredients;
 
+    private RectTransform _thisRectTransform;
+
     [SerializeField]
     private bool _PresetSpawn = false;
     public int IngredienceSpawnAmout;
@@ -17,6 +19,10 @@ public class GrillPlateStack : DropArea {
     int StackCount = -1;
     BurgerDrag BurgerCheck;
 
+    private void Awake()
+    {
+        _thisRectTransform = GetComponent<RectTransform>();
+    }
 
     private void Start() {
         if (_PresetSpawn) {
@@ -29,7 +35,7 @@ public class GrillPlateStack : DropArea {
     private void SpawnIngredience() {
         _SpawnedIngredients = Instantiate(_Ingredience, transform).GetComponent<BurgerDrag>();
 
-        _SpawnedIngredients.ResetPositionParent = transform;
+        _SpawnedIngredients.ResetPositionParent = _thisRectTransform;
         _SpawnedIngredients.GetComponent<RectTransform>().position = transform.position + (Vector3.up * ++StackCount * 8) + (Vector3.up * 28.5f);
     }
 
@@ -55,7 +61,7 @@ public class GrillPlateStack : DropArea {
 
             if(BurgerCheck.TheBurgerInfos.MyVariablesUp._BurgerHeat == 0 && BurgerCheck.TheBurgerInfos.MyVariablesDown._BurgerHeat == 0) {
                 StackCount += 1;
-                BurgerCheck.ResetPositionParent = transform;
+                BurgerCheck.ResetPositionParent = _thisRectTransform;
                 BurgerCheck.GetComponent<RectTransform>().position = transform.position + (Vector3.up * StackCount * 8) + (Vector3.up * 28.5f);
             }
         } 

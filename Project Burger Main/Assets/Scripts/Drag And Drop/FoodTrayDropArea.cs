@@ -13,6 +13,7 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
     [SerializeField] private Order _order; // Get order from Customer
     [SerializeField] private bool _orderSuccessful;
 
+    private RectTransform _thisRectTransform;
 
     public Order Order { set => _order = value; }
     public bool OrderSuccessful { get => _orderSuccessful; }
@@ -30,7 +31,8 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
             var food = eventData.pointerDrag.GetComponent<Food>();
             if (food != null)
             {
-                food.FoodDrag.ResetPositionParent = this.transform;
+                //food.FoodDrag.ResetPositionParent = this.transform;
+                food.FoodDrag.ResetPositionParent = _thisRectTransform;
                 _foods.Add(food);
 
             }

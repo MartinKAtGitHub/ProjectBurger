@@ -48,7 +48,14 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
 
 
 
+    private RectTransform _thisRectTransform;
 
+
+    private void Awake()
+    {
+      
+        _thisRectTransform = GetComponent<RectTransform>();
+    }
 
 
     private void Update()
@@ -139,7 +146,7 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
             if (_theBurgerDrag != null) {
                 //   if (_theBurgerDrag.TheIngredientGameObject.ingredient.IngredientType == Ingredient.IngredientTypes.HamBurger_Meat_Raw){//only raw burgers can get on the grill.
 
-                _theBurgerDrag.ResetPositionParent = transform;
+                _theBurgerDrag.ResetPositionParent = _thisRectTransform;
                 _theBurgerDrag.TheGrill = this;
 
                 BurgerIngredience = _theBurgerDrag.TheIngredientGameObject.Ingredient as BurgersMeat;

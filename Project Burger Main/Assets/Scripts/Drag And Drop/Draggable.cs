@@ -11,11 +11,12 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     /// The transform that will determine the render order of the dragged object, think of it as sorting layer but with Transform/hierarchy
     /// </summary>
     private Transform _renderOrderTransform;
-    protected Transform _resetPositionParent;
+    protected RectTransform _resetPositionParent;
+    protected Vector2 _resetPosOffset;
     /// <summary>
     /// Used to calculate drag point. This allows you to drag from anywhere on the img. If we didnt use this it would snap to center of img
     /// </summary>
-    protected Vector3 _offset;
+    protected Vector3 _touchOffset;
     /// <summary>
     /// Canvas group allows us use certain options to allow us to register PointerEventData through draggable objects.
     /// </summary>
@@ -25,15 +26,19 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     /// </summary>
 
     private RectTransform _rectTransform;
-    public virtual Transform ResetPositionParent { get => _resetPositionParent; set => _resetPositionParent = value; }
+    public virtual RectTransform ResetPositionParent { get => _resetPositionParent; set => _resetPositionParent = value; }
     public Transform RenderOrderTransform { get => _renderOrderTransform; set => _renderOrderTransform = value; }
+    public Vector2 ResetPosOffset { set => _resetPosOffset = value; }
+
     private void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _rectTransform = GetComponent<RectTransform>();
 
-        _resetPositionParent = transform.parent;
-      
+        //_resetPositionParent = transform.parent;
+        _resetPositionParent = transform.parent.GetComponent<RectTransform>();
+
+        Debug.Log(_resetPositionParent.name);
     }
 
     private void Start()
@@ -41,7 +46,8 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
         if (_renderOrderTransform == null)
         {
             _renderOrderTransform = GameObject.FindGameObjectWithTag("MainCanvas").transform;
-            Debug.LogError($" draggbel.cs| {name} dose not have a _renderOrderTransform , might cause the dragged object to be render behind other objects -> Setting -> {_renderOrderTransform.name}");
+            Debug.Log("Finding Tag -> MainCanvas Setting as RenderLayer transform");
+            //Debug.LogError($" draggbel.cs| {name} dose not have a _renderOrderTransform , might cause the dragged object to be render behind other objects -> Setting -> {_renderOrderTransform.name}");
             // _renderOrderTransform = transform.parent.parent;
         }
     }
@@ -57,7 +63,7 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = eventData.position + (Vector2)_offset;
+        transform.position = eventData.position + (Vector2)_touchOffset;
         Debug.Log($"OneDrag -> {name} , {transform.parent.name}");
     }
 
@@ -65,9 +71,11 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     {
         // OnDrop happens before this, so if you set the parent in OnDrop then this will snap to the new Position and not the Original
         transform.SetParent(_resetPositionParent);
-        _rectTransform.localPosition = Vector2.zero;
+        // _rectTransform.localPosition = Vector2.zero;
+       // Debug.Log(_resetPositionParent.transform.position);
+        _rectTransform.anchoredPosition = Vector2.zero + _resetPosOffset;
         _canvasGroup.blocksRaycasts = true;
-        Debug.Log($"OneEndDrag -> {name}");
+        Debug.Log($"OneEndDrag -> {name} | My Pos {_rectTransform.anchoredPosition} -- offset { (Vector2.zero + _resetPosOffset)}");
     }
 
     /// <summary>
@@ -85,6 +93,6 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     private void CalculateDragAreaOffset(PointerEventData eventData)
     {
         // Center of object - the position of the mouse on the object
-        _offset = (Vector2)transform.position - eventData.position;
+        _touchOffset = (Vector2)transform.position - eventData.position;
     }
 }

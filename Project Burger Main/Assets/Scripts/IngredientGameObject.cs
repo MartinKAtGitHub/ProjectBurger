@@ -47,9 +47,9 @@ public class IngredientGameObject : MonoBehaviour //TODO  put this in Ingredient
     public void RescaleTouchArea(RectTransform targetTouchArea)
     {
         // Debug.LogError(" DELTA IS -> " + targetTouchArea.sizeDelta);
-        //_touchArea.sizeDelta = targetTouchArea.sizeDelta;
-        _touchArea.offsetMin = Vector2.zero;
-        _touchArea.offsetMax = Vector2.zero;
+        _touchArea.sizeDelta = targetTouchArea.sizeDelta;
+        //_touchArea.offsetMin = Vector2.zero;
+        //_touchArea.offsetMax = Vector2.zero;
 
     }
 }

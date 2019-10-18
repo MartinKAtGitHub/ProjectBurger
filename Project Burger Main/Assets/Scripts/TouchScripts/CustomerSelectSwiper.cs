@@ -12,12 +12,13 @@ public class CustomerSelectSwiper : TouchSwipeController
     protected override void Awake()
     {
         base.Awake();
-       
         LevelManager.Instance.CustomerSelectSwiper = this;
 
         // Maybe make an init
         CacheQueueSlotsFromElements();
         _elementInFocus.GetComponent<QueueSlot>().QueueSlotInFocus = true;
+
+        Debug.LogError("CustomerSelectSwiper.cs might be broken becasue _swipeContainer and _swipeContainerHorizontalLayoutGroup are changed beacase of updated TouchScriped. Script need to be attached on movign object");
 
     }
 

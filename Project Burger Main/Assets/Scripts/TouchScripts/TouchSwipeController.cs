@@ -4,9 +4,9 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 
+[RequireComponent(typeof(HorizontalLayoutGroup))]
 public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDragHandler
 {
-
     // [SerializeField] int _tmpMaxElementLimit;
     [Tooltip("The threshold of what should be consider a swipe")]
     [SerializeField] private float percentSwipeThreshold = 0.2f;
@@ -14,12 +14,12 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     [SerializeField] private float _easingSwipe = 0.8f;
     [Tooltip("How fast the slide/snap motion back to the original position is in case the cancels swipe")]
     [SerializeField] private float _easingReset = 0.8f;
-    [Tooltip("The element gameobject which will be used inside the Swipe container ")]
+    [Tooltip("1 of the element gameobject which will be used inside the Swipe container, used to find the size so swipe distance can be calculated ")]
     [SerializeField] private GameObject _swipeContainerElementPrefab;
     [Tooltip("The Rect Transform which will be moved when swiped")]
     [SerializeField] private RectTransform _swipeContainer;
-    [Tooltip("Used to calculate the X distance needed to swipe, in case of additional spacing")]
-    [SerializeField] private HorizontalLayoutGroup _swipeContainerHorizontalLayoutGroup;
+   /* [Tooltip("Used to calculate the X distance needed to swipe, in case of additional spacing")]
+    [SerializeField] */private HorizontalLayoutGroup _swipeContainerHorizontalLayoutGroup;
     [Tooltip("The ElementPrefabs / containers which will hold data(customer/food item) and will be swiped to")]
     [SerializeField] private RectTransform[] _elements; // drag and drop -> Length is used as limit
 
@@ -39,8 +39,20 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
     virtual protected void Awake()
     {
-        _activeElementsTEMPLIMIT = _elements.Length;
+        _swipeContainerHorizontalLayoutGroup = GetComponent<HorizontalLayoutGroup>();
+        if(_swipeContainerHorizontalLayoutGroup == null)
+        {
+            Debug.LogError($"Horizontal layout group on > {name} is NULL");
+        }
 
+        _swipeContainer = GetComponent<RectTransform>();
+
+        if (_swipeContainer == null)
+        {
+            Debug.LogError($"Cant find RectTransform make sure {name} is the swipe object");
+        }
+
+        _activeElementsTEMPLIMIT = _elements.Length;
         _swipeDistance = _swipeContainerElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
 
         Debug.Log(_swipeDistance);

@@ -7,22 +7,29 @@ using UnityEngine;
 /// </summary>
 public class FoodStationController : MonoBehaviour
 {
-
+    [Tooltip("The time it takes to transition to another station")]
+    [SerializeField] private float _timeToArrive = 0.5f;
     [Tooltip("The RectTransform which will be moved on Left Right btn press")]
     private RectTransform _stationContainer;
+
+
+    private int _stationCount;
+    private int _stationIndex;
+    private float _stationWidth;
+    private bool _inTransition;
+
 
     void Awake()
     {
         _stationContainer = GetComponent<RectTransform>();
-
-        if (_stationContainer == null)
-        {
-            Debug.LogError($"Cant find RectTransform make sure {name} is the swipe object");
-        }
+        _stationCount = transform.childCount - 1;
+        _stationWidth = transform.GetChild(0).GetComponent<RectTransform>().sizeDelta.x;
+        SetDeafultStation();
     }
 
     IEnumerator SmoothTransition(Vector2 startPos, Vector2 endPos, float sec)
     {
+        _inTransition = true;
         float t = 0f;
         while (t <= 1.0)
         {
@@ -31,23 +38,46 @@ public class FoodStationController : MonoBehaviour
             yield return null;
         }
 
+        _inTransition = false;
         yield return null;
     }
 
 
     public void NextStation()
     {
-        var newPos = _stationContainer.anchoredPosition;
-        newPos += new Vector2(-1 * (1920), 0);
+        if (!_inTransition)
+        {
+            if (_stationIndex < _stationCount)
+            {
+                _stationIndex++;
 
-        StartCoroutine(SmoothTransition(_stationContainer.anchoredPosition, newPos, 5f));
+                var newPos = _stationContainer.anchoredPosition;
+                newPos += new Vector2(-1 * (_stationWidth), 0);
+
+                StartCoroutine(SmoothTransition(_stationContainer.anchoredPosition, newPos, _timeToArrive));
+            }
+        }
     }
 
     public void PreviousStation()
     {
-        var newPos = _stationContainer.anchoredPosition;
-        newPos += new Vector2( (1920), 0);
+        if (!_inTransition)
+        {
+            if (_stationIndex > 0)
+            {
+                _stationIndex--;
 
-        StartCoroutine(SmoothTransition(_stationContainer.anchoredPosition, newPos, 5f));
+                var newPos = _stationContainer.anchoredPosition;
+                newPos += new Vector2((_stationWidth), 0);
+                StartCoroutine(SmoothTransition(_stationContainer.anchoredPosition, newPos, _timeToArrive));
+
+            }
+        }
+    }
+
+
+    private void SetDeafultStation()
+    {
+        _stationIndex = 0;
     }
 }

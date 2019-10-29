@@ -12,6 +12,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: HamBurger_Tomato
       objectReference: {fileID: 0}
+    - target: {fileID: 4364827356571203016, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: _ingredient
+      value: 
+      objectReference: {fileID: 11400000, guid: 798a59be8afb3a74b851cf2092a11d94,
+        type: 2}
     - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
       propertyPath: m_LocalPosition.x

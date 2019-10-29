@@ -20,18 +20,19 @@ public class Ingredient : ScriptableObject
     {
         NotDefined,
 
-        HamBurger_BottomBun,
-        HamBurger_Meat,
-        HamBurger_Meat_Raw,
-        HamBurger_Meat_Rare,
-        HamBurger_Meat_Medium,
-        HamBurger_Meat_MediumWell,
-        HamBurger_Meat_WellDone,
-        HamBurger_Meat_Overcooked,
-        HamBurger_Cheese,
-        HamBurger_Lettuce,
-        HamBurger_Onions,
+        Hamburger_BottomBun,
+        Hamburger_Meat,
+        //Hamburger_Meat_Raw,
+        //Hamburger_Meat_Rare,
+        //Hamburger_Meat_Medium,
+        //Hamburger_Meat_MediumWell,
+        //Hamburger_Meat_WellDone,
+        //Hamburger_Meat_Overcooked,
+        Hamburger_Cheese,
+        Hamburger_Lettuce,
+        Hamburger_Onions,
         Hamburger_Pickels,
+        Hamburger_Tomatos,
         Hamburger_TopBun
     }
     public IngredientTypes IngredientType { get => ingredientType; }

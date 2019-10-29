@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 868ad1209047edc4fa2fd6a1969fc8c0, type: 3}
+  m_Name: Tomatos
+  m_EditorClassIdentifier: 
+  IngredientTime: 1
+  _ingredientLayerSprites:
+  - {fileID: -468844461441825964, guid: fc0449b60e3c54b499b77ebe8a16e767, type: 3}
+  - {fileID: -7876509730349400126, guid: fc0449b60e3c54b499b77ebe8a16e767, type: 3}
+  - {fileID: -9028483496470027526, guid: fc0449b60e3c54b499b77ebe8a16e767, type: 3}
+  - {fileID: -3443446940082239752, guid: fc0449b60e3c54b499b77ebe8a16e767, type: 3}
+  - {fileID: -7966102365944969915, guid: fc0449b60e3c54b499b77ebe8a16e767, type: 3}
+  _ingredientName: Tomato
+  ingredientType: 7
+  RemoveChance: 0

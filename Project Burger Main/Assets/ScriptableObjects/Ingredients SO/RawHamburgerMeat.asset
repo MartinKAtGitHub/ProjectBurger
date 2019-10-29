@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 868ad1209047edc4fa2fd6a1969fc8c0, type: 3}
-  m_Name: Hamburg_Meat
+  m_Name: RawHamburgerMeat
   m_EditorClassIdentifier: 
   IngredientTime: 1
   _ingredientLayerSprites:
@@ -19,6 +19,6 @@ MonoBehaviour:
   - {fileID: -8240138308730508506, guid: 5038721c132cdc64387da070e4db313b, type: 3}
   - {fileID: 6125103688318448064, guid: 5038721c132cdc64387da070e4db313b, type: 3}
   - {fileID: -1635447897833527825, guid: 5038721c132cdc64387da070e4db313b, type: 3}
-  _ingredientName: ReadyMeat
-  ingredientType: 2
+  _ingredientName: Raw Hamburger Meat
+  ingredientType: 3
   RemoveChance: 0

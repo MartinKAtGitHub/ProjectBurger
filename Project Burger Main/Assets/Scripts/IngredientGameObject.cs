@@ -20,8 +20,15 @@ public class IngredientGameObject : MonoBehaviour //TODO  put this in Ingredient
 
     private void Awake()
     {
-        _ingredient.InitializeIngredient();
-        //_ingredientImage = GetComponent<Image>();
+        if(_ingredient !=null)
+        {
+             _ingredient.InitializeIngredient();
+        }
+        else
+        {
+            Debug.LogError($"Missing Ingredient SO in {name}");
+            return;
+        }
         _ingredientImage.sprite = Ingredient.IngredientSprite; 
     }
 

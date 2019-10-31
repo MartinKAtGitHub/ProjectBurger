@@ -39,13 +39,13 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         NullCheck<QueueManager>(QueueManager);
-        NullCheck(FoodTrayDropArea);
+     //   NullCheck(FoodTrayDropArea);
        // NullCheck(CustomerSpawner);
         NullCheck(SalesManager);
         NullCheck(ShuffleBag);
         NullCheck(ScoreManager);
         NullCheck(CustomerSelect);
-        NullCheck(OrderWindow);
+       // NullCheck(OrderWindow);
         NullCheck(WinLooseManager);
 
         if(_enableSpawner)
@@ -53,6 +53,7 @@ public class LevelManager : MonoBehaviour
             StartCoroutine(CustomerSpawnSystemInit());
 
         }
+       
 
     }
 
@@ -113,7 +114,7 @@ public class LevelManager : MonoBehaviour
     {
         if(reference == null)
         {
-            Debug.LogError(/*nameof(reference)+*/ "  missing reference -> check below console for type" );
+            Debug.LogError(/*nameof(reference)+*/ "  missing reference -> check below console for Line Num" );
         }
     }
 }

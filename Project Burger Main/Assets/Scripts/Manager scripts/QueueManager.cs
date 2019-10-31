@@ -6,12 +6,12 @@ using UnityEngine;
 public class QueueManager : MonoBehaviour
 {
 
-    [SerializeField] private RectTransform _customerNotInFocusContainer;
-    [SerializeField] private RectTransform _customerInteractionContainer;
+    //[SerializeField] private RectTransform _customerNotInFocusContainer;
+    //[SerializeField] private RectTransform _customerInteractionContainer;
     [SerializeField] private GameObject _queueSlotPrefab;
     [SerializeField] private int _activeQueueLimit;
     [SerializeField] private int _numOfActiveCustomers;
-    [SerializeField] private QueueSlot[] _queueSlots;
+    private QueueSlot[] _queueSlots;
 
     //private LimitedQueueDotIndicators _limitedQueueDotIndicators;
     //private LimitedCustomerSelect _limitedCustomerSelect;
@@ -37,7 +37,7 @@ public class QueueManager : MonoBehaviour
 
     private void Start()
     {
-        _queueSlots = LevelManager.Instance.CustomerSelectSwiper.QueueSlots;
+        _queueSlots = LevelManager.Instance.CustomerSelectSwiper.QueueSlots; // This might be better here
     }
 
     //private void GenerateQueueSlots()
@@ -58,7 +58,7 @@ public class QueueManager : MonoBehaviour
         _numOfActiveCustomers++;
         customer.gameObject.SetActive(true);
 
-        SearchForEmptyQueueSlot(customer);
+        InsertCustomerToEmptyQueueSlot(customer);
         
     }
 
@@ -83,7 +83,7 @@ public class QueueManager : MonoBehaviour
 
         }
     }
-    private void SearchForEmptyQueueSlot(Customer customer)
+    private void InsertCustomerToEmptyQueueSlot(Customer customer)
     {
         for (int i = 0; i < _queueSlots.Length; i++)
         {
@@ -100,7 +100,7 @@ public class QueueManager : MonoBehaviour
 
                 if(slot.QueueSlotInFocus)
                 {
-                    LevelManager.Instance.OrderWindow.UpdateUI(customer);
+                   // LevelManager.Instance.OrderWindow.UpdateUI(customer);
                 }
                 
                 //_limitedQueueDotIndicators.IsQueueSlotOccupied(i, true);

@@ -28,33 +28,33 @@ public class ShuffleBag : MonoBehaviour
         GetComponentsInChildren<Customer>(true, CustomerPool);
         _maxCount = CustomerPool.Count - 1;
 
-        //   Debug.Log("AWAKE -< maxCount = " + _maxCount);
+        // Debug.Log("AWAKE -< maxCount = " + _maxCount);
 
     }
 
     public Customer Next()
     {
         // var customer = new Customer();
-      //  Debug.Log("MAX COUNT = "  + _maxCount);
+        //Debug.Log("MAX COUNT = "  + _maxCount);
         if (_maxCount < 1)
         {
             if (TESTING_LOOPSUFFLEBAG)
             {
                 _maxCount = CustomerPool.Count - 1; // With this we just start over again when the pool runs out
                 _customer = CustomerPool[0];
-                 Debug.Log("ShuffleBag Repeating MaxCount = " + _maxCount);
+                Debug.Log("ShuffleBag Repeating MaxCount = " + _maxCount);
                 return _customer;
             }
             else
             {
                 _customer = CustomerPool[0];
-                 Debug.Log("SuffleBag FINAL Customer = " + _customer.name);
+                Debug.Log("SuffleBag FINAL Customer = " + _customer.name);
                 return _customer;
             }
 
-           // _customer = CustomerPool[0];
-           //// Debug.Log("FINAL Customer = " + _customer.name);
-           // return _customer;
+            // _customer = CustomerPool[0];
+            //// Debug.Log("FINAL Customer = " + _customer.name);
+            // return _customer;
         }
 
         var randomIndex = Random.Range(0, _maxCount);
@@ -64,7 +64,7 @@ public class ShuffleBag : MonoBehaviour
         CustomerPool[_maxCount] = _customer;
         _maxCount--;
 
-       // Debug.Log("ShuffleBAG Customer = " + _customer.name);
+        // Debug.Log("ShuffleBAG Customer = " + _customer.name);
 
         return _customer;
     }

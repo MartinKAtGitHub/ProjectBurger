@@ -20,8 +20,8 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     [SerializeField] private RectTransform _swipeContainer;
    /* [Tooltip("Used to calculate the X distance needed to swipe, in case of additional spacing")]
     [SerializeField] */private HorizontalLayoutGroup _swipeContainerHorizontalLayoutGroup;
-    [Tooltip("The ElementPrefabs / containers which will hold data(customer/food item) and will be swiped to")]
-    [SerializeField] private RectTransform[] _elements; // drag and drop -> Length is used as limit
+    [Tooltip("The Slots / containers which will hold customer,food items can be anything, serves as a position for the swiper to go to")]
+    [SerializeField] private RectTransform[] _slots; // drag and drop -> Length is used as limit
 
 
     private Vector2 _currentSwipeContainerPos;
@@ -35,7 +35,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     protected int _elementIndex = 0;
 
     public int ActiveElements { get => _activeElementsTEMPLIMIT; set => _activeElementsTEMPLIMIT = value; }
-    public RectTransform[] Elements { get => _elements;}
+    public RectTransform[] Slots { get => _slots;}
 
     virtual protected void Awake()
     {
@@ -43,6 +43,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         if(_swipeContainerHorizontalLayoutGroup == null)
         {
             Debug.LogError($"Horizontal layout group on > {name} is NULL");
+            return;
         }
 
         _swipeContainer = GetComponent<RectTransform>();
@@ -50,9 +51,10 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         if (_swipeContainer == null)
         {
             Debug.LogError($"Cant find RectTransform make sure {name} is the swipe object");
+            return;
         }
 
-        _activeElementsTEMPLIMIT = _elements.Length;
+        _activeElementsTEMPLIMIT = _slots.Length;
         _swipeDistance = _swipeContainerElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
 
         Debug.Log(_swipeDistance);
@@ -67,9 +69,9 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
     private void InitializeTouchControll() // maybe make this abstract and let the child handle this
     {
-        if (_elements.Length > 0)
+        if (_slots.Length > 0)
         {
-            var element = _elements[_elementIndex];
+            var element = _slots[_elementIndex];
             // element.SetParent(_swipeContainer);
             _elementInFocus = element;
         }
@@ -81,10 +83,9 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
     public void OnDrag(PointerEventData eventData)
     {
-
+        Debug.Log($"Dragging {name}");
         float diff = eventData.pressPosition.x - eventData.position.x;
         _swipeContainer.anchoredPosition = _currentSwipeContainerPos - new Vector2(diff, 0);
-
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -119,6 +120,12 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         }
     }
 
+
+    private void GetAllSlotsInSwipeContainer()
+    {
+      // maybe make slots into a list and get the type from the children insted of drag and drop into arry
+    }
+
     private IEnumerator LimitedTransistionLogic(Vector2 startPos, Vector2 endPos, float sec)
     {
         _inSmoothTransition = true;
@@ -144,9 +151,9 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         Debug.Log("BASIC NEXT");
         _elementIndex++;
 
-        if (_elementIndex > _elements.Length)
+        if (_elementIndex > _slots.Length)
         {
-            _elementIndex = _elements.Length - 1;
+            _elementIndex = _slots.Length - 1;
         }
 
         // _elements[_elementIndex] == null then increment agains
@@ -171,5 +178,6 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     {
         StartCoroutine(LimitedTransistionLogic(_swipeContainer.anchoredPosition, _newPos, _easingReset));
     }
+
 
 }

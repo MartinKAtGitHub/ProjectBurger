@@ -18,7 +18,9 @@ public class CustomerSelectSwiper : TouchSwipeController
         CacheQueueSlotsFromElements();
         _elementInFocus.GetComponent<QueueSlot>().QueueSlotInFocus = true;
 
-        Debug.LogError("CustomerSelectSwiper.cs might be broken becasue _swipeContainer and _swipeContainerHorizontalLayoutGroup are changed beacase of updated TouchScriped. Script need to be attached on movign object");
+        Debug.LogError("CustomerSelectSwiper.cs might be broken becasue _swipeContainer" +
+            " and _swipeContainerHorizontalLayoutGroup are changed beacase of updated TouchScriped." +
+            " Script need to be attached on movign object");
 
     }
 
@@ -26,9 +28,9 @@ public class CustomerSelectSwiper : TouchSwipeController
     {
         var index =  _elementIndex;
         index++;
-        if (index > Elements.Length - 1)
+        if (index > Slots.Length - 1)
         {
-            _elementIndex = Elements.Length - 1;
+            _elementIndex = Slots.Length - 1;
             return;
         }
 
@@ -101,11 +103,11 @@ public class CustomerSelectSwiper : TouchSwipeController
 
     private void CacheQueueSlotsFromElements()
     {
-        _queueSlots = new QueueSlot[Elements.Length];
+        _queueSlots = new QueueSlot[Slots.Length];
 
-        for (int i = 0; i < Elements.Length; i++)
+        for (int i = 0; i < Slots.Length; i++)
         {
-            _queueSlots[i] = Elements[i].GetComponent<QueueSlot>();
+            _queueSlots[i] = Slots[i].GetComponent<QueueSlot>();
         }
     }
 

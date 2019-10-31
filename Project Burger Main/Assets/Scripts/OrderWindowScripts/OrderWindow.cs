@@ -54,7 +54,7 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
         {
             for (int i = 0; i < _activeCustomer.Order.OrderRecipes.Count; i++) // This can never be more the tmpMax 
             {
-                var foodItemPnl = _orderWindowSwiper.Elements[i];
+                var foodItemPnl = _orderWindowSwiper.Slots[i];
                 foodItemPnl.gameObject.SetActive(true);
                 foodItemPnl.GetComponent<OrderWindowFoodItemPage>().UpdateThisPage(_activeCustomer.Order.OrderRecipes[i]);
             }

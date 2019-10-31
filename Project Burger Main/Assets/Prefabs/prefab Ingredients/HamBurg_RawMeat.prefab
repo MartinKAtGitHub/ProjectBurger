@@ -12,6 +12,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: HamBurg_RawMeat
       objectReference: {fileID: 0}
+    - target: {fileID: 4364827356571203016, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: _ingredient
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f8ff79c83ba81246a5f6ef44741c739,
+        type: 2}
+    - target: {fileID: 646263549191932966, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 260
+      objectReference: {fileID: 0}
+    - target: {fileID: 646263549191932966, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2046117214151235935, guid: d6bdb26a075ad64489be7918469951df,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 84552078326984462, guid: ffe8038318200e9499686641288ebe5d,
+        type: 3}
     - target: {fileID: 295963924765048986, guid: d6bdb26a075ad64489be7918469951df,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -42,27 +64,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 646263549191932966, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 260
-      objectReference: {fileID: 0}
-    - target: {fileID: 646263549191932966, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 4364827356571203016, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: _ingredient
-      value: 
-      objectReference: {fileID: 11400000, guid: 5f8ff79c83ba81246a5f6ef44741c739,
-        type: 2}
-    - target: {fileID: 2046117214151235935, guid: d6bdb26a075ad64489be7918469951df,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 84552078326984462, guid: ffe8038318200e9499686641288ebe5d,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6bdb26a075ad64489be7918469951df, type: 3}

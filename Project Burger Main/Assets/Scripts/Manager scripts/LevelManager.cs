@@ -6,7 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     public QueueManager QueueManager;
     // public CustomerSelect CustomerSelect;
-    public FoodTrayDropArea FoodTrayDropArea;
+    public FoodTray FoodTray;
     //public CustomerSpawner CustomerSpawner;
     public SalesManager SalesManager;
     public ShuffleBag ShuffleBag;
@@ -39,13 +39,13 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         NullCheck<QueueManager>(QueueManager);
-     //   NullCheck(FoodTrayDropArea);
+        NullCheck(FoodTray);
        // NullCheck(CustomerSpawner);
         NullCheck(SalesManager);
         NullCheck(ShuffleBag);
         NullCheck(ScoreManager);
         NullCheck(CustomerSelect);
-       // NullCheck(OrderWindow);
+        NullCheck(OrderWindow);
         NullCheck(WinLooseManager);
 
         if(_enableSpawner)

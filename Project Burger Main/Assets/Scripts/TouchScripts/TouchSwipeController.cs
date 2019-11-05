@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(HorizontalLayoutGroup))]
+//[RequireComponent(typeof(HorizontalLayoutGroup))]
 public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     // [SerializeField] int _tmpMaxElementLimit;
@@ -18,8 +18,8 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     [SerializeField] private GameObject _swipeContainerElementPrefab;
     [Tooltip("The Rect Transform which will be moved when swiped")]
     [SerializeField] private RectTransform _swipeContainer;
-   /* [Tooltip("Used to calculate the X distance needed to swipe, in case of additional spacing")]
-    [SerializeField] */private HorizontalLayoutGroup _swipeContainerHorizontalLayoutGroup;
+    [Tooltip("Used to calculate the X distance needed to swipe, in case of additional spacing")]
+    [SerializeField]private HorizontalLayoutGroup _swipeContainerHorizontalLayoutGroup;
     [Tooltip("The Slots / containers which will hold customer,food items can be anything, serves as a position for the swiper to go to")]
     [SerializeField] private RectTransform[] _slots; // drag and drop -> Length is used as limit
 
@@ -35,25 +35,10 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     protected int _elementIndex = 0;
 
     public int ActiveElements { get => _activeElementsTEMPLIMIT; set => _activeElementsTEMPLIMIT = value; }
-    public RectTransform[] Slots { get => _slots;}
+    public RectTransform[] Slots { get => _slots; }
 
     virtual protected void Awake()
     {
-        _swipeContainerHorizontalLayoutGroup = GetComponent<HorizontalLayoutGroup>();
-        if(_swipeContainerHorizontalLayoutGroup == null)
-        {
-            Debug.LogError($"Horizontal layout group on > {name} is NULL");
-            return;
-        }
-
-        _swipeContainer = GetComponent<RectTransform>();
-
-        if (_swipeContainer == null)
-        {
-            Debug.LogError($"Cant find RectTransform make sure {name} is the swipe object");
-            return;
-        }
-
         _activeElementsTEMPLIMIT = _slots.Length;
         _swipeDistance = _swipeContainerElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
 
@@ -92,7 +77,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     {
         float percentage = (eventData.pressPosition.x - eventData.position.x) / Screen.width;
 
-        if(!_inSmoothTransition)
+        if (!_inSmoothTransition)
         {
             if (Mathf.Abs(percentage) >= percentSwipeThreshold)
             {
@@ -123,7 +108,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
     private void GetAllSlotsInSwipeContainer()
     {
-      // maybe make slots into a list and get the type from the children insted of drag and drop into arry
+        // maybe make slots into a list and get the type from the children insted of drag and drop into arry
     }
 
     private IEnumerator LimitedTransistionLogic(Vector2 startPos, Vector2 endPos, float sec)

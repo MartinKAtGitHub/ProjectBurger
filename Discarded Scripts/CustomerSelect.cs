@@ -48,7 +48,7 @@ public class CustomerSelect : MonoBehaviour // TODO CustomerSelect.cs | Update t
 
     private void Start()
     {
-        _foodTrayDropArea = LevelManager.Instance.FoodTrayDropArea;
+        _foodTrayDropArea = LevelManager.Instance.FoodTray;
         _customers = _queueManager.ActiveCustomerQueue;
     }
 

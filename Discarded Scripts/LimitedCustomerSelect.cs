@@ -40,7 +40,7 @@ public class LimitedCustomerSelect : MonoBehaviour
     private void Start()
     {
         Initialize();
-        _foodTrayDropArea = LevelManager.Instance.FoodTrayDropArea;
+        _foodTrayDropArea = LevelManager.Instance.FoodTray;
        
     }
 

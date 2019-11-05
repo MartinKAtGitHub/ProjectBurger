@@ -18,10 +18,6 @@ public class CustomerSelectSwiper : TouchSwipeController
         CacheQueueSlotsFromElements();
         _elementInFocus.GetComponent<QueueSlot>().QueueSlotInFocus = true;
 
-        Debug.LogError("CustomerSelectSwiper.cs might be broken becasue _swipeContainer" +
-            " and _swipeContainerHorizontalLayoutGroup are changed beacase of updated TouchScriped." +
-            " Script need to be attached on movign object");
-
     }
 
     protected override void LimitedNextElement()
@@ -59,8 +55,6 @@ public class CustomerSelectSwiper : TouchSwipeController
                 return;
             }
         }
-
-        Debug.Log(_elementIndex + "INDEX");
         //ResetPnl();
     }
 

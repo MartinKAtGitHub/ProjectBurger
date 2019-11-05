@@ -27,7 +27,7 @@ public class SalesManager : MonoBehaviour
         {
             if (!_customerSelect.InSmoothTransition)
             {
-                LevelManager.Instance.FoodTrayDropArea.CheckFoodStacksAgainstOrder();
+                LevelManager.Instance.FoodTray.CheckFoodStacksAgainstOrder();
 
                // _customerSelect.OnSell();
                 _queueManager.RemoveCustomerFromQueue(customer);

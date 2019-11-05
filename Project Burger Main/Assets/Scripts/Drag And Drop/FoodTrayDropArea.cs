@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
-/// Holds the food order that is ready to be sold AND checks the Food against the order to see if it was correct or not
+/// DropArea logic for food the player want to be sold
 /// </summary>
 public class FoodTrayDropArea : MonoBehaviour, IDropHandler
 {
@@ -14,14 +14,17 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
     [SerializeField] private bool _orderSuccessful;
 
     private RectTransform _thisRectTransform;
+    private FoodTray _foodTray;
 
     public Order Order { set => _order = value; }
     public bool OrderSuccessful { get => _orderSuccessful; }
+
     [Space(20)] public List<Food> _foods = new List<Food>();
 
     private void Awake()
     {
-        LevelManager.Instance.FoodTrayDropArea = this;
+        //LevelManager.Instance.FoodTrayDropArea = this;
+        _foodTray = GetComponent<FoodTray>();
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -33,7 +36,8 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
             {
                 //food.FoodDrag.ResetPositionParent = this.transform;
                 food.FoodDrag.ResetPositionParent = _thisRectTransform;
-                _foods.Add(food);
+                //_foods.Add(food);
+                _foodTray.FoodItemsOnTray.Add(food);
 
             }
             else
@@ -50,150 +54,8 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
     public void DropAreaOnBeginDrag()
     {
         Debug.Log("Dragging from food tray ");
-        _foods.RemoveAt(_foods.Count - 1);
+        // _foods.RemoveAt(_foods.Count - 1);
+        _foodTray.FoodItemsOnTray.RemoveAt(_foodTray.FoodItemsOnTray.Count - 1);
     }
 
-
-
-    /// <summary>
-    /// The food will sold the moment the amount of foodstacks = to the amount of foodstack the order requers
-    /// </summary>
-    //private void AutoSell()
-    //{
-    //    if (_order.OrderRecipes.Count == _foods.Count)
-    //    {
-    //        CheckFoodStacksAgainstOrder();
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("Missing rest of the order -> Order recipes(" + _order.OrderRecipes.Count + ") FoodStacks(" + _foods.Count + ")");
-    //    }
-    //}
-
-    //PERFORMANCE Foodtray CheckFoodStacksAgainstOrder() we can check food per Drop instead of all the food at 1 time. check all the results on sell
-    public void CheckFoodStacksAgainstOrder() // TODO FoodTray.cs | CheckFoodStacksAgainstOrder() can be moved to another script to make it cleaner 
-    {
-        var amountOfOrderRecipes = _order.OrderRecipes.Count;
-        var amountOffoodStackMatches = 0;
-
-        if (_order != null)
-        {
-            if (_foods.Count == 0)
-            {
-                Debug.Log("NO FOOD PLACED ON FOODTRAY !!!!!");
-                OnFailOrder();
-                return;
-            }
-
-            if (amountOfOrderRecipes == _foods.Count)
-            {
-                for (int i = 0; i < _foods.Count; i++) // for every foodstack
-                {
-                    //Debug.Log("This should not decrease " + _order.OrderRecipes.Count);
-               
-                    var tempOrderRecipes = _order.OrderRecipes;
-                    var ingredientMatchFoundInOrderRecipeIndex = 0;
-                    var failCounter = 0;
-
-                    for (int j = 0; j < _foods[i].IngredientsGO.Count; j++) // ingredients in foodstack loop
-                    {
-                        var currentIngredient = _foods[i].IngredientsGO[j].Ingredient;
-                        var currentIngredientIndex = j;
-
-                        for (int k = ingredientMatchFoundInOrderRecipeIndex; k < tempOrderRecipes.Count; k++) // Order recipes Loop
-                        {
-                            if (_foods[i].IngredientsGO.Count <= tempOrderRecipes[k].OrderIngredients.Count)
-                            {
-                                if (currentIngredient.IngredientType == tempOrderRecipes[k].OrderIngredients[currentIngredientIndex].IngredientType)
-                                {
-                                    // Debug.Log("Match found ! | " + _foodStacks[i].name + "(" + currentIngredient.IngredientType + ") == (" + tempOrderRecipes[k].OrderIngredients[currentIngredientIndex].IngredientType + ")");
-                                    ingredientMatchFoundInOrderRecipeIndex = k;
-                                    break; // Go to next FoodStack ingredient
-                                }
-                                else
-                                {
-                                    // Foodstack ingredient didn't match this order recipe ingredient
-                                    failCounter++;
-                                }
-                            }
-                            else
-                            {
-                                // Foodstack is to big for this OrderRecipe[k]
-                                failCounter++;
-                            }
-                        }
-
-                        // Next Foodstack ingredient
-                        if (failCounter == tempOrderRecipes.Count)
-                        {
-                            // The ingredient didn't match any order recipe ingredient so go to next foodstack
-                            _foods[i].DidStackMatchOrder = false;
-                            // If 1 foodstack fails do we fail the whole thing or give half points ?
-                            // Beacuse we dont need to loop trhoug the whole thing if we fail here
-                            break;
-                        }
-                        else // TODO foodtray optimization,  _foodStacks[i].DidStackMatchOrder = true;
-                        {
-                            _foods[i].DidStackMatchOrder = true;
-                        }
-                    }
-
-                    // Check this foodStack Fail or success
-                    if (!_foods[i].DidStackMatchOrder)
-                    {
-                        Debug.Log("FAIL " + _foods[i].name);
-                        continue;
-                    }
-                    else
-                    {
-                        _foods[i].DidStackMatchOrder = true;
-                        tempOrderRecipes.RemoveAt(ingredientMatchFoundInOrderRecipeIndex);
-                        amountOffoodStackMatches++;
-                    }
-                }
-
-                if (amountOffoodStackMatches == amountOfOrderRecipes)
-                {
-                    OnSuccessfulOrder();
-                }
-                else
-                {
-                    OnFailOrder();
-                }
-            }
-            else
-            {
-                Debug.Log("Can not sell food, Amount of food is not the same in order, Give player FAIL for selling to early ?");
-                OnFailOrder();
-            }
-        }
-        else
-        {
-            Debug.Log("FoodTray has no Order = null");
-        }
-    }
-
-    private void OnSuccessfulOrder()
-    {
-        _orderSuccessful = true;
-        RemoveFoodFromGame();
-        LevelManager.Instance.ScoreManager.AddScore(_order.PriceTotal);
-    }
-
-    private  void OnFailOrder()
-    {
-        _orderSuccessful = false;
-        RemoveFoodFromGame();
-        LevelManager.Instance.ScoreManager.RemoveLife();
-    }
-
-    private void RemoveFoodFromGame()
-    {
-        for (int i = 0; i < _foods.Count; i++)
-        {
-            var food = _foods[i];
-            _foods.RemoveAt(i);
-            food.RemoveFromGame(); 
-        }
-    }
 }

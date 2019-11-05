@@ -21,7 +21,7 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
 
     public Customer ActiveCustomer { get => _activeCustomer; }
     public RectTransform NotInFocusPnls { get => _notInFocusPnls; }
-    public GameObject FoodItemPnlPrefab { get => _foodItemPnlPrefab;  }
+    public GameObject FoodItemPnlPrefab { get => _foodItemPnlPrefab; }
 
     private void Awake()
     {
@@ -32,8 +32,7 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
     public void OpenWindow(Customer customer)
     {
         // Anim Fade INN Window / enable window = true
-        
-       // UpdateUI(customer);
+        // UpdateUI(customer);
         gameObject.SetActive(true);
     }
 
@@ -47,10 +46,11 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
 
     public void UpdateUI(Customer customer)
     {
+        Debug.Log("UPDATING ORDERWINDOW");
         _activeCustomer = customer;
         var foodItemsInOrder = _activeCustomer.Order.OrderRecipes.Count;
 
-        if(foodItemsInOrder <= _tmpMax)
+        if (foodItemsInOrder <= _tmpMax)
         {
             for (int i = 0; i < _activeCustomer.Order.OrderRecipes.Count; i++) // This can never be more the tmpMax 
             {
@@ -61,7 +61,7 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
         }
         else
         {
-            Debug.LogError($"Customer {_activeCustomer.name} has more then {_tmpMax} food items Ordered, this will overflow array" );
+            Debug.LogError($"Customer {_activeCustomer.name} has more then {_tmpMax} food items Ordered, this will overflow array");
         }
 
     }

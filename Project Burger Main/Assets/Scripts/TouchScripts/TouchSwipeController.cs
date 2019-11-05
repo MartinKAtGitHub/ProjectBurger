@@ -75,6 +75,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        // TODO BUG -> Can Randomly just drag the customer into weird positions, and messing up the whole thing
         float percentage = (eventData.pressPosition.x - eventData.position.x) / Screen.width;
 
         if (!_inSmoothTransition)

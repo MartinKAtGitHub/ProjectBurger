@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class FoodTray : MonoBehaviour
 {
-    private Order _order;
+    [SerializeField]private Order _order;
     /// <summary>
     /// Food items placed on the foodtray;
     /// </summary>
     private List<Food> _foodItemsOnTray = new List<Food>();
 
     public List<Food> FoodItemsOnTray { get => _foodItemsOnTray;}
-
-
+    public Order Order { get => _order; }
 
     private void Awake()
     {
         LevelManager.Instance.FoodTray = this;
     }
 
-    public void UpdateFoodTray()
+    public void UpdateFoodTray(Customer customer)
     {
-        
+        _order = customer.Order;
     }
 
     //PERFORMANCE Foodtray CheckFoodStacksAgainstOrder() we can check food per Drop instead of all the food at 1 time. check all the results on sell

@@ -46,16 +46,15 @@ public class CustomerSelectSwiper : TouchSwipeController
 
                 var newSlot = _queueSlots[_elementIndex];
                 newSlot.QueueSlotInFocus = true;
-                _customerInFocus = newSlot.CurrentCustomer;
 
-                LevelManager.Instance.OrderWindow.UpdateUI(_customerInFocus);
+                SetCustomerInFocus(newSlot.CurrentCustomer);
+
 
                 _newPos += new Vector2(-1 * (_swipeDistance + skipDistance), 0);
                 Debug.Log(" NEXT Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
                 return;
             }
         }
-        //ResetPnl();
     }
 
     protected override void LimitedPrevElement()
@@ -84,8 +83,10 @@ public class CustomerSelectSwiper : TouchSwipeController
 
                 var newSlot = _queueSlots[_elementIndex];
                 newSlot.QueueSlotInFocus = true;
-                _customerInFocus = newSlot.CurrentCustomer;
 
+                SetCustomerInFocus(newSlot.CurrentCustomer);
+               
+                
                 _newPos += new Vector2(_swipeDistance + skipDistance, 0);
                 Debug.Log(" PREV Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
                 return;
@@ -94,6 +95,20 @@ public class CustomerSelectSwiper : TouchSwipeController
         Debug.Log(_elementIndex + "INDEX");
     }
 
+
+    private void SetCustomerInFocus(Customer currentCustomer)
+    {
+        if(currentCustomer != null)
+        {
+            _customerInFocus = currentCustomer;
+            LevelManager.Instance.OrderWindow.UpdateUI(currentCustomer);
+            LevelManager.Instance.FoodTray.UpdateFoodTray(currentCustomer);
+        }
+        else
+        {
+            Debug.Log("QueueSlot Is Empty, No customer to update FOODTRAY OR ORDERWINDOW");
+        }
+    }
 
     private void CacheQueueSlotsFromElements()
     {

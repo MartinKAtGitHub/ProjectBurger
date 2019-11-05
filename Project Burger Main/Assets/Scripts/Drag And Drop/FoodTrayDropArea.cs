@@ -10,14 +10,14 @@ using UnityEngine.UI;
 public class FoodTrayDropArea : MonoBehaviour, IDropHandler
 {
    
-    [SerializeField] private Order _order; // Get order from Customer
-    [SerializeField] private bool _orderSuccessful;
+    //[serializefield] private order _order; // get order from customer
+    //[serializefield] private bool _ordersuccessful;
 
     private RectTransform _thisRectTransform;
     private FoodTray _foodTray;
 
-    public Order Order { set => _order = value; }
-    public bool OrderSuccessful { get => _orderSuccessful; }
+    //public Order Order { set => _order = value; }
+    //public bool OrderSuccessful { get => _orderSuccessful; }
 
     [Space(20)] public List<Food> _foods = new List<Food>();
 
@@ -29,7 +29,7 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (_order != null)
+        if (_foodTray.Order != null)
         {
             var food = eventData.pointerDrag.GetComponent<Food>();
             if (food != null)

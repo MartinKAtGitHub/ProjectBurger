@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     public SalesManager SalesManager;
     public ShuffleBag ShuffleBag;
     public ScoreManager ScoreManager;
-    public LimitedCustomerSelect CustomerSelect;
+   // public LimitedCustomerSelect CustomerSelect;
     public CustomerSelectSwiper CustomerSelectSwiper;
     public OrderWindow OrderWindow;
     public WinLooseManager WinLooseManager;
@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour
         NullCheck(SalesManager);
         NullCheck(ShuffleBag);
         NullCheck(ScoreManager);
-        NullCheck(CustomerSelect);
+       // NullCheck(CustomerSelect);
         NullCheck(OrderWindow);
         NullCheck(WinLooseManager);
 

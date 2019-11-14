@@ -63,8 +63,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: e87e54daa09fdf04181ca6e55bf47fcf, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
@@ -87,7 +85,7 @@ GameObject:
   - component: {fileID: 7498998131796987432}
   - component: {fileID: 7498998131796987439}
   - component: {fileID: 7498998131796987438}
-  - component: {fileID: 7498998131796987437}
+  - component: {fileID: 3149761933092155289}
   m_Layer: 0
   m_Name: GrillSingleSpot
   m_TagString: Untagged
@@ -141,8 +139,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -160,16 +156,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7498998131796987427}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a276227697ebdc46859b1f73eff5338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GrillSettings: {fileID: 7498998131796987437}
+  GrillSettings: {fileID: 0}
   BurgerIngredience: {fileID: 0}
   DropAreaOccupied: 0
   _HeatOfBurger: 0
---- !u!114 &7498998131796987437
+--- !u!114 &3149761933092155289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,13 +174,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7498998131796987427}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0c90e2f11c98db459872ebb7cf8aa93, type: 3}
+  m_Script: {fileID: 11500000, guid: 1793e056f325387458d930ff54c82025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HeatOnOff: 1
-  GrillTopTemperatureValue: 60
-  GrillHeatingRate: 0.5
-  GrillCoolingRate: 1.5
 --- !u!1 &7498998132614701962
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,8 +243,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 9467f5dbd983e6e449f75b4454fb738f, type: 3}
   m_Type: 3
   m_PreserveAspect: 0

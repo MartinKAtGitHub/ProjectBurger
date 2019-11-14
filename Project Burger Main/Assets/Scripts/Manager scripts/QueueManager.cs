@@ -6,15 +6,10 @@ using UnityEngine;
 public class QueueManager : MonoBehaviour
 {
 
-    //[SerializeField] private RectTransform _customerNotInFocusContainer;
-    //[SerializeField] private RectTransform _customerInteractionContainer;
     [SerializeField] private GameObject _queueSlotPrefab;
     [SerializeField] private int _activeQueueLimit;
     [SerializeField] private int _numOfActiveCustomers;
     private QueueSlot[] _queueSlots;
-
-    //private LimitedQueueDotIndicators _limitedQueueDotIndicators;
-    //private LimitedCustomerSelect _limitedCustomerSelect;
 
     // [SerializeField] private List<Customer> _activeCustomerQueue = new List<Customer>();
     // private CustomerSelect _customerSelect;

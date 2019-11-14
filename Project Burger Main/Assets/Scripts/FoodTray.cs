@@ -9,6 +9,7 @@ public class FoodTray : MonoBehaviour
     /// Food items placed on the foodtray;
     /// </summary>
     private List<Food> _foodItemsOnTray = new List<Food>();
+    
 
     public List<Food> FoodItemsOnTray { get => _foodItemsOnTray;}
     public Order Order { get => _order; }
@@ -16,6 +17,7 @@ public class FoodTray : MonoBehaviour
     private void Awake()
     {
         LevelManager.Instance.FoodTray = this;
+
     }
 
     public void UpdateFoodTray(Customer customer)
@@ -23,7 +25,7 @@ public class FoodTray : MonoBehaviour
         _order = customer.Order;
     }
 
-    //PERFORMANCE Foodtray CheckFoodStacksAgainstOrder() we can check food per Drop instead of all the food at 1 time. check all the results on sell
+    
     public void CheckFoodStacksAgainstOrder() 
     {
         var amountOfOrderRecipes = _order.OrderRecipes.Count;
@@ -122,7 +124,7 @@ public class FoodTray : MonoBehaviour
         }
         else
         {
-            Debug.Log("FoodTray has no Order = null");
+            Debug.Log("FoodTray has no Order(null)");
         }
     }
 

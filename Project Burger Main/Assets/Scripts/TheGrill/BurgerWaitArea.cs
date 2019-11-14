@@ -37,11 +37,11 @@ public class BurgerWaitArea : DropArea {
     }
 
 
-    public override void DropAreaOnBeginDrag() {//Calculate Burger Freshness :D
-        if (ConstantHeat == false) {//TODO Do This / Burger Getting Old/Cold
-            //TODO Make Burger Lose Its Freshness;
-        }
-        _IsSomethingHere = false;
+    //public override void DropAreaOnBeginDrag() {//Calculate Burger Freshness :D
+    //    if (ConstantHeat == false) {//TODO Do This / Burger Getting Old/Cold
+    //        //TODO Make Burger Lose Its Freshness;
+    //    }
+    //    _IsSomethingHere = false;
 
-    }
+    //}
 }

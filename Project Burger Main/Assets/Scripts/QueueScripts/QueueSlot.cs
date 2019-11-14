@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class QueueSlot : MonoBehaviour
 {
     [SerializeField]private Customer _currentCustomer;

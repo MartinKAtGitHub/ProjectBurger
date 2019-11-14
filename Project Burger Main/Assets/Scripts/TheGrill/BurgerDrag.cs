@@ -8,9 +8,9 @@ public class BurgerDrag : DraggableIngredient
 {
 
     public Image TheImage;
-    public BurgerInfo TheBurgerInfos;
+    public BurgerMeatLogic TheBurgerInfos;
     public IngredientGameObject TheIngredientGameObject;
-    public TheGrill TheGrill;
+    //public TheGrill TheGrill;
 
     private Transform LastParent;
     //  private Vector3 LastPosition;
@@ -19,7 +19,7 @@ public class BurgerDrag : DraggableIngredient
     public override void OnBeginDrag(PointerEventData eventData)
     {
         base.OnBeginDrag(eventData);
-        ResetPositionParent.GetComponent<TheGrill>()?.DropAreaOnBeginDrag();
+       // ResetPositionParent.GetComponent<TheGrill>()?.DropAreaOnBeginDrag();
 
         //transform.SetParent(transform.parent.parent.parent);//Hmmmm
         //canvasGroup.blocksRaycasts = false;
@@ -34,7 +34,7 @@ public class BurgerDrag : DraggableIngredient
     public override void OnEndDrag(PointerEventData eventData)
     {
         base.OnEndDrag(eventData);
-        ResetPositionParent.GetComponent<TheGrill>()?.Setup();
+       // ResetPositionParent.GetComponent<TheGrill>()?.Setup();
 
         //if (ResetPositionParent == null)
         //{//This Is True If The OnDrop Didnt Happen, So Im Calling OnDrop Again To Reapply Info From OnDrop

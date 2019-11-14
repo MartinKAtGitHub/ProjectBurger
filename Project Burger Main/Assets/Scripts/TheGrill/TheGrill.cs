@@ -4,59 +4,58 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
-{
+public class TheGrill : MonoBehaviour {
 
-    public GrillTemperature GrillSettings;
-    [HideInInspector]
-    public BurgersMeat BurgerIngredience;
-    BurgerDrag _theBurgerDrag;
+    private GrillSlotDropArea _grillSlotDropArea;
+   // private BurgerMeatLogic _burgerMeatLogic;
 
+    private float _grillslotTemp = 1;
+    private float _gracePeriodTimer = 0;
+    private bool _activeGracePeriod = false;
 
-    //    readonly float StartTemp = 0.125f;
-    public readonly float EndHeat = 0.905f;//This Is Going To Become 1, Its Just That I Need To Make a Sprite With Correct Dimentions.
+    public GrillSlotDropArea GrillSlotDropArea { get => _grillSlotDropArea; }
 
-    public bool DropAreaOccupied; // occupied
-    float _GrillTopHeat = 60;
+    // public BurgerMeatLogic BurgerMeatLogic { get => _burgerMeatLogic; set => _burgerMeatLogic = value; }
 
-    [SerializeField]
-    private float _HeatOfBurger = 0;
-
-    public float HeatOfBurger
+    private void Awake()
     {
-        get
+        _grillSlotDropArea = GetComponent<GrillSlotDropArea>();
+
+        //_burgerMeatLogic = _grillSlotDropArea.BurgerMeatLogic;
+    }
+
+
+    public void flipped() 
+    {
+        _activeGracePeriod = false;
+        _gracePeriodTimer = 0;
+    }
+
+    public void ApplyGracePeriod() 
+    {
+        _activeGracePeriod = true;
+        _gracePeriodTimer = Time.time + 5;
+    }
+
+    public void Update() 
+    {
+        if(_grillSlotDropArea.BurgerMeatLogic != null)
         {
-            return _HeatOfBurger;
+            if (_activeGracePeriod == true) {
+                if (Time.time > _gracePeriodTimer) {
+                    _activeGracePeriod = false;
+                }
+            } else {
+                if(_grillSlotDropArea.BurgerMeatLogic != null) {
+                    _grillSlotDropArea.BurgerMeatLogic.AddHeatToBurger(_grillslotTemp * Time.deltaTime);
+                }
+            }
         }
     }
 
 
-    #region Flip Variables
 
-    bool _RotateBackAndForth = true;
-    bool _FlipBurger = false;
-
-    readonly float _JumpSpeed = 10f;
-    readonly float _RotateSpeed = 5f;
-
-    float _RotateTime = 0;
-    float _DownForce = 0;
-    readonly float _UpForce = 200;//TODO Think About Screen.Height??
-
-    #endregion
-
-
-
-
-    private RectTransform _thisRectTransform;
-
-
-    private void Awake()
-    {
-      
-        _thisRectTransform = GetComponent<RectTransform>();
-    }
-
+    /*
 
     private void Update()
     {
@@ -137,7 +136,7 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
 
     }
 
-
+    
     public void OnDrop(PointerEventData eventData) 
     {
         if (DropAreaOccupied == false)
@@ -147,7 +146,7 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
                 //   if (_theBurgerDrag.TheIngredientGameObject.ingredient.IngredientType == Ingredient.IngredientTypes.HamBurger_Meat_Raw){//only raw burgers can get on the grill.
 
                 _theBurgerDrag.ResetPositionParent = _thisRectTransform;
-                _theBurgerDrag.TheGrill = this;
+                //_theBurgerDrag.TheGrill = this;
 
                 BurgerIngredience = _theBurgerDrag.TheIngredientGameObject.Ingredient as BurgersMeat;
 
@@ -263,7 +262,7 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
         }
     }
 
-
+    
     void EvaluateQuality()
     {//TODO make this abit more advanced later on. 
 
@@ -274,6 +273,6 @@ public class TheGrill : MonoBehaviour, IPointerClickHandler, IDropHandler
     }
 
 
-
+    */
 
 }

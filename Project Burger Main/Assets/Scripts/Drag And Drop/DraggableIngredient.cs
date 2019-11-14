@@ -60,7 +60,6 @@ public class DraggableIngredient : Draggable
                 FoodCombinationDropArea.MakeFoodDraggable();
                 FoodCombinationDropArea.ParentIngredientsToFood();
                 FoodCombinationDropArea.IsFoodReady = false;
-
             }
             else
             {

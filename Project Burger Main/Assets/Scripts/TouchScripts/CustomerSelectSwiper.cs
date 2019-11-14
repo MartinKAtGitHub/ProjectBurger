@@ -5,8 +5,10 @@ using UnityEngine;
 public class CustomerSelectSwiper : TouchSwipeController
 {
 
-    private QueueSlot[] _queueSlots;
+    [SerializeField]private QueueSlot[] _queueSlots;
     private Customer _customerInFocus;
+   
+    //private QueueSlot _queueSlotInFocus;
     public QueueSlot[] QueueSlots { get => _queueSlots; }
 
     protected override void Awake()
@@ -17,6 +19,14 @@ public class CustomerSelectSwiper : TouchSwipeController
         // Maybe make an init
         CacheQueueSlotsFromElements();
         _elementInFocus.GetComponent<QueueSlot>().QueueSlotInFocus = true;
+        
+
+
+    }
+
+
+    private void Update() 
+    {
 
     }
 
@@ -47,7 +57,7 @@ public class CustomerSelectSwiper : TouchSwipeController
                 var newSlot = _queueSlots[_elementIndex];
                 newSlot.QueueSlotInFocus = true;
 
-                SetCustomerInFocus(newSlot.CurrentCustomer);
+                //SetCustomerInFocus(newSlot.CurrentCustomer);
 
 
                 _newPos += new Vector2(-1 * (_swipeDistance + skipDistance), 0);
@@ -84,7 +94,7 @@ public class CustomerSelectSwiper : TouchSwipeController
                 var newSlot = _queueSlots[_elementIndex];
                 newSlot.QueueSlotInFocus = true;
 
-                SetCustomerInFocus(newSlot.CurrentCustomer);
+               // SetCustomerInFocus(newSlot.CurrentCustomer);
                
                 
                 _newPos += new Vector2(_swipeDistance + skipDistance, 0);
@@ -96,19 +106,19 @@ public class CustomerSelectSwiper : TouchSwipeController
     }
 
 
-    private void SetCustomerInFocus(Customer currentCustomer)
-    {
-        if(currentCustomer != null)
-        {
-            _customerInFocus = currentCustomer;
-            LevelManager.Instance.OrderWindow.UpdateUI(currentCustomer);
-            LevelManager.Instance.FoodTray.UpdateFoodTray(currentCustomer);
-        }
-        else
-        {
-            Debug.Log("QueueSlot Is Empty, No customer to update FOODTRAY OR ORDERWINDOW");
-        }
-    }
+    //private void SetCustomerInFocus(Customer currentCustomer) // move to take order logic
+    //{
+    //    if(currentCustomer != null)
+    //    {
+    //        _customerInFocus = currentCustomer;
+    //        LevelManager.Instance.OrderWindow.UpdateUI(currentCustomer);
+    //        LevelManager.Instance.FoodTray.UpdateFoodTray(currentCustomer);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("QueueSlot Is Empty, No customer to update FOODTRAY OR ORDERWINDOW");
+    //    }
+    //}
 
     private void CacheQueueSlotsFromElements()
     {

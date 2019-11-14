@@ -30,7 +30,7 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
     public Transform RenderOrderTransform { get => _renderOrderTransform; set => _renderOrderTransform = value; }
     public Vector2 ResetPosOffset { set => _resetPosOffset = value; }
 
-    private void Awake()
+    protected void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
         _rectTransform = GetComponent<RectTransform>();
@@ -38,10 +38,10 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
         //_resetPositionParent = transform.parent;
         _resetPositionParent = transform.parent.GetComponent<RectTransform>();
 
-        Debug.Log(_resetPositionParent.name);
+       // Debug.Log(_resetPositionParent.name);
     }
 
-    private void Start()
+    protected void Start()
     {
         if (_renderOrderTransform == null)
         {
@@ -69,10 +69,7 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     public virtual void OnEndDrag(PointerEventData eventData) // THIS FIRES AFTER ONDROP () IN DropArea
     {
-        // OnDrop happens before this, so if you set the parent in OnDrop then this will snap to the new Position and not the Original
         transform.SetParent(_resetPositionParent);
-        // _rectTransform.localPosition = Vector2.zero;
-       // Debug.Log(_resetPositionParent.transform.position);
         _rectTransform.anchoredPosition = Vector2.zero + _resetPosOffset;
         _canvasGroup.blocksRaycasts = true;
         Debug.Log($"OneEndDrag -> {name} | My Pos {_rectTransform.anchoredPosition} -- offset { (Vector2.zero + _resetPosOffset)}");

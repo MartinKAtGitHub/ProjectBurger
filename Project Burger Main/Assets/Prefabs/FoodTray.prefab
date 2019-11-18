@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 720, y: -300}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 480, y: 480}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3452498268054116583
@@ -88,6 +88,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e142cbad7c998439b52f3ec0563cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _order:
+    CustomerName: 
+    PriceTotal: 0
+    OrderRecipes: []
 --- !u!114 &3452498268054116582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,11 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24543fb105dd8d2498216a2e7772e9e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _order:
-    CustomerName: 
-    PriceTotal: 0
-    OrderRecipes: []
-  _orderSuccessful: 0
   _foods: []
 --- !u!114 &4144458960206559854
 MonoBehaviour:

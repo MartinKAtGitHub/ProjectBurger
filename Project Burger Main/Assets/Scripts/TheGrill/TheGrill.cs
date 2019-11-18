@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TheGrill : MonoBehaviour {
+public class TheGrill : MonoBehaviour
+{
 
     private GrillSlotDropArea _grillSlotDropArea;
-   // private BurgerMeatLogic _burgerMeatLogic;
 
     private float _grillslotTemp = 1;
     private float _gracePeriodTimer = 0;
@@ -15,38 +15,38 @@ public class TheGrill : MonoBehaviour {
 
     public GrillSlotDropArea GrillSlotDropArea { get => _grillSlotDropArea; }
 
-    // public BurgerMeatLogic BurgerMeatLogic { get => _burgerMeatLogic; set => _burgerMeatLogic = value; }
-
     private void Awake()
     {
         _grillSlotDropArea = GetComponent<GrillSlotDropArea>();
-
-        //_burgerMeatLogic = _grillSlotDropArea.BurgerMeatLogic;
     }
 
-
-    public void flipped() 
+    public void flipped()
     {
         _activeGracePeriod = false;
         _gracePeriodTimer = 0;
     }
 
-    public void ApplyGracePeriod() 
+    public void ApplyGracePeriod()
     {
         _activeGracePeriod = true;
         _gracePeriodTimer = Time.time + 5;
     }
 
-    public void Update() 
+    public void Update()
     {
-        if(_grillSlotDropArea.BurgerMeatLogic != null)
+        if (_grillSlotDropArea.BurgerMeatLogic != null)
         {
-            if (_activeGracePeriod == true) {
-                if (Time.time > _gracePeriodTimer) {
+            if (_activeGracePeriod == true)
+            {
+                if (Time.time > _gracePeriodTimer)
+                {
                     _activeGracePeriod = false;
                 }
-            } else {
-                if(_grillSlotDropArea.BurgerMeatLogic != null) {
+            }
+            else
+            {
+                if (_grillSlotDropArea.BurgerMeatLogic != null)
+                {
                     _grillSlotDropArea.BurgerMeatLogic.AddHeatToBurger(_grillslotTemp * Time.deltaTime);
                 }
             }

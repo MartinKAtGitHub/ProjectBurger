@@ -5,26 +5,27 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public QueueManager QueueManager;
-    // public CustomerSelect CustomerSelect;
-    public FoodTray FoodTray;
+    //public CustomerSelect CustomerSelect;
+    //public FoodTray FoodTray;
     //public CustomerSpawner CustomerSpawner;
+    public FoodTrayManager FoodTrayManger;
     public SalesManager SalesManager;
     public ShuffleBag ShuffleBag;
     public ScoreManager ScoreManager;
-   // public LimitedCustomerSelect CustomerSelect;
+    // public LimitedCustomerSelect CustomerSelect;
     public CustomerSelectSwiper CustomerSelectSwiper;
     public OrderWindow OrderWindow;
     public WinLooseManager WinLooseManager;
 
     [SerializeField] private float _preparationTime;
     [SerializeField] private Vector2 _customerSpawnTimerMinMax;
-    [SerializeField]private bool _enableSpawner;
+    [SerializeField] private bool _enableSpawner;
 
     public static LevelManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (Instance == null) 
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -33,27 +34,28 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("Found another LevelManager in the same Scene, make sure only 1 LevelManager exist per scene");
             Destroy(gameObject); // Destroy myself is Instance already has a ref
         }
-        
+
     }
 
     void Start()
     {
         NullCheck<QueueManager>(QueueManager);
-        NullCheck(FoodTray);
-       // NullCheck(CustomerSpawner);
+        NullCheck<FoodTrayManager>(FoodTrayManger);
+        // NullCheck(FoodTray);
+        // NullCheck(CustomerSpawner);
         NullCheck(SalesManager);
         NullCheck(ShuffleBag);
         NullCheck(ScoreManager);
-       // NullCheck(CustomerSelect);
+        // NullCheck(CustomerSelect);
         NullCheck(OrderWindow);
         NullCheck(WinLooseManager);
 
-        if(_enableSpawner)
+        if (_enableSpawner)
         {
             StartCoroutine(CustomerSpawnSystemInit());
 
         }
-       
+
 
     }
 
@@ -104,7 +106,7 @@ public class LevelManager : MonoBehaviour
 
     private void NullChecking(object componant)
     {
-        if(componant == null)
+        if (componant == null)
         {
             Debug.LogError($"Component {nameof(componant)} is NULL");
         }
@@ -112,9 +114,9 @@ public class LevelManager : MonoBehaviour
 
     private void NullCheck<T>(T reference)
     {
-        if(reference == null)
+        if (reference == null)
         {
-            Debug.LogError(/*nameof(reference)+*/ "  missing reference -> check below console for Line Num" );
+            Debug.LogError(/*nameof(reference)+*/ "  missing reference -> check below console for Line Num");
         }
     }
 }

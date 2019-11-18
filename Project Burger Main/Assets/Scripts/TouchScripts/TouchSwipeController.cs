@@ -21,7 +21,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     [Tooltip("Used to calculate the X distance needed to swipe, in case of additional spacing")]
     [SerializeField]private HorizontalLayoutGroup _swipeContainerHorizontalLayoutGroup;
     [Tooltip("The Slots / containers which will hold customer,food items can be anything, serves as a position for the swiper to go to")]
-    [SerializeField] private RectTransform[] _slots; // drag and drop -> Length is used as limit
+    [SerializeField] private RectTransform[] _slots; // drag and drop -> Length is used as limit | TODO -> make a spawn system for them in a level editor
 
 
     private Vector2 _currentSwipeContainerPos;
@@ -41,8 +41,6 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     {
         _activeElementsTEMPLIMIT = _slots.Length;
         _swipeDistance = _swipeContainerElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
-
-        Debug.Log(_swipeDistance);
         InitializeTouchControll();
     }
 
@@ -68,19 +66,26 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log($"Dragging {name}");
+      
         float diff = eventData.pressPosition.x - eventData.position.x;
         _swipeContainer.anchoredPosition = _currentSwipeContainerPos - new Vector2(diff, 0);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // TODO BUG -> Can Randomly just drag the customer into weird positions, and messing up the whole thing
+       
+      
         float percentage = (eventData.pressPosition.x - eventData.position.x) / Screen.width;
+
+
+
+
+        
+
 
         if (!_inSmoothTransition)
         {
-            if (Mathf.Abs(percentage) >= percentSwipeThreshold)
+            if (Mathf.Abs(percentage) >= percentSwipeThreshold) 
             {
                 _newPos = _currentSwipeContainerPos;
 
@@ -101,6 +106,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
             }
             else
             {
+               
                 ResetElement();
             }
         }
@@ -162,7 +168,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
     protected virtual void ResetElement()
     {
-        StartCoroutine(LimitedTransistionLogic(_swipeContainer.anchoredPosition, _newPos, _easingReset));
+        StartCoroutine(LimitedTransistionLogic(_swipeContainer.anchoredPosition, _currentSwipeContainerPos, _easingReset));
     }
 
 

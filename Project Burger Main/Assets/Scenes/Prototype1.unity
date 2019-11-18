@@ -2715,11 +2715,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7498998131796987438, guid: e88b8f6707ad87547b8ee7801df67e55,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e88b8f6707ad87547b8ee7801df67e55, type: 3}
 --- !u!224 &517952747 stripped
@@ -4483,9 +4478,8 @@ GameObject:
   m_Component:
   - component: {fileID: 874029081}
   - component: {fileID: 874029082}
-  - component: {fileID: 874029083}
   m_Layer: 5
-  m_Name: LimitedCustomerSelectWindow
+  m_Name: CustomerContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4538,18 +4532,6 @@ MonoBehaviour:
   - {fileID: 1781555145}
   _activeElementsTEMPLIMIT: 3
   _queueSlots: []
---- !u!114 &874029083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 874029080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bf7cfa1af97bcc489e6bc3aff65e56c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &889500510
 GameObject:
   m_ObjectHideFlags: 0
@@ -6375,6 +6357,58 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1230984406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1230984407}
+  - component: {fileID: 1230984408}
+  m_Layer: 5
+  m_Name: FoodTray_grp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1230984407
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230984406}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 997462301}
+  m_Father: {fileID: 1486648799}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 720, y: -300}
+  m_SizeDelta: {x: 480, y: 480}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1230984408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230984406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7157d61b836d29d41b7b0e963a7a6d7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _foodTrayPrefab: {fileID: 3452498268054116570, guid: 93374a7d250183d4a88bbf4cf1f3b7f1,
+    type: 3}
+  _foodTrays: []
 --- !u!1 &1236781406
 GameObject:
   m_ObjectHideFlags: 0
@@ -8013,7 +8047,7 @@ RectTransform:
   m_Children:
   - {fileID: 1299441899}
   - {fileID: 1337016894}
-  - {fileID: 997462301}
+  - {fileID: 1230984407}
   m_Father: {fileID: 1157477520}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8477,7 +8511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QueueManager: {fileID: 1518027894}
-  FoodTray: {fileID: 0}
+  FoodTrayManger: {fileID: 0}
   SalesManager: {fileID: 1518027893}
   ShuffleBag: {fileID: 1857412543}
   ScoreManager: {fileID: 0}
@@ -13639,12 +13673,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1486648799}
+    m_TransformParent: {fileID: 1230984407}
     m_Modifications:
     - target: {fileID: 3452498268054116570, guid: 93374a7d250183d4a88bbf4cf1f3b7f1,
         type: 3}
       propertyPath: m_Name
       value: FoodTray (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452498268054116570, guid: 93374a7d250183d4a88bbf4cf1f3b7f1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3452498268054116569, guid: 93374a7d250183d4a88bbf4cf1f3b7f1,
         type: 3}
@@ -13664,17 +13703,17 @@ PrefabInstance:
     - target: {fileID: 3452498268054116569, guid: 93374a7d250183d4a88bbf4cf1f3b7f1,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3452498268054116569, guid: 93374a7d250183d4a88bbf4cf1f3b7f1,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3452498268054116569, guid: 93374a7d250183d4a88bbf4cf1f3b7f1,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3452498268054116569, guid: 93374a7d250183d4a88bbf4cf1f3b7f1,
         type: 3}
@@ -13684,7 +13723,7 @@ PrefabInstance:
     - target: {fileID: 3452498268054116569, guid: 93374a7d250183d4a88bbf4cf1f3b7f1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3452498268054116569, guid: 93374a7d250183d4a88bbf4cf1f3b7f1,
         type: 3}
@@ -13704,12 +13743,12 @@ PrefabInstance:
     - target: {fileID: 3452498268054116569, guid: 93374a7d250183d4a88bbf4cf1f3b7f1,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3452498268054116569, guid: 93374a7d250183d4a88bbf4cf1f3b7f1,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -300
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3452498268054116569, guid: 93374a7d250183d4a88bbf4cf1f3b7f1,
         type: 3}

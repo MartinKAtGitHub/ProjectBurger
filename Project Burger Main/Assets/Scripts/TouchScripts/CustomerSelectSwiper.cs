@@ -19,15 +19,14 @@ public class CustomerSelectSwiper : TouchSwipeController
         // Maybe make an init
         CacheQueueSlotsFromElements();
         _elementInFocus.GetComponent<QueueSlot>().QueueSlotInFocus = true;
-        
-
-
     }
 
 
-    private void Update() 
+    protected override void Start()
     {
+        base.Start();
 
+       // LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
     }
 
     protected override void LimitedNextElement()
@@ -58,7 +57,7 @@ public class CustomerSelectSwiper : TouchSwipeController
                 newSlot.QueueSlotInFocus = true;
 
                 //SetCustomerInFocus(newSlot.CurrentCustomer);
-
+                LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
 
                 _newPos += new Vector2(-1 * (_swipeDistance + skipDistance), 0);
                 Debug.Log(" NEXT Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
@@ -94,9 +93,9 @@ public class CustomerSelectSwiper : TouchSwipeController
                 var newSlot = _queueSlots[_elementIndex];
                 newSlot.QueueSlotInFocus = true;
 
-               // SetCustomerInFocus(newSlot.CurrentCustomer);
-               
-                
+                // SetCustomerInFocus(newSlot.CurrentCustomer);
+                LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
+
                 _newPos += new Vector2(_swipeDistance + skipDistance, 0);
                 Debug.Log(" PREV Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
                 return;

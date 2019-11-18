@@ -16,8 +16,7 @@ public class FoodTray : MonoBehaviour
 
     private void Awake()
     {
-        LevelManager.Instance.FoodTray = this;
-
+        //LevelManager.Instance.FoodTray = this;
     }
 
     public void UpdateFoodTray(Customer customer)

@@ -6,10 +6,11 @@ public class CustomerSelectSwiper : TouchSwipeController
 {
 
     [SerializeField]private QueueSlot[] _queueSlots;
-    private Customer _customerInFocus;
+    //private Customer _customerInFocus;
+    private QueueSlot _queueSlotInFocus;
    
-    //private QueueSlot _queueSlotInFocus;
     public QueueSlot[] QueueSlots { get => _queueSlots; }
+    public QueueSlot QueueSlotInFocus { get => _queueSlotInFocus;}
 
     protected override void Awake()
     {
@@ -18,7 +19,9 @@ public class CustomerSelectSwiper : TouchSwipeController
 
         // Maybe make an init
         CacheQueueSlotsFromElements();
-        _elementInFocus.GetComponent<QueueSlot>().QueueSlotInFocus = true;
+        _queueSlotInFocus = _queueSlots[_elementIndex];
+
+        _elementInFocus.GetComponent<QueueSlot>().QueueSlotInFocus = true; // WTF is this <-
     }
 
 
@@ -55,6 +58,7 @@ public class CustomerSelectSwiper : TouchSwipeController
 
                 var newSlot = _queueSlots[_elementIndex];
                 newSlot.QueueSlotInFocus = true;
+                _queueSlotInFocus = newSlot;
 
                 //SetCustomerInFocus(newSlot.CurrentCustomer);
                 LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
@@ -92,6 +96,7 @@ public class CustomerSelectSwiper : TouchSwipeController
 
                 var newSlot = _queueSlots[_elementIndex];
                 newSlot.QueueSlotInFocus = true;
+                _queueSlotInFocus = newSlot;
 
                 // SetCustomerInFocus(newSlot.CurrentCustomer);
                 LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);

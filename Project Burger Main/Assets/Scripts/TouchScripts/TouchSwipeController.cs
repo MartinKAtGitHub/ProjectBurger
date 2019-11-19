@@ -77,12 +77,6 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
       
         float percentage = (eventData.pressPosition.x - eventData.position.x) / Screen.width;
 
-
-
-
-        
-
-
         if (!_inSmoothTransition)
         {
             if (Mathf.Abs(percentage) >= percentSwipeThreshold) 
@@ -140,7 +134,6 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
     protected virtual void LimitedNextElement()
     {
-        Debug.Log("BASIC NEXT");
         _elementIndex++;
 
         if (_elementIndex > _slots.Length)
@@ -155,7 +148,6 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     }
     protected virtual void LimitedPrevElement()
     {
-        Debug.Log("PREV");
         _elementIndex--;
 
         if (_elementIndex < 0)

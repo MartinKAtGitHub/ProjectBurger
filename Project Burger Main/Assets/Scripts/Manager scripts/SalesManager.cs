@@ -1,28 +1,33 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
-public class SalesManager : MonoBehaviour
+public class SalesManager : MonoBehaviour, IPointerClickHandler
 {
 
-   // [SerializeField]private LimitedCustomerSelect _customerSelect;
-    private QueueManager _queueManager;
     private Action _onSale;
     public Action OnSale { get => _onSale; set => _onSale = value; }
 
     private void Awake()
     {
-     //   _customerSelect = GetComponent<LimitedCustomerSelect>();
-        _queueManager = GetComponent<QueueManager>();
+        LevelManager.Instance.SalesManager = this;
     }
-    /// <summary>
-    /// Triggers the onSale event;
-    /// </summary>
+
     public void OnSell()
     {
+      
+        var queueSlot = LevelManager.Instance.CustomerSelectSwiper.QueueSlotInFocus;
 
-        //var customer = _customerSelect.QueueSlotInFocus.CurrentCustomer;
+        if (queueSlot.CurrentCustomer != null)
+        {
+           // Check the customer order TO foodtray !!!!!!!!!!!!!
+        }
+        else
+        {
+            Debug.Log(queueSlot.name + " = empty | cant sell to empty slot. Play/show warning ");
+        }
+
+        
         //if (customer != null)
         //{
         //    if (!_customerSelect.InSmoothTransition)
@@ -37,5 +42,10 @@ public class SalesManager : MonoBehaviour
         //{
         //    Debug.Log("No customer too sell to");
         //}
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        OnSell();
     }
 }

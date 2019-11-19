@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeToBeDoneTop: 0
   TimeToBeDoneBot: 0
+  _burgerStatesSprites:
+  - {fileID: -5375991019396681241, guid: 3088f113823aad249a8bdd48cf1b73f6, type: 3}
+  - {fileID: 4197168246652675261, guid: 3088f113823aad249a8bdd48cf1b73f6, type: 3}
+  - {fileID: -746167914694506502, guid: 3088f113823aad249a8bdd48cf1b73f6, type: 3}
+  - {fileID: -2247299213138286614, guid: 3088f113823aad249a8bdd48cf1b73f6, type: 3}
+  - {fileID: 3743428529936729535, guid: 3088f113823aad249a8bdd48cf1b73f6, type: 3}
 --- !u!114 &8953880488639126310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26,6 +32,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 560b8f6b43da3b442aeacb567f0a54ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _prevTheGrill: {fileID: 0}
+  _prevResetRect: {fileID: 0}
 --- !u!1001 &7687573455334716926
 PrefabInstance:
   m_ObjectHideFlags: 0

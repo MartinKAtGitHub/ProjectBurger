@@ -6,7 +6,8 @@ public class BurgerMeatLogic : MonoBehaviour, IPointerClickHandler
 
     private Animator _animator;
     private TheGrill _theGrill;
- 
+    private SpriteRenderer _spriteRenderer;
+
     private bool _burgerSide = true;
     private float _currentTimeUsedOnTop = 0;
     private float _currentTimeUsedOnBot = 0;
@@ -16,12 +17,14 @@ public class BurgerMeatLogic : MonoBehaviour, IPointerClickHandler
     public float TimeToBeDoneTop;
     public float TimeToBeDoneBot;
 
+    [SerializeField]private Sprite[] _burgerStatesSprites;
     public TheGrill TheGrill { get => _theGrill; set => _theGrill = value; }
 
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     public void OnPointerClick(PointerEventData eventData)

@@ -13,14 +13,45 @@ public class SalesManager : MonoBehaviour, IPointerClickHandler
         LevelManager.Instance.SalesManager = this;
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        OnSell();
+    }
     public void OnSell()
     {
       
         var queueSlot = LevelManager.Instance.CustomerSelectSwiper.QueueSlotInFocus;
 
-        if (queueSlot.CurrentCustomer != null)
+        
+        if (queueSlot.CurrentCustomer != null) //if (!_customerSelect.InSmoothTransition might need this)
         {
-           // Check the customer order TO foodtray !!!!!!!!!!!!!
+            var customer = queueSlot.CurrentCustomer;
+
+            if (customer.Order != null)
+            {
+                // Check the customer order TO foodtray !!!!!!!!!!!!!
+                var orderSuccses = LevelManager.Instance.TESTING_FoodTray.CheckFoodStacksAgainstOrder(customer.Order);
+
+                if(orderSuccses)
+                {
+                    Debug.Log("ORDER WAS SUCCSESFULL");
+                }
+                else
+                {
+                    Debug.Log("ORDER FAILED");
+                }
+
+
+            }
+            else
+            {
+                // This will only happen in case the customer is still decide what to order and the player wants to sell something to this person.
+                Debug.Log(customer.name + " Has no Order but you are trying to sell. GIVEPLAYER FEEDBACK / WARNING FOR THIS");
+            }
+
+
+
+
         }
         else
         {
@@ -44,8 +75,32 @@ public class SalesManager : MonoBehaviour, IPointerClickHandler
         //}
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        OnSell();
-    }
+
+
+    //private void OnSuccessfulOrder()
+    //{
+    //    //_orderSuccessful = true;
+    //    RemoveFoodFromGame();
+    //    LevelManager.Instance.ScoreManager.AddScore(order.PriceTotal);
+    //}
+
+    //private void OnFailOrder()
+    //{
+    //    //_orderSuccessful = false;
+    //    RemoveFoodFromGame();
+    //    LevelManager.Instance.ScoreManager.RemoveLife();
+    //}
+
+    //private void RemoveFoodFromGame()
+    //{
+    //    for (int i = 0; i < _foodItemsOnTray.Count; i++)
+    //    {
+    //        var food = _foodItemsOnTray[i];
+    //        _foodItemsOnTray.RemoveAt(i);
+    //        food.RemoveFromGame();
+    //    }
+    //}
+
+
+   
 }

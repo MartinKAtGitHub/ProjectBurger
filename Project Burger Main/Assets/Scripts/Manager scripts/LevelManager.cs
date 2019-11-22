@@ -6,9 +6,8 @@ public class LevelManager : MonoBehaviour
 {
     public QueueManager QueueManager;
     //public CustomerSelect CustomerSelect;
-    //public FoodTray FoodTray;
+    public FoodTray TESTING_FoodTray;
     //public CustomerSpawner CustomerSpawner;
-    public FoodTrayManager FoodTrayManger;
     public SalesManager SalesManager;
     public ShuffleBag ShuffleBag;
     public ScoreManager ScoreManager;
@@ -16,12 +15,15 @@ public class LevelManager : MonoBehaviour
     public CustomerSelectSwiper CustomerSelectSwiper;
     public OrderWindow OrderWindow;
     public WinLooseManager WinLooseManager;
+   
+    private FoodTrayManager _foodTrayManger;
 
     [SerializeField] private float _preparationTime;
     [SerializeField] private Vector2 _customerSpawnTimerMinMax;
     [SerializeField] private bool _enableSpawner;
 
     public static LevelManager Instance { get; private set; }
+    public FoodTrayManager FoodTrayManger { get => _foodTrayManger; set => _foodTrayManger = value; }
 
     private void Awake()
     {
@@ -40,7 +42,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         NullCheck<QueueManager>(QueueManager);
-        NullCheck<FoodTrayManager>(FoodTrayManger);
+       // NullCheck<FoodTrayManager>(FoodTrayManger);
         // NullCheck(FoodTray);
         // NullCheck(CustomerSpawner);
         NullCheck(SalesManager);

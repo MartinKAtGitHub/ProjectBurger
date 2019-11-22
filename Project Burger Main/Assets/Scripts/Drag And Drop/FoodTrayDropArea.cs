@@ -13,7 +13,7 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
     //[serializefield] private order _order; // get order from customer
     //[serializefield] private bool _ordersuccessful;
 
-    private RectTransform _thisRectTransform;
+    private RectTransform _rect;
     private FoodTray _foodTray;
 
     //public Order Order { set => _order = value; }
@@ -25,17 +25,17 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
     {
         //LevelManager.Instance.FoodTrayDropArea = this;
         _foodTray = GetComponent<FoodTray>();
+        _rect = GetComponent<RectTransform>();
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (_foodTray.Order != null)
+        //if (_foodTray.Order != null)
         {
             var food = eventData.pointerDrag.GetComponent<Food>();
             if (food != null)
             {
-                //food.FoodDrag.ResetPositionParent = this.transform;
-                food.FoodDrag.ResetPositionParent = _thisRectTransform;
+                food.FoodDrag.ResetPositionParent = _rect;
                 //_foods.Add(food);
                 _foodTray.FoodItemsOnTray.Add(food);
 
@@ -45,10 +45,10 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
                 Debug.LogWarning("Only food can be dropped on the foodtray");
             }
         }
-        else
-        {
-            Debug.LogError("We don't have the order for the current customer food tray cant check food");
-        }
+        //else
+        //{
+        //    Debug.LogError("We don't have the order for the current customer food tray cant check food");
+        //}
     }
 
     public void DropAreaOnBeginDrag()

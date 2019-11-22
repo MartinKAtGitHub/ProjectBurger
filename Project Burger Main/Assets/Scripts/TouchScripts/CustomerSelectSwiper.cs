@@ -64,7 +64,7 @@ public class CustomerSelectSwiper : TouchSwipeController
                 LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
 
                 _newPos += new Vector2(-1 * (_swipeDistance + skipDistance), 0);
-                Debug.Log(" NEXT Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
+               // Debug.Log(" NEXT Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
                 return;
             }
         }
@@ -102,11 +102,10 @@ public class CustomerSelectSwiper : TouchSwipeController
                 LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
 
                 _newPos += new Vector2(_swipeDistance + skipDistance, 0);
-                Debug.Log(" PREV Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
+               // Debug.Log(" PREV Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
                 return;
             }
         }
-        Debug.Log(_elementIndex + "INDEX");
     }
 
 

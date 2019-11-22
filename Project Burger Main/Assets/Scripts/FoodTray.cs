@@ -16,27 +16,23 @@ public class FoodTray : MonoBehaviour
 
     private void Awake()
     {
-        //LevelManager.Instance.FoodTray = this;
+        LevelManager.Instance.TESTING_FoodTray = this;
     }
-
-    public void UpdateFoodTray(Customer customer)
+  
+    public bool CheckFoodStacksAgainstOrder(Order order) 
     {
-        _order = customer.Order;
-    }
-
-    
-    public void CheckFoodStacksAgainstOrder() 
-    {
-        var amountOfOrderRecipes = _order.OrderRecipes.Count;
+       // _order = order;
+        var amountOfOrderRecipes = order.OrderRecipes.Count;
         var amountOffoodStackMatches = 0;
 
-        if (_order != null)
+        //if (order != null) // this should technically never happen
         {
             if (_foodItemsOnTray.Count == 0)
             {
                 Debug.Log("NO FOOD PLACED ON FOODTRAY !!!!!");
-                OnFailOrder();
-                return;
+                //OnFailOrder();
+                //return;
+                return false;
             }
 
             if (amountOfOrderRecipes == _foodItemsOnTray.Count)
@@ -45,7 +41,7 @@ public class FoodTray : MonoBehaviour
                 {
                     //Debug.Log("This should not decrease " + _order.OrderRecipes.Count);
 
-                    var tempOrderRecipes = _order.OrderRecipes;
+                    var tempOrderRecipes = order.OrderRecipes;
                     var ingredientMatchFoundInOrderRecipeIndex = 0;
                     var failCounter = 0;
 
@@ -108,48 +104,52 @@ public class FoodTray : MonoBehaviour
 
                 if (amountOffoodStackMatches == amountOfOrderRecipes)
                 {
-                    OnSuccessfulOrder();
+                   // OnSuccessfulOrder();
+                    return true;
                 }
                 else
                 {
-                    OnFailOrder();
+                   // OnFailOrder();
+                    return false;
                 }
             }
             else
             {
                 Debug.Log("Can not sell food, Amount of food is not the same in order, Give player FAIL for selling to early ?");
-                OnFailOrder();
+                //OnFailOrder();
+                return false;
             }
         }
-        else
-        {
-            Debug.Log("FoodTray has no Order(null)");
-        }
+        //else
+        //{
+        //    Debug.LogError("Order = null, Cant check food. This should never happen. If the customer doesn't have a ORDER this method should never be called");
+            
+        //}
     }
 
-    private void OnSuccessfulOrder()
-    {
-        //_orderSuccessful = true;
-        RemoveFoodFromGame();
-        LevelManager.Instance.ScoreManager.AddScore(_order.PriceTotal);
-    }
+    //private void OnSuccessfulOrder()
+    //{
+    //    //_orderSuccessful = true;
+    //    RemoveFoodFromGame();
+    //    LevelManager.Instance.ScoreManager.AddScore(order.PriceTotal);
+    //}
 
-    private void OnFailOrder()
-    {
-        //_orderSuccessful = false;
-        RemoveFoodFromGame();
-        LevelManager.Instance.ScoreManager.RemoveLife();
-    }
+    //private void OnFailOrder()
+    //{
+    //    //_orderSuccessful = false;
+    //    RemoveFoodFromGame();
+    //    LevelManager.Instance.ScoreManager.RemoveLife();
+    //}
 
-    private void RemoveFoodFromGame()
-    {
-        for (int i = 0; i < _foodItemsOnTray.Count; i++)
-        {
-            var food = _foodItemsOnTray[i];
-            _foodItemsOnTray.RemoveAt(i);
-            food.RemoveFromGame();
-        }
-    }
+    //private void RemoveFoodFromGame()
+    //{
+    //    for (int i = 0; i < _foodItemsOnTray.Count; i++)
+    //    {
+    //        var food = _foodItemsOnTray[i];
+    //        _foodItemsOnTray.RemoveAt(i);
+    //        food.RemoveFromGame();
+    //    }
+    //}
 
 
 }

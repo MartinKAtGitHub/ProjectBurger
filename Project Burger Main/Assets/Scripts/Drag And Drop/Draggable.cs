@@ -72,7 +72,7 @@ public abstract class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler
         transform.SetParent(_resetPositionParent);
         _rectTransform.anchoredPosition = Vector2.zero + _resetPosOffset;
         _canvasGroup.blocksRaycasts = true;
-        Debug.Log($"OneEndDrag -> {name} | My Pos {_rectTransform.anchoredPosition} -- offset { (Vector2.zero + _resetPosOffset)}");
+        Debug.Log($"OneEndDrag -> {name} | My Pos {_rectTransform.anchoredPosition} - offset { (Vector2.zero + _resetPosOffset)} PARENT { transform.parent.name}");
     }
 
     /// <summary>

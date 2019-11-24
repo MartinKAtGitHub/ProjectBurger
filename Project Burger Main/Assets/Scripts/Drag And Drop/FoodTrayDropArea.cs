@@ -19,7 +19,7 @@ public class FoodTrayDropArea : MonoBehaviour, IDropHandler
     //public Order Order { set => _order = value; }
     //public bool OrderSuccessful { get => _orderSuccessful; }
 
-    [Space(20)] public List<Food> _foods = new List<Food>();
+   // [Space(20)] public List<Food> _foods = new List<Food>();
 
     private void Awake()
     {

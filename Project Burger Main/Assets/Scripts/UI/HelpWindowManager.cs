@@ -5,7 +5,7 @@ using UnityEngine;
 public class HelpWindowManager : MonoBehaviour // This might be a game manager thing
 {
 
-    [SerializeField] private Animator _animator;
+    private Animator _animator;
 
 
     private bool _isOrderWindowOpen;

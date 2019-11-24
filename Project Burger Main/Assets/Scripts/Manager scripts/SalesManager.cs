@@ -34,7 +34,8 @@ public class SalesManager : MonoBehaviour, IPointerClickHandler
 
                 if(orderSuccses)
                 {
-                    Debug.Log("ORDER WAS SUCCSESFULL");
+                    
+                    OnSuccessfulOrder(customer.Order);
                 }
                 else
                 {
@@ -48,9 +49,6 @@ public class SalesManager : MonoBehaviour, IPointerClickHandler
                 // This will only happen in case the customer is still decide what to order and the player wants to sell something to this person.
                 Debug.Log(customer.name + " Has no Order but you are trying to sell. GIVEPLAYER FEEDBACK / WARNING FOR THIS");
             }
-
-
-
 
         }
         else
@@ -77,30 +75,31 @@ public class SalesManager : MonoBehaviour, IPointerClickHandler
 
 
 
-    //private void OnSuccessfulOrder()
-    //{
-    //    //_orderSuccessful = true;
-    //    RemoveFoodFromGame();
-    //    LevelManager.Instance.ScoreManager.AddScore(order.PriceTotal);
-    //}
+    private void OnSuccessfulOrder(Order order)
+    {
+        Debug.Log("ORDER WAS SUCCSESFULL");
+        RemoveFoodFromGame();
+        LevelManager.Instance.ScoreManager.AddScore(order.PriceTotal);
+    }
 
-    //private void OnFailOrder()
-    //{
-    //    //_orderSuccessful = false;
-    //    RemoveFoodFromGame();
-    //    LevelManager.Instance.ScoreManager.RemoveLife();
-    //}
+    private void OnFailOrder()
+    {
+        //_orderSuccessful = false;
+        RemoveFoodFromGame();
+        LevelManager.Instance.ScoreManager.RemoveLife();
+    }
 
-    //private void RemoveFoodFromGame()
-    //{
-    //    for (int i = 0; i < _foodItemsOnTray.Count; i++)
-    //    {
-    //        var food = _foodItemsOnTray[i];
-    //        _foodItemsOnTray.RemoveAt(i);
-    //        food.RemoveFromGame();
-    //    }
-    //}
+    private void RemoveFoodFromGame()
+    {
+        var foodtray = LevelManager.Instance.TESTING_FoodTray;
+        for (int i = 0; i < foodtray.FoodItemsOnTray.Count; i++)
+        {
+            var food = foodtray.FoodItemsOnTray[i];
+            foodtray.FoodItemsOnTray.RemoveAt(i);
+            food.RemoveFromGame();
+        }
+    }
 
 
-   
+
 }

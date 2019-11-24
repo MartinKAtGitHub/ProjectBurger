@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FoodTray : MonoBehaviour
 {
-    [SerializeField]private Order _order;
+    //[SerializeField]private Order _order;
     /// <summary>
     /// Food items placed on the foodtray;
     /// </summary>
@@ -12,7 +12,7 @@ public class FoodTray : MonoBehaviour
     
 
     public List<Food> FoodItemsOnTray { get => _foodItemsOnTray;}
-    public Order Order { get => _order; }
+   // public Order Order { get => _order; }
 
     private void Awake()
     {

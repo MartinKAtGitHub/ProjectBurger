@@ -61,7 +61,7 @@ public class CustomerSelectSwiper : TouchSwipeController
                 _queueSlotInFocus = newSlot;
 
                 //SetCustomerInFocus(newSlot.CurrentCustomer);
-                LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
+               // LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
 
                 _newPos += new Vector2(-1 * (_swipeDistance + skipDistance), 0);
                // Debug.Log(" NEXT Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
@@ -99,7 +99,7 @@ public class CustomerSelectSwiper : TouchSwipeController
                 _queueSlotInFocus = newSlot;
 
                 // SetCustomerInFocus(newSlot.CurrentCustomer);
-                LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
+                //LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
 
                 _newPos += new Vector2(_swipeDistance + skipDistance, 0);
                // Debug.Log(" PREV Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);

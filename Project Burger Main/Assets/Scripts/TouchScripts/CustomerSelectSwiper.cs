@@ -19,9 +19,9 @@ public class CustomerSelectSwiper : TouchSwipeController
 
         // Maybe make an init
         CacheQueueSlotsFromElements();
-        _queueSlotInFocus = _queueSlots[_elementIndex];
+        _queueSlotInFocus = _queueSlots[_elementHorizonIndex];
 
-        _elementInFocus.GetComponent<QueueSlot>().QueueSlotInFocus = true; // WTF is this <-
+        _elementInFocusHorizontal.GetComponent<QueueSlot>().QueueSlotInFocus = true; // WTF is this <-
     }
 
 
@@ -34,11 +34,11 @@ public class CustomerSelectSwiper : TouchSwipeController
 
     protected override void LimitedNextElement()
     {
-        var index =  _elementIndex;
+        var index =  _elementHorizonIndex;
         index++;
         if (index > Slots.Length - 1)
         {
-            _elementIndex = Slots.Length - 1;
+            _elementHorizonIndex = Slots.Length - 1;
             return;
         }
 
@@ -47,23 +47,23 @@ public class CustomerSelectSwiper : TouchSwipeController
         {
             if (_queueSlots[i].CurrentCustomer == null)
             {
-                skipDistance += _swipeDistance;
+                skipDistance += _swipeHorizontalDistance;
             }
             else
             {
-                var oldSlot = _queueSlots[_elementIndex];
+                var oldSlot = _queueSlots[_elementHorizonIndex];
                 oldSlot.QueueSlotInFocus = false;
 
-                _elementIndex = i;
+                _elementHorizonIndex = i;
 
-                var newSlot = _queueSlots[_elementIndex];
+                var newSlot = _queueSlots[_elementHorizonIndex];
                 newSlot.QueueSlotInFocus = true;
                 _queueSlotInFocus = newSlot;
 
                 //SetCustomerInFocus(newSlot.CurrentCustomer);
                // LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
 
-                _newPos += new Vector2(-1 * (_swipeDistance + skipDistance), 0);
+                _newHorizontalPos += new Vector2(-1 * (_swipeHorizontalDistance + skipDistance), 0);
                // Debug.Log(" NEXT Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
                 return;
             }
@@ -72,11 +72,11 @@ public class CustomerSelectSwiper : TouchSwipeController
 
     protected override void LimitedPrevElement()
     {
-        var index =  _elementIndex;
+        var index =  _elementHorizonIndex;
         index--;
         if (index < 0)
         {
-            _elementIndex = 0;
+            _elementHorizonIndex = 0;
         }
 
         var skipDistance = 0f;
@@ -85,23 +85,23 @@ public class CustomerSelectSwiper : TouchSwipeController
         {
             if (_queueSlots[i].CurrentCustomer == null)
             {
-                skipDistance += _swipeDistance;
+                skipDistance += _swipeHorizontalDistance;
             }
             else
             {
-                var oldSlot = _queueSlots[_elementIndex];
+                var oldSlot = _queueSlots[_elementHorizonIndex];
                 oldSlot.QueueSlotInFocus = false;
 
-                _elementIndex = i;
+                _elementHorizonIndex = i;
 
-                var newSlot = _queueSlots[_elementIndex];
+                var newSlot = _queueSlots[_elementHorizonIndex];
                 newSlot.QueueSlotInFocus = true;
                 _queueSlotInFocus = newSlot;
 
                 // SetCustomerInFocus(newSlot.CurrentCustomer);
                 //LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
 
-                _newPos += new Vector2(_swipeDistance + skipDistance, 0);
+                _newHorizontalPos += new Vector2(_swipeHorizontalDistance + skipDistance, 0);
                // Debug.Log(" PREV Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
                 return;
             }

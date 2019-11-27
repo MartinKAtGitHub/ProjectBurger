@@ -23,18 +23,18 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     [SerializeField] private RectTransform _horizontalSwipeContainer;
     [SerializeField] private RectTransform _verticalSwipeContainer;
     [Tooltip("Used to calculate the X distance needed to swipe, in case of additional spacing")]
-    [SerializeField]private HorizontalLayoutGroup _swipeContainerHorizontalLayoutGroup;
+    [SerializeField] private HorizontalLayoutGroup _swipeContainerHorizontalLayoutGroup;
     [Tooltip("The Slots / containers which will hold customer,food items can be anything, serves as a position for the swiper to go to")]
     [SerializeField] private RectTransform[] _slotsHorizontal; // drag and drop -> Length is used as limit | TODO -> make a spawn system for them in a level editor
-   
-    [SerializeField] private List< RectTransform> _slotsVertical; 
+
+    [SerializeField] private List<RectTransform> _slotsVertical;
 
 
     private Vector2 _currentHorizontalSwipeContainerPos;
     private Vector2 _currentVerticalSwipeContainerPos;
 
     private bool _inSmoothTransition;
-   // [SerializeField] private int _activeElementsTEMPLIMIT;
+    // [SerializeField] private int _activeElementsTEMPLIMIT;
 
 
     protected Vector2 _newHorizontalPos;
@@ -49,12 +49,12 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     protected int _elementHorizonIndex = 0;
     protected int _elementVerticalIndex = 0;
 
-   // public int ActiveElements { get => _activeElementsTEMPLIMIT; set => _activeElementsTEMPLIMIT = value; }
+    // public int ActiveElements { get => _activeElementsTEMPLIMIT; set => _activeElementsTEMPLIMIT = value; }
     public RectTransform[] Slots { get => _slotsHorizontal; }
 
     virtual protected void Awake()
     {
-       // _activeElementsTEMPLIMIT = _slots.Length;
+        // _activeElementsTEMPLIMIT = _slots.Length;
         _swipeHorizontalDistance = _swipeContainerElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
         InitializeTouchControll();
     }
@@ -62,7 +62,8 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     virtual protected void Start()
     {
         _currentHorizontalSwipeContainerPos = _horizontalSwipeContainer.anchoredPosition;
-        _currentVerticalSwipeContainerPos = _verticalSwipeContainer.anchoredPosition;
+
+        // _currentVerticalSwipeContainerPos = _verticalSwipeContainer.anchoredPosition;
     }
 
 
@@ -80,62 +81,16 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         }
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public virtual void OnDrag(PointerEventData eventData)
     {
-      
-        float diffX = eventData.pressPosition.x - eventData.position.x;
-        float diffY = eventData.pressPosition.y - eventData.position.y;
 
-
-        _horizontalSwipeContainer.anchoredPosition = _currentHorizontalSwipeContainerPos - new Vector2(diffX, 0);
-        _verticalSwipeContainer.anchoredPosition = _currentVerticalSwipeContainerPos - new Vector2(0, diffY);
+        HorizontalDragging(eventData);
+        VerticalDragging(eventData);
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public virtual void OnEndDrag(PointerEventData eventData)
     {
-       
-        float percentHorizontal = (eventData.pressPosition.x - eventData.position.x) / Screen.width;
-        float percentVertical = (eventData.pressPosition.y - eventData.position.y) / Screen.height;
-
-        if (!_inSmoothTransition)
-        {
-            if (Mathf.Abs(percentHorizontal) >= percentHorizontalSwipeThreshold) 
-            {
-                _newHorizontalPos = _currentHorizontalSwipeContainerPos;
-
-                if (percentHorizontal > 0 && _elementHorizonIndex < /*_activeElementsTEMPLIMIT*/ _slotsHorizontal.Length - 1)
-                {
-                    // newPos += new Vector2(-_swipeDistance, 0);
-                    //InfinitNextElement(_tmpMaxElementLimit); // maxlimit needs to be the order.recipe.length
-                    LimitedNextElement();
-                }
-                else if (percentHorizontal < 0 && _elementHorizonIndex > 0)
-                {
-                    //newPos += new Vector2(_swipeDistance, 0);
-                    //InfinitPreviousElement(_tmpMaxElementLimit); // MaxLimit needs to be the order.recipe.length
-                    LimitedPrevElement();
-                }
-
-                StartCoroutine(LimitedTransistionLogic(_horizontalSwipeContainer.anchoredPosition, _newHorizontalPos, _easingSwipe));
-            }
-            else
-            {
-               
-                ResetHorizontalElement();
-            }
-        }
-
-        //if(Mathf.Abs(percentVertical) >= percentVerticalSwipeThreshold)
-        //{
-        //    _newVerticalPos = _currentVerticalSwipeContainerPos;
-        //    if(percentVertical > 0 && _elementVerticalIndex < _slotsVertical.Count)
-        //    {
-
-        //    }
-
-        //}
-
-
+        SnapToClosestHorizontalElement(eventData);
 
     }
 
@@ -174,10 +129,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
             _elementHorizonIndex = _slotsHorizontal.Length - 1;
         }
 
-        // _elements[_elementIndex] == null then increment agains
         _newHorizontalPos += new Vector2(-1 * (_swipeHorizontalDistance), 0);
-
-
     }
     protected virtual void LimitedPrevElement()
     {
@@ -196,4 +148,63 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         StartCoroutine(LimitedTransistionLogic(_horizontalSwipeContainer.anchoredPosition, _currentHorizontalSwipeContainerPos, _easingReset));
     }
 
+    protected void HorizontalDragging(PointerEventData eventData)
+    {
+        float diffX = eventData.pressPosition.x - eventData.position.x;
+        _horizontalSwipeContainer.anchoredPosition = _currentHorizontalSwipeContainerPos - new Vector2(diffX, 0);
+    }
+
+    protected void VerticalDragging(PointerEventData eventData)
+    {
+        float diffY = eventData.pressPosition.y - eventData.position.y;
+        _verticalSwipeContainer.anchoredPosition = _currentVerticalSwipeContainerPos - new Vector2(0, diffY);
+    }
+
+    /// <summary>
+    /// Checks to see if player has swiped far enough in the horizontal direction to snap to closest Next/Previous element
+    /// </summary>
+    protected void SnapToClosestHorizontalElement(PointerEventData eventData)
+    {
+        float percentHorizontal = (eventData.pressPosition.x - eventData.position.x) / Screen.width;
+
+        if (!_inSmoothTransition)
+        {
+            if (Mathf.Abs(percentHorizontal) >= percentHorizontalSwipeThreshold)
+            {
+                _newHorizontalPos = _currentHorizontalSwipeContainerPos;
+
+                if (percentHorizontal > 0 && _elementHorizonIndex < /*_activeElementsTEMPLIMIT*/ _slotsHorizontal.Length - 1)
+                {
+                    LimitedNextElement();
+                }
+                else if (percentHorizontal < 0 && _elementHorizonIndex > 0)
+                {
+                    LimitedPrevElement();
+                }
+                StartCoroutine(LimitedTransistionLogic(_horizontalSwipeContainer.anchoredPosition, _newHorizontalPos, _easingSwipe));
+            }
+            else
+            {
+                ResetHorizontalElement();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Checks to see if player has swiped far enough in the Vertical direction to snap to closest Next/Previous element
+    /// </summary>
+    protected void SnapToClosestVerticalElement(PointerEventData eventData)
+    {
+
+        float percentVertical = (eventData.pressPosition.y - eventData.position.y) / Screen.height;
+        //if(Mathf.Abs(percentVertical) >= percentVerticalSwipeThreshold)
+        //{
+        //    _newVerticalPos = _currentVerticalSwipeContainerPos;
+        //    if(percentVertical > 0 && _elementVerticalIndex < _slotsVertical.Count)
+        //    {
+
+        //    }
+
+        //}
+    }
 }

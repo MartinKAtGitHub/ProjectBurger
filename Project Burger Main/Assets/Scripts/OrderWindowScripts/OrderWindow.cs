@@ -46,23 +46,23 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
 
     public void UpdateUI(Customer customer)
     {
-        Debug.Log("UPDATING ORDERWINDOW");
-        _activeCustomer = customer;
-        var foodItemsInOrder = _activeCustomer.Order.OrderRecipes.Count;
+        //Debug.Log("UPDATING ORDERWINDOW");
+        //_activeCustomer = customer;
+        //var foodItemsInOrder = _activeCustomer.Order.OrderRecipes.Count;
 
-        if (foodItemsInOrder <= _tmpMax)
-        {
-            for (int i = 0; i < _activeCustomer.Order.OrderRecipes.Count; i++) // This can never be more the tmpMax 
-            {
-                var foodItemPnl = _orderWindowSwiper.Slots[i];
-                foodItemPnl.gameObject.SetActive(true);
-                foodItemPnl.GetComponent<OrderWindowFoodItemPage>().UpdateThisPage(_activeCustomer.Order.OrderRecipes[i]);
-            }
-        }
-        else
-        {
-            Debug.LogError($"Customer {_activeCustomer.name} has more then {_tmpMax} food items Ordered, this will overflow array");
-        }
+        //if (foodItemsInOrder <= _tmpMax)
+        //{
+        //    for (int i = 0; i < _activeCustomer.Order.OrderRecipes.Count; i++) // This can never be more the tmpMax 
+        //    {
+        //        var foodItemPnl = _orderWindowSwiper.Slots[i];
+        //        foodItemPnl.gameObject.SetActive(true);
+        //        foodItemPnl.GetComponent<OrderWindowFoodItemPage>().UpdateThisPage(_activeCustomer.Order.OrderRecipes[i]);
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.LogError($"Customer {_activeCustomer.name} has more then {_tmpMax} food items Ordered, this will overflow array");
+        //}
 
     }
 }

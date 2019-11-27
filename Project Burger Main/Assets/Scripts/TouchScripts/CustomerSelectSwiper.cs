@@ -5,7 +5,7 @@ using UnityEngine;
 public class CustomerSelectSwiper : TouchSwipeController
 {
 
-    [SerializeField]private QueueSlot[] _queueSlots;
+    private QueueSlot[] _queueSlots;
     //private Customer _customerInFocus;
     private QueueSlot _queueSlotInFocus;
    

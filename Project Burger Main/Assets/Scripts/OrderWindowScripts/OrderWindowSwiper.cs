@@ -9,23 +9,27 @@ public class OrderWindowSwiper : TouchSwipeController
     {
         base.Awake();
     }
+    protected override void Start()
+    {
+        base.Start();
+    }
 
     protected override void LimitedNextElement()
     {
         base.LimitedNextElement();
-       
     }
 
     protected override void LimitedPrevElement()
     {
         base.LimitedPrevElement();
-       
     }
 
-    protected override void Start()
+    protected override void ResetHorizontalElement()
     {
-        base.Start();
+        base.ResetHorizontalElement();
     }
+
+  
 
     private void OnCustomerChange() // move this to window
     {

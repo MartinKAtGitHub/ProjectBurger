@@ -14,22 +14,34 @@ public class OrderWindowSwiper : TouchSwipeController
         base.Start();
     }
 
-    protected override void LimitedNextElement()
+    public override void OnDrag(PointerEventData eventData)
     {
-        base.LimitedNextElement();
+        HorizontalDragging(eventData);
     }
 
-    protected override void LimitedPrevElement()
+    public override void OnEndDrag(PointerEventData eventData)
     {
-        base.LimitedPrevElement();
+        SnapToClosestHorizontalElement(eventData);
     }
 
-    protected override void ResetHorizontalElement()
-    {
-        base.ResetHorizontalElement();
-    }
 
-  
+    //protected override void SnapNextHorizontalElement()
+    //{
+    //    base.SnapNextHorizontalElement();
+    //}
+
+    //protected override void SnapPrevHorizontalElement()
+    //{
+    //    base.SnapPrevHorizontalElement();
+    //}
+
+    //protected override void ResetHorizontalElement()
+    //{
+    //    base.ResetHorizontalElement();
+    //}
+
+
+
 
     private void OnCustomerChange() // move this to window
     {
@@ -45,4 +57,15 @@ public class OrderWindowSwiper : TouchSwipeController
         //_activePage = initialFoodPnl;
         //initialFoodPnl.transform.SetParent(_slidingContainer);
     }
+
+    private void GenerateOrderSlots()
+    {
+        //for (int i = 0; i < QueueSlots.length; i++)
+        //{
+        //  insta(RequestContainer) 
+        //}
+
+
+    }
+
 }

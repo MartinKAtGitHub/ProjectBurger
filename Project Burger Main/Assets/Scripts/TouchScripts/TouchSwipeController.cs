@@ -81,17 +81,12 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         }
     }
 
-    public virtual void OnDrag(PointerEventData eventData)
+    public virtual void OnDrag(PointerEventData eventData) // we dont need these inn here
     {
-
-        HorizontalDragging(eventData);
-        VerticalDragging(eventData);
     }
 
-    public virtual void OnEndDrag(PointerEventData eventData)
+    public virtual void OnEndDrag(PointerEventData eventData)// we dont need these inn here
     {
-        SnapToClosestHorizontalElement(eventData);
-
     }
 
 
@@ -120,7 +115,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         yield return null;
     }
 
-    protected virtual void LimitedNextElement()
+    protected virtual void SnapNextHorizontalElement()
     {
         _elementHorizonIndex++;
 
@@ -131,7 +126,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
         _newHorizontalPos += new Vector2(-1 * (_swipeHorizontalDistance), 0);
     }
-    protected virtual void LimitedPrevElement()
+    protected virtual void SnapPrevHorizontalElement()
     {
         _elementHorizonIndex--;
 
@@ -140,6 +135,36 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
             _elementHorizonIndex = 0;
         }
         _newHorizontalPos += new Vector2(_swipeHorizontalDistance, 0);
+    }
+
+    protected virtual void SnapNextVerticalElement()
+    {
+        if (_slotsVertical.Count > 1)
+        {
+            _elementVerticalIndex++; // needs to be reset every horizontal snap
+
+            if (_elementVerticalIndex > _slotsVertical.Count)
+            {
+                _elementVerticalIndex = _slotsVertical.Count - 1;
+            }
+
+            _newVerticalPos += new Vector2(0, -1 * (_swipeVerticalDistance));
+        }
+
+    }
+
+    protected virtual void SnapPrevVericalElement()
+    {
+        if (_slotsVertical.Count > 1)
+        {
+            _elementVerticalIndex--;
+
+            if (_elementVerticalIndex < 0)
+            {
+                _elementVerticalIndex = 0;
+            }
+            _newVerticalPos += new Vector2(0, _swipeVerticalDistance);
+        }
     }
 
 
@@ -175,11 +200,11 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
                 if (percentHorizontal > 0 && _elementHorizonIndex < /*_activeElementsTEMPLIMIT*/ _slotsHorizontal.Length - 1)
                 {
-                    LimitedNextElement();
+                    SnapNextHorizontalElement();
                 }
                 else if (percentHorizontal < 0 && _elementHorizonIndex > 0)
                 {
-                    LimitedPrevElement();
+                    SnapPrevHorizontalElement();
                 }
                 StartCoroutine(LimitedTransistionLogic(_horizontalSwipeContainer.anchoredPosition, _newHorizontalPos, _easingSwipe));
             }

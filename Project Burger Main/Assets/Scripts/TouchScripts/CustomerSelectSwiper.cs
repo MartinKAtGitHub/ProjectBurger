@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class CustomerSelectSwiper : TouchSwipeController
 {
@@ -32,7 +32,19 @@ public class CustomerSelectSwiper : TouchSwipeController
        // LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
     }
 
-    protected override void LimitedNextElement()
+
+    public override void OnDrag(PointerEventData eventData)
+    {
+        HorizontalDragging(eventData);
+    }
+
+    public override void OnEndDrag(PointerEventData eventData)
+    {
+        SnapToClosestHorizontalElement(eventData);
+    }
+
+
+    protected override void SnapNextHorizontalElement()
     {
         var index =  _elementHorizonIndex;
         index++;
@@ -70,7 +82,7 @@ public class CustomerSelectSwiper : TouchSwipeController
         }
     }
 
-    protected override void LimitedPrevElement()
+    protected override void SnapPrevHorizontalElement()
     {
         var index =  _elementHorizonIndex;
         index--;

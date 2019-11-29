@@ -8,20 +8,17 @@ public class CustomerSelectSwiper : TouchSwipeController
     private QueueSlot[] _queueSlots;
     //private Customer _customerInFocus;
     private QueueSlot _queueSlotInFocus;
-   
-    public QueueSlot[] QueueSlots { get => _queueSlots; }
-    public QueueSlot QueueSlotInFocus { get => _queueSlotInFocus;}
+
+    public QueueSlot[] QueueSlots { get => _queueSlots; set => _queueSlots = value; }
+    public QueueSlot QueueSlotInFocus { get => _queueSlotInFocus; }
 
     protected override void Awake()
     {
         base.Awake();
         LevelManager.Instance.CustomerSelectSwiper = this;
 
-        // Maybe make an init
-        CacheQueueSlotsFromElements();
-        _queueSlotInFocus = _queueSlots[_elementHorizonIndex];
-
-        _elementInFocusHorizontal.GetComponent<QueueSlot>().QueueSlotInFocus = true; // WTF is this <-
+        //CacheQueueSlotsFromElements();
+        
     }
 
 
@@ -29,7 +26,11 @@ public class CustomerSelectSwiper : TouchSwipeController
     {
         base.Start();
 
-       // LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
+        _queueSlotInFocus = _queueSlots[_elementHorizonIndex];
+        _queueSlotInFocus.QueueSlotInFocus = true;
+        // _elementInFocusHorizontal.GetComponent<QueueSlot>().QueueSlotInFocus = true; // WTF is this <-
+
+        SetSlotRects(_queueSlots);      
     }
 
 
@@ -46,11 +47,11 @@ public class CustomerSelectSwiper : TouchSwipeController
 
     protected override void SnapNextHorizontalElement()
     {
-        var index =  _elementHorizonIndex;
+        var index = _elementHorizonIndex;
         index++;
-        if (index > Slots.Length - 1)
+        if (index > SlotsHorizontal.Length - 1)
         {
-            _elementHorizonIndex = Slots.Length - 1;
+            _elementHorizonIndex = SlotsHorizontal.Length - 1;
             return;
         }
 
@@ -73,10 +74,10 @@ public class CustomerSelectSwiper : TouchSwipeController
                 _queueSlotInFocus = newSlot;
 
                 //SetCustomerInFocus(newSlot.CurrentCustomer);
-               // LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
+                // LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
 
                 _newHorizontalPos += new Vector2(-1 * (_swipeHorizontalDistance + skipDistance), 0);
-               // Debug.Log(" NEXT Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
+                // Debug.Log(" NEXT Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
                 return;
             }
         }
@@ -84,7 +85,7 @@ public class CustomerSelectSwiper : TouchSwipeController
 
     protected override void SnapPrevHorizontalElement()
     {
-        var index =  _elementHorizonIndex;
+        var index = _elementHorizonIndex;
         index--;
         if (index < 0)
         {
@@ -114,9 +115,20 @@ public class CustomerSelectSwiper : TouchSwipeController
                 //LevelManager.Instance.FoodTrayManger.SetFoodTrayFocus(_elementIndex);
 
                 _newHorizontalPos += new Vector2(_swipeHorizontalDistance + skipDistance, 0);
-               // Debug.Log(" PREV Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
+                // Debug.Log(" PREV Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
                 return;
             }
+        }
+    }
+
+
+
+    protected override void SetSlotRects(SlotHorizontal[] slotHorizontal)
+    {
+        for (int i = 0; i < slotHorizontal.Length; i++)
+        {
+            var QSlot = slotHorizontal[i];
+            SlotsHorizontal[i] = QSlot.GetComponent<RectTransform>();
         }
     }
 
@@ -135,14 +147,14 @@ public class CustomerSelectSwiper : TouchSwipeController
     //    }
     //}
 
-    private void CacheQueueSlotsFromElements()
-    {
-        _queueSlots = new QueueSlot[Slots.Length];
+    //private void CacheQueueSlotsFromElements()
+    //{
+    //    _queueSlots = new QueueSlot[SlotsHorizontal.Length];
 
-        for (int i = 0; i < Slots.Length; i++)
-        {
-            _queueSlots[i] = Slots[i].GetComponent<QueueSlot>();
-        }
-    }
+    //    for (int i = 0; i < SlotsHorizontal.Length; i++)
+    //    {
+    //        _queueSlots[i] = SlotsHorizontal[i].GetComponent<QueueSlot>();
+    //    }
+    //}
 
 }

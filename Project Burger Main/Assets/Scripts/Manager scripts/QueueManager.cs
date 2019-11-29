@@ -6,10 +6,13 @@ using UnityEngine;
 public class QueueManager : MonoBehaviour
 {
 
-    [SerializeField] private GameObject _queueSlotPrefab;
     [SerializeField] private int _activeQueueLimit;
     [SerializeField] private int _numOfActiveCustomers;
+    [SerializeField] private GameObject _queueSlotPrefab;
+    [SerializeField] private RectTransform _customerSwipeContainer;
+   
     private QueueSlot[] _queueSlots;
+    //private RectTransform[] _Slots;
 
     // [SerializeField] private List<Customer> _activeCustomerQueue = new List<Customer>();
     // private CustomerSelect _customerSelect;
@@ -26,27 +29,28 @@ public class QueueManager : MonoBehaviour
         //_queueDotIndicators = GetComponent<QueueDotIndicators>();
         //_limitedQueueDotIndicators = GetComponent<LimitedQueueDotIndicators>();
         //_limitedCustomerSelect = GetComponent<LimitedCustomerSelect>();
-
-        //GenerateQueueSlots();
+        _customerSwipeContainer = LevelManager.Instance.CustomerSelectSwiper.HorizontalSwipeContainer;
+        GenerateQueueSlots();
     }
 
     private void Start()
     {
-        _queueSlots = LevelManager.Instance.CustomerSelectSwiper.QueueSlots; // This might be better here
+        //GenerateQueueSlots();
     }
 
-    //private void GenerateQueueSlots()
-    //{
-    //    _queueSlots = new QueueSlot[_activeQueueLimit];
+    private void GenerateQueueSlots()
+    {
+        _queueSlots = new QueueSlot[_activeQueueLimit];
 
-    //    for (int i = 0; i < _queueSlots.Length; i++)
-    //    {
-    //        var queueSlot = Instantiate(_queueSlotPrefab, _customerNotInFocusContainer.transform);
-    //        _queueSlots[i] = queueSlot.GetComponent<QueueSlot>();
+        for (int i = 0; i < _queueSlots.Length; i++)
+        {
+            var queueSlot = Instantiate(_queueSlotPrefab, _customerSwipeContainer.transform);
+            queueSlot.name = "QSlot " + i;
+            _queueSlots[i] = queueSlot.GetComponent<QueueSlot>();
+        }
 
-    //    }
-
-    //}
+        LevelManager.Instance.CustomerSelectSwiper.QueueSlots = _queueSlots;
+    }
 
     public void AddCustomerToQueue(Customer customer)
     {
@@ -110,9 +114,5 @@ public class QueueManager : MonoBehaviour
             }
         }
     }
-
-   
-
-
 
 }

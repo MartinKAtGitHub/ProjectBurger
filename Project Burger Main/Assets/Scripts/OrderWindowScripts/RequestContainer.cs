@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RequestContainer : MonoBehaviour
+public class RequestContainer : SlotHorizontal
 {
     [SerializeField]private GameObject RequestCardPrefab;
 

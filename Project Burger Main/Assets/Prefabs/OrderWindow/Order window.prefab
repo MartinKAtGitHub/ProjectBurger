@@ -329,10 +329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b63a9135faf4b74d83a08399e8a7b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tmpMax: 6
-  _foodItemPnlPrefab: {fileID: 138952404240402919, guid: a0aecc3d116f0844ba087bc2223357c0,
+  _requestCardsContainerPrefab: {fileID: 8511897079178076946, guid: 6f842b775559c0a4a824d46e85071ba0,
     type: 3}
-  _notInFocusPnls: {fileID: 958729983722142272}
 --- !u!114 &6541748529248713867
 MonoBehaviour:
   m_ObjectHideFlags: 0

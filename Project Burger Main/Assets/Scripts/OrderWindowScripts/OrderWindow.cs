@@ -9,40 +9,39 @@ using System.Collections.Generic;
 public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer ?
 {
 
-    [SerializeField] private int _tmpMax = 6; // TODO  OrderWindow.cs | Connect Max limit pnls/ fooditems per customer to Manager
-    [SerializeField] private GameObject _foodItemPnlPrefab;
+    // [SerializeField] private int _tmpMax = 6; // TODO  OrderWindow.cs | Connect Max limit pnls/ fooditems per customer to Manager
+    //[SerializeField] private GameObject _foodItemPnlPrefab;
     /// <summary>
     /// Holds the pnls with the information on fooditem which are not in focus from the player.
     /// </summary>
-    [SerializeField] private RectTransform _notInFocusPnls;
+    // [SerializeField] private RectTransform _notInFocusPnls;
+    [SerializeField]private GameObject _requestCardsContainerPrefab;
 
-    private Customer _activeCustomer;
+    //  private Customer _activeCustomer;
     private OrderWindowSwiper _orderWindowSwiper;
-
-    public Customer ActiveCustomer { get => _activeCustomer; }
-    public RectTransform NotInFocusPnls { get => _notInFocusPnls; }
-    public GameObject FoodItemPnlPrefab { get => _foodItemPnlPrefab; }
+    private RequestContainer[] _requestContainers;
+    //public Customer ActiveCustomer { get => _activeCustomer; }
+    //public RectTransform NotInFocusPnls { get => _notInFocusPnls; }
+    //public GameObject FoodItemPnlPrefab { get => _foodItemPnlPrefab; }
 
     private void Awake()
     {
         LevelManager.Instance.OrderWindow = this;
         _orderWindowSwiper = GetComponent<OrderWindowSwiper>();
+        GenerateOrderSlots();
     }
 
-    public void OpenWindow(Customer customer)
+    private void GenerateOrderSlots()
     {
-        // Anim Fade INN Window / enable window = true
-        // UpdateUI(customer);
-        gameObject.SetActive(true);
+        _requestContainers = new RequestContainer[LevelManager.Instance.QueueManager.ActiveQueueLimit];
+
+        for (int i = 0; i < _requestContainers.Length; i++ )
+        {
+            var orderSlot = Instantiate(_requestCardsContainerPrefab, _orderWindowSwiper.HorizontalSwipeContainer);
+            _requestContainers[i] = orderSlot.GetComponent<RequestContainer>();
+        }
     }
 
-    public void CloseWindow()
-    {
-        // Fade OUT Window / enable window = false
-        //set all to null
-        gameObject.SetActive(false);
-        // Destroy(_orderWindow);
-    }
 
     public void UpdateUI(Customer customer)
     {
@@ -65,4 +64,7 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
         //}
 
     }
+
+
+
 }

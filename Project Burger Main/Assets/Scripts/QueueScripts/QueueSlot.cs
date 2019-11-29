@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class QueueSlot : MonoBehaviour
+public class QueueSlot : SlotHorizontal
 {
     [SerializeField]private Customer _currentCustomer;
     [SerializeField] private bool _queueSlotInFocus;

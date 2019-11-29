@@ -58,14 +58,9 @@ public class OrderWindowSwiper : TouchSwipeController
         //initialFoodPnl.transform.SetParent(_slidingContainer);
     }
 
-    private void GenerateOrderSlots()
+
+    protected override void SetSlotRects(SlotHorizontal[] slotHorizontal)
     {
-        //for (int i = 0; i < QueueSlots.length; i++)
-        //{
-        //  insta(RequestContainer) 
-        //}
-
-
+        throw new NotImplementedException();
     }
-
 }

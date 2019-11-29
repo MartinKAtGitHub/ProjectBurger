@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RequestCard : MonoBehaviour
+public class RequestCard : SlotVertical
 {
 
 /* 

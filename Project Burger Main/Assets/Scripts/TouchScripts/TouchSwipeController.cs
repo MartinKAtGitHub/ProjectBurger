@@ -50,25 +50,30 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     protected int _elementVerticalIndex = 0;
 
     // public int ActiveElements { get => _activeElementsTEMPLIMIT; set => _activeElementsTEMPLIMIT = value; }
-    public RectTransform[] Slots { get => _slotsHorizontal; }
+    public RectTransform[] SlotsHorizontal { get => _slotsHorizontal; }
+    public RectTransform HorizontalSwipeContainer { get => _horizontalSwipeContainer;}
 
     virtual protected void Awake()
     {
         // _activeElementsTEMPLIMIT = _slots.Length;
         _swipeHorizontalDistance = _swipeContainerElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
-        InitializeTouchControll();
+        _slotsHorizontal = new RectTransform[LevelManager.Instance.QueueManager.ActiveQueueLimit];
     }
 
     virtual protected void Start()
     {
-        _currentHorizontalSwipeContainerPos = _horizontalSwipeContainer.anchoredPosition;
-
-        // _currentVerticalSwipeContainerPos = _verticalSwipeContainer.anchoredPosition;
+        InitializeTouchControll();
+        //SetSlotRects();
     }
 
+    abstract protected void SetSlotRects(SlotHorizontal[] slotHorizontal); // Assign the whet
 
     private void InitializeTouchControll() // maybe make this abstract and let the child handle this
     {
+
+        _currentHorizontalSwipeContainerPos = _horizontalSwipeContainer.anchoredPosition;
+        // _currentVerticalSwipeContainerPos = _verticalSwipeContainer.anchoredPosition;
+
         if (_slotsHorizontal.Length > 0)
         {
             var element = _slotsHorizontal[_elementHorizonIndex];

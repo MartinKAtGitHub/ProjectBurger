@@ -19,7 +19,7 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
 
     //  private Customer _activeCustomer;
     private OrderWindowSwiper _orderWindowSwiper;
-    private RequestContainer[] _requestContainers;
+   // private RequestContainer[] _requestContainers;
     //public Customer ActiveCustomer { get => _activeCustomer; }
     //public RectTransform NotInFocusPnls { get => _notInFocusPnls; }
     //public GameObject FoodItemPnlPrefab { get => _foodItemPnlPrefab; }
@@ -29,16 +29,18 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
         LevelManager.Instance.OrderWindow = this;
         _orderWindowSwiper = GetComponent<OrderWindowSwiper>();
         GenerateOrderSlots();
+       
     }
 
     private void GenerateOrderSlots()
     {
-        _requestContainers = new RequestContainer[LevelManager.Instance.QueueManager.ActiveQueueLimit];
 
-        for (int i = 0; i < _requestContainers.Length; i++ )
+        _orderWindowSwiper.RequestContainers = new RequestContainer[LevelManager.Instance.QueueManager.ActiveQueueLimit];
+
+        for (int i = 0; i < _orderWindowSwiper.RequestContainers.Length; i++ )
         {
             var orderSlot = Instantiate(_requestCardsContainerPrefab, _orderWindowSwiper.HorizontalSwipeContainer);
-            _requestContainers[i] = orderSlot.GetComponent<RequestContainer>();
+            _orderWindowSwiper.RequestContainers[i] = orderSlot.GetComponent<RequestContainer>();
         }
     }
 

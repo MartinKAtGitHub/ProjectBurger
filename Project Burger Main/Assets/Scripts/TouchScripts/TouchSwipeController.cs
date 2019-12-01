@@ -19,21 +19,24 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     [SerializeField] private float _easingReset = 0.8f;
     [Tooltip("1 of the element gameobject which will be used inside the Swipe container, used to find the size so swipe distance can be calculated ")]
     [SerializeField] private GameObject _swipeContainerElementPrefab;
-    [Tooltip("The Rect Transform which will be moved when swiped")]
-    [SerializeField] private RectTransform _horizontalSwipeContainer;
-    [SerializeField] private RectTransform _verticalSwipeContainer;
+   
     [Tooltip("Used to calculate the X distance needed to swipe, in case of additional spacing")]
     [SerializeField] private HorizontalLayoutGroup _swipeContainerHorizontalLayoutGroup;
-    [Tooltip("The Slots / containers which will hold customer,food items can be anything, serves as a position for the swiper to go to")]
-    [SerializeField] private RectTransform[] _slotsHorizontal; // drag and drop -> Length is used as limit | TODO -> make a spawn system for them in a level editor
 
-    [SerializeField] private List<RectTransform> _slotsVertical;
+    [Tooltip("The Rect Transform which will be moved when swiped")]
+    [SerializeField] protected RectTransform _horizontalSwipeContainer;
+    [SerializeField] protected RectTransform _verticalSwipeContainer;
+
+    [Tooltip("The Slots / containers which will hold customer,food items can be anything, serves as a position for the swiper to go to")]
+    [SerializeField] protected SlotHorizontal[] _slotsHorizontal; // drag and drop -> Length is used as limit | TODO -> make a spawn system for them in a level editor
+    [SerializeField] protected List<SlotVertical> _slotsVertical;
 
 
     private Vector2 _currentHorizontalSwipeContainerPos;
     private Vector2 _currentVerticalSwipeContainerPos;
 
-    private bool _inSmoothTransition;
+    private bool _inSmoothHorizontalTransition;
+    private bool _inSmoothVerticalTransition;
     // [SerializeField] private int _activeElementsTEMPLIMIT;
 
 
@@ -43,46 +46,40 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     protected float _swipeHorizontalDistance;
     protected float _swipeVerticalDistance;
 
-    protected RectTransform _elementInFocusHorizontal;
-    protected RectTransform _elementInFocusVertical;
-
     protected int _elementHorizonIndex = 0;
     protected int _elementVerticalIndex = 0;
 
-    // public int ActiveElements { get => _activeElementsTEMPLIMIT; set => _activeElementsTEMPLIMIT = value; }
-    public RectTransform[] SlotsHorizontal { get => _slotsHorizontal; }
+    // public int ActiveElements { get => _activeElementsTEMPLIMIT; set => _activeElementsTEMPLIMIT = value; 
+
+    public SlotHorizontal[] SlotsHorizontal { get => _slotsHorizontal; }
     public RectTransform HorizontalSwipeContainer { get => _horizontalSwipeContainer;}
+
 
     virtual protected void Awake()
     {
         // _activeElementsTEMPLIMIT = _slots.Length;
         _swipeHorizontalDistance = _swipeContainerElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
-        _slotsHorizontal = new RectTransform[LevelManager.Instance.QueueManager.ActiveQueueLimit];
+       
+        _slotsHorizontal = new SlotHorizontal[LevelManager.Instance.QueueManager.ActiveQueueLimit];
     }
 
     virtual protected void Start()
     {
-        InitializeTouchControll();
-        //SetSlotRects();
+       // InitializeTouchControll();
     }
 
-    abstract protected void SetSlotRects(SlotHorizontal[] slotHorizontal); // Assign the whet
+   
 
-    private void InitializeTouchControll() // maybe make this abstract and let the child handle this
+    protected virtual void InitializeTouchControll()
     {
 
         _currentHorizontalSwipeContainerPos = _horizontalSwipeContainer.anchoredPosition;
-        // _currentVerticalSwipeContainerPos = _verticalSwipeContainer.anchoredPosition;
+        _currentVerticalSwipeContainerPos = _verticalSwipeContainer.anchoredPosition;
+    
 
-        if (_slotsHorizontal.Length > 0)
+        if (_slotsHorizontal.Length <= 0)
         {
-            var element = _slotsHorizontal[_elementHorizonIndex];
-            // element.SetParent(_swipeContainer);
-            _elementInFocusHorizontal = element;
-        }
-        else
-        {
-            Debug.LogError("TouchSwipeController has no elements to swipe, The SwipeContainer needs to at least have 1 element in order to function");
+            Debug.LogError("_slotsHorizontal is 0. Assign Slots for the _slotsHorizontal[] or the swiper cant swipe");
         }
     }
 
@@ -100,9 +97,9 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         // maybe make slots into a list and get the type from the children insted of drag and drop into arry
     }
 
-    private IEnumerator LimitedTransistionLogic(Vector2 startPos, Vector2 endPos, float sec)
+    private IEnumerator HorizontalTransistionLogic(Vector2 startPos, Vector2 endPos, float sec)
     {
-        _inSmoothTransition = true;
+        _inSmoothHorizontalTransition = true;
         // LevelManager.Instance.OrderWindow.CloseWindow();
 
 
@@ -115,10 +112,30 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         }
 
         _currentHorizontalSwipeContainerPos = endPos;
-        _inSmoothTransition = false;
+        _inSmoothHorizontalTransition = false;
 
         yield return null;
     }
+    private IEnumerator VerticalTransistionLogic(Vector2 startPos, Vector2 endPos, float sec)
+    {
+        _inSmoothVerticalTransition = true;
+        // LevelManager.Instance.OrderWindow.CloseWindow();
+
+
+        float t = 0f;
+        while (t <= 1.0)
+        {
+            t += Time.deltaTime / sec;
+            _verticalSwipeContainer.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
+            yield return null;
+        }
+
+        _currentVerticalSwipeContainerPos = endPos;
+        _inSmoothHorizontalTransition = false;
+
+        yield return null;
+    }
+
 
     protected virtual void SnapNextHorizontalElement()
     {
@@ -175,7 +192,11 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
     protected virtual void ResetHorizontalElement()
     {
-        StartCoroutine(LimitedTransistionLogic(_horizontalSwipeContainer.anchoredPosition, _currentHorizontalSwipeContainerPos, _easingReset));
+        StartCoroutine(HorizontalTransistionLogic(_horizontalSwipeContainer.anchoredPosition, _currentHorizontalSwipeContainerPos, _easingReset));
+    }
+    protected virtual void ResetVerticalElement()
+    {
+        StartCoroutine(VerticalTransistionLogic(_verticalSwipeContainer.anchoredPosition, _currentVerticalSwipeContainerPos, _easingReset));
     }
 
     protected void HorizontalDragging(PointerEventData eventData)
@@ -197,7 +218,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     {
         float percentHorizontal = (eventData.pressPosition.x - eventData.position.x) / Screen.width;
 
-        if (!_inSmoothTransition)
+        if (!_inSmoothHorizontalTransition)
         {
             if (Mathf.Abs(percentHorizontal) >= percentHorizontalSwipeThreshold)
             {
@@ -211,7 +232,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
                 {
                     SnapPrevHorizontalElement();
                 }
-                StartCoroutine(LimitedTransistionLogic(_horizontalSwipeContainer.anchoredPosition, _newHorizontalPos, _easingSwipe));
+                StartCoroutine(HorizontalTransistionLogic(_horizontalSwipeContainer.anchoredPosition, _newHorizontalPos, _easingSwipe));
             }
             else
             {
@@ -227,14 +248,28 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     {
 
         float percentVertical = (eventData.pressPosition.y - eventData.position.y) / Screen.height;
-        //if(Mathf.Abs(percentVertical) >= percentVerticalSwipeThreshold)
-        //{
-        //    _newVerticalPos = _currentVerticalSwipeContainerPos;
-        //    if(percentVertical > 0 && _elementVerticalIndex < _slotsVertical.Count)
-        //    {
 
-        //    }
+        if (!_inSmoothVerticalTransition)
+        {
+            if (Mathf.Abs(percentVertical) >= percentHorizontalSwipeThreshold)
+            {
+                _newVerticalPos = _currentVerticalSwipeContainerPos;
 
-        //}
+                if (percentVertical > 0 && _elementVerticalIndex <  _slotsVertical.Count - 1)
+                {
+                    SnapNextVerticalElement();
+                }
+                else if (percentVertical < 0 && _elementVerticalIndex > 0)
+                {
+                    SnapPrevVericalElement();
+                }
+
+                StartCoroutine(VerticalTransistionLogic(_verticalSwipeContainer.anchoredPosition, _newVerticalPos, _easingSwipe));
+            }
+            else
+            {
+                ResetVerticalElement();
+            }
+        }
     }
 }

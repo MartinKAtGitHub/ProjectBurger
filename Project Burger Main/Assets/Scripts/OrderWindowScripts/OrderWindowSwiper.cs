@@ -5,23 +5,42 @@ using UnityEngine.EventSystems;
 
 public class OrderWindowSwiper : TouchSwipeController
 {
+    RequestContainer[] _requestContainers;
+
+    public RequestContainer[] RequestContainers { get => _requestContainers; set => _requestContainers = value; }
+
     protected override void Awake()
     {
         base.Awake();
+       
     }
     protected override void Start()
     {
         base.Start();
+        _slotsHorizontal = _requestContainers;
+
+        InitializeTouchControll();
     }
+
+
+    protected override void InitializeTouchControll()
+    {
+        _verticalSwipeContainer = _requestContainers[0].VerticalSwiper;
+        base.InitializeTouchControll();
+        Debug.Log("Name ->" + _verticalSwipeContainer.name);
+    }
+    
 
     public override void OnDrag(PointerEventData eventData)
     {
         HorizontalDragging(eventData);
+        VerticalDragging(eventData);
     }
 
     public override void OnEndDrag(PointerEventData eventData)
     {
         SnapToClosestHorizontalElement(eventData);
+        SnapToClosestVerticalElement(eventData);
     }
 
 
@@ -59,8 +78,5 @@ public class OrderWindowSwiper : TouchSwipeController
     }
 
 
-    protected override void SetSlotRects(SlotHorizontal[] slotHorizontal)
-    {
-        throw new NotImplementedException();
-    }
+  
 }

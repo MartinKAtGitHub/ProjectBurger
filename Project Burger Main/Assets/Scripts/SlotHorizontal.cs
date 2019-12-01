@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class SlotHorizontal : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public RectTransform RectTransform { get; set; }
+    protected virtual void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        RectTransform = GetComponent<RectTransform>();        
     }
 }

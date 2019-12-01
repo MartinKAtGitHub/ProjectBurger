@@ -36,6 +36,8 @@ public class QueueManager : MonoBehaviour
     private void Start()
     {
         //GenerateQueueSlots();
+
+     
     }
 
     private void GenerateQueueSlots()

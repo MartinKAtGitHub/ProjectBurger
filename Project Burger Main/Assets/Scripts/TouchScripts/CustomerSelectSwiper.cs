@@ -30,7 +30,8 @@ public class CustomerSelectSwiper : TouchSwipeController
         _queueSlotInFocus.QueueSlotInFocus = true;
         // _elementInFocusHorizontal.GetComponent<QueueSlot>().QueueSlotInFocus = true; // WTF is this <-
 
-        SetSlotRects(_queueSlots);      
+        _slotsHorizontal = _queueSlots;
+     
     }
 
 
@@ -118,17 +119,6 @@ public class CustomerSelectSwiper : TouchSwipeController
                 // Debug.Log(" PREV Moving " + skipDistance + " New index = " + i + " Customer Name = " + _queueSlots[i].CurrentCustomer.name);
                 return;
             }
-        }
-    }
-
-
-
-    protected override void SetSlotRects(SlotHorizontal[] slotHorizontal)
-    {
-        for (int i = 0; i < slotHorizontal.Length; i++)
-        {
-            var QSlot = slotHorizontal[i];
-            SlotsHorizontal[i] = QSlot.GetComponent<RectTransform>();
         }
     }
 

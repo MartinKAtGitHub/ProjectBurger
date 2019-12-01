@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 1797889669802753581}
   - component: {fileID: 8035720344584504954}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Food_img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

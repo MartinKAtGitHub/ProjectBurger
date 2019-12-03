@@ -18,7 +18,7 @@ public class CustomerSelectSwiper : TouchSwipeController
         LevelManager.Instance.CustomerSelectSwiper = this;
 
         //CacheQueueSlotsFromElements();
-        
+
     }
 
 
@@ -31,9 +31,23 @@ public class CustomerSelectSwiper : TouchSwipeController
         // _elementInFocusHorizontal.GetComponent<QueueSlot>().QueueSlotInFocus = true; // WTF is this <-
 
         _slotsHorizontal = _queueSlots;
-     
+        InitializeTouchControll();
+
     }
 
+    protected override void InitializeTouchControll()
+    {
+        _currentHorizontalSwipeContainerPos = _horizontalSwipeContainer.anchoredPosition;
+        // _currentVerticalSwipeContainerPos = _verticalSwipeContainer.anchoredPosition;
+
+        if (_slotsHorizontal.Length <= 0)
+        {
+            Debug.LogError("_slotsHorizontal is 0. Assign Slots for the _slotsHorizontal[] or the swiper cant swipe");
+        }
+
+        //base.InitializeTouchControll();
+
+    }
 
     public override void OnDrag(PointerEventData eventData)
     {

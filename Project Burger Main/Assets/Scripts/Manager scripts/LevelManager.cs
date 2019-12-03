@@ -15,8 +15,10 @@ public class LevelManager : MonoBehaviour
     public CustomerSelectSwiper CustomerSelectSwiper;
     public OrderWindow OrderWindow;
     public WinLooseManager WinLooseManager;
-   
-    private FoodTrayManager _foodTrayManger;
+    public TakeOrder TakeOrder;
+
+     private FoodTrayManager _foodTrayManger;
+
 
     [SerializeField] private float _preparationTime;
     [SerializeField] private Vector2 _customerSpawnTimerMinMax;
@@ -42,7 +44,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         NullCheck<QueueManager>(QueueManager);
-       // NullCheck<FoodTrayManager>(FoodTrayManger);
+        // NullCheck<FoodTrayManager>(FoodTrayManger);
         // NullCheck(FoodTray);
         // NullCheck(CustomerSpawner);
         NullCheck(SalesManager);
@@ -51,6 +53,7 @@ public class LevelManager : MonoBehaviour
         // NullCheck(CustomerSelect);
         NullCheck(OrderWindow);
         NullCheck(WinLooseManager);
+        NullCheck(TakeOrder);
 
         if (_enableSpawner)
         {

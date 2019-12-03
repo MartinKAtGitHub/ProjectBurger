@@ -5,32 +5,30 @@ using UnityEngine.EventSystems;
 
 public class OrderWindowSwiper : TouchSwipeController
 {
-    RequestContainer[] _requestContainers;
+    //RequestContainer[] _requestContainers;
+    //public RequestContainer[] RequestContainers { get => _requestContainers; set => _requestContainers = value; }
 
-    public RequestContainer[] RequestContainers { get => _requestContainers; set => _requestContainers = value; }
+    private OrderWindow _orderWindow;
 
     protected override void Awake()
     {
         base.Awake();
-       
+        _orderWindow = GetComponent<OrderWindow>();
     }
     protected override void Start()
     {
         base.Start();
-        _slotsHorizontal = _requestContainers;
+        _slotsHorizontal = _orderWindow.RequestContainers;
 
         InitializeTouchControll();
     }
 
-
     protected override void InitializeTouchControll()
     {
-        _verticalSwipeContainer = _requestContainers[0].VerticalSwiper;
+        _verticalSwipeContainer = _orderWindow.RequestContainers[0].VerticalSwiper;
         base.InitializeTouchControll();
-        Debug.Log("Name ->" + _verticalSwipeContainer.name);
     }
     
-
     public override void OnDrag(PointerEventData eventData)
     {
         HorizontalDragging(eventData);
@@ -42,7 +40,6 @@ public class OrderWindowSwiper : TouchSwipeController
         SnapToClosestHorizontalElement(eventData);
         SnapToClosestVerticalElement(eventData);
     }
-
 
     //protected override void SnapNextHorizontalElement()
     //{
@@ -59,9 +56,6 @@ public class OrderWindowSwiper : TouchSwipeController
     //    base.ResetHorizontalElement();
     //}
 
-
-
-
     private void OnCustomerChange() // move this to window
     {
         // Fade out Orderwin text
@@ -76,7 +70,4 @@ public class OrderWindowSwiper : TouchSwipeController
         //_activePage = initialFoodPnl;
         //initialFoodPnl.transform.SetParent(_slidingContainer);
     }
-
-
-  
 }

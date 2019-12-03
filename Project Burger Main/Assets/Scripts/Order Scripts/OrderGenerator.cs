@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class OrderGenerator : MonoBehaviour
 {
-    public bool RemoveIngredients;
+    [SerializeField] bool _enableORDERGENEARTIR;
 
     [SerializeField] private RecipeBook _recipeBook;
     [Range(2, 6)]
@@ -18,6 +18,7 @@ public class OrderGenerator : MonoBehaviour
     /// </summary>
     [SerializeField] private Order _order;
 
+
     private Recipe _orderBaseRecipe;
     private Customer _customer;
   
@@ -27,6 +28,8 @@ public class OrderGenerator : MonoBehaviour
     /// </summary>
     public Recipe OrderBaseRecipe { get { return _orderBaseRecipe; } }
   
+    public bool RemoveIngredients;
+    
     private void Awake()
     {
         //_customer = GetComponent<Customer>();
@@ -38,12 +41,8 @@ public class OrderGenerator : MonoBehaviour
     /// </summary>
     public Order RequestOrder()
     {
-        //Debug.Log(name + " Is requesting a Order");
         _order = new Order();
-        //   _order.CustomerName = _customer.CustomerName;
-
         var multiOrderRoll = Random.Range(1, 100);
-
         if (multiOrderRoll < _multiOrderChance)
         {
             //  Debug.Log("Requesting Multi food recipe order");

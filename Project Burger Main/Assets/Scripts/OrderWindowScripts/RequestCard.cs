@@ -1,12 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class RequestCard : SlotVertical
 {
+    [SerializeField] TextMeshProUGUI _recipeTitleTxt;
+    [SerializeField] SpecialRequestElement[] _specialRequestElements;
 
-/* 
- * GET ALL THE UI ELEMENTS
- * MAKE THEM AVALIABLE TO BE SET
- */
+    public TextMeshProUGUI RecipeTitleTxt { get => _recipeTitleTxt; }
+    public SpecialRequestElement[] SpecialRequestElements { get => _specialRequestElements; }
 }

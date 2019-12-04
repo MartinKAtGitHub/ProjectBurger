@@ -10,6 +10,8 @@ public class RequestContainer : SlotHorizontal
     List<RequestCard> _requestCards = new List<RequestCard>();
 
     public RectTransform VerticalSwiper { get => _verticalSwiper; }
+    public List<RequestCard> RequestCards { get => _requestCards; }
+    public GameObject RequestCardPrefab { get => _requestCardPrefab;  }
 
     public void GenerateRequestCardsFromOrder(Order order)
     {

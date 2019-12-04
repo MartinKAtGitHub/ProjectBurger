@@ -10,15 +10,18 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 {
     // [SerializeField] int _tmpMaxElementLimit;
     [Tooltip("The threshold of what should be consider a horizontal swipe ")]
-    [SerializeField] private float percentHorizontalSwipeThreshold = 0.2f;
+    [SerializeField] protected float percentHorizontalSwipeThreshold = 0.2f;
     [Tooltip("The threshold of what should be consider a vertical swipe")]
-    [SerializeField] private float percentVerticalSwipeThreshold = 0.2f;
+    [SerializeField] protected float percentVerticalSwipeThreshold = 0.2f;
     [Tooltip("How fast the slide/snap motion to the next element")]
-    [SerializeField] private float _easingSwipe = 0.8f;
+    [SerializeField] protected float _easingSwipe = 0.8f;
     [Tooltip("How fast the slide/snap motion back to the original position is in case the cancels swipe")]
-    [SerializeField] private float _easingReset = 0.8f;
+    [SerializeField] protected float _easingReset = 0.8f;
+
+
     [Tooltip("1 of the element gameobject which will be used inside the Swipe container, used to find the size so swipe distance can be calculated ")]
-    [SerializeField] private GameObject _swipeContainerElementPrefab;
+    [SerializeField] private GameObject _swipeContainerHorizontalElementPrefab;
+    [SerializeField] private GameObject _swipeContainerVertcalElementPrefab;
 
     [Tooltip("Used to calculate the X distance needed to swipe, in case of additional spacing")]
     [SerializeField] private HorizontalLayoutGroup _swipeContainerHorizontalLayoutGroup;
@@ -35,8 +38,8 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     protected Vector2 _currentHorizontalSwipeContainerPos;
     protected Vector2 _currentVerticalSwipeContainerPos;
 
-    private bool _inSmoothHorizontalTransition;
-    private bool _inSmoothVerticalTransition;
+    protected bool _inSmoothHorizontalTransition;
+    protected bool _inSmoothVerticalTransition;
     // [SerializeField] private int _activeElementsTEMPLIMIT;
 
 
@@ -61,7 +64,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     virtual protected void Awake()
     {
         // _activeElementsTEMPLIMIT = _slots.Length;
-        _swipeHorizontalDistance = _swipeContainerElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
+        _swipeHorizontalDistance = _swipeContainerHorizontalElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
 
         _slotsHorizontal = new SlotHorizontal[LevelManager.Instance.QueueManager.ActiveQueueLimit];
     }
@@ -100,7 +103,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
         // maybe make slots into a list and get the type from the children insted of drag and drop into arry
     }
 
-    private IEnumerator HorizontalTransistionLogic(Vector2 startPos, Vector2 endPos, float sec)
+    protected IEnumerator HorizontalTransistionLogic(Vector2 startPos, Vector2 endPos, float sec)
     {
         _inSmoothHorizontalTransition = true;
         // LevelManager.Instance.OrderWindow.CloseWindow();
@@ -119,7 +122,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
         yield return null;
     }
-    private IEnumerator VerticalTransistionLogic(Vector2 startPos, Vector2 endPos, float sec)
+    protected IEnumerator VerticalTransistionLogic(Vector2 startPos, Vector2 endPos, float sec)
     {
         _inSmoothVerticalTransition = true;
         // LevelManager.Instance.OrderWindow.CloseWindow();
@@ -164,31 +167,29 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
     protected virtual void SnapNextVerticalElement()
     {
-        if (_slotsVertical.Count > 1)
+
+        _elementVerticalIndex++; // needs to be reset every horizontal snap
+
+        if (_elementVerticalIndex > _slotsVertical.Count)
         {
-            _elementVerticalIndex++; // needs to be reset every horizontal snap
-
-            if (_elementVerticalIndex > _slotsVertical.Count)
-            {
-                _elementVerticalIndex = _slotsVertical.Count - 1;
-            }
-
-            _newVerticalPos += new Vector2(0, -1 * (_swipeVerticalDistance));
+            _elementVerticalIndex = _slotsVertical.Count - 1;
         }
+
+        _newVerticalPos += new Vector2(0, -1 * (_swipeVerticalDistance));
+
     }
 
     protected virtual void SnapPrevVericalElement()
     {
-        if (_slotsVertical.Count > 1)
-        {
-            _elementVerticalIndex--;
 
-            if (_elementVerticalIndex < 0)
-            {
-                _elementVerticalIndex = 0;
-            }
-            _newVerticalPos += new Vector2(0, _swipeVerticalDistance);
+        _elementVerticalIndex--;
+
+        if (_elementVerticalIndex < 0)
+        {
+            _elementVerticalIndex = 0;
         }
+        _newVerticalPos += new Vector2(0, _swipeVerticalDistance);
+
     }
 
     protected virtual void ResetHorizontalElement()
@@ -245,7 +246,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     /// <summary>
     /// Checks to see if player has swiped far enough in the Vertical direction to snap to closest Next/Previous element
     /// </summary>
-    protected void SnapToClosestVerticalElement(PointerEventData eventData)
+    protected virtual void SnapToClosestVerticalElement(PointerEventData eventData)
     {
 
         float percentVertical = (eventData.pressPosition.y - eventData.position.y) / Screen.height;

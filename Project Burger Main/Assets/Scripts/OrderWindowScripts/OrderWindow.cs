@@ -15,11 +15,12 @@ public class OrderWindow : MonoBehaviour // TODO place OrderWindow per Customer 
     private RequestContainer[] _requestContainers;
 
     public RequestContainer[] RequestContainers { get => _requestContainers;}
+    public GameObject RequestCardsContainerPrefab { get => _requestCardsContainerPrefab; }
+
     private void Awake()
     {
         LevelManager.Instance.OrderWindow = this;
         _orderWindowSwiper = GetComponent<OrderWindowSwiper>();
-
         GenerateOrderSlots();
     }
 

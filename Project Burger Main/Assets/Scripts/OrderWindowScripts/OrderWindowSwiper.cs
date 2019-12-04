@@ -2,13 +2,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class OrderWindowSwiper : TouchSwipeController
 {
-    //RequestContainer[] _requestContainers;
-    //public RequestContainer[] RequestContainers { get => _requestContainers; set => _requestContainers = value; }
-
+ 
     private OrderWindow _orderWindow;
+
 
     protected override void Awake()
     {
@@ -18,14 +18,19 @@ public class OrderWindowSwiper : TouchSwipeController
     protected override void Start()
     {
         base.Start();
-        _slotsHorizontal = _orderWindow.RequestContainers;
-
+       
         InitializeTouchControll();
     }
 
     protected override void InitializeTouchControll()
     {
-        _verticalSwipeContainer = _orderWindow.RequestContainers[0].VerticalSwiper;
+        _slotsHorizontal = _orderWindow.RequestContainers;
+        _verticalSwipeContainer = _orderWindow.RequestContainers[_elementHorizonIndex].VerticalSwiper;
+
+       //_swipeHorizontalDistance = _orderWindow.RequestCardsContainerPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
+        _swipeVerticalDistance = _orderWindow.RequestCardsContainerPrefab.GetComponent<RequestContainer>().RequestCardPrefab.GetComponent<RectTransform>().sizeDelta.y +
+            _orderWindow.RequestCardsContainerPrefab.GetComponent<RequestContainer>().VerticalSwiper.GetComponent<VerticalLayoutGroup>().spacing;
+
         base.InitializeTouchControll();
     }
     
@@ -41,33 +46,92 @@ public class OrderWindowSwiper : TouchSwipeController
         SnapToClosestVerticalElement(eventData);
     }
 
-    //protected override void SnapNextHorizontalElement()
-    //{
-    //    base.SnapNextHorizontalElement();
-    //}
-
-    //protected override void SnapPrevHorizontalElement()
-    //{
-    //    base.SnapPrevHorizontalElement();
-    //}
-
-    //protected override void ResetHorizontalElement()
-    //{
-    //    base.ResetHorizontalElement();
-    //}
-
-    private void OnCustomerChange() // move this to window
+    protected override void SnapNextHorizontalElement()
     {
-        // Fade out Orderwin text
-        // Update all the pnls with Order/ foodItems from this new customer
-        // And reset the index back 0(start to swipe from 0)
-        // Fade back inn
+        _elementHorizonIndex++;
+        if (_elementHorizonIndex > _slotsHorizontal.Length)
+        {
+            _elementHorizonIndex = _slotsHorizontal.Length - 1;
+        }
+        _verticalSwipeContainer = _orderWindow.RequestContainers[_elementHorizonIndex].VerticalSwiper;
+
+        _newHorizontalPos += new Vector2(-1 * (_swipeHorizontalDistance), 0);
     }
 
-    private void SetInitPage()
+    protected override void SnapPrevHorizontalElement()
     {
-        //var initialFoodPnl = _orderWindow.FoodItemPnls[0];
-        //_activePage = initialFoodPnl;
-        //initialFoodPnl.transform.SetParent(_slidingContainer);
+        _elementHorizonIndex--;
+
+        if (_elementHorizonIndex < 0)
+        {
+            _elementHorizonIndex = 0;
+        }
+
+        _verticalSwipeContainer = _orderWindow.RequestContainers[_elementHorizonIndex].VerticalSwiper;
+        _newHorizontalPos += new Vector2(_swipeHorizontalDistance, 0);
     }
+
+    protected override void SnapNextVerticalElement()
+    {
+
+        _elementVerticalIndex++; 
+
+        if (_elementVerticalIndex > _orderWindow.RequestContainers[_elementHorizonIndex].RequestCards.Count)
+        {
+            _elementVerticalIndex = _orderWindow.RequestContainers[_elementHorizonIndex].RequestCards.Count - 1;
+        }
+
+        _newVerticalPos -= new Vector2(0, -1 * (_swipeVerticalDistance));
+        Debug.Log(_newVerticalPos + "GO NEXT");
+
+    }
+
+    protected override void SnapPrevVericalElement()
+    {
+
+        _elementVerticalIndex--;
+
+        if (_elementVerticalIndex < 0)
+        {
+            _elementVerticalIndex = 0;
+        }
+        _newVerticalPos -= new Vector2(0, _swipeVerticalDistance);
+
+    }
+
+    protected override void ResetHorizontalElement()
+    {
+        base.ResetHorizontalElement();
+    }
+
+    protected override void SnapToClosestVerticalElement(PointerEventData eventData)
+    {
+
+        float percentVertical = (eventData.pressPosition.y - eventData.position.y) / Screen.height;
+
+        if (!_inSmoothVerticalTransition)
+        {
+            if (Mathf.Abs(percentVertical) >= percentVerticalSwipeThreshold)
+            {
+                _newVerticalPos = _currentVerticalSwipeContainerPos;
+
+                if (percentVertical < 0 && _elementVerticalIndex < _orderWindow.RequestContainers[_elementHorizonIndex].RequestCards.Count - 1)
+                {
+                    SnapNextVerticalElement();
+                }
+                else if (percentVertical > 0 && _elementVerticalIndex > 0)
+                {
+                    SnapPrevVericalElement();
+                }
+
+                StartCoroutine(VerticalTransistionLogic(_verticalSwipeContainer.anchoredPosition, _newVerticalPos, _easingSwipe));
+            }
+            else
+            {
+                ResetVerticalElement();
+            }
+        }
+    }
+
+
 }

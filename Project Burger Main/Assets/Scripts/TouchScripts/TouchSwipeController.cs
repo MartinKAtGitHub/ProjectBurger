@@ -20,11 +20,11 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
 
 
     [Tooltip("1 of the element gameobject which will be used inside the Swipe container, used to find the size so swipe distance can be calculated ")]
-    [SerializeField] private GameObject _swipeContainerHorizontalElementPrefab;
-    [SerializeField] private GameObject _swipeContainerVertcalElementPrefab;
+    [SerializeField] protected GameObject _swipeContainerHorizontalElementPrefab;
+    [SerializeField] protected GameObject _swipeContainerVertcalElementPrefab;
 
     [Tooltip("Used to calculate the X distance needed to swipe, in case of additional spacing")]
-    [SerializeField] private HorizontalLayoutGroup _swipeContainerHorizontalLayoutGroup;
+    [SerializeField] protected HorizontalLayoutGroup _swipeContainerHorizontalLayoutGroup;
 
     [Tooltip("The Rect Transform which will be moved when swiped")]
     [SerializeField] protected RectTransform _horizontalSwipeContainer;
@@ -64,7 +64,7 @@ public abstract class TouchSwipeController : MonoBehaviour, IDragHandler, IEndDr
     virtual protected void Awake()
     {
         // _activeElementsTEMPLIMIT = _slots.Length;
-        _swipeHorizontalDistance = _swipeContainerHorizontalElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
+        //_swipeHorizontalDistance = _swipeContainerHorizontalElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
 
         _slotsHorizontal = new SlotHorizontal[LevelManager.Instance.QueueManager.ActiveQueueLimit];
     }

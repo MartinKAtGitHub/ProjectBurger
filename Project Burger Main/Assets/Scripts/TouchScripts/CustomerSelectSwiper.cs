@@ -25,7 +25,7 @@ public class CustomerSelectSwiper : TouchSwipeController
     protected override void Start()
     {
         base.Start();
-
+        _swipeHorizontalDistance = _swipeContainerHorizontalElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
         _queueSlotInFocus = _queueSlots[_elementHorizonIndex];
         _queueSlotInFocus.QueueSlotInFocus = true;
         // _elementInFocusHorizontal.GetComponent<QueueSlot>().QueueSlotInFocus = true; // WTF is this <-

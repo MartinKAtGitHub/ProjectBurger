@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
+
 
 public class OrderWindowSwiper : TouchSwipeController
 {
@@ -25,25 +24,26 @@ public class OrderWindowSwiper : TouchSwipeController
     protected override void InitializeTouchControll()
     {
         _slotsHorizontal = _orderWindow.RequestContainers;
-        _verticalSwipeContainer = _orderWindow.RequestContainers[_elementHorizonIndex].VerticalSwiper;
+        //_verticalSwipeContainer = _orderWindow.RequestContainers[_elementHorizonIndex].VerticalSwiper;
+        _swipeHorizontalDistance = _swipeContainerHorizontalElementPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
+        //_swipeHorizontalDistance = _orderWindow.RequestCardsContainerPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
+        //_swipeVerticalDistance = _orderWindow.RequestCardsContainerPrefab.GetComponent<RequestContainer>().RequestCardPrefab.GetComponent<RectTransform>().sizeDelta.y +
+        //    _orderWindow.RequestCardsContainerPrefab.GetComponent<RequestContainer>().VerticalSwiper.GetComponent<VerticalLayoutGroup>().spacing;
 
-       //_swipeHorizontalDistance = _orderWindow.RequestCardsContainerPrefab.GetComponent<RectTransform>().sizeDelta.x + _swipeContainerHorizontalLayoutGroup.spacing;
-        _swipeVerticalDistance = _orderWindow.RequestCardsContainerPrefab.GetComponent<RequestContainer>().RequestCardPrefab.GetComponent<RectTransform>().sizeDelta.y +
-            _orderWindow.RequestCardsContainerPrefab.GetComponent<RequestContainer>().VerticalSwiper.GetComponent<VerticalLayoutGroup>().spacing;
-
-        base.InitializeTouchControll();
+        _currentHorizontalSwipeContainerPos = _horizontalSwipeContainer.anchoredPosition;
+        //base.InitializeTouchControll();
     }
     
     public override void OnDrag(PointerEventData eventData)
     {
+        Debug.Log("HORI DRAG START");
         HorizontalDragging(eventData);
-        VerticalDragging(eventData);
     }
 
     public override void OnEndDrag(PointerEventData eventData)
     {
-        SnapToClosestHorizontalElement(eventData);
-        SnapToClosestVerticalElement(eventData);
+        Debug.Log("HORI DRAG END");
+        SnapToClosestHorizontalElement(eventData);     
     }
 
     protected override void SnapNextHorizontalElement()
@@ -53,8 +53,8 @@ public class OrderWindowSwiper : TouchSwipeController
         {
             _elementHorizonIndex = _slotsHorizontal.Length - 1;
         }
+        
         _verticalSwipeContainer = _orderWindow.RequestContainers[_elementHorizonIndex].VerticalSwiper;
-
         _newHorizontalPos += new Vector2(-1 * (_swipeHorizontalDistance), 0);
     }
 
@@ -68,70 +68,71 @@ public class OrderWindowSwiper : TouchSwipeController
         }
 
         _verticalSwipeContainer = _orderWindow.RequestContainers[_elementHorizonIndex].VerticalSwiper;
+       
         _newHorizontalPos += new Vector2(_swipeHorizontalDistance, 0);
     }
 
-    protected override void SnapNextVerticalElement()
-    {
+    //protected override void SnapNextVerticalElement()
+    //{
 
-        _elementVerticalIndex++; 
+    //    _elementVerticalIndex++; 
 
-        if (_elementVerticalIndex > _orderWindow.RequestContainers[_elementHorizonIndex].RequestCards.Count)
-        {
-            _elementVerticalIndex = _orderWindow.RequestContainers[_elementHorizonIndex].RequestCards.Count - 1;
-        }
+    //    if (_elementVerticalIndex > _orderWindow.RequestContainers[_elementHorizonIndex].RequestCards.Count)
+    //    {
+    //        _elementVerticalIndex = _orderWindow.RequestContainers[_elementHorizonIndex].RequestCards.Count - 1;
+    //    }
 
-        _newVerticalPos -= new Vector2(0, -1 * (_swipeVerticalDistance));
-        Debug.Log(_newVerticalPos + "GO NEXT");
+    //    _newVerticalPos -= new Vector2(0, -1 * (_swipeVerticalDistance));
+    //    Debug.Log(_newVerticalPos + "GO NEXT");
 
-    }
+    //}
 
-    protected override void SnapPrevVericalElement()
-    {
+    //protected override void SnapPrevVericalElement()
+    //{
 
-        _elementVerticalIndex--;
+    //    _elementVerticalIndex--;
 
-        if (_elementVerticalIndex < 0)
-        {
-            _elementVerticalIndex = 0;
-        }
-        _newVerticalPos -= new Vector2(0, _swipeVerticalDistance);
+    //    if (_elementVerticalIndex < 0)
+    //    {
+    //        _elementVerticalIndex = 0;
+    //    }
+    //    _newVerticalPos -= new Vector2(0, _swipeVerticalDistance);
 
-    }
+    //}
 
     protected override void ResetHorizontalElement()
     {
         base.ResetHorizontalElement();
     }
 
-    protected override void SnapToClosestVerticalElement(PointerEventData eventData)
-    {
+    //protected override void SnapToClosestVerticalElement(PointerEventData eventData)
+    //{
 
-        float percentVertical = (eventData.pressPosition.y - eventData.position.y) / Screen.height;
+    //    float percentVertical = (eventData.pressPosition.y - eventData.position.y) / Screen.height;
 
-        if (!_inSmoothVerticalTransition)
-        {
-            if (Mathf.Abs(percentVertical) >= percentVerticalSwipeThreshold)
-            {
-                _newVerticalPos = _currentVerticalSwipeContainerPos;
+    //    if (!_inSmoothVerticalTransition)
+    //    {
+    //        if (Mathf.Abs(percentVertical) >= percentVerticalSwipeThreshold)
+    //        {
+    //            _newVerticalPos = _currentVerticalSwipeContainerPos;
 
-                if (percentVertical < 0 && _elementVerticalIndex < _orderWindow.RequestContainers[_elementHorizonIndex].RequestCards.Count - 1)
-                {
-                    SnapNextVerticalElement();
-                }
-                else if (percentVertical > 0 && _elementVerticalIndex > 0)
-                {
-                    SnapPrevVericalElement();
-                }
+    //            if (percentVertical < 0 && _elementVerticalIndex < _orderWindow.RequestContainers[_elementHorizonIndex].RequestCards.Count - 1)
+    //            {
+    //                SnapNextVerticalElement();
+    //            }
+    //            else if (percentVertical > 0 && _elementVerticalIndex > 0)
+    //            {
+    //                SnapPrevVericalElement();
+    //            }
 
-                StartCoroutine(VerticalTransistionLogic(_verticalSwipeContainer.anchoredPosition, _newVerticalPos, _easingSwipe));
-            }
-            else
-            {
-                ResetVerticalElement();
-            }
-        }
-    }
+    //            StartCoroutine(VerticalTransistionLogic(_verticalSwipeContainer.anchoredPosition, _newVerticalPos, _easingSwipe));
+    //        }
+    //        else
+    //        {
+    //            ResetVerticalElement();
+    //        }
+    //    }
+    //}
 
 
 }

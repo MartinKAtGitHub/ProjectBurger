@@ -17,7 +17,7 @@ public class Customer : MonoBehaviour
     public string CustomerName { get => _customerName; }
     public OrderGenerator OrderGenerator { get => _orderGenerator; private set => _orderGenerator = value; }
     public Order Order { get => _order; }
-    public bool IsWaiting { get => _isWaiting; }
+    public bool IsWaiting { get => _isWaiting; set => _isWaiting = value; }
     
     public GameObject QueuePositionDot;
 

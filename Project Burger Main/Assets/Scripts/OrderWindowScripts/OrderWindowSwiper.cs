@@ -54,7 +54,7 @@ public class OrderWindowSwiper : TouchSwipeController
             _elementHorizonIndex = _slotsHorizontal.Length - 1;
         }
         
-        _verticalSwipeContainer = _orderWindow.RequestContainers[_elementHorizonIndex].VerticalSwiper;
+       // _verticalSwipeContainer = _orderWindow.RequestContainers[_elementHorizonIndex].VerticalSwiper;
         _newHorizontalPos += new Vector2(-1 * (_swipeHorizontalDistance), 0);
     }
 
@@ -67,7 +67,7 @@ public class OrderWindowSwiper : TouchSwipeController
             _elementHorizonIndex = 0;
         }
 
-        _verticalSwipeContainer = _orderWindow.RequestContainers[_elementHorizonIndex].VerticalSwiper;
+        //_verticalSwipeContainer = _orderWindow.RequestContainers[_elementHorizonIndex].VerticalSwiper;
        
         _newHorizontalPos += new Vector2(_swipeHorizontalDistance, 0);
     }

@@ -135,30 +135,4 @@ public class CustomerSelectSwiper : TouchSwipeController
             }
         }
     }
-
-
-    //private void SetCustomerInFocus(Customer currentCustomer) // move to take order logic
-    //{
-    //    if(currentCustomer != null)
-    //    {
-    //        _customerInFocus = currentCustomer;
-    //        LevelManager.Instance.OrderWindow.UpdateUI(currentCustomer);
-    //        LevelManager.Instance.FoodTray.UpdateFoodTray(currentCustomer);
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("QueueSlot Is Empty, No customer to update FOODTRAY OR ORDERWINDOW");
-    //    }
-    //}
-
-    //private void CacheQueueSlotsFromElements()
-    //{
-    //    _queueSlots = new QueueSlot[SlotsHorizontal.Length];
-
-    //    for (int i = 0; i < SlotsHorizontal.Length; i++)
-    //    {
-    //        _queueSlots[i] = SlotsHorizontal[i].GetComponent<QueueSlot>();
-    //    }
-    //}
-
 }

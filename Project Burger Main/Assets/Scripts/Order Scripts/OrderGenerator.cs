@@ -32,7 +32,7 @@ public class OrderGenerator : MonoBehaviour
     
     private void Awake()
     {
-        //_customer = GetComponent<Customer>();
+        _customer = GetComponent<Customer>();
     }
 
     /// <summary>
@@ -50,12 +50,13 @@ public class OrderGenerator : MonoBehaviour
             {
                 SelectRandomRecipe();
             }
-
+            _customer.IsWaiting = true;
             return _order;
         }
         else
         {
             SelectRandomRecipe();
+            _customer.IsWaiting = true;
             return _order;
         }
     }

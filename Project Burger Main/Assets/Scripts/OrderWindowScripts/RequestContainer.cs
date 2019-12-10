@@ -20,6 +20,7 @@ public class RequestContainer : SlotHorizontal
             var card = Instantiate(_requestCardPrefab, _verticalSwiper).GetComponent<RequestCard>();
             
             card.RecipeTitleTxt.text = order.OrderRecipes[i].BaseRecipe.name;
+            //card.SpecialRequestElements
 
             _requestCards.Add(card);
         }

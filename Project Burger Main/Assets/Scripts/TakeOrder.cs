@@ -24,10 +24,9 @@ public class TakeOrder : MonoBehaviour
       
         if (_customerSelect.QueueSlotInFocus.CurrentCustomer != null && !_customerSelect.InSmoothHorizontalTransition)
         {
-            if(_customerSelect.QueueSlotInFocus.CurrentCustomer.Order != null)
+            if(_customerSelect.QueueSlotInFocus.CurrentCustomer.Order != null && _customerSelect.QueueSlotInFocus.CurrentCustomer.IsWaiting)
             {
                 _hasOrderIcon.SetActive(true);
-             
             }
             else
             {
@@ -44,6 +43,7 @@ public class TakeOrder : MonoBehaviour
     public void SendOrderToOrderDisplay()
     {
         _orderWindow.UpdateOrderDisplayUI(_customerSelect.QueueSlotInFocus.CurrentCustomer.Order, _customerSelect.ElementHorizonIndex);
+        _customerSelect.QueueSlotInFocus.CurrentCustomer.IsWaiting = false;
     }
 
 }

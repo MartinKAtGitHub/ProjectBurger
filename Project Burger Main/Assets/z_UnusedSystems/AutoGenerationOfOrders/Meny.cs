@@ -4,16 +4,27 @@ using UnityEngine;
 
 public class Meny : MonoBehaviour {
 
+    public Recipe[] RepicesAvailable;
+    public Recipe[] NewRecipes;
+
     public MenuItems[] Items;
     public bool UPdateCost = false;
 
     private void Awake() {
+
         setAverageCost();
        OrderByCostTime();
+
     }
 
     void setAverageCost() {
-        for(int i = 0; i < Items.Length; i++) {
+
+        for (int i = 0; i < Items.Length; i++) {
+            Items[i].Cost = Items[i].test.Price;
+            Items[i].TheTime = Items[i].test.RecipeTime;
+        }
+
+        for (int i = 0; i < Items.Length; i++) {
             Items[i].averageCost = Items[i].Cost / Items[i].TheTime;
         }
     }
@@ -73,7 +84,16 @@ public class MenuItems {
     [HideInInspector]
     public float max;
 
+    public Recipe test;
+    
+
 
 }
 
 public enum Recipess {Coke, Fanta, Sprite, Coffe, SmallFries, NormalFries, BigFries, SixNuggets, NineNuggets, TwelveNuggets};
+
+// burger meat  -> 50 price, time 25
+// lettuce      -> 1  price, time 2.5
+// buns         -> 2  price, time 2
+//
+//

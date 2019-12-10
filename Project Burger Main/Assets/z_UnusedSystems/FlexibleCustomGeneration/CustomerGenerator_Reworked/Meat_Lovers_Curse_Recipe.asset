@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cc43817b2ce86d458be24be40781e9f, type: 3}
-  m_Name: Hamburger_recipe
+  m_Name: Meat_Lovers_Curse_Recipe
   m_EditorClassIdentifier: 
-  _recipeImg: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
-  _recipeName: Hamburger
+  _recipeImg: {fileID: 0}
+  _recipeName: MeatLoversCurse
   _orderChance: 50
   _accumulatedWight: 50
-  _price: 46
-  _recipeTime: 74
+  _price: 42
+  _recipeTime: 78
   Ingredients:
   - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
-  - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
   - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+  - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+  - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}
+  - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}
   - {fileID: 11400000, guid: fcbd45575bfaf6844b5defa0b3fcd358, type: 2}

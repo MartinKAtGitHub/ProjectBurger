@@ -14,7 +14,4 @@ public class AreaMapPositions : MonoBehaviour {
     public Node StartNode { get => _startNodes; }
     public AreaPoints MapPoints { get => _points; }
 
-
-
-
 }

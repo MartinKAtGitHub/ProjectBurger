@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recipeImg: {fileID: 0}
   _recipeName: DoubleDecker
-  _foodType: 1
   _orderChance: 50
   _accumulatedWight: 50
-  _recipeCost: 25
-  _recipeTime: 25
+  _price: 44
+  _recipeTime: 76
   Ingredients:
   - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
   - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}

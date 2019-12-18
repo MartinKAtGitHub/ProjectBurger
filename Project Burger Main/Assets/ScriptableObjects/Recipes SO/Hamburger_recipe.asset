@@ -16,8 +16,8 @@ MonoBehaviour:
   _recipeName: Hamburger
   _orderChance: 50
   _accumulatedWight: 50
-  _price: 46
-  _recipeTime: 74
+  _price: 58
+  _recipeTime: 40
   Ingredients:
   - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
   - {fileID: 11400000, guid: b3ccd02b0b8da994a876ca5c3063d7a4, type: 2}

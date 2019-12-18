@@ -16,8 +16,8 @@ MonoBehaviour:
   _recipeName: LettuceCarnivours
   _orderChance: 50
   _accumulatedWight: 50
-  _price: 41
-  _recipeTime: 79
+  _price: 40
+  _recipeTime: 50
   Ingredients:
   - {fileID: 11400000, guid: 5406d62c85e6b584da8e9f4cd3ca93ee, type: 2}
   - {fileID: 11400000, guid: 66909d21083262f4aad50f1d7ad2aed7, type: 2}

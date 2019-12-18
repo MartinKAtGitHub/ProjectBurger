@@ -9,7 +9,7 @@ public class FoodMenu : MonoBehaviour {
 
 
 
-    public FoodGroup GetFood() {
+    public FoodGroup GetFood() { 
         saved = ItemsInOrder[0];
         ItemsInOrder.RemoveAt(0);
 
